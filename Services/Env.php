@@ -1,4 +1,7 @@
 <?php
+
+    namespace Services;
+
     class Env
     {
         protected static $loaded = false;

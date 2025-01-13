@@ -1,15 +1,63 @@
 <?php
 
-    header('Allow-Control-Access-Origin: *');
-    header('Content-Type: application/json');
+namespace DaguConnect;
 
-    //Initialize the API
-    require_once('../DaguConnect-API_PHP/Config/config.php');
-    require_once('/../DaguConnect-API_PHP/Post.php');
-    include_once('/../DaguConnect-API_PHP/initialize.php');
+use core\Post;
+use PDO;
 
-    $db = getDbConnection();
+class read{
+    private $db;
+    private $post;
 
-    $post = new Post($db);
+    public function __construct()
+    {
+        $this->loadDependencies();
 
-    var_dump($post, $db);
+        $this->readData();
+    }
+
+
+    private function loadDependencies():void {
+        require_once(__DIR__ . '/../DaguConnect-API_PHP/includes/config.php');
+        require_once(__DIR__ . '/../DaguConnect-API_PHP/core/Post.php');
+        include_once(__DIR__ . '/../DaguConnect-API_PHP/initialize.php');
+    }
+
+    private function readData():void {
+        $config = new config();
+        $this->db = $config->getDB();
+
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+
+        $posts = $this->post = new Post($this->db);
+
+        $result = $posts->read();
+
+        $rowCount = $result->rowCount();
+
+
+        if ($rowCount > 0) {
+            $post_array = array();
+            $post_array['data'] = array();
+
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                extract($row);
+
+                $post_item = array(
+                    'id' =>$id,
+                    'name' => $name,
+                    'created_at' => $created_at
+                );
+                array_push($post_array['data'], $post_item);
+            }
+            // covert to json
+            echo json_encode($post_array);
+        } else {
+            echo json_encode(['Message' => 'No available post']);
+        }
+    }
+
+}
+error_reporting(E_ALL);  // Enable all error reporting
+ini_set('display_errors', 1);  // Display errors in the output
