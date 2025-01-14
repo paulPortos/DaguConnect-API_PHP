@@ -2,7 +2,7 @@
 
 namespace DaguConnect;
 
-use core\Post;
+use Core\Post;
 use PDO;
 
 class read{
@@ -15,7 +15,6 @@ class read{
 
         $this->readData();
     }
-
 
     private function loadDependencies():void {
         require_once(__DIR__ . '/../DaguConnect-API_PHP/includes/config.php');
@@ -59,5 +58,3 @@ class read{
     }
 
 }
-error_reporting(E_ALL);  // Enable all error reporting
-ini_set('display_errors', 1);  // Display errors in the output
