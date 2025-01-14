@@ -1,5 +1,7 @@
 <?php
 
+namespace Routes;
+
 use Controller\AuthenticationController;
 use Core\BaseApi;
 use Model\User;
@@ -10,19 +12,18 @@ class Api extends BaseApi
     {
         parent::__construct(); // Calling its constructor
 
-        // Set up routes
-        $requestUri = $_SERVER['REQUEST_URI'];
-        $requestMethod = $_SERVER['REQUEST_METHOD'];
+        $this->registeredRoutes();
 
-        // Instantiate the controller
-        $postController = new AuthenticationController(new User($this->db));
-
-        // Route the request
-        if ($requestUri === '/posts' && $requestMethod === 'GET') {
-            $postController->index();
-        } else {
-            header("HTTP/1.0 404 Not Found");
-            echo json_encode(['message' => 'Route not found']);
-        }
+        $this->handleRequest();
     }
+
+    public function registeredRoutes(): void {
+        // Register a route for the AuthenticationController
+        $this->route('GET', '/getUser', function () {
+            $authController = new AuthenticationController(new User($this->db));
+            $authController->index();
+        });
+    }
+
+
 }

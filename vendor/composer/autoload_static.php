@@ -19,9 +19,17 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
+        'R' => 
+        array (
+            'Routes\\' => 7,
+        ),
         'P' => 
         array (
             'PhpOption\\' => 10,
+        ),
+        'M' => 
+        array (
+            'Model\\' => 6,
         ),
         'G' => 
         array (
@@ -30,6 +38,12 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
         'D' => 
         array (
             'Dotenv\\' => 7,
+            'DaguConnect\\' => 12,
+        ),
+        'C' => 
+        array (
+            'Core\\' => 5,
+            'Controller\\' => 11,
         ),
     );
 
@@ -46,9 +60,17 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Routes\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Api',
+        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'Model\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Model',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
@@ -57,6 +79,18 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'DaguConnect\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/',
+        ),
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core',
+        ),
+        'Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Controller',
         ),
     );
 

@@ -13,8 +13,8 @@ class BaseApi
 
     public function __construct()
     {
-        require_once 'vendor/autoload.php';
-        require_once 'includes/config.php';
+        require_once __DIR__ . '/../vendor/autoload.php';
+        require_once  __DIR__ . '/../includes/config.php';
 
         $this->config = new config();
         $this->db = $this->config->getDB();
@@ -29,7 +29,7 @@ class BaseApi
      * @param callable $action Function or method to call
      */
 
-    public function registerRoute(string $method, string $uri, callable $action): void
+    public function route(string $method, string $uri, callable $action): void
     {
         $this->routes[$method][$uri] = $action;
     }
