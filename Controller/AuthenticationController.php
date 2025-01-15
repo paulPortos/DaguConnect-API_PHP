@@ -3,12 +3,11 @@
 namespace Controller;
 
 use Core\BaseController;
-use DaguConnect\Services\Confirm_Password;
-use Model\User;
+use DaguConnect\Model\User;
 
 class AuthenticationController extends BaseController
 {
-    private $userModel;
+    private User $userModel;
 
     public function __construct(User $userModel)
     {

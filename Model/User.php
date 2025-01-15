@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace DaguConnect\Model;
 
 
 use Core\BaseModel;
