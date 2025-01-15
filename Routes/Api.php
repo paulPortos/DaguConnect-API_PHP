@@ -2,8 +2,10 @@
 
 namespace DaguConnect\Routes;
 
+use Controller\AdminAuthController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
+use DaguConnect\Model\Admin;
 use DaguConnect\Model\User;
 
 class Api extends BaseApi
@@ -23,7 +25,28 @@ class Api extends BaseApi
             $authController = new AuthenticationController(new User($this->db));
             $authController->index();
         });
+
+        $this->route('POST', '/register/admin', function () {
+            
+            $this->responseBodyChecker();
+
+            $email = $this->requestBody['email'];
+            $password = $this->requestBody['password'];
+            $confirm_password = $this->requestBody['confirm_password'];
+
+            $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->register($email, $password, $confirm_password);
+        });
     }
 
+
+    //Check if the response body for POST is empty
+    private function responseBodyChecker(): void {
+        if (!$this->requestBody || !is_array($this->requestBody)) {
+            echo json_encode(['message' => 'Invalid or missing JSON payload']);
+            http_response_code(400);
+            exit();
+        }
+    }
 
 }

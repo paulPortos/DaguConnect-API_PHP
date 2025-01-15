@@ -9,9 +9,9 @@ class AuthenticationController extends BaseController
 {
     private User $userModel;
 
-    public function __construct(User $userModel)
+    public function __construct(User $user_Model)
     {
-        $this->userModel = $userModel;
+        $this->userModel = $user_Model;
     }
 
     public function index(): void {

@@ -10,12 +10,13 @@ class BaseApi
     public config $config;
     public PDO $db;
     private array $routes = [];
+    public mixed $requestBody;
 
     public function __construct()
     {
         require_once __DIR__ . '/../vendor/autoload.php';
         require_once __DIR__ . '/../Includes/config.php';
-
+        $this->requestBody = json_decode(file_get_contents('php://input'), true);
         $this->config = new config();
         $this->db = $this->config->getDB();
     }

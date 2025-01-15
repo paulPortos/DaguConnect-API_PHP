@@ -4,19 +4,19 @@ namespace DaguConnect\Model;
 
 
 use DaguConnect\Core\BaseModel;
+
 use DaguConnect\Services\Confirm_Password;
 use PDO;
 
 class User extends BaseModel
 {
-    protected Confirm_Password $confirm_Password;
+    use Confirm_Password;
 
     protected $table = 'users';
 
     public function __construct(PDO $db)
     {
         parent::__construct($db);
-        $this->confirm_Password = new Confirm_Password();
     }
 
     public function readAll(): array {
@@ -50,10 +50,8 @@ class User extends BaseModel
     public function registerUser($first_name, $last_name, $email, $password, $confirm_password, $age):bool {
         if (isset($first_name, $last_name, $email, $password, $confirm_password, $age)) {
             //Check if password and confirm password match
-            $match = $this->confirm_Password->checkPassword($password, $confirm_password);
-
+            $match = $this->checkPassword($password, $confirm_password);
             if ($match) {
-
                 $hash_password = password_hash($password, PASSWORD_ARGON2ID);
 
                 $query = "INSERT INTO $this->table 
