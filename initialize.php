@@ -15,8 +15,8 @@ class initialize
         defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
         defined('SITE_ROOT') ? null : define('SITE_ROOT', __DIR__ );
 
-        defined('INC_PATH') ? null : define('INC_PATH', SITE_ROOT . DS . 'includes');
-        defined('CORE_PATH') ? null : define('CORE_PATH', SITE_ROOT . DS . 'core');
+        defined('INC_PATH') ? null : define('INC_PATH', SITE_ROOT . DS . 'Includes');
+        defined('CORE_PATH') ? null : define('CORE_PATH', SITE_ROOT . DS . 'Core');
 
         require_once(INC_PATH . DS . "config.php");
     }

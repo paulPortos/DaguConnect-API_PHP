@@ -11,12 +11,13 @@ class User extends BaseModel
 {
     protected Confirm_Password $confirm_Password;
 
-    public function __construct()
+    protected $table = 'users';
+
+    public function __construct(PDO $db)
     {
+        parent::__construct($db);
         $this->confirm_Password = new Confirm_Password();
     }
-
-    protected $table = 'users';
 
     public function readAll(): array {
         $query = "SELECT * FROM $this->table";

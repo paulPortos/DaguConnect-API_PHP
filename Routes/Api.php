@@ -10,7 +10,7 @@ class Api extends BaseApi
 {
     public function __construct()
     {
-        parent::__construct(); // Calling its constructor
+        parent::__construct(); // Calling constructor
 
         $this->registeredRoutes();
 
