@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Core\BaseController;
+use DaguConnect\Services\Confirm_Password;
 use Model\User;
 
 class AuthenticationController extends BaseController

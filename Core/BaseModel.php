@@ -11,8 +11,4 @@ class BaseModel
     {
         $this->db = $db;
     }
-
-    public function index($table, $id) {
-
-    }
 }

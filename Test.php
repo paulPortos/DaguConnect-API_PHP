@@ -1,6 +1,6 @@
 <?php
 // Instantiate the class
-require_once 'read.php';
+require_once 'readme.php';
 
 use DaguConnect\read;
 
