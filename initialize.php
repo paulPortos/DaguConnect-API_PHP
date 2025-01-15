@@ -3,7 +3,7 @@
 namespace DaguConnect;
 
 require_once __DIR__ . '/Services/Env.php';
-use Services\Env;
+use DaguConnect\Services\Env;
 
 class initialize
 {

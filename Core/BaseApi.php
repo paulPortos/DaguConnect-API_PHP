@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use DaguConnect\config;
+use DaguConnect\Includes\config;
 use PDO;
 
 class BaseApi
@@ -14,7 +14,7 @@ class BaseApi
     public function __construct()
     {
         require_once __DIR__ . '/../vendor/autoload.php';
-        require_once  __DIR__ . '/../includes/config.php';
+        require_once __DIR__ . '/../Includes/config.php';
 
         $this->config = new config();
         $this->db = $this->config->getDB();

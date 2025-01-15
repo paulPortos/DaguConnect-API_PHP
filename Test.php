@@ -1,7 +1,7 @@
 <?php
 // Instantiate the class
-require_once 'readme.php';
+require_once 'Includes/config.php';
 
-use DaguConnect\read;
+use DaguConnect\Includes\config;
 
-$test = new read();
+$test = new config();

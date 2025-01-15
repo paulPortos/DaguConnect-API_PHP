@@ -1,10 +1,10 @@
 <?php
 
-namespace DaguConnect;
+namespace DaguConnect\Includes;
 
+use DaguConnect\Services\Env;
 use PDO;
 use PDOException;
-use Services\Env;
 
 require_once __DIR__ . '/../Services/Env.php';
 
