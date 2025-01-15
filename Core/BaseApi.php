@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace DaguConnect\Core;
 
 use DaguConnect\Includes\config;
 use PDO;

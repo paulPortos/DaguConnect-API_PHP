@@ -4,7 +4,7 @@ require_once '../vendor/autoload.php'; // Composer autoloader
 require_once '../initialize.php'; // Initialize class
 
 use DaguConnect\initialize;
-use Routes\Api;
+use DaguConnect\Routes\Api;
 
 // Initialize the application
 new initialize();

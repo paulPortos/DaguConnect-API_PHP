@@ -3,7 +3,7 @@
 namespace DaguConnect\Model;
 
 
-use Core\BaseModel;
+use DaguConnect\Core\BaseModel;
 use DaguConnect\Services\Confirm_Password;
 use PDO;
 

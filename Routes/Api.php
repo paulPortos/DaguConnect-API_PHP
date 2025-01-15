@@ -1,10 +1,10 @@
 <?php
 
-namespace Routes;
+namespace DaguConnect\Routes;
 
 use Controller\AuthenticationController;
-use Core\BaseApi;
-use Model\User;
+use DaguConnect\Core\BaseApi;
+use DaguConnect\Model\User;
 
 class Api extends BaseApi
 {

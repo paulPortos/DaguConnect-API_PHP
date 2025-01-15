@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Core\BaseController;
+use DaguConnect\Core\BaseController;
 use DaguConnect\Model\User;
 
 class AuthenticationController extends BaseController
