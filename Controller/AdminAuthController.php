@@ -28,7 +28,7 @@ class AdminAuthController extends BaseController
             if ($match) {
                 if (!$this->exists($email, 'email', 'admin') && !$this->exists($username, 'username', 'admin')) {
                     $user_data = $this->adminModel->registerUser($username, $email, $password);
-                    if ($user_data == true) {
+                    if ($user_data) {
                         $this->jsonResponse(['Message' => 'Registered successfully'], 201);
                     } else {
                         $this->jsonResponse(['Message' => 'Registration failed.'], 400);
@@ -45,7 +45,9 @@ class AdminAuthController extends BaseController
     }
     public function login($username, $email, $password){
         if (isset($username, $email, $password)) {
-            
+            if ($this->login($username, $email, $password)) {
+
+            }
         } else {
             $this->jsonResponse(['Message' => 'Fields are required to be filled up.'], 400);
         }
