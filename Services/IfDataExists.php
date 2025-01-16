@@ -17,11 +17,11 @@ trait IfDataExists
             throw new InvalidArgumentException("Invalid column name.");
         }
 
-        $query = "SELECT COUNT(*) AS count FROM $table WHERE $value = :value";
+        $query = "SELECT COUNT(*) AS count FROM $table WHERE $column = :value";
 
         $stmt = $this->db->getDB()->prepare($query);
 
-        $stmt->bindParam(':value', $data);
+        $stmt->bindParam(':value', $value);
 
         $stmt->execute();
 

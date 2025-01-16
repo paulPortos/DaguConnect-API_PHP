@@ -27,7 +27,7 @@ class Api extends BaseApi
         });
 
         $this->route('POST', '/register/admin', function () {
-            
+
             $this->responseBodyChecker();
 
             $email = $this->requestBody['email'];
