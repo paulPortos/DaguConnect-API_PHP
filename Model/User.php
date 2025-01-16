@@ -47,26 +47,23 @@ class User extends BaseModel
         return false;
     }
 
-    public function registerUser($first_name, $last_name, $email, $password, $confirm_password, $age):bool {
-        if (isset($first_name, $last_name, $email, $password, $confirm_password, $age)) {
-            //Check if password and confirm password match
-            $match = $this->checkPassword($password, $confirm_password);
-            if ($match) {
-                $hash_password = password_hash($password, PASSWORD_ARGON2ID);
+    public function registerUser($first_name, $last_name,$age,$email, $password, ):bool {
 
-                $query = "INSERT INTO $this->table 
-                (name, email, password, created_at, updated_at)
-                VALUES (:name, :email, :password, NOW(), NOW())
+        $hash_password = password_hash($password, PASSWORD_ARGON2ID);
+
+        $query = "INSERT INTO $this->table 
+                (first_name, last_name, age ,email ,password ,created_at, updated_at)
+                VALUES (:first_name, :last_name, :age, :email, :password, NOW(), NOW())
                  ";
 
-                $stmt = $this->db->prepare($query);
+        $stmt = $this->db->prepare($query);
 
-                $stmt->bindParam(':name', $name);
-                $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':password', $hash_password);
+        $stmt->bindParam(':first_name', $first_name);
+        $stmt->bindParam(':last_name', $last_name);
+        $stmt->bindParam(':age', $age);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hash_password);
 
-                return $stmt->execute();
-            } return false;
-        } return false;
+        return $stmt->execute();
     }
 }
