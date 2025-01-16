@@ -45,8 +45,11 @@ class AdminAuthController extends BaseController
     }
     public function login($username, $email, $password){
         if (isset($username, $email, $password)) {
-            if ($this->login($username, $email, $password)) {
-
+            if ($this->adminModel->loginUser($username, $email, $password)) {
+                $token = $this->adminModel->createToken($email);
+                $this->jsonResponse(['Message' => 'Login successully!', 'Token' => $token], 200);
+            } else {
+                $this->jsonResponse(['Message' => 'User does not exist.'], 400);
             }
         } else {
             $this->jsonResponse(['Message' => 'Fields are required to be filled up.'], 400);

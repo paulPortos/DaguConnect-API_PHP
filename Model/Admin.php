@@ -36,7 +36,7 @@ class Admin extends BaseModel
     {
 
         // Query to check if the user exists
-        $query = "SELECT * FROM users WHERE username = :username AND email = :email LIMIT 1";
+        $query = "SELECT * FROM $this->table WHERE username = :username AND email = :email LIMIT 1";
 
         // Prepare the statement
         $stmt = $this->db->prepare($query);
@@ -57,5 +57,27 @@ class Admin extends BaseModel
         }
 
         return false; // Login failed
+    }
+
+    public function createToken($email): string
+    {
+        // Check if the user exists
+        $query = "SELECT * FROM users WHERE email = :email LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        // Generate a unique token
+        $token = bin2hex(random_bytes(32)); // Creates a 64-character token
+
+        // Store the token in the database
+        $updateQuery = "UPDATE $this->table SET token = :token WHERE email = :email";
+        $updateStmt = $this->db->prepare($updateQuery);
+        $updateStmt->bindParam(':token', $token);
+        $updateStmt->bindParam(':email', $email);
+        $updateStmt->execute();
+
+        // Return the token
+        return $token;
     }
 }

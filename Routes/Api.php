@@ -38,6 +38,17 @@ class Api extends BaseApi
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->register($username, $email, $password, $confirm_password);
         });
+
+        $this->route('POST', '/login/admin', function() {
+            $this->responseBodyChecker();
+
+            $username = $this->requestBody['username'];
+            $email = $this->requestBody['email'];
+            $password = $this->requestBody['password'];
+
+            $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->login($username, $email, $password);
+        });
     }
 
 
