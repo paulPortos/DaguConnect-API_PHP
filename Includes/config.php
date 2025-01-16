@@ -25,7 +25,9 @@ class config {
             $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             $this->db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            define('APP_NAME', $_ENV['APP_NAME']);
+            if (!defined('APP_NAME')) {
+                define('APP_NAME', 'YourAppName');
+            }
         } catch (PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
         }

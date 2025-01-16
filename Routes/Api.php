@@ -30,12 +30,13 @@ class Api extends BaseApi
 
             $this->responseBodyChecker();
 
+            $username = $this->requestBody['username'];
             $email = $this->requestBody['email'];
             $password = $this->requestBody['password'];
             $confirm_password = $this->requestBody['confirm_password'];
 
             $adminController = new AdminAuthController(new Admin($this->db));
-            $adminController->register($email, $password, $confirm_password);
+            $adminController->register($username, $email, $password, $confirm_password);
         });
     }
 
