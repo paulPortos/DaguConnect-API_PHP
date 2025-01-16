@@ -23,10 +23,10 @@ class AdminAuthController extends BaseController
 
         if (isset($email, $password, $confirm_password)) {
             if ($match) {
-                if ($this->exists($email, 'email', 'admin')) {
+                if (!$this->exists($email, 'email', 'admin')) {
                     $user_data = $this->adminModel->registerUser($email, $password);
                 } else {
-                    $this->jsonResponse(['Message' => "Account does not exist."], 400);
+                    $this->jsonResponse(['Message' => "Account already exist."], 400);
                 }
             } else {
                 $this->jsonResponse(['Message' => "Password do not match"], 400);
