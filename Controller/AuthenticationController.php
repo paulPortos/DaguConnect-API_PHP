@@ -7,6 +7,7 @@ use DaguConnect\Includes\config;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
+use DaguConnect\Services\Trim_Password;
 
 
 class AuthenticationController extends BaseController
@@ -14,9 +15,9 @@ class AuthenticationController extends BaseController
     private User $userModel;
 
 
-
     use Confirm_Password;
     use IfDataExists;
+    use Trim_Password;
 
     public function __construct(User $user_Model)
     {
@@ -24,10 +25,10 @@ class AuthenticationController extends BaseController
         $this->userModel = $user_Model;
 
 
-
     }
 
-    public function index(): void {
+    public function index(): void
+    {
         $user_data = $this->userModel->readAll();
 
         if (empty($user_data)) {
@@ -37,26 +38,31 @@ class AuthenticationController extends BaseController
         }
     }
 
-    public function storeUsers($first_name, $last_name,$age,$email, $password, $confirm_password): void {
-            //Check if password and confirm password match
-            $match = $this->checkPassword($password, $confirm_password);
-            if (isset($first_name, $last_name,$age,$email, $password, $confirm_password)) {
-              if ($match) {
-                  if ($this->exists($email, 'email', 'users')) {
-                      $this->jsonResponse(['Message' => "Account already exists."], 400);
-                  }else{
+    public function storeUsers($first_name, $last_name, $age, $email, $password, $confirm_password): void
+    {
+        //Check if password and confirm password match
+        $match = $this->checkPassword($password, $confirm_password);
+        //trim the password and check if the characters are 6 above
+        $CorrectPass = $this->trimPassword($password);
 
-                      $this->userModel->registerUser($first_name, $last_name,$age,$email, $password);
-                      $this->jsonResponse(['Message' => "Account created successfully."], 201);
-                  }
+        if (isset($first_name, $last_name, $age, $email, $password, $confirm_password)) {
 
-
-
-              }else{
-                  $this->jsonResponse(['Message' => "Password Do not match."], 400);
-              }
-        }else{
-                $this->jsonResponse(['Message' => 'Fields are required to be filled up.'], 400);
+            if ($CorrectPass) {
+                if ($match) {
+                    if ($this->exists($email, 'email', 'users')) {
+                        $this->jsonResponse(['Message' => "Account already exists."], 400);
+                    } else {
+                        $this->userModel->registerUser($first_name, $last_name, $age, $email, $password);
+                        $this->jsonResponse(['Message' => "Account created successfully."], 201);
+                    }
+                } else {
+                    $this->jsonResponse(['Message' => "Password Do not match."], 400);
+                }
+            } else {
+                $this->jsonResponse(['Message' => 'Password must be at least 6 characters long.'], 400);
             }
+        }
+
+
     }
 }
