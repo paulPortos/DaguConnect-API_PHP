@@ -12,6 +12,7 @@ use DaguConnect\Services\TokenGenerator;
 use DaguConnect\Services\GetIdByEmail;
 
 
+
 class AuthenticationController extends BaseController
 {
     private User $userModel;

@@ -4,11 +4,13 @@ namespace DaguConnect\Core;
 
 use DaguConnect\Includes\config;
 use PDO;
+use DaguConnect\Model\Token;
 
 class BaseApi
 {
     public config $config;
     public PDO $db;
+
     private array $routes = [];
     public mixed $requestBody;
 
@@ -42,14 +44,58 @@ class BaseApi
     {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $requestMethod = $_SERVER['REQUEST_METHOD'];
+        $headers = apache_request_headers();
+
+        // Check for Bearer token in Authorization header
+        $token = null;
+        if(isset($headers['Authorization'])) {
+            $token = substr($headers['Authorization'], 7); // Remove "Bearer " from the token string
+        }
+
 
         if (isset($this->routes[$requestMethod][$requestUri])) {
+
+            // If token is required, validate it
+            if ($this->isTokenRequired($requestUri)) {
+                if (!$this->middleware($token)) {
+                    http_response_code(401);
+                    echo json_encode(['message' => 'Unauthorized']);
+                    exit();
+                }
+            }
+
             $action = $this->routes[$requestMethod][$requestUri];
             call_user_func($action);
         } else {
             $this->respondNotFound();
         }
     }
+
+    //endpoints that is protected by the middleware that needs a token
+    private function isTokenRequired(string $uri): bool
+    {
+        // Define routes that require authentication
+        $protectedRoutes = [
+            '/getUser',
+        ];
+
+        return in_array($uri, $protectedRoutes);
+    }
+
+    //gets the token from the token table
+    public function middleware(?string $token): bool
+    {
+        if ($token === null) {
+            return false; // Token is missing
+        }
+
+        $tokenModel = new Token($this->db);
+        $tokenData = $tokenModel->validateToken($token);
+
+        return $tokenData !== null;
+    }
+
+
 
     protected function respondNotFound(): void
     {
