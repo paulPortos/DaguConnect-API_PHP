@@ -36,8 +36,8 @@ class User extends BaseModel
         $hash_password = password_hash($password, PASSWORD_ARGON2ID);
 
         $query = "INSERT INTO $this->table 
-                (first_name, last_name, age ,email ,password ,created_at)
-                VALUES (:first_name, :last_name, :age, :email, :password, NOW())
+                (first_name, last_name, age,suspend ,email ,password ,created_at)
+                VALUES (:first_name, :last_name, :age, false , :email, :password, NOW())
                  ";
 
         $stmt = $this->db->prepare($query);

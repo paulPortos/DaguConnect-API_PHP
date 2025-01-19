@@ -9,7 +9,7 @@ use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\Trim_Password;
 use DaguConnect\Services\TokenGenerator;
-use DaguConnect\Services\Get_ID_By_Email;
+use DaguConnect\Services\GetIdByEmail;
 
 
 class AuthenticationController extends BaseController
@@ -21,7 +21,7 @@ class AuthenticationController extends BaseController
     use IfDataExists;
     use Trim_Password;
     use TokenGenerator;
-    use Get_ID_By_Email;
+    use GetIdByEmail;
 
 
     public function __construct(User $user_Model)
