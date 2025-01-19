@@ -8,7 +8,7 @@ use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\Trim_Password;
-
+use DaguConnect\Services\TokenGenerator;
 
 class AuthenticationController extends BaseController
 {
@@ -18,6 +18,7 @@ class AuthenticationController extends BaseController
     use Confirm_Password;
     use IfDataExists;
     use Trim_Password;
+    use TokenGenerator;
 
     public function __construct(User $user_Model)
     {
@@ -62,7 +63,23 @@ class AuthenticationController extends BaseController
                 $this->jsonResponse(['Message' => 'Password must be at least 6 characters long.'], 400);
             }
         }
+    }
 
-
+    public function login($email, $password): void{
+        if($this->userModel->loginUser($email,$password)){ //
+            $user = $this->userModel->getUserByEmail($email);
+            if($user){
+                $token = $this->generateToken($user['id'], $this -> db->getDB());
+                if($token){
+                    $this->jsonResponse(['message' => 'Login successful', 'token' => $token], 200);
+                }else{
+                    $this->jsonResponse(['message' => 'Token generation failed'], 500);
+                }
+            }else{
+                $this->jsonResponse(['message' => 'User not found'], 404);
+            }
+        }else{
+            $this->jsonResponse(['message' => 'Email or password invalid' ], 400);
+        }
     }
 }

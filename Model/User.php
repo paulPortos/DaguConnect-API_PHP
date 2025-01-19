@@ -6,11 +6,13 @@ namespace DaguConnect\Model;
 use DaguConnect\Core\BaseModel;
 
 use DaguConnect\Services\Confirm_Password;
+use DaguConnect\Services\TokenGenerator;
 use PDO;
 
 class User extends BaseModel
 {
     use Confirm_Password;
+    use TokenGenerator;
 
     protected $table = 'users';
 
@@ -19,35 +21,17 @@ class User extends BaseModel
         parent::__construct($db);
     }
 
-    public function readAll(): array {
+    public function readAll(): array
+    {
         $query = "SELECT * FROM $this->table";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function loginUser($email, $password): bool {
-        $query = "SELECT * 
-        FROM $this->table
-        WHERE email_verified_at IS NOT NULL
-        AND email = :email
-        ";
 
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        $user_exist = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user_exist) {
-            if (password_verify($password, $user_exist['password'])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function registerUser($first_name, $last_name,$age,$email, $password, ):bool {
+    public function registerUser($first_name, $last_name, $age, $email, $password,): bool
+    {
 
         $hash_password = password_hash($password, PASSWORD_ARGON2ID);
 
@@ -65,5 +49,32 @@ class User extends BaseModel
         $stmt->bindParam(':password', $hash_password);
 
         return $stmt->execute();
+    }
+
+    public function loginUser($email,$password): bool
+    {
+        $query = "SELECT * FROM $this->table WHERE email = :email LIMIT 1";
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $user_Exist = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($user_Exist && password_verify($password, $user_Exist['password'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function getUserByEmail(string $email): ?array
+    {
+        $query = "SELECT * FROM $this->table WHERE email = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $user ?: null;
     }
 }
