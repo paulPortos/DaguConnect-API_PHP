@@ -80,4 +80,18 @@ class Admin extends BaseModel
         // Return the token
         return $token;
     }
+
+    public function getAllActiveUsers() {
+
+    }
+
+    public function getAllUserCount():Int {
+        $query = "SELECT COUNT(*) AS count FROM users";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return the count as an integer
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
 }

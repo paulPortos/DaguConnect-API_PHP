@@ -27,24 +27,24 @@ class AdminAuthController extends BaseController
     public function register($username, $email, $password, $confirm_password): void
     {
         if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
-            $this->jsonResponse(['Message' => 'Fields are required to be filled up.'], 400);
+            $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
             return;
         }
 
         if (!$this->checkPassword($password, $confirm_password)) {
-            BaseController::jsonResponse(['Message' => 'Passwords do not match.'], 400);
+            BaseController::jsonResponse(['message' => 'Passwords do not match.'], 400);
             return;
         }
 
         if ($this->exists($email, 'email', 'admin') || $this->exists($username, 'username', 'admin')) {
-            $this->jsonResponse(['Message' => 'Account already exists.'], 400);
+            $this->jsonResponse(['message' => 'Account already exists.'], 400);
             return;
         }
 
         if ($this->adminModel->registerUser($username, $email, $password)) {
-            $this->jsonResponse(['Message' => 'Registered successfully'], 201);
+            $this->jsonResponse(['message' => 'Registered successfully'], 201);
         } else {
-            $this->jsonResponse(['Message' => 'Registration failed.'], 400);
+            $this->jsonResponse(['message' => 'Registration failed.'], 400);
         }
     }
 
@@ -53,19 +53,23 @@ class AdminAuthController extends BaseController
         if (isset($username, $email, $password)) {
 
             if ($this->loggedIn($email, 'admin')){
-                $this->jsonResponse(['Message' => 'Already logged in on another device.'], 400);
+                $this->jsonResponse(['message' => 'Already logged in on another device.'], 400);
             } else {
                 if ($this->adminModel->loginUser($username, $email, $password)) {
                     $token = $this->adminModel->createToken($email);
-                    $this->jsonResponse(['Message' => 'Login successully!', 'Token' => $token], 200);
+                    $this->jsonResponse(['message' => 'Login successfully!',
+                        'admin' => [
+                        'token' => $token,
+                        'username' => $username,
+                        'email' => $email,
+                        ]
+                    ], 200);
                 } else {
-                    $this->jsonResponse(['Message' => 'User does not exist.'], 400);
+                    $this->jsonResponse(['message' => 'User does not exist.'], 400);
                 }
             }
-
-
         } else {
-            $this->jsonResponse(['Message' => 'Fields are required to be filled up.'], 400);
+            $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
         }
     }
 }
