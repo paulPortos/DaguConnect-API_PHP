@@ -4,7 +4,7 @@ namespace DaguConnect\Core;
 
 class BaseController
 {
-    protected function jsonResponse($data, int $status =200): void
+    protected static function jsonResponse($data, int $status =200): void
     {
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');

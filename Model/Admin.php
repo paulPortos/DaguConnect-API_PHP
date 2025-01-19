@@ -2,6 +2,7 @@
 
 namespace DaguConnect\Model;
 
+use DaguConnect\Core\BaseController;
 use DaguConnect\Core\BaseModel;
 use DaguConnect\Services\Confirm_Password;
 use PDO;

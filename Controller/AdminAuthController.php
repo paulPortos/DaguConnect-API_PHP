@@ -15,7 +15,6 @@ class AdminAuthController extends BaseController
     use IfDataExists;
     use CheckIfLoggedIn;
 
-
     private Admin $adminModel;
 
     public function __construct(Admin $admin_model)
@@ -42,7 +41,7 @@ class AdminAuthController extends BaseController
         }
 
         if ($this->adminModel->registerUser($username, $email, $password)) {
-            $this->jsonResponse(['message' => 'Registered successfully'], 201);
+            BaseController::jsonResponse(['message' => 'Account already exists.'], 400);
         } else {
             $this->jsonResponse(['message' => 'Registration failed.'], 400);
         }
