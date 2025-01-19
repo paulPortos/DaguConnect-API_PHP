@@ -4,7 +4,7 @@ namespace DaguConnect\Services;
 
 use PDO;
 
-trait Get_ID_By_Email
+trait GetIdByEmail
 {
     public function getUserByEmail( string $email,PDO $db): ?array
     {
