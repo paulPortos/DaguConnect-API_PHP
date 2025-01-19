@@ -39,7 +39,7 @@ class Api extends BaseApi
             $adminController->register($username, $email, $password, $confirm_password);
         });
 
-        $this->route('POST', '/login/admin', function() {
+        $this->route('POST', '/login/admin', function () {
             $this->responseBodyChecker();
 
             $username = $this->requestBody['username'];
