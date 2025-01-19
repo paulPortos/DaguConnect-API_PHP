@@ -26,6 +26,22 @@ class Api extends BaseApi
             $authController->index();
         });
 
+        $this->route('POST', '/register/user', function () {
+            $this->responseBodyChecker();
+
+            $first_name = $this->requestBody['first_name'];
+            $last_name = $this->requestBody['last_name'];
+            $age = $this->requestBody['age'];
+            $email = $this->requestBody['email'];
+            $password = $this->requestBody['password'];
+            $confirm_password = $this->requestBody['confirm_password'];
+
+            $authController = new AuthenticationController(new User($this->db));
+            $authController->storeUsers($first_name, $last_name,$age,$email, $password, $confirm_password);
+
+
+        });
+
         $this->route('POST', '/register/admin', function () {
 
             $this->responseBodyChecker();
@@ -49,6 +65,20 @@ class Api extends BaseApi
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->login($username, $email, $password);
         });
+        $this->route('POST', '/login/user', function () {
+            $this->responseBodyChecker();
+
+            $email = $this->requestBody['email'];
+            $password = $this->requestBody['password'];
+
+            $authController = new AuthenticationController(new User($this->db));
+            $authController->login($email, $password);
+
+
+        });
+
+
+
     }
 
 
