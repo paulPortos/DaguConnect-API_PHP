@@ -42,8 +42,7 @@ class Api extends BaseApi
 
         });
 
-        $this->route('POST', '/register/admin', function () {
-
+        $this->route('POST', '/admin/register', function () {
             $this->responseBodyChecker();
 
             $username = $this->requestBody['username'];
@@ -55,7 +54,7 @@ class Api extends BaseApi
             $adminController->register($username, $email, $password, $confirm_password);
         });
 
-        $this->route('POST', '/login/admin', function () {
+        $this->route('POST', '/admin/login', function () {
             $this->responseBodyChecker();
 
             $username = $this->requestBody['username'];
@@ -65,6 +64,18 @@ class Api extends BaseApi
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->login($username, $email, $password);
         });
+
+        $this->route('PUT', '/admin/change_password', function () {
+            $this->responseBodyChecker();
+
+            $user_id = $this->requestBody['user_id'];
+            $current_password = $this->requestBody['current_password'];
+            $new_password = $this->requestBody['new_password'];
+
+            $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->changePassword($user_id, $current_password, $new_password);
+        });
+
         $this->route('POST', '/login/user', function () {
             $this->responseBodyChecker();
 

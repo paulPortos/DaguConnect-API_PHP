@@ -72,4 +72,13 @@ class AdminAuthController extends BaseController
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
         }
     }
+
+    public function changePassword($userId, $current_password, $new_password): void {
+        $success = $this->adminModel->changeAdminPassword($userId, $current_password, $new_password);
+        if ($success) {
+            $this->jsonResponse(['message' => 'Password changed successfully.'], 200);
+            return;
+        }
+        $this->jsonResponse(['message' => 'Incorrect password.'], 200);
+    }
 }

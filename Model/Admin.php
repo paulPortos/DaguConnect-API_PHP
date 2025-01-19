@@ -4,13 +4,12 @@ namespace DaguConnect\Model;
 
 use DaguConnect\Core\BaseModel;
 use DaguConnect\Services\Confirm_Password;
-use InvalidArgumentException;
 use PDO;
 
 class Admin extends BaseModel
 {
     use Confirm_Password;
-    protected $table = 'admin';
+    protected string $table = 'admin';
 
     public function __construct(PDO $db)
     {
@@ -93,5 +92,31 @@ class Admin extends BaseModel
         // Fetch the result as an associative array and return the count as an integer
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return (int)$result['count'];
+    }
+
+    public function changeAdminPassword($userId, $current_password, $new_password): bool {
+        $hashedPassword = null;
+
+        $query = "SELECT password FROM $this->table WHERE id = :id";
+        $stmt = $this->db ->prepare($query);
+        $stmt->bindParam(":id", $userId);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $hashedPassword = $result['password'];
+        }
+        $stmt->closeCursor();
+
+        if (password_verify($current_password, $hashedPassword)) {
+            $newHashPassword = password_hash($new_password, PASSWORD_ARGON2I);
+
+            $updateQuery = "UPDATE $this->table SET password = :new_password WHERE id = :id";
+            $updateStmt = $this->db->prepare($updateQuery);
+            $updateStmt->bindParam(":new_password", $newHashPassword);
+            $updateStmt->bindParam(":id", $userId, PDO::PARAM_INT);
+            return $updateStmt->execute();
+        }
+        return false;
     }
 }
