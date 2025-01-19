@@ -6,13 +6,13 @@ use PDO;
 
 trait TokenGenerator
 {
-
-    public function generateToken( $user_id, PDO $db): bool
+    protected $token_table = 'user_tokens';
+    public function generateToken( $user_id, PDO $db): ?string
     {
         try {
             $token = bin2hex(random_bytes(32));
 
-            $query = "INSERT INTO tokens(user_id, token ,created_at) 
+            $query = "INSERT INTO $this->token_table(user_id, token ,created_at) 
                         VALUES(:user_id, :token, NOW())";
 
             $stmt = $db->prepare($query);

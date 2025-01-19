@@ -9,6 +9,8 @@ use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\Trim_Password;
 use DaguConnect\Services\TokenGenerator;
+use DaguConnect\Services\Get_ID_By_Email;
+
 
 class AuthenticationController extends BaseController
 {
@@ -19,6 +21,8 @@ class AuthenticationController extends BaseController
     use IfDataExists;
     use Trim_Password;
     use TokenGenerator;
+    use Get_ID_By_Email;
+
 
     public function __construct(User $user_Model)
     {
@@ -67,7 +71,7 @@ class AuthenticationController extends BaseController
 
     public function login($email, $password): void{
         if($this->userModel->loginUser($email,$password)){ //
-            $user = $this->userModel->getUserByEmail($email);
+            $user = $this->getUserByEmail($email,$this->db->getDB());
             if($user){
                 $token = $this->generateToken($user['id'], $this -> db->getDB());
                 if($token){

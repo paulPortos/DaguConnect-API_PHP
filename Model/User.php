@@ -66,15 +66,5 @@ class User extends BaseModel
             return false;
         }
     }
-    public function getUserByEmail(string $email): ?array
-    {
-        $query = "SELECT * FROM $this->table WHERE email = :email";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $user ?: null;
-    }
 }
