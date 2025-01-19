@@ -1,9 +1,15 @@
 <?php
 
  /*
- * To run the server
+ * To run the server on localhost
  * Type this in the terminal
  * php -S localhost:8000 -t public
+ */
+
+/*
+ * To run the server on any ip
+ * Type this in the terminal
+ * php -S 0.0.0.0:8000 -t public
  */
 
  /*
