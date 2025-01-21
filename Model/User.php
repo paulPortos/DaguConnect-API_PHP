@@ -21,14 +21,14 @@ class User extends BaseModel
         parent::__construct($db);
     }
 
-    public function registerUser($first_name, $last_name, $age, $email, $password,): bool
+    public function registerUser($first_name, $last_name, $age, $email,$is_client, $password,): bool
     {
 
         $hash_password = password_hash($password, PASSWORD_ARGON2ID);
 
         $query = "INSERT INTO $this->table 
-                (first_name, last_name, age,suspend ,email ,password ,created_at)
-                VALUES (:first_name, :last_name, :age, false , :email, :password, NOW())
+                (first_name, last_name, age,suspend ,email,is_client ,password ,created_at)
+                VALUES (:first_name, :last_name, :age, false , :email,:is_client, :password, NOW())
                  ";
 
         $stmt = $this->db->prepare($query);
@@ -37,6 +37,7 @@ class User extends BaseModel
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':age', $age);
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':is_client', $is_client);
         $stmt->bindParam(':password', $hash_password);
 
         return $stmt->execute();

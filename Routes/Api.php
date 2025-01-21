@@ -30,13 +30,12 @@ class Api extends BaseApi
             $last_name = $this->requestBody['last_name'];
             $age = $this->requestBody['age'];
             $email = $this->requestBody['email'];
+            $is_client = $this->requestBody['is_client'];
             $password = $this->requestBody['password'];
             $confirm_password = $this->requestBody['confirm_password'];
 
             $authController = new AuthenticationController(new User($this->db));
-            $authController->storeUsers($first_name, $last_name,$age,$email, $password, $confirm_password);
-
-
+            $authController->storeUsers($first_name, $last_name, $age, $email,$is_client ,$password, $confirm_password);
         });
 
         $this->route('POST', '/register/admin', function () {
