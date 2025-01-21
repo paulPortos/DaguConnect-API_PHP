@@ -51,6 +51,15 @@ class User extends BaseModel
         return $stmt->execute();
     }
 
+    /*public function EmailVerify($email): bool{
+        $query = "UPDATE $this->table SET email_verified_at = NOW() WHERE email = :email AND email_verified_at IS NULL";
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':email', $email);
+
+        return $stmt->execute() && $stmt->rowCount() > 0;
+    }*/
+
     public function loginUser($email,$password): bool
     {
         $query = "SELECT * FROM $this->table WHERE email = :email LIMIT 1";
@@ -66,5 +75,7 @@ class User extends BaseModel
             return false;
         }
     }
+
+
 
 }
