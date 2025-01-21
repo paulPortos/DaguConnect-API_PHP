@@ -21,15 +21,6 @@ class User extends BaseModel
         parent::__construct($db);
     }
 
-    public function readAll(): array
-    {
-        $query = "SELECT * FROM $this->table";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-
     public function registerUser($first_name, $last_name, $age, $email, $password,): bool
     {
 

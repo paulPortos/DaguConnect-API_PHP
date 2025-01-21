@@ -23,11 +23,6 @@ class Api extends BaseApi
 
     public function registeredRoutes(): void {
         // Register a route for the AuthenticationController
-        $this->route('GET', '/getUser', function () {
-            $authController = new AuthenticationController(new User($this->db));
-            $authController->index();
-        });
-
         $this->route('POST', '/register/user', function () {
             $this->responseBodyChecker();
 

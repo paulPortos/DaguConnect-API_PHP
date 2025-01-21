@@ -33,19 +33,6 @@ class AuthenticationController extends BaseController
     {
         $this->db = new config();
         $this->userModel = $user_Model;
-
-
-    }
-
-    public function index(): void
-    {
-        $user_data = $this->userModel->readAll();
-
-        if (empty($user_data)) {
-            $this->jsonResponse(['Message' => 'No fetched users'], 200);
-        } else {
-            $this->jsonResponse(['users' => $user_data]);
-        }
     }
 
     public function storeUsers($first_name, $last_name, $age, $email, $password, $confirm_password): void
