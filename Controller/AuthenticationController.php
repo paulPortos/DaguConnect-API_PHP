@@ -43,7 +43,7 @@ class AuthenticationController extends BaseController
         $CorrectPass = $this->trimPassword($password);
 
         //check if the fields a re all filled up
-        if(empty($first_name) || empty($last_name) || empty($age) || empty($email) || empty($is_client)|| empty($password) || empty($confirm_password)){
+        if(empty($first_name) || empty($last_name) || empty($age) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
             $this->jsonResponse(['Message' => 'Fields are required to be filled up.'], 400);
             return;
         }
