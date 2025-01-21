@@ -30,6 +30,14 @@ class AdminAuthController extends BaseController
             return;
         }
 
+        if (strlen($username) >= 5) {
+            $this->jsonResponse(['message' => 'Username must be at least 5 characters long.'], 400);
+        }
+
+        if (strlen($password) >= 8) {
+            $this->jsonResponse(['message' => '"Password must be at least 8 characters long.'], 400);
+        }
+
         if (!$this->checkPassword($password, $confirm_password)) {
             BaseController::jsonResponse(['message' => 'Passwords do not match.'], 400);
             return;
@@ -41,7 +49,7 @@ class AdminAuthController extends BaseController
         }
 
         if ($this->adminModel->registerUser($username, $email, $password)) {
-            BaseController::jsonResponse(['message' => 'Account already exists.'], 400);
+            $this->jsonResponse(['message' => 'Account successfully created.'], 201);
         } else {
             $this->jsonResponse(['message' => 'Registration failed.'], 400);
         }
@@ -49,27 +57,39 @@ class AdminAuthController extends BaseController
 
     public function login($username, $email, $password): void
     {
-        if (isset($username, $email, $password)) {
-
-            if ($this->loggedIn($email, 'admin')){
-                $this->jsonResponse(['message' => 'Already logged in on another device.'], 400);
-            } else {
-                if ($this->adminModel->loginUser($username, $email, $password)) {
-                    $token = $this->adminModel->createToken($email);
-                    $this->jsonResponse(['message' => 'Login successfully!',
-                        'admin' => [
-                        'token' => $token,
-                        'username' => $username,
-                        'email' => $email,
-                        ]
-                    ], 200);
-                } else {
-                    $this->jsonResponse(['message' => 'User does not exist.'], 400);
-                }
-            }
-        } else {
+        if (empty($username) || empty($email) || empty($password)) {
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
+            return;
         }
+
+        if (strlen($username) >= 5) {
+            $this->jsonResponse(['message' => 'Username must be at least 5 characters long.'], 400);
+        }
+
+        if (strlen($password) >= 8) {
+            $this->jsonResponse(['message' => '"Password must be at least 8 characters long.'], 400);
+        }
+
+        if ($this->loggedIn($email, 'admin')){
+            $this->jsonResponse(['message' => 'Already logged in on another device.'], 400);
+            return;
+        }
+
+        if (!$this->adminModel->loginUser($username, $email, $password)) {
+            $this->jsonResponse(['message' => 'User does not exist.'], 400);
+            return;
+        }
+
+        $token = $this->adminModel->createToken($email);
+        $this->jsonResponse(['message' => 'Login successfully!',
+            'admin' => [
+                [
+                    'token' => $token,
+                    'username' => $username,
+                    'email' => $email,
+                ]
+            ]
+        ], 200);
     }
 
     public function changePassword($userId, $current_password, $new_password): void {

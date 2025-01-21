@@ -24,17 +24,18 @@
 /*
  * create the users_token table
  *
- * CREATE TABLE user_tokens (
+
+    CREATE TABLE user_tokens (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     token VARCHAR(255) NOT NULL,
     created_at DATETIME NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+    );
 
-*create the users table
- *
- * CREATE TABLE users (
+ * create the users table
+
+    CREATE TABLE users (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -45,7 +46,18 @@
     is_client TINYINT(1) NULL,
     password VARCHAR(255) NOT NULL,
     created_at DATE NOT NULL
-);
+    );
 
+ *create admin table
+
+    CREATE TABLE Admin (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    token VARCHAR(255),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY idx_email (email) -- Creates a unique index for faster searches on email
+    );
 
  */

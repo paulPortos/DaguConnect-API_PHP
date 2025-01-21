@@ -76,7 +76,7 @@ class Api extends BaseApi
             $adminController->changePassword($user_id, $current_password, $new_password);
         });
 
-        $this->route('POST', '/login/user', function () {
+        $this->route('POST', '/user/login', function () {
             $this->responseBodyChecker();
 
             $email = $this->requestBody['email'];
