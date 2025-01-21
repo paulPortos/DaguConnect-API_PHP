@@ -35,7 +35,7 @@ class Api extends BaseApi
             $confirm_password = $this->requestBody['confirm_password'];
 
             $authController = new AuthenticationController(new User($this->db));
-            $authController->storeUsers($first_name, $last_name, $age, $email,$is_client ,$password, $confirm_password);
+            $authController->register($first_name, $last_name, $age, $email,$is_client ,$password, $confirm_password);
         });
 
         $this->route('POST', '/register/admin', function () {
