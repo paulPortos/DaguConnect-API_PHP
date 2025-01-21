@@ -8,8 +8,10 @@ use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\User;
 
+
 class Api extends BaseApi
 {
+
     public function __construct()
     {
         parent::__construct(); // Calling constructor
@@ -65,6 +67,12 @@ class Api extends BaseApi
 
         });
 
+        $this->route('GET', '/verify-email', function () {
+            $email = $_GET['email'] ?? null;
+
+            $authController = new AuthenticationController(new User($this->db));
+            $authController->verifyEmail($email);
+        });
 
 
     }

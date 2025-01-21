@@ -10,6 +10,9 @@ use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\Trim_Password;
 use DaguConnect\Services\TokenGenerator;
 use DaguConnect\Services\GetIdByEmail;
+use DaguConnect\PhpMailer\Email_Sender;
+use DaguConnect\PhpMailer\EmailVerification;
+
 
 
 
@@ -23,6 +26,7 @@ class AuthenticationController extends BaseController
     use Trim_Password;
     use TokenGenerator;
     use GetIdByEmail;
+    use EmailVerification;
 
 
     public function __construct(User $user_Model)
@@ -59,7 +63,10 @@ class AuthenticationController extends BaseController
                         $this->jsonResponse(['Message' => "Account already exists."], 400);
                     } else {
                         $this->userModel->registerUser($first_name, $last_name, $age, $email, $password);
-                        $this->jsonResponse(['Message' => "Account created successfully."], 201);
+                        //send_email verification
+                        Email_Sender::sendVerificationEmail($email);
+
+                        $this->jsonResponse(['Message' => "Account created successfully.Please verify your email"], 201);
                     }
                 } else {
                     $this->jsonResponse(['Message' => "Password Do not match."], 400);
@@ -70,13 +77,31 @@ class AuthenticationController extends BaseController
         }
     }
 
+    public function verifyEmail($email): void
+    {
+        if (isset($email)) {
+            if ($this->EmailVerify($email, $this->db->getDB())) {
+                $this->renderView('Verified.html', ['message' => 'Email successfully verified.']);
+            } else {
+                $this->renderView('Already_Verified.html', ['message' => 'Email Already verified.']);
+            }
+        } else {
+            $this->jsonResponse(['Message' => 'Email parameter is missing.'], 400);
+        }
+    }
+
+
     public function login($email, $password): void{
         if($this->userModel->loginUser($email,$password)){ //
             $user = $this->getUserByEmail($email,$this->db->getDB());
             if($user){
                 $token = $this->generateToken($user['id'], $this -> db->getDB());
                 if($token){
-                    $this->jsonResponse(['message' => 'Login successful', 'token' => $token], 200);
+                    if($user['email_verified_at'] !== null){
+                        $this->jsonResponse(['message' => 'Login successful', 'token' => $token], 200);
+                    }else{
+                        $this->jsonResponse(['message' => 'Email not verified'], 400);
+                    }
                 }else{
                     $this->jsonResponse(['message' => 'Token generation failed'], 500);
                 }

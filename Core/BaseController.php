@@ -11,4 +11,9 @@ class BaseController
         http_response_code($status);
         echo json_encode($data);
     }
+    protected function renderView(string $viewFile, array $data = []): void
+    {
+        extract($data);
+        include __DIR__ . '/../Views/' . $viewFile;
+    }
 }
