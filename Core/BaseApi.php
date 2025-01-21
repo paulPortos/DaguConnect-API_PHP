@@ -83,7 +83,7 @@ class BaseApi
     }
 
     //gets the token from the token table
-    public function middleware(?string $token): bool
+    public function middleware(?string $token): ?int
     {
         if ($token === null) {
             return false; // Token is missing
@@ -92,7 +92,7 @@ class BaseApi
         $tokenModel = new Token($this->db);
         $tokenData = $tokenModel->validateToken($token);
 
-        return $tokenData !== null;
+        return $tokenData['user_id'] ?? null;
     }
 
 
