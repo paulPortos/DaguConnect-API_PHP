@@ -3,9 +3,11 @@
 namespace DaguConnect\Routes;
 
 use Controller\AdminAuthController;
+use Controller\APP\ResumeController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
+use DaguConnect\Model\Resume;
 use DaguConnect\Model\User;
 
 
@@ -90,6 +92,42 @@ class Api extends BaseApi
             $authController = new AuthenticationController(new User($this->db));
             $authController->verifyEmail($email);
         });
+
+        $this->route('POST','/store_resume', function () {
+            $this->responseBodyChecker();
+
+            // Extract title and description from request body
+            $title = $this->requestBody['title'] ?? null;
+            $description = $this->requestBody['description'] ?? null;
+
+            // Check for missing data
+            if (!$title || !$description) {
+                echo json_encode(['message' => 'Title and description are required']);
+                http_response_code(400);
+                return;
+            }
+
+            // Extract token from Authorization header
+            $headers = apache_request_headers();
+            $token = null;
+            if (isset($headers['Authorization'])) {
+                $token = substr($headers['Authorization'], 7); // Remove "Bearer " from the token string
+            }
+
+            // Validate token and get user_id
+            $userId = $this->middleware($token);
+            if (!$userId) {
+                http_response_code(401);
+                echo json_encode(['message' => 'Unauthorized']);
+                return;
+            }
+
+            // Create ResumeController and store resume
+            $resumeController = new ResumeController(new Resume($this->db));
+            $resumeController->StoreResume($userId, $title, $description);
+        });
+
+
 
 
     }
