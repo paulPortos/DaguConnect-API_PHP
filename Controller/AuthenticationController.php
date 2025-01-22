@@ -12,6 +12,8 @@ use DaguConnect\Services\TokenGenerator;
 use DaguConnect\Services\GetIdByEmail;
 use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\PhpMailer\EmailVerification;
+use DaguConnect\Services\validate_FirstandLastName;
+use DaguConnect\Services\Validate_EmailAddress;
 
 
 
@@ -22,12 +24,13 @@ class AuthenticationController extends BaseController
 
 
     use Confirm_Password;
+    use validate_FirstandLastName;
     use IfDataExists;
     use Trim_Password;
     use TokenGenerator;
     use GetIdByEmail;
     use EmailVerification;
-
+    use Validate_EmailAddress;
 
     public function __construct(User $user_Model)
     {
@@ -41,6 +44,11 @@ class AuthenticationController extends BaseController
         $match = $this->checkPassword($password, $confirm_password);
         //trim the password and check if the characters are 6 above
         $CorrectPass = $this->trimPassword($password);
+        //checks if the first name and last name has numerical value or not
+        $firstNameandLastnameValidation = $this->validateFirstAndLastName($first_name, $last_name);
+        //check if the user enters a valid email
+        $emailValidation = $this->validateEmailAddress($email);
+
 
         //check if the fields a re all filled up
         if(empty($first_name) || empty($last_name) || empty($age) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
@@ -51,6 +59,16 @@ class AuthenticationController extends BaseController
         //check if the password and confirm password is the same
         if(!$match){
             $this->jsonResponse(['Message' => 'Password do not match.'], 400);
+            return;
+        }
+
+        if(!$emailValidation){
+            $this->jsonResponse(['Message' => 'Email is not valid.'], 400);
+            return;
+        }
+
+        if(!$firstNameandLastnameValidation){
+            $this->jsonResponse(['Message' => 'First name and Last name should not contain any numerical value.'], 400);
             return;
         }
 
