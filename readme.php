@@ -82,7 +82,7 @@
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (reported_user) REFERENCES users(id) ON DELETE CASCADE
     ) ENGINE = InnoDB;
-    arrange daguconnct chat table
+
 
 *create chat table
 
@@ -94,7 +94,7 @@
     profile_picture BLOB NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users`(id`),
-    FOREIGN KEY (receiver_id) REFERENCES users`(id`)
+    FOREIGN KEY (user_id) REFERENCES `users`(`id`),
+    FOREIGN KEY (receiver_id) REFERENCES `users`(`id`)
     ) ENGINE = InnoDB;
  */
