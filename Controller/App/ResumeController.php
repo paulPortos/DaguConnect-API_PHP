@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller\APP;
+namespace Controller\App;
 
 use DaguConnect\Core\BaseController;
 use DaguConnect\Model\Resume;

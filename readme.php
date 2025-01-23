@@ -1,15 +1,9 @@
 <?php
 
  /*
- * To run the server on localhost
+ * To run the server
  * Type this in the terminal
  * php -S localhost:8000 -t public
- */
-
-/*
- * To run the server on any ip
- * Type this in the terminal
- * php -S 0.0.0.0:8000 -t public
  */
 
  /*
@@ -24,8 +18,7 @@
 /*
  * create the users_token table
  *
-
-    CREATE TABLE user_tokens (
+ * CREATE TABLE user_tokens (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     token VARCHAR(255) NOT NULL,
@@ -33,9 +26,9 @@
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
- * create the users table
-
-    CREATE TABLE users (
+*create the users table
+ *
+ * CREATE TABLE users (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -48,7 +41,18 @@
     created_at DATE NOT NULL
     );
 
- *create admin table
+ *create the user_resume
+
+    CREATE TABLE resume (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+
+    *create admin table
 
     CREATE TABLE `daguconnect-db`.`admin` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

@@ -30,6 +30,7 @@ class Api extends BaseApi
 
             $first_name = $this->requestBody['first_name'];
             $last_name = $this->requestBody['last_name'];
+            $username = $this->requestBody['username'];
             $age = $this->requestBody['age'];
             $email = $this->requestBody['email'];
             $is_client = $this->requestBody['is_client'];
@@ -37,10 +38,11 @@ class Api extends BaseApi
             $confirm_password = $this->requestBody['confirm_password'];
 
             $authController = new AuthenticationController(new User($this->db));
-            $authController->register($first_name, $last_name, $age, $email,$is_client ,$password, $confirm_password);
+            $authController->storeUsers($first_name, $last_name, $age, $email,$is_client ,$password, $confirm_password);
         });
 
-        $this->route('POST', '/admin/register', function () {
+        $this->route('POST', '/register/admin', function () {
+            
             $this->responseBodyChecker();
 
             $username = $this->requestBody['username'];
@@ -74,7 +76,7 @@ class Api extends BaseApi
             $adminController->changePassword($user_id, $current_password, $new_password);
         });
 
-        $this->route('POST', '/user/login', function () {
+        $this->route('POST', '/login/user', function () {
             $this->responseBodyChecker();
 
             $email = $this->requestBody['email'];
