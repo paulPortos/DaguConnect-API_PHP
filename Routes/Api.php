@@ -95,7 +95,7 @@ class Api extends BaseApi
             $authController->verifyEmail($email);
         });
 
-        $this->route('POST','/store_resume', function ($userId) {
+        $this->route('POST','/user/resume', function ($userId) {
             $this->responseBodyChecker();
 
             // Extract title and description from request body

@@ -9,7 +9,7 @@ trait Middleware
     {
         //endpoints that is protected by the middleware that needs a token
         $protectedRoutes = [
-            '/store_resume'
+            '/user/resume'
         ];
 
         if (in_array($requestUri, $protectedRoutes)) {
