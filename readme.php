@@ -50,7 +50,7 @@
 
  *create admin table
 
-    CREATE TABLE Admin (
+    CREATE TABLE `daguconnect-db`.`admin` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
@@ -60,4 +60,22 @@
     UNIQUE KEY idx_email (email) -- Creates a unique index for faster searches on email
     );
 
+*create table reports
+
+    CREATE TABLE `daguconnect-db`.`reports` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `user_id` INT(11) NOT NULL,
+    `reason` ENUM('inactive','scam','spam','harassment','unprofessional_behavior','violating_terms','impersonation') NOT NULL,
+    `reported_user` INT NOT NULL,
+    `is_solved` BOOLEAN NOT NULL DEFAULT FALSE,
+    `statement` TEXT NOT NULL,
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    INDEX (`user_id`),
+    INDEX (`reported_user`),
+    INDEX (`reason`),
+    INDEX (`created_at`),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (reported_user) REFERENCES users(id) ON DELETE CASCADE
+    ) ENGINE = InnoDB;
  */
