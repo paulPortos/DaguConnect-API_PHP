@@ -86,7 +86,7 @@
 
 *create chat table
 
-    CREATE TABLE daguconnect-db.`chat` (
+    CREATE TABLE `daguconnect-db`.`chat` (
     id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
     receiver_id INT NOT NULL,
