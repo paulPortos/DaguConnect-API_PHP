@@ -13,7 +13,7 @@ use DaguConnect\Services\GetIdByEmail;
 use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\PhpMailer\EmailVerification;
 use DaguConnect\Services\validate_FirstandLastName;
-use DaguConnect\Services\Validate_EmailAddress;
+use DaguConnect\Services\validate_EmailAddress;
 
 
 
@@ -30,7 +30,7 @@ class AuthenticationController extends BaseController
     use TokenGenerator;
     use GetIdByEmail;
     use EmailVerification;
-    use Validate_EmailAddress;
+    use validate_EmailAddress;
 
     public function __construct(User $user_Model)
     {
@@ -38,7 +38,7 @@ class AuthenticationController extends BaseController
         $this->userModel = $user_Model;
     }
 
-    public function register($first_name, $last_name, $age, $email, $is_client ,$password, $confirm_password): void
+    public function register($first_name, $last_name, $username,$age, $email, $is_client ,$password, $confirm_password): void
     {
         //Check if password and confirm password match
         $match = $this->checkPassword($password, $confirm_password);
@@ -51,7 +51,7 @@ class AuthenticationController extends BaseController
 
 
         //check if the fields a re all filled up
-        if(empty($first_name) || empty($last_name) || empty($age) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
+        if(empty($first_name) || empty($last_name) || empty($username) ||empty($age) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
             return;
         }
@@ -84,7 +84,7 @@ class AuthenticationController extends BaseController
             return;
         }
         //stored the data in the database
-        if($this->userModel->registerUser($first_name, $last_name, $age, $email,$is_client, $password,)){
+        if($this->userModel->registerUser($first_name, $last_name, $username, $age, $email,$is_client, $password,)){
                 //send_email verification
                 Email_Sender::sendVerificationEmail($email);
                 $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);

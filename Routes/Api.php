@@ -38,7 +38,7 @@ class Api extends BaseApi
             $confirm_password = $this->requestBody['confirm_password'];
 
             $authController = new AuthenticationController(new User($this->db));
-            $authController->storeUsers($first_name, $last_name, $age, $email,$is_client ,$password, $confirm_password);
+            $authController->register($first_name, $last_name, $username,$age, $email,$is_client ,$password, $confirm_password);
         });
 
         $this->route('POST', '/register/admin', function () {
@@ -95,7 +95,7 @@ class Api extends BaseApi
             $authController->verifyEmail($email);
         });
 
-        $this->route('POST','/store_resume', function () {
+        $this->route('POST','/store_resume', function ($userId) {
             $this->responseBodyChecker();
 
             // Extract title and description from request body
@@ -106,21 +106,6 @@ class Api extends BaseApi
             if (!$title || !$description) {
                 echo json_encode(['message' => 'Title and description are required']);
                 http_response_code(400);
-                return;
-            }
-
-            // Extract token from Authorization header
-            $headers = apache_request_headers();
-            $token = null;
-            if (isset($headers['Authorization'])) {
-                $token = substr($headers['Authorization'], 7); // Remove "Bearer " from the token string
-            }
-
-            // Validate token and get user_id
-            $userId = $this->middleware($token);
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode(['message' => 'Unauthorized']);
                 return;
             }
 
