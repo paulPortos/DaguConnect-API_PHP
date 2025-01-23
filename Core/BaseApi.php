@@ -4,10 +4,11 @@ namespace DaguConnect\Core;
 
 use DaguConnect\Includes\config;
 use PDO;
-use DaguConnect\Model\Token;
+use DaguConnect\Middleware\Middleware;
 
 class BaseApi
 {
+    use Middleware;
     public config $config;
     public PDO $db;
 
@@ -44,55 +45,21 @@ class BaseApi
     {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $requestMethod = $_SERVER['REQUEST_METHOD'];
-        $headers = apache_request_headers();
-
-        // Check for Bearer token in Authorization header
-        $token = null;
-        if(isset($headers['Authorization'])) {
-            $token = substr($headers['Authorization'], 7); // Remove "Bearer " from the token string
-        }
-
 
         if (isset($this->routes[$requestMethod][$requestUri])) {
-
-            // If token is required, validate it
-            if ($this->isTokenRequired($requestUri)) {
-                if (!$this->middleware($token)) {
-                    http_response_code(401);
-                    echo json_encode(['message' => 'Unauthorized']);
-                    exit();
-                }
+            // Validate the token and get user ID
+            $userId = $this->Auth($requestUri, $this->db);
+            if ($userId === null) {
+                http_response_code(401);
+                echo json_encode(['message' => 'Unauthorized']);
+                return;
             }
-
+            // Call the action for the route
             $action = $this->routes[$requestMethod][$requestUri];
-            call_user_func($action);
+            call_user_func_array($action, [$userId]);
         } else {
             $this->respondNotFound();
         }
-    }
-
-    //endpoints that is protected by the middleware that needs a token
-    private function isTokenRequired(string $uri): bool
-    {
-        // Define routes that require authentication
-        $protectedRoutes = [
-            '/getUser',
-        ];
-
-        return in_array($uri, $protectedRoutes);
-    }
-
-    //gets the token from the token table
-    public function middleware(?string $token): ?int
-    {
-        if ($token === null) {
-            return false; // Token is missing
-        }
-
-        $tokenModel = new Token($this->db);
-        $tokenData = $tokenModel->validateToken($token);
-
-        return $tokenData['user_id'] ?? null;
     }
 
 

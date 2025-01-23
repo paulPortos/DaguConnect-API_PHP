@@ -13,7 +13,7 @@ use DaguConnect\Services\GetIdByEmail;
 use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\PhpMailer\EmailVerification;
 use DaguConnect\Services\validate_FirstandLastName;
-use DaguConnect\Services\Validate_EmailAddress;
+use DaguConnect\Services\validate_EmailAddress;
 
 
 
@@ -30,7 +30,7 @@ class AuthenticationController extends BaseController
     use TokenGenerator;
     use GetIdByEmail;
     use EmailVerification;
-    use Validate_EmailAddress;
+    use validate_EmailAddress;
 
     public function __construct(User $user_Model)
     {
@@ -38,7 +38,7 @@ class AuthenticationController extends BaseController
         $this->userModel = $user_Model;
     }
 
-    public function storeUsers($first_name, $last_name, $age, $email, $is_client ,$password, $confirm_password): void
+    public function storeUsers($first_name, $last_name,$username ,$age, $email, $is_client ,$password, $confirm_password): void
     {
         //Check if password and confirm password match
         $match = $this->checkPassword($password, $confirm_password);
@@ -51,7 +51,7 @@ class AuthenticationController extends BaseController
 
 
         //check if the fields a re all filled up
-        if(empty($first_name) || empty($last_name) || empty($age) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
+        if(empty($first_name) || empty($last_name)||empty($username) || empty($age) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
             $this->jsonResponse(['Message' => 'Fields are required to be filled up.'], 400);
             return;
         }
@@ -84,7 +84,7 @@ class AuthenticationController extends BaseController
             return;
         }
         //stored the data in the database
-        if($this->userModel->registerUser($first_name, $last_name, $age, $email,$is_client, $password,)){
+        if($this->userModel->registerUser($first_name, $last_name,$username, $age, $email,$is_client, $password,)){
                 //send_email verification
                 Email_Sender::sendVerificationEmail($email);
                 $this->jsonResponse(['Message' => "Account created successfully.Please verify your email"], 201);
@@ -131,7 +131,7 @@ class AuthenticationController extends BaseController
 
     public function login($email, $password): void{
 
-        //gets the id by email inputed
+        // Get the user by email
         $user = $this->getUserByEmail($email,$this->db->getDB());
 
 
@@ -154,7 +154,16 @@ class AuthenticationController extends BaseController
             //generates the token if all the requirements are met
             $token = $this->generateToken($user['id'], $this -> db->getDB());
             if($token){
-                $this->jsonResponse(['message' => 'Login successful', 'token' => $token], 200);
+                //exclude the pass and the confirm_password from the json response
+                unset($user['password'], $user['confirm_password']);
+
+                $response = [
+                    'message' => 'Login successful',
+                    'token' => $token ,
+                    'user' => $user
+                ];
+
+                $this->jsonResponse($response, 200);
             }else{
                 $this->jsonResponse(['message' => 'Token generation failed'], 500);
             }
