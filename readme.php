@@ -44,7 +44,7 @@
 
  *create the user_resume
 
-    CREATE TABLE resume (
+    CREATE TABLE user_resume (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
