@@ -120,4 +120,17 @@ class Admin extends BaseModel
         }
         return false;
     }
+
+
+    public function logoutUser($userId):bool {
+        try {
+            $query = "UPDATE $this->table SET token = NULL WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':id', $userId);
+            return $stmt->execute();
+        } catch (PDOException $e){
+            error_log("Error logging out user: ", $e->getMessage());
+            return false;
+        }
+    }
 }
