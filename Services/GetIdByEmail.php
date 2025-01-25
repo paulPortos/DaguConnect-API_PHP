@@ -14,7 +14,11 @@ trait GetIdByEmail
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        if ($user) {
+            // Convert TINYINT(1) to true/false
+            $user['suspend'] = (bool)$user['suspend'];
+            $user['is_client'] = (bool)$user['is_client'];
+        }
         return $user ?: null;
     }
 

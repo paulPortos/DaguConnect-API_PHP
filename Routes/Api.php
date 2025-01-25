@@ -41,7 +41,7 @@ class Api extends BaseApi
             $authController->register($first_name, $last_name, $username,$age, $email,$is_client ,$password, $confirm_password);
         });
 
-        $this->route('POST', '/register/admin', function () {
+        $this->route('POST', '/admin/register', function () {
             
             $this->responseBodyChecker();
 

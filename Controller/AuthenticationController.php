@@ -89,30 +89,6 @@ class AuthenticationController extends BaseController
                 Email_Sender::sendVerificationEmail($email);
                 $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);
         }
-
-
-      /*  if (isset($first_name, $last_name, $age, $email, $password, $confirm_password)) {
-
-            if ($CorrectPass) {
-                if ($match) {
-                    if ($this->exists($email, 'email', 'users')) {
-                        $this->jsonResponse(['Message' => "Account already exists."], 400);
-                    } else {
-                        $this->userModel->registerUser($first_name, $last_name, $age, $email, $password);
-                        //send_email verification
-                        Email_Sender::sendVerificationEmail($email);
-
-                        $this->jsonResponse(['Message' => "Account created successfully.Please verify your email"], 201);
-                    }
-                } else {
-                    $this->jsonResponse(['Message' => "Password Do not match."], 400);
-                }
-            } else {
-                $this->jsonResponse(['Message' => 'Password must be at least 6 characters long.'], 400);
-            }
-        }*/
-
-
     }
 
     public function verifyEmail($email): void
