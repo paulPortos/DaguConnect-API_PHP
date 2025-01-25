@@ -61,17 +61,22 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Password do not match.'], 400);
             return;
         }
-
+        //check the email if it's validated or not
         if(!$emailValidation){
             $this->jsonResponse(['message' => 'Email is not valid.'], 400);
             return;
         }
-
+        //checks if the user
+        //checks the first_name and lastname if it contains a invalid character
         if(!$firstNameandLastnameValidation){
             $this->jsonResponse(['message' => 'First name and Last name should not contain any numerical value.'], 400);
             return;
         }
-
+        //check if the username already exist or not
+        if($this->exists($username, 'username', 'users')){
+            $this->jsonResponse(['message' => 'Username already exists.'], 400);
+            return;
+        }
         //check if the email already exist or not
         if($this->exists($email, 'email', 'users')){
             $this->jsonResponse(['message' => 'Account already exists.'], 400);
