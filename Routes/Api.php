@@ -4,10 +4,12 @@ namespace DaguConnect\Routes;
 
 use Controller\AdminAuthController;
 use Controller\APP\ResumeController;
+use Controller\App\ClientController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\Resume;
+use DaguConnect\Model\Client_Booking;
 use DaguConnect\Model\User;
 
 
@@ -112,6 +114,19 @@ class Api extends BaseApi
             // Create ResumeController and store resume
             $resumeController = new ResumeController(new Resume($this->db));
             $resumeController->StoreResume($userId, $title, $description);
+        });
+
+        $this->route('POST', '/user/bookclient', function ($userId) {
+            $this->responseBodyChecker();
+
+            $resume_id= $this->requestBody['resume_id'] ?? null;
+            $task_type = $this->requestBody['task_type'] ?? null;
+            $task = $this->requestBody['task'] ?? null;
+            $booking_status = $this->requestBody['booking_status'] ?? null;
+
+
+            $TradesmanController = new ClientController(new Client_Booking($this->db));
+            $TradesmanController->BookTClient($userId,$resume_id,$task_type,$task,$booking_status);
         });
 
 
