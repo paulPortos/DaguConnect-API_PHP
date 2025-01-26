@@ -5,7 +5,7 @@ namespace DaguConnect\Model;
 use DaguConnect\Core\BaseModel;
 
 use PDO;
-class Client_Booking extends BaseModel
+class Client extends BaseModel
 {
     protected $table = 'client_booking';
 

@@ -3,14 +3,14 @@
 namespace Controller\App;
 
 use DaguConnect\Core\BaseController;
-use DaguConnect\Model\Client_Booking;
+use DaguConnect\Model\Client;
 
 
 class ClientController extends BaseController
 {
-    private Client_Booking $client;
+    private Client $client;
 
-    public function __construct(Client_Booking $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }

@@ -5,11 +5,13 @@ namespace DaguConnect\Routes;
 use Controller\AdminAuthController;
 use Controller\APP\ResumeController;
 use Controller\App\ClientController;
+use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\Resume;
-use DaguConnect\Model\Client_Booking;
+use DaguConnect\Model\Client;
+use DaguConnect\Model\Tradesman;
 use DaguConnect\Model\User;
 
 
@@ -125,8 +127,14 @@ class Api extends BaseApi
             $booking_status = $this->requestBody['booking_status'] ?? null;
 
 
-            $TradesmanController = new ClientController(new Client_Booking($this->db));
-            $TradesmanController->BookTradesman($userId,$resume_id,$task_type,$task,$booking_status);
+            $ClientController = new ClientController(new Client($this->db));
+            $ClientController->BookTradesman($userId,$resume_id,$task_type,$task,$booking_status);
+        });
+
+        $this->route('GET', '/user/tradesmanbooking', function ($userId) {
+
+            $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
+            $TradesmanBookingController->GetBookingFromClient($userId);
         });
 
 
