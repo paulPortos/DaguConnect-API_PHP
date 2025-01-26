@@ -131,14 +131,15 @@ class Api extends BaseApi
             $jobController->addJob($userId, $client_fullname, $salary, $job_type, $job_description, $status, $deadline);
         });
 
-        $this->route('GET', '/user/client/jobs', function ($userId) {
+        $this->route('GET', '/user/client/jobs', function () {
             $jobController = new JobController(new Job($this->db));
             $jobController->getAllJobs();
         });
 
-        $this->route('GET', '/user/client/job/{jobId}', function ($userId, $jobId) {
+        $this->route('GET', '/user/client/job/view/{id}', function ($userId, $id) {
+
             $jobController = new JobController(new Job($this->db));
-            $jobController->getSingleJob($jobId);
+            $jobController->viewJob($id);
         });
 
         $this->route('POST', '/user/booktradesman', function ($userId) {
@@ -158,6 +159,7 @@ class Api extends BaseApi
             $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
             $TradesmanBookingController->GetBookingFromClient($userId);
         });
+
     }
 
 

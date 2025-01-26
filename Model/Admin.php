@@ -6,6 +6,7 @@ use DaguConnect\Core\BaseController;
 use DaguConnect\Core\BaseModel;
 use DaguConnect\Services\Confirm_Password;
 use PDO;
+use PDOException;
 
 class Admin extends BaseModel
 {
@@ -82,7 +83,11 @@ class Admin extends BaseModel
     }
 
     public function getAllActiveUsers() {
-
+        $query = "SELECT COUNT(*) AS total FROM user_tokens WHERE token IS NOT NULL AND token != ''";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the active users and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
 
     public function getAllUserCount():Int {

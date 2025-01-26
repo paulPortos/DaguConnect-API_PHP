@@ -13,8 +13,10 @@ class DashboardController extends BaseController
         $this->admin_model = $admin_model;
     }
 
-    public function userStatistics() {
+    public function userStatistics(): void
+    {
         $totalUserCount = $this->admin_model->getAllUserCount();
+        $totalActiveUsers = $this->admin_model->getAllActiveUsers();
         if ($totalUserCount <= 0 ) {
             $this->jsonResponse(["Message" => "No users detected"], 200);
         }

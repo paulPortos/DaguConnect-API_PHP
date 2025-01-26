@@ -21,6 +21,6 @@ class Tradesman extends BaseModel
         $stmt->bindParam(':tradesman_id', $tradesman_id);
         $stmt->execute();
 
-        return $stmt->fetchall(PDO::FETCH_ASSOC) ;
+        return $stmt->fetchall(PDO::FETCH_ASSOC);
     }
 }

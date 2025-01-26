@@ -25,7 +25,7 @@ class Job extends BaseModel
         }
     }
 
-    public function getJob($id){
+    public function viewJob($id){
         try {
             $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE id = :id");
             $stmt->bindParam(':id', $id);

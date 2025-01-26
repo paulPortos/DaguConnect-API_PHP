@@ -9,15 +9,13 @@ use DaguConnect\Middleware\Middleware;
 class BaseApi
 {
     use Middleware;
-    public config $config;
     public PDO $db;
-
+    public config $config;
     private array $routes = [];
     public mixed $requestBody;
 
     public function __construct()
     {
-
         $this->requestBody = json_decode(file_get_contents('php://input'), true);
         $this->config = new config();
         $this->db = $this->config->getDB();
@@ -39,26 +37,53 @@ class BaseApi
     /**
      * Handle incoming requests and route them
      */
+
     public function handleRequest(): void
     {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-        if (isset($this->routes[$requestMethod][$requestUri])) {
-            // Validate the token and get user ID
-            $userId = $this->Auth($requestUri, $this->db);
-            if ($userId === null) {
-                http_response_code(401);
-                echo json_encode(['message' => 'Unauthorized']);
+        foreach ($this->routes[$requestMethod] ?? [] as $routeUri => $action) {
+            $pattern = preg_replace('/\{(\w+)\}/', '(\w+)', $routeUri); // Convert {param} to regex
+            if (preg_match("~^{$pattern}$~", $requestUri, $matches)) {
+                array_shift($matches); // Remove full match
+
+                // Validate the token and get user ID
+                $userId = $this->Auth($requestUri, $this->db);
+                if ($userId === null) {
+                    http_response_code(401);
+                    echo json_encode(['message' => 'Unauthorized']);
+                    return;
+                }
+
+                // Call the action with matched params
+                call_user_func_array($action, array_merge([$userId], $matches));
                 return;
             }
-            // Call the action for the route
-            $action = $this->routes[$requestMethod][$requestUri];
-            call_user_func_array($action, [$userId]);
-        } else {
-            $this->respondNotFound();
         }
+        $this->respondNotFound();
     }
+
+//    public function handleRequest(): void
+//    {
+//        $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+//        $requestMethod = $_SERVER['REQUEST_METHOD'];
+//
+//        if (isset($this->routes[$requestMethod][$requestUri])) {
+//            // Validate the token and get user ID
+//            $userId = $this->Auth($requestUri, $this->db);
+//            if ($userId === null) {
+//                http_response_code(401);
+//                echo json_encode(['message' => 'Unauthorized']);
+//                return;
+//            }
+//            // Call the action for the route
+//            $action = $this->routes[$requestMethod][$requestUri];
+//            call_user_func_array($action, [$userId]);
+//        } else {
+//            $this->respondNotFound();
+//        }
+//    }
 
 
 

@@ -69,4 +69,21 @@ class JobController extends BaseController
             return;
         }
     }
+
+    public function viewJob($id): void
+    {
+        $exist = $this->exists($id, "id", "jobs");
+
+        if(!$exist) {
+            $this->jsonResponse(['message' => "Job not found"], 400);
+            return;
+        }
+
+        $job = $this->job_model->viewJob($id);
+        if ($job) {
+            $this->jsonResponse(['job' => $job], 200);
+        } else {
+            $this->jsonResponse(['message' => "Failed to view job"], 500);
+        }
+    }
 }
