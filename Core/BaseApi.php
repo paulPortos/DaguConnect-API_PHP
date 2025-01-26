@@ -3,6 +3,7 @@
 namespace DaguConnect\Core;
 
 use DaguConnect\Includes\config;
+use Exception;
 use PDO;
 use DaguConnect\Middleware\Middleware;
 
@@ -14,6 +15,18 @@ class BaseApi
     private array $routes = [];
     public mixed $requestBody;
 
+    /**
+     * Constructor for the BaseApi class.
+     *
+     * Initializes the class by setting up the request body, configuration, and database connection.
+     *
+     * This constructor performs the following actions:
+     * 1. Decodes the JSON input from the request body.
+     * 2. Creates a new instance of the config class.
+     * 3. Establishes a database connection using the configuration.
+     *
+     * No parameters are required as it uses the raw input and internal configuration.
+     */
     public function __construct()
     {
         $this->requestBody = json_decode(file_get_contents('php://input'), true);
@@ -28,16 +41,21 @@ class BaseApi
      * @param string $uri Route path (e.g., /posts)
      * @param callable $action Function or method to call
      */
-
     public function route(string $method, string $uri, callable $action): void
     {
         $this->routes[$method][$uri] = $action;
     }
 
     /**
-     * Handle incoming requests and route them
+     * Handle incoming HTTP requests and route them to the appropriate action.
+     *
+     * This method processes the incoming request by matching the request URI and method
+     * against registered routes. It also performs authentication and passes any matched
+     * parameters to the action.
+     *
+     * @throws Exception If there's an error during request handling.
+     * @return void
      */
-
     public function handleRequest(): void
     {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
