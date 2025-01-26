@@ -35,8 +35,6 @@ class ClientController extends BaseController
             $this->jsonResponse(['message' => $e->getMessage()],500);
         }
 
-
-
     }
 }
 

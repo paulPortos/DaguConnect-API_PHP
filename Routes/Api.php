@@ -99,7 +99,7 @@ class Api extends BaseApi
             $authController->verifyEmail($email);
         });
 
-        $this->route('POST','/user/resume', function ($userId) {
+        $this->route('POST','/user/tradesman/resume', function ($userId) {
             $this->responseBodyChecker();
 
             // Extract title and description from request body
@@ -118,7 +118,7 @@ class Api extends BaseApi
             $resumeController->StoreResume($userId, $title, $description);
         });
 
-        $this->route('POST', '/user/booktradesman', function ($userId) {
+        $this->route('POST', '/user/client/booktradesman', function ($userId) {
             $this->responseBodyChecker();
 
             $resume_id= $this->requestBody['resume_id'] ?? null;
@@ -131,7 +131,7 @@ class Api extends BaseApi
             $ClientController->BookTradesman($userId,$resume_id,$task_type,$task,$booking_status);
         });
 
-        $this->route('GET', '/user/tradesmanbooking', function ($userId) {
+        $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
 
             $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
             $TradesmanBookingController->GetBookingFromClient($userId);

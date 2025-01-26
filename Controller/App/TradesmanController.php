@@ -19,11 +19,13 @@ class TradesmanController extends BaseController
             //fetch the booking base from the tradesman_id
             $booking = $this->tradesman->getClientsBooking($userId);
 
+            //check if there's any booking
             if(!$booking){
                 $this->jsonResponse(['message' => 'No booking found.'],400);
                 return;
             }
 
+            //checks if the booking your getting is yours
             if(!$userId){
                 $this->jsonResponse(['message' => 'This booking is not yours'],200);
                 return;
@@ -34,6 +36,5 @@ class TradesmanController extends BaseController
         }catch (\Exception $e){
             echo $e->getMessage();
         }
-
     }
 }
