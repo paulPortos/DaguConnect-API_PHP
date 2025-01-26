@@ -121,14 +121,14 @@ class Api extends BaseApi
         $this->route('POST', '/user/client/booktradesman', function ($userId) {
             $this->responseBodyChecker();
 
-            $resume_id= $this->requestBody['resume_id'] ?? null;
+            $tradesman_id= $this->requestBody['tradesman_id'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
             $task = $this->requestBody['task'] ?? null;
             $booking_status = $this->requestBody['booking_status'] ?? null;
 
 
             $ClientController = new ClientController(new Client($this->db));
-            $ClientController->BookTradesman($userId,$resume_id,$task_type,$task,$booking_status);
+            $ClientController->BookTradesman($userId,$tradesman_id,$task_type,$task);
         });
 
         $this->route('GET', '/user/tradesman/getbooking', function ($userId) {

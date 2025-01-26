@@ -12,8 +12,8 @@ use DaguConnect\Services\TokenGenerator;
 use DaguConnect\Services\GetIdByEmail;
 use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\PhpMailer\EmailVerification;
-use DaguConnect\Services\validate_FirstandLastName;
-use DaguConnect\Services\validate_EmailAddress;
+use DaguConnect\Services\Validate_FirstandLastName;
+use DaguConnect\Services\Validate_EmailAddress;
 
 
 
@@ -24,13 +24,13 @@ class AuthenticationController extends BaseController
 
 
     use Confirm_Password;
-    use validate_FirstandLastName;
+    use Validate_FirstandLastName;
     use IfDataExists;
     use Trim_Password;
     use TokenGenerator;
     use GetIdByEmail;
     use EmailVerification;
-    use validate_EmailAddress;
+    use Validate_EmailAddress;
 
     public function __construct(User $user_Model)
     {

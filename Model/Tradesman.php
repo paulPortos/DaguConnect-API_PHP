@@ -15,7 +15,7 @@ class Tradesman extends BaseModel
 
     public function getClientsBooking($tradesman_id):array{
 
-        $query = "SELECT * FROM $this->table WHERE resume_id = :tradesman_id";
+        $query = "SELECT * FROM $this->table WHERE tradesman_id = :tradesman_id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':tradesman_id', $tradesman_id);

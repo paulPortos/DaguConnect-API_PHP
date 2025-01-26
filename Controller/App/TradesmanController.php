@@ -25,11 +25,6 @@ class TradesmanController extends BaseController
                 return;
             }
 
-            //checks if the booking your getting is yours
-            if(!$userId){
-                $this->jsonResponse(['message' => 'This booking is not yours'],200);
-                return;
-            }
             // Return the booking details
             $this->jsonResponse(['message' => 'Booking retrieved successfully.', 'data' => $booking], 200);
 
