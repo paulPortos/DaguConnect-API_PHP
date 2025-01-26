@@ -2,7 +2,7 @@
 
 namespace DaguConnect\Services;
 
-trait validate_FirstandLastName
+trait Validate_FirstandLastName
 {
     public function validateFirstAndLastName($first_name, $last_name): bool
     {

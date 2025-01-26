@@ -24,7 +24,6 @@ class Api extends BaseApi
     /**
      * @throws Exception
      */
-
     public function __construct()
     {
         parent::__construct(); // Calling constructor
@@ -36,9 +35,8 @@ class Api extends BaseApi
 
     public function registeredRoutes(): void {
         // Register a route for the AuthenticationController
-
-
         $this->route('POST', '/admin/register', function () {
+            
             $this->responseBodyChecker();
 
             ['username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
@@ -100,7 +98,7 @@ class Api extends BaseApi
             $authController->verifyEmail($email);
         });
 
-        $this->route('POST','/user/resume', function ($userId) {
+        $this->route('POST','/user/tradesman/resume', function ($userId) {
             $this->responseBodyChecker();
 
             // Extract title and description from request body
@@ -113,9 +111,29 @@ class Api extends BaseApi
                 http_response_code(400);
                 return;
             }
+
             // Create ResumeController and store resume
             $resumeController = new ResumeController(new Resume($this->db));
             $resumeController->StoreResume($userId, $title, $description);
+        });
+
+        $this->route('POST', '/user/booktradesman', function ($userId) {
+            $this->responseBodyChecker();
+
+            $tradesman_id= $this->requestBody['tradesman_id'] ?? null;
+            $task_type = $this->requestBody['task_type'] ?? null;
+            $task = $this->requestBody['task'] ?? null;
+            $booking_status = $this->requestBody['booking_status'] ?? null;
+
+
+            $ClientController = new ClientController(new Client($this->db));
+            $ClientController->BookTradesman($userId,$tradesman_id,$task_type,$task);
+        });
+
+        $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
+
+            $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
+            $TradesmanBookingController->GetBookingFromClient($userId);
         });
 
         $this->route('POST', '/user/client/create-job', function ($userId) {
@@ -142,25 +160,6 @@ class Api extends BaseApi
             $jobController = new JobController(new Job($this->db));
             $jobController->viewJob($id);
         });
-
-        $this->route('POST', '/user/booktradesman', function ($userId) {
-            $this->responseBodyChecker();
-
-            $resume_id= $this->requestBody['resume_id'] ?? null;
-            $task_type = $this->requestBody['task_type'] ?? null;
-            $task = $this->requestBody['task'] ?? null;
-            $booking_status = $this->requestBody['booking_status'] ?? null;
-
-            $ClientController = new ClientController(new Client($this->db));
-            $ClientController->BookTradesman($userId,$resume_id,$task_type,$task,$booking_status);
-        });
-
-        $this->route('GET', '/user/tradesmanbooking', function ($userId) {
-
-            $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
-            $TradesmanBookingController->GetBookingFromClient($userId);
-        });
-
     }
 
 
