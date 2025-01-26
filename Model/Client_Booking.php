@@ -14,7 +14,7 @@ class Client_Booking extends BaseModel
         parent::__construct($db);
     }
 
-    public function BookTClient($user_id, $resume_id,$task_type,$task,$booking_status): bool
+    public function BookTradesman($user_id, $resume_id,$task_type,$task,$booking_status): bool
     {
         // Correct the query to explicitly define column names
         $query = "INSERT INTO $this->table 

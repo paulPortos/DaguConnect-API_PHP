@@ -116,7 +116,7 @@ class Api extends BaseApi
             $resumeController->StoreResume($userId, $title, $description);
         });
 
-        $this->route('POST', '/user/bookclient', function ($userId) {
+        $this->route('POST', '/user/booktradesman', function ($userId) {
             $this->responseBodyChecker();
 
             $resume_id= $this->requestBody['resume_id'] ?? null;
@@ -126,7 +126,7 @@ class Api extends BaseApi
 
 
             $TradesmanController = new ClientController(new Client_Booking($this->db));
-            $TradesmanController->BookTClient($userId,$resume_id,$task_type,$task,$booking_status);
+            $TradesmanController->BookTradesman($userId,$resume_id,$task_type,$task,$booking_status);
         });
 
 

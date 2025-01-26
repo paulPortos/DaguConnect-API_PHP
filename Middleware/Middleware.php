@@ -10,7 +10,7 @@ trait Middleware
         //endpoints that is protected by the middleware that needs a token
         $protectedRoutes = [
             '/user/resume',
-            '/user/bookclient'
+            '/user/booktradesman'
         ];
 
         if (in_array($requestUri, $protectedRoutes)) {

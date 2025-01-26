@@ -15,7 +15,7 @@ class ClientController extends BaseController
         $this->client = $client;
     }
 
-    public function BookTClient($user_id,$resume_id,$task_type,$task,$booking_status): void
+    public function BookTradesman($user_id,$resume_id,$task_type,$task,$booking_status): void
     {
         try{
             if( empty($resume_id) || empty($task_type) || empty($task) || empty($booking_status)){
@@ -23,7 +23,7 @@ class ClientController extends BaseController
                 return;
             }
 
-            $result = $this->client->BookTClient($user_id,$resume_id,$task_type,$task,$booking_status);
+            $result = $this->client->BookTradesman($user_id,$resume_id,$task_type,$task,$booking_status);
 
             if($result){
                 $this->jsonResponse(['message' => 'Booking created successfully.'],200);
