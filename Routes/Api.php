@@ -135,7 +135,10 @@ class Api extends BaseApi
             $jobController->getAllJobs();
         });
 
-
+        $this->route('GET', '/user/client/job/{jobId}', function ($userId, $jobId) {
+            $jobController = new JobController(new Job($this->db));
+            $jobController->getSingleJob($jobId);
+        });
     }
 
 
