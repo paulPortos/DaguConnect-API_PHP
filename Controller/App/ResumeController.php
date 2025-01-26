@@ -22,7 +22,7 @@ class ResumeController extends BaseController
        }
        $result =  $this->resumeModel->resume($user_id,$title, $description);
        if($result){
-           $this->jsonResponse(['message' => 'Resume created successfully.'],200);
+           $this->jsonResponse(['message' => 'Resume created successfully.'],201);
        }else{
            $this->jsonResponse(['message' => 'Something went wrong.'],500);
        }

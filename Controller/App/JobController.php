@@ -34,7 +34,7 @@ class JobController extends BaseController
         $exist = $this->exists($user_id, "id", "users");
         //Check if user exists
         if (!$exist) {
-            $this->jsonResponse(['message' => "User not found"], 404);
+            $this->jsonResponse(['message' => "User not found"], 400);
             return;
         }
 

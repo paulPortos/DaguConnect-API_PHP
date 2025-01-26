@@ -28,6 +28,7 @@ class TradesmanController extends BaseController
                 $this->jsonResponse(['message' => 'This booking is not yours'],200);
                 return;
             }
+
             // Return the booking details
             $this->jsonResponse(['message' => 'Booking retrieved successfully.', 'data' => $booking], 200);
 
