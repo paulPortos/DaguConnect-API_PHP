@@ -3,10 +3,12 @@
 namespace DaguConnect\Routes;
 
 use Controller\AdminAuthController;
+use Controller\App\JobController;
 use Controller\APP\ResumeController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
+use DaguConnect\Model\Job;
 use DaguConnect\Model\Resume;
 use DaguConnect\Model\User;
 
@@ -114,7 +116,24 @@ class Api extends BaseApi
             $resumeController->StoreResume($userId, $title, $description);
         });
 
+        $this->route('POST', '/user/client/create-job', function ($userId) {
+            $this->responseBodyChecker();
 
+            $client_fullname = $this->requestBody['client_fullname'] ?? null;
+            $salary = $this->requestBody['salary'] ?? null;
+            $job_type = $this->requestBody['job_type'] ?? null;
+            $job_description = $this->requestBody['job_description'] ?? null;
+            $status = $this->requestBody['status'] ?? null;
+            $deadline = $this->requestBody['deadline'] ?? null;
+
+            $jobController = new JobController(new Job($this->db));
+            $jobController->addJob($userId, $client_fullname, $salary, $job_type, $job_description, $status, $deadline);
+        });
+
+        $this->route('GET', '/user/client/jobs', function ($userId) {
+            $jobController = new JobController(new Job($this->db));
+            $jobController->getAllJobs();
+        });
 
 
     }
