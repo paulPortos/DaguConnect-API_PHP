@@ -8,7 +8,7 @@ use PDOException;
 
 class Job extends BaseModel
 {
-    protected $table = 'jobs';
+    protected string $table = 'jobs';
     public function __construct($db){
         parent::__construct($db);
     }
