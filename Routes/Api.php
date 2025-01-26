@@ -5,11 +5,15 @@ namespace DaguConnect\Routes;
 use Controller\AdminAuthController;
 use Controller\App\JobController;
 use Controller\APP\ResumeController;
+use Controller\App\ClientController;
+use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\Job;
 use DaguConnect\Model\Resume;
+use DaguConnect\Model\Client;
+use DaguConnect\Model\Tradesman;
 use DaguConnect\Model\User;
 
 
@@ -138,6 +142,25 @@ class Api extends BaseApi
         $this->route('GET', '/user/client/job/{jobId}', function ($userId, $jobId) {
             $jobController = new JobController(new Job($this->db));
             $jobController->getSingleJob($jobId);
+        });
+
+        $this->route('POST', '/user/booktradesman', function ($userId) {
+            $this->responseBodyChecker();
+
+            $resume_id= $this->requestBody['resume_id'] ?? null;
+            $task_type = $this->requestBody['task_type'] ?? null;
+            $task = $this->requestBody['task'] ?? null;
+            $booking_status = $this->requestBody['booking_status'] ?? null;
+
+
+            $ClientController = new ClientController(new Client($this->db));
+            $ClientController->BookTradesman($userId,$resume_id,$task_type,$task,$booking_status);
+        });
+
+        $this->route('GET', '/user/tradesmanbooking', function ($userId) {
+
+            $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
+            $TradesmanBookingController->GetBookingFromClient($userId);
         });
     }
 
