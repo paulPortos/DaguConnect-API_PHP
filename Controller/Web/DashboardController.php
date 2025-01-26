@@ -21,7 +21,8 @@ class DashboardController extends BaseController
             $this->jsonResponse(["Message" => "No users detected"], 200);
         }
         $this->jsonResponse(["users" => [
-            "count" => $totalUserCount
+            "count" => $totalUserCount,
+            "active" => $totalActiveUsers
         ]]);
     }
 }

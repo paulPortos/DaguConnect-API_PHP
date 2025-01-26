@@ -15,10 +15,15 @@ use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
 use DaguConnect\Model\Tradesman;
 use DaguConnect\Model\User;
+use Exception;
 
 
 class Api extends BaseApi
 {
+
+    /**
+     * @throws Exception
+     */
 
     public function __construct()
     {
@@ -31,30 +36,12 @@ class Api extends BaseApi
 
     public function registeredRoutes(): void {
         // Register a route for the AuthenticationController
-        $this->route('POST', '/user/register', function () {
-            $this->responseBodyChecker();
 
-            $first_name = $this->requestBody['first_name'];
-            $last_name = $this->requestBody['last_name'];
-            $username = $this->requestBody['username'];
-            $age = $this->requestBody['age'];
-            $email = $this->requestBody['email'];
-            $is_client = $this->requestBody['is_client'];
-            $password = $this->requestBody['password'];
-            $confirm_password = $this->requestBody['confirm_password'];
-
-            $authController = new AuthenticationController(new User($this->db));
-            $authController->register($first_name, $last_name, $username,$age, $email,$is_client ,$password, $confirm_password);
-        });
 
         $this->route('POST', '/admin/register', function () {
-            
             $this->responseBodyChecker();
 
-            $username = $this->requestBody['username'];
-            $email = $this->requestBody['email'];
-            $password = $this->requestBody['password'];
-            $confirm_password = $this->requestBody['confirm_password'];
+            ['username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
 
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->register($username, $email, $password, $confirm_password);
@@ -63,9 +50,7 @@ class Api extends BaseApi
         $this->route('POST', '/admin/login', function () {
             $this->responseBodyChecker();
 
-            $username = $this->requestBody['username'];
-            $email = $this->requestBody['email'];
-            $password = $this->requestBody['password'];
+            ['username' => $username, 'email' => $email, 'password' => $password] = $this->requestBody;
 
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->login($username, $email, $password);
@@ -80,6 +65,22 @@ class Api extends BaseApi
 
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->changePassword($user_id, $current_password, $new_password);
+        });
+
+        $this->route('POST', '/user/register', function () {
+            $this->responseBodyChecker();
+
+            $first_name = $this->requestBody['first_name'];
+            $last_name = $this->requestBody['last_name'];
+            $username = $this->requestBody['username'];
+            $age = $this->requestBody['age'];
+            $email = $this->requestBody['email'];
+            $is_client = $this->requestBody['is_client'];
+            $password = $this->requestBody['password'];
+            $confirm_password = $this->requestBody['confirm_password'];
+
+            $authController = new AuthenticationController(new User($this->db));
+            $authController->register($first_name, $last_name, $username,$age, $email,$is_client ,$password, $confirm_password);
         });
 
         $this->route('POST', '/user/login', function () {
