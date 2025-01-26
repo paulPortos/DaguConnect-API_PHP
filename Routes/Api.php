@@ -90,8 +90,6 @@ class Api extends BaseApi
 
             $authController = new AuthenticationController(new User($this->db));
             $authController->login($email, $password);
-
-
         });
 
         $this->route('GET', '/verify-email', function () {
@@ -114,7 +112,6 @@ class Api extends BaseApi
                 http_response_code(400);
                 return;
             }
-
             // Create ResumeController and store resume
             $resumeController = new ResumeController(new Resume($this->db));
             $resumeController->StoreResume($userId, $title, $description);
@@ -151,7 +148,6 @@ class Api extends BaseApi
             $task_type = $this->requestBody['task_type'] ?? null;
             $task = $this->requestBody['task'] ?? null;
             $booking_status = $this->requestBody['booking_status'] ?? null;
-
 
             $ClientController = new ClientController(new Client($this->db));
             $ClientController->BookTradesman($userId,$resume_id,$task_type,$task,$booking_status);
