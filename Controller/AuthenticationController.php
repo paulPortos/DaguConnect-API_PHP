@@ -7,13 +7,12 @@ use DaguConnect\Includes\config;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
-use DaguConnect\Services\Trim_Password;
+use DaguConnect\Services\TrimPassword;
 use DaguConnect\Services\TokenGenerator;
-use DaguConnect\Services\GetIdByEmail;
 use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\PhpMailer\EmailVerification;
-use DaguConnect\Services\Validate_FirstandLastName;
-use DaguConnect\Services\Validate_EmailAddress;
+use DaguConnect\Services\ValidateFirstandLastName;
+use DaguConnect\Services\ValidateEmailAddress;
 
 
 
@@ -24,13 +23,12 @@ class AuthenticationController extends BaseController
 
 
     use Confirm_Password;
-    use Validate_FirstandLastName;
+    use ValidateFirstandLastName;
     use IfDataExists;
-    use Trim_Password;
+    use TrimPassword;
     use TokenGenerator;
-    use GetIdByEmail;
     use EmailVerification;
-    use Validate_EmailAddress;
+    use ValidateEmailAddress;
 
     public function __construct(User $user_Model)
     {
@@ -113,7 +111,7 @@ class AuthenticationController extends BaseController
     public function login($email, $password): void{
 
         //gets the id by email inputed
-        $user = $this->getUserByEmail($email,$this->db->getDB());
+        $user = $this->userModel->getUserByEmail($email);
 
 
         //check if the user exist
@@ -133,7 +131,7 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Email or password invalid' ], 400);
         }else{
             //generates the token if all the requirements are met
-            $token = $this->generateToken($user['id'], $this -> db->getDB());
+            $token = $this->CreateToken($user['id'], $this -> db->getDB());
             if($token){
                 //exclude the pass and the confirm_password from the json response
                 unset($user['password'], $user['confirm_password']);

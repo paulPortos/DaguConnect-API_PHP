@@ -12,26 +12,33 @@ trait Middleware
             '/user/tradesman/resume',
             '/user/client/booktradesman',
             '/user/tradesman/getbooking',
-            '/user/client/create-job'
+            '/user/client/create-job',
+            '/user/tradesman/bookings/status/{booking_id}'
         ];
 
-        if (in_array($requestUri, $protectedRoutes)) {
-            $headers = getallheaders();
-            $token = null;
+        foreach ($protectedRoutes as $protectedRoute) {
+            // Convert {param} placeholders to regex
+            $pattern = preg_replace('/\{(\w+)\}/', '(\w+)', $protectedRoute);
+            if (preg_match("~^{$pattern}$~", $requestUri)) {
+                $headers = getallheaders();
+                $token = null;
 
-            // Extract token from Authorization header
-            if (isset($headers['Authorization'])) {
-                $token = substr($headers['Authorization'], 7); // Remove "Bearer " from the token string
+                // Extract token from Authorization header
+                if (isset($headers['Authorization'])) {
+                    $token = substr($headers['Authorization'], 7); // Remove "Bearer " from the token string
+                }
+                if ($token === null) {
+                    return null; // Token is missing
+                }
+
+                // Validate the token
+                $tokenModel = new Token($db);
+                $tokenData = $tokenModel->validateToken($token);
+
+                return $tokenData['user_id'] ?? null;
             }
-            if ($token === null) {
-                return null; // Token is missing
-            }
-
-            $tokenModel = new Token($db);
-            $tokenData = $tokenModel->validateToken($token);
-
-            return $tokenData['user_id'] ?? null;
         }
+
         return true;
     }
 }

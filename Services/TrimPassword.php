@@ -2,7 +2,7 @@
 
 namespace DaguConnect\Services;
 
-trait Trim_Password
+trait TrimPassword
 {
     public function trimPassword($password): bool
     {
