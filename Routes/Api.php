@@ -38,7 +38,6 @@ class Api extends BaseApi
         $this->route('POST', '/admin/register', function () {
             
             $this->responseBodyChecker();
-
             ['username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
 
             $adminController = new AdminAuthController(new Admin($this->db));
@@ -155,7 +154,7 @@ class Api extends BaseApi
             $jobController->getAllJobs();
         });
 
-        $this->route('GET', '/user/client/job/view/{id}', function ($userId, $id) {
+        $this->route('GET', '/user/client/job/view/{id}', function ($id) {
 
             $jobController = new JobController(new Job($this->db));
             $jobController->viewJob($id);
