@@ -14,6 +14,6 @@ trait GetResumeIdByTradesmanId
         $stmt = $db->prepare($query);
         $stmt->bindParam(':tradesman_id', $tradesman_id);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 }

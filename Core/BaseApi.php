@@ -75,7 +75,7 @@ class BaseApi
                 }
 
                 // Call the action with matched params
-                call_user_func_array($action, array_merge([$userId], $matches));
+                    call_user_func_array($action, array_merge([$userId], $matches));
                 return;
             }
         }

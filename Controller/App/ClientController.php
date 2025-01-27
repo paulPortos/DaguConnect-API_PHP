@@ -29,9 +29,17 @@ class ClientController extends BaseController
                 return;
             }
 
-            $resume_id = $this->getResumeIdByTradesmanId($tradesman_id, $this->db->getDB());
+            // get resume ID by tradesman ID and task_type
+            $resume_id = $this->getResumeIdByTradesmanId($tradesman_id ,$this->db->getDB());
+
+            // Handle case where tradesman does not exist
+            if (!$resume_id) {
+                $this->jsonResponse(['message' => "Tradesman with ID $tradesman_id does not exist."], 404);
+                return;
+            }
 
             $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$task_type,$task);
+
 
             if($result){
                 $this->jsonResponse(['message' => 'Booking created successfully.'],201);

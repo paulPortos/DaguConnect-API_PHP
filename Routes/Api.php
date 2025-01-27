@@ -117,13 +117,12 @@ class Api extends BaseApi
             $resumeController->StoreResume($userId, $title, $description);
         });
 
-        $this->route('POST', '/user/booktradesman', function ($userId) {
+        $this->route('POST', '/user/client/booktradesman', function ($userId) {
             $this->responseBodyChecker();
 
             $tradesman_id= $this->requestBody['tradesman_id'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
             $task = $this->requestBody['task'] ?? null;
-            $booking_status = $this->requestBody['booking_status'] ?? null;
 
 
             $ClientController = new ClientController(new Client($this->db));
@@ -155,7 +154,7 @@ class Api extends BaseApi
             $jobController->getAllJobs();
         });
 
-        $this->route('GET', '/user/client/job/view/{id}', function ($userId, $id) {
+        $this->route('GET', '/user/client/job/view/{id}', function ($userId,$id) {
 
             $jobController = new JobController(new Job($this->db));
             $jobController->viewJob($id);
