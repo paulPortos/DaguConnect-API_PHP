@@ -2,7 +2,7 @@
 
 namespace DaguConnect\Services;
 
-trait Validate_EmailAddress
+trait ValidateEmailAddress
 {
     public function validateEmailAddress($email):bool{
         // Validate email format

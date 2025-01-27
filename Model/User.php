@@ -6,14 +6,12 @@ namespace DaguConnect\Model;
 use DaguConnect\Core\BaseModel;
 
 use DaguConnect\Services\Confirm_Password;
-use DaguConnect\Services\TokenGenerator;
 use PDO;
 use PDOException;
 
 class User extends BaseModel
 {
     use Confirm_Password;
-    use TokenGenerator;
 
     protected $table = 'users';
 
@@ -69,5 +67,21 @@ class User extends BaseModel
             error_log('Error in loginUser: '. $pdo->getMessage());
             return false;
         }
+    }
+
+    public function getUserByEmail( string $email): ?array
+    {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user) {
+            // Convert TINYINT(1) to true/false
+            $user['suspend'] = (bool)$user['suspend'];
+            $user['is_client'] = (bool)$user['is_client'];
+        }
+        return $user ?: null;
     }
 }

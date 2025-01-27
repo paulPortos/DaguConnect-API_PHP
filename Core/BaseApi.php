@@ -66,6 +66,13 @@ class BaseApi
             if (preg_match("~^{$pattern}$~", $requestUri, $matches)) {
                 array_shift($matches); // Remove full match
 
+
+                // Cast numeric parameters to integers
+                $matches = array_map(function ($param) {
+                    return is_numeric($param) ? (int)$param : $param;
+                }, $matches);
+
+
                 // Validate the token and get user ID
                 $userId = $this->Auth($requestUri, $this->db);
                 if ($userId === null) {

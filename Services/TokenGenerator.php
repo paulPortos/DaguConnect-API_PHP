@@ -7,7 +7,7 @@ use PDO;
 trait TokenGenerator
 {
     protected $token_table = 'user_tokens';
-    public function generateToken( $user_id, PDO $db): ?string
+    public function CreateToken( $user_id, PDO $db): ?string
     {
         try {
             $token = bin2hex(random_bytes(32));

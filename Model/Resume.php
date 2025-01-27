@@ -30,4 +30,6 @@ class Resume extends BaseModel
         return  $stmt->execute();
 
     }
+
+
 }

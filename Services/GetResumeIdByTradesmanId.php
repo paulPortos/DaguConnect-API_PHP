@@ -2,7 +2,6 @@
 
 namespace DaguConnect\Services;
 
-use DaguConnect\Includes\config;
 use PDO;
 trait GetResumeIdByTradesmanId
 {
