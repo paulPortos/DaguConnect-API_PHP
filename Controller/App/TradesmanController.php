@@ -18,6 +18,7 @@ class TradesmanController extends BaseController
         $this->tradesman = $tradesman;
     }
 
+    //get booking from the clients of the tradesman
     public function GetBookingFromClient($userId):void{
         try {
             //fetch the booking base from the tradesman_id
@@ -29,10 +30,6 @@ class TradesmanController extends BaseController
                 return;
             }
 
-            if(!$userId){
-                $this->jsonResponse(['message' => 'This booking is not yours'],400);
-                return;
-            }
             // Return the booking details
             $this->jsonResponse(['message' => 'Booking retrieved successfully.', 'data' => $booking], 200);
 
@@ -40,6 +37,8 @@ class TradesmanController extends BaseController
             echo $e->getMessage();
         }
     }
+
+    //update the booking if is accepted or rejected by the tradesman
     public function UpdateBookingFromClient($booking_status,$booking_id,$tradesman_id):void{
 
         //ensure that all the required fields are filled up
@@ -54,6 +53,7 @@ class TradesmanController extends BaseController
         }
         $work_status = $booking_status == 'Accepted' ? 'Active' : null;
 
+        //check if the booking exist or the booking belongs to the tradesman
         if(!$this->tradesman->ValidateBookingUpdate($booking_id,$tradesman_id)){
             $this->jsonResponse([
                 'message' => 'Booking not found or does not belong to the tradesman.',

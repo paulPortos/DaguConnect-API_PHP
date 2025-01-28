@@ -58,5 +58,48 @@ class ClientController extends BaseController
         }
 
     }
+
+    //get booking of the clients
+    public function GetBookingClient($user_id){
+        try{
+            $ClientBooking = $this->client->GetBooking($user_id);
+            if($ClientBooking){
+                $this->jsonResponse(['message' => 'Booking Successfully retrieve',
+                   'client_bookings' => $ClientBooking  ],200);
+            }
+
+        }catch (\Exception $e){
+            $this->jsonResponse(['message' => $e->getMessage()],500);
+        }
+    }
+
+    public function UpdateWorkFromTradesman($user_id,$booking_id,$work_status): void{
+
+        //check if the booking belongs to the user and if exists
+        if($this->client->ValidateWorkUpdate($user_id,$booking_id)){
+            $this->jsonResponse(['message' => 'Booking not found or does not belong to the client',
+                'booking_id' => $booking_id,
+                'user_id' => $user_id],
+                400);
+        }
+
+        // Ensure status is either 'Finished' or 'Failed'
+        if (!in_array($work_status, ['Finished', 'Failed'])) {
+            $this->jsonResponse(['message' => 'Invalid status provided.'], 400);
+            return;
+        }
+        //update the work_status if the client mark it as finish or not
+        $UpdateWorkStatus = $this->client->UpdateWorkStatus($user_id,$booking_id,$work_status);
+        if($UpdateWorkStatus){
+            $this->jsonResponse(['message' => 'Work status updated successfully.'],200);
+        }else {
+            $this->jsonResponse(['message' => 'Failed to update work status.'], 500);
+        }
+
+
+
+    }
+
+
 }
 

@@ -126,10 +126,22 @@ class Api extends BaseApi
             $task_type = $this->requestBody['task_type'] ?? null;
             $task = $this->requestBody['task'] ?? null;
 
-
-
             $ClientController = new ClientController(new Client($this->db));
             $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task);
+        });
+
+        $this->route('GET', '/user/client/getbooking', function ($userId) {
+            $ClientBookingController = new ClientController(new Client($this->db));
+            $ClientBookingController->GetBookingClient($userId);
+        });
+
+        $this->route('PUT', '/user/client/work/status/{booking_id}', function ($userId,$booking_id) {
+            $this->responseBodyChecker();
+
+            $work_status = $this->requestBody['work_status'] ?? null;
+
+            $ClientWorkController = new ClientController(new Client($this->db));
+            $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$work_status);
         });
 
         $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
