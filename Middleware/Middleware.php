@@ -15,7 +15,8 @@ trait Middleware
             '/user/client/create-job',
             '/user/tradesman/bookings/status/{booking_id}',
             '/user/client/work/status/{booking_id}',
-            '/user/client/getbooking'
+            '/user/client/getbooking',
+            '/user/getresumes'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {

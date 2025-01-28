@@ -42,7 +42,28 @@ class Resume extends BaseModel
             error_log("Error on posting a resume:", $e->getMessage());
             return false;
         }
+    }
 
+    public function GetResume():array{
+        try {
+            $query = "SELECT * FROM $this->table";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+
+            $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Decode JSON fields for each resume
+            foreach ($resumes as &$resume) {
+                $resume['specialties'] = json_decode($resume['specialties'], true);
+                $resume['prefered_work_location'] = json_decode($resume['prefered_work_location'], true);
+                $resume['academic_background'] = json_decode($resume['academic_background'], true);
+            }
+
+            return $resumes;
+        }catch (PDOException $e){
+            error_log("Error getting resume's: ", $e->getMessage());
+            return [];
+        }
 
     }
 

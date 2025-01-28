@@ -183,6 +183,12 @@ class Api extends BaseApi
         });
 
 
+        $this->route('GET', '/user/getresumes', function () {
+            $ResumeController = new ResumeController(new Resume($this->db));
+            $ResumeController->GetAllResumes();
+        });
+
+
     }
 
 

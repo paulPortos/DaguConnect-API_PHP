@@ -13,6 +13,19 @@ class ResumeController extends BaseController
     {
         $this->resumeModel = $resume_Model;
     }
+    //get the resume
+    public function GetAllResumes():void{
+        $resume = $this->resumeModel->GetResume();
+        //check if there are existing resume's
+        if(empty($resume)){
+            $this->jsonResponse(['message'=>'No Resumes Found']);
+            return;
+        }else{
+            $this->jsonResponse(['resumes'=>$resume]);
+        }
+
+    }
+    //post resume of the tradesman
     public function StoreResume($email,$user_id,$specialties,$prefered_work_location,$academic_background,$tradesman_full_name): void
     {
        if(empty($email) ||empty($specialties) || empty($prefered_work_location)|| empty($tradesman_full_name))
