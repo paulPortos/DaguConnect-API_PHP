@@ -17,12 +17,12 @@ class Client extends BaseModel
     }
 
     //client booking tradesman
-    public function BookTradesman($user_id, $resume_id,$tradesman_id,$phone_number,$address,$task_type,$task): bool
+    public function BookTradesman($user_id, $resume_id,$tradesman_id,$phone_number,$address,$task_type,$task_description): bool
     {
         // Correct the query to explicitly define column names
         $query = "INSERT INTO $this->table 
-                    (user_id, resume_id, tradesman_id,phone_number,address,task_type ,task,booking_status,created_at)
-                    VALUES (:user_id,:resume_id ,:tradesman_id,:phone_number,:address,:task_type, :task,'Pending',NOW())";
+                    (user_id, resume_id, tradesman_id,phone_number,address,task_type ,task_description,booking_status,created_at)
+                    VALUES (:user_id,:resume_id ,:tradesman_id,:phone_number,:address,:task_type, :task_description,'Pending',NOW())";
 
         $stmt = $this->db->prepare($query);
 
@@ -33,7 +33,7 @@ class Client extends BaseModel
         $stmt->bindParam(':phone_number', $phone_number);
         $stmt->bindParam(':address', $address);
         $stmt->bindParam(':task_type', $task_type);
-        $stmt->bindParam(':task', $task);
+        $stmt->bindParam(':task_description', $task_description);
 
 
         return $stmt->execute();

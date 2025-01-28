@@ -3,7 +3,6 @@
 namespace Controller\App;
 
 use DaguConnect\Core\BaseController;
-use DaguConnect\Includes\config;
 use DaguConnect\Model\Tradesman;
 
 

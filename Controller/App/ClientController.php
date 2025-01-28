@@ -12,6 +12,7 @@ use DaguConnect\Services\ValidatePhoneNumber;
 class ClientController extends BaseController
 {
     private Client $client;
+    private array $Book_type;
     private config $db;
 
     use GetResumeIdByTradesmanId;
@@ -19,18 +20,25 @@ class ClientController extends BaseController
 
     public function __construct(Client $client)
     {
+        $this->Book_type = ['Carpentry','Painting','Welding','Electrical_work','Plumbing','Masonry','Roofing','Ac repair','Mechanics','Drywalling','glazing'];
         $this->db = new config();
         $this->client = $client;
     }
 
-    public function BookTradesman($user_id,$tradesman_id,$phone_number,$address,$task_type,$task): void
+    public function BookTradesman($user_id,$tradesman_id,$phone_number,$address,$task_type,$task_description): void
     {
         try{
-            if( empty($tradesman_id) ||  empty($phone_number) || empty($address) ||empty($task_type) || empty($task)){
+            if( empty($tradesman_id) ||  empty($phone_number) || empty($address) ||empty($task_type) || empty($task_description)){
                 $this->jsonResponse(['message' => 'Please fill all the fields.'],400);
                 return;
             }
 
+            //Check if the job type is valid
+            if (!in_array($task_type, $this->Book_type, true)) {
+                $this->jsonResponse(['message' => "Invalid Booking type"], 400);
+                return;
+            }
+            //check if it's valid phone_number
             if(!$this->validatePhoneNumber($phone_number)){
                 $this->jsonResponse(['message'=>'Invalid phone number']);
                 return;
@@ -44,7 +52,7 @@ class ClientController extends BaseController
                 return;
             }
 
-            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$address,$task_type,$task);
+            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$address,$task_type,$task_description);
 
 
             if($result){
@@ -63,6 +71,10 @@ class ClientController extends BaseController
     public function GetBookingClient($user_id){
         try{
             $ClientBooking = $this->client->GetBooking($user_id);
+            if(!$ClientBooking){
+                $this->jsonResponse(['message' => "No bookings found"], 400);
+            }
+
             if($ClientBooking){
                 $this->jsonResponse(['message' => 'Booking Successfully retrieve',
                    'client_bookings' => $ClientBooking  ],200);

@@ -102,19 +102,16 @@ class Api extends BaseApi
             $this->responseBodyChecker();
 
             // Extract title and description from request body
-            $title = $this->requestBody['title'] ?? null;
-            $description = $this->requestBody['description'] ?? null;
+            $email = $this->requestBody['email'] ?? null;
+            $specialties = $this->requestBody['specialties'] ?? null;
+            $prefered_work_location = $this->requestBody['prefered_work_location'] ?? null;
+            $academic_background = $this->requestBody['academic_background'] ?? null;
+            $tradesman_full_name = $this->requestBody['tradesman_full_name'] ?? null;
 
-            // Check for missing data
-            if (!$title || !$description) {
-                echo json_encode(['message' => 'Title and description are required']);
-                http_response_code(400);
-                return;
-            }
 
             // Create ResumeController and store resume
             $ResumeController = new ResumeController(new Resume($this->db));
-            $ResumeController->StoreResume($userId, $title, $description);
+            $ResumeController->StoreResume($email,$userId,$specialties,$prefered_work_location,$academic_background,$tradesman_full_name);
         });
 
         $this->route('POST', '/user/client/booktradesman', function ($userId) {
@@ -124,10 +121,10 @@ class Api extends BaseApi
             $phone_number = $this->requestBody['phone_number'] ?? null;
             $address = $this->requestBody['address'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
-            $task = $this->requestBody['task'] ?? null;
+            $task_description = $this->requestBody['task_description'] ?? null;
 
             $ClientController = new ClientController(new Client($this->db));
-            $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task);
+            $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task_description);
         });
 
         $this->route('GET', '/user/client/getbooking', function ($userId) {
