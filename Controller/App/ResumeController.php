@@ -4,10 +4,13 @@ namespace Controller\App;
 
 use DaguConnect\Core\BaseController;
 use DaguConnect\Model\Resume;
+use Exception;
 
 class ResumeController extends BaseController
 {
     private Resume $resumeModel;
+
+
 
     public function __construct(Resume $resume_Model)
     {
@@ -26,19 +29,30 @@ class ResumeController extends BaseController
 
     }
     //post resume of the tradesman
-    public function StoreResume($email,$user_id,$specialties,$prefered_work_location,$academic_background,$tradesman_full_name): void
+    public function StoreResume($email, $user_id, $specialties, $profile_pic,$prefered_work_location, $academic_background, $tradesman_full_name): void
     {
-       if(empty($email) ||empty($specialties) || empty($prefered_work_location)|| empty($tradesman_full_name))
-       {
-          $this->jsonResponse(['message' => 'Please fill all the fields.'],400);
-          return;
-       }
-       $result =  $this->resumeModel->resume($email,$user_id,$specialties,$prefered_work_location,$academic_background,$tradesman_full_name);
-       if($result){
-           $this->jsonResponse(['message' => 'Resume created successfully.'],201);
-       }else{
-           $this->jsonResponse(['message' => 'Something went wrong.'],500);
-       }
+        if (empty($email) || empty($specialties) || empty($prefered_work_location) || empty($tradesman_full_name)) {
+            $this->jsonResponse(['message' => 'Please fill all the fields.'], 400);
+            return;
+        }
+
+        // Check if the file was uploaded
+        if (isset($profile_pic) && $profile_pic['error'] === UPLOAD_ERR_OK) {
+            try {
+                $result = $this->resumeModel->resume($email, $user_id, $specialties, $profile_pic, $prefered_work_location, $academic_background, $tradesman_full_name);
+                if ($result) {
+                    $this->jsonResponse(['message' => 'Resume created successfully.'], 201);
+                } else {
+                    $this->jsonResponse(['message' => 'Something went wrong.'], 500);
+                }
+            } catch (Exception $e) {
+                $this->jsonResponse(['message' => $e->getMessage()], 500);
+            }
+        } else {
+            $this->jsonResponse(['message' => 'Please upload a valid profile picture.'], 400);
+        }
     }
+
+
 
 }

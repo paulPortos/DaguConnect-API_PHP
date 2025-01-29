@@ -107,11 +107,12 @@ class Api extends BaseApi
             $prefered_work_location = $this->requestBody['prefered_work_location'] ?? null;
             $academic_background = $this->requestBody['academic_background'] ?? null;
             $tradesman_full_name = $this->requestBody['tradesman_full_name'] ?? null;
+            $profile_pic = $_FILES['profile_pic'] ?? null;
 
 
             // Create ResumeController and store resume
             $ResumeController = new ResumeController(new Resume($this->db));
-            $ResumeController->StoreResume($email,$userId,$specialties,$prefered_work_location,$academic_background,$tradesman_full_name);
+            $ResumeController->StoreResume($email,$userId,$specialties,$profile_pic,$prefered_work_location,$academic_background,$tradesman_full_name);
         });
 
         $this->route('POST', '/user/client/booktradesman', function ($userId) {
