@@ -15,7 +15,7 @@ job_type ENUM(
 'ac_repair',
 'mechanics',
 'drywalling',
-'glazing'
+'cleaning'
 ) NOT NULL,
 job_description TEXT NOT NULL,
 status ENUM('available','ongoing','done') NOT NULL,
