@@ -59,9 +59,8 @@ class Api extends BaseApi
         $this->route('PUT', '/admin/change_password', function () {
             $this->responseBodyChecker();
 
-            $user_id = $this->requestBody['user_id'];
-            $current_password = $this->requestBody['current_password'];
-            $new_password = $this->requestBody['new_password'];
+            ['user_id' => $user_id, 'current_password' => $current_password, 'new_password' => $new_password] = $this->requestBody;
+
 
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->changePassword($user_id, $current_password, $new_password);
@@ -70,14 +69,16 @@ class Api extends BaseApi
         $this->route('POST', '/user/register', function () {
             $this->responseBodyChecker();
 
-            $first_name = $this->requestBody['first_name'];
-            $last_name = $this->requestBody['last_name'];
-            $username = $this->requestBody['username'];
-            $age = $this->requestBody['age'];
-            $email = $this->requestBody['email'];
-            $is_client = $this->requestBody['is_client'];
-            $password = $this->requestBody['password'];
-            $confirm_password = $this->requestBody['confirm_password'];
+            [
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'username' => $username,
+                'age' => $age,
+                'email' => $email,
+                'is_client' => $is_client,
+                'password' => $password,
+                'confirm_password' => $confirm_password
+            ] = $this->requestBody;
 
             $AuthController = new AuthenticationController(new User($this->db));
             $AuthController->register($first_name, $last_name, $username,$age, $email,$is_client ,$password, $confirm_password);
@@ -86,8 +87,7 @@ class Api extends BaseApi
         $this->route('POST', '/user/login', function () {
             $this->responseBodyChecker();
 
-            $email = $this->requestBody['email'];
-            $password = $this->requestBody['password'];
+            ['email' => $email, 'password' => $password] = $this->requestBody;
 
             $authController = new AuthenticationController(new User($this->db));
             $authController->login($email, $password);
@@ -186,14 +186,12 @@ class Api extends BaseApi
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
             $jobApplicationController->apply_job($userId, $jobId, $jobName, $jobType, $qualificationSummary, $status);
         });
+        
         $this->route('GET', '/user/getresumes', function () {
             $ResumeController = new ResumeController(new Resume($this->db));
             $ResumeController->GetAllResumes();
         });
-
-
     }
-
 
     //Check if the response body for POST is empty
     private function responseBodyChecker(): void {
