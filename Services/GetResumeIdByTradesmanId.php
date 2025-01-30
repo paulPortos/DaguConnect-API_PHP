@@ -6,7 +6,7 @@ use PDO;
 trait GetResumeIdByTradesmanId
 {
 
-    protected $table = 'user_resume';
+    protected $table = 'tradesman_resume';
     public function getResumeIdByTradesmanId($tradesman_id, PDO $db): ?array
     {
         $query = "SELECT *FROM $this->table WHERE user_id = :tradesman_id ";

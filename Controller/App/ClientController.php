@@ -12,6 +12,7 @@ use DaguConnect\Services\ValidatePhoneNumber;
 class ClientController extends BaseController
 {
     private Client $client;
+    private array $Book_type;
     private config $db;
 
     use GetResumeIdByTradesmanId;
@@ -19,18 +20,25 @@ class ClientController extends BaseController
 
     public function __construct(Client $client)
     {
+        $this->Book_type = ['Carpentry','Painting','Welding','Electrical_work','Plumbing','Masonry','Roofing','Ac repair','Mechanics','Drywalling','glazing'];
         $this->db = new config();
         $this->client = $client;
     }
 
-    public function BookTradesman($user_id,$tradesman_id,$phone_number,$address,$task_type,$task): void
+    public function BookTradesman($user_id,$tradesman_id,$phone_number,$address,$task_type,$task_description,$booking_date): void
     {
         try{
-            if( empty($tradesman_id) ||  empty($phone_number) || empty($address) ||empty($task_type) || empty($task)){
+            if( empty($tradesman_id) ||  empty($phone_number) || empty($address) ||empty($task_type) || empty($task_description) || empty($booking_date) ){
                 $this->jsonResponse(['message' => 'Please fill all the fields.'],400);
                 return;
             }
 
+            //Check if the job type is valid
+            if (!in_array($task_type, $this->Book_type, true)) {
+                $this->jsonResponse(['message' => "Invalid Booking type"], 400);
+                return;
+            }
+            //check if it's valid phone_number
             if(!$this->validatePhoneNumber($phone_number)){
                 $this->jsonResponse(['message'=>'Invalid phone number']);
                 return;
@@ -44,7 +52,7 @@ class ClientController extends BaseController
                 return;
             }
 
-            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$address,$task_type,$task);
+            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$address,$task_type,$task_description,$booking_date );
 
 
             if($result){
@@ -58,5 +66,52 @@ class ClientController extends BaseController
         }
 
     }
+
+    //get booking of the clients
+    public function GetBookingClient($user_id){
+        try{
+            $ClientBooking = $this->client->GetBooking($user_id);
+            if(!$ClientBooking){
+                $this->jsonResponse(['message' => "No bookings found"], 400);
+            }
+
+            if($ClientBooking){
+                $this->jsonResponse(['message' => 'Booking Successfully retrieve',
+                   'client_bookings' => $ClientBooking  ],200);
+            }
+
+        }catch (\Exception $e){
+            $this->jsonResponse(['message' => $e->getMessage()],500);
+        }
+    }
+
+    public function UpdateWorkFromTradesman($user_id,$booking_id,$work_status): void{
+
+        //check if the booking belongs to the user and if exists
+        if($this->client->ValidateWorkUpdate($user_id,$booking_id)){
+            $this->jsonResponse(['message' => 'Booking not found or does not belong to the client',
+                'booking_id' => $booking_id,
+                'user_id' => $user_id],
+                400);
+        }
+
+        // Ensure status is either 'Finished' or 'Failed'
+        if (!in_array($work_status, ['Finished', 'Failed'])) {
+            $this->jsonResponse(['message' => 'Invalid status provided.'], 400);
+            return;
+        }
+        //update the work_status if the client mark it as finish or not
+        $UpdateWorkStatus = $this->client->UpdateWorkStatus($user_id,$booking_id,$work_status);
+        if($UpdateWorkStatus){
+            $this->jsonResponse(['message' => 'Work status updated successfully.'],200);
+        }else {
+            $this->jsonResponse(['message' => 'Failed to update work status.'], 500);
+        }
+
+
+
+    }
+
+
 }
 

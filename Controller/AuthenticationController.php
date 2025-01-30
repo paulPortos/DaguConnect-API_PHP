@@ -7,7 +7,7 @@ use DaguConnect\Includes\config;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
-use DaguConnect\Services\TrimPassword;
+use DaguConnect\Services\Trim;
 use DaguConnect\Services\TokenGenerator;
 use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\PhpMailer\EmailVerification;
@@ -22,16 +22,18 @@ class AuthenticationController extends BaseController
     private User $userModel;
 
 
+
     use Confirm_Password;
     use ValidateFirstandLastName;
     use IfDataExists;
-    use TrimPassword;
+    use Trim;
     use TokenGenerator;
     use EmailVerification;
     use ValidateEmailAddress;
 
     public function __construct(User $user_Model)
     {
+
         $this->db = new config();
         $this->userModel = $user_Model;
     }
@@ -40,10 +42,17 @@ class AuthenticationController extends BaseController
     {
         //Check if password and confirm password match
         $match = $this->checkPassword($password, $confirm_password);
+
         //trim the password and check if the characters are 6 above
-        $CorrectPass = $this->trimPassword($password);
+        $CorrectPass = $this->TrimPassword($password);
+
+        //trim firstname and last name and check if the character is 1 above
+        $trimedFirstName = $this->TrimFirstName($first_name);
+        $trimedLastName = $this->TrimLastName($last_name);
+
         //checks if the first name and last name has numerical value or not
         $firstNameandLastnameValidation = $this->validateFirstAndLastName($first_name, $last_name);
+
         //check if the user enters a valid email
         $emailValidation = $this->validateEmailAddress($email);
 
@@ -51,6 +60,17 @@ class AuthenticationController extends BaseController
         //check if the fields a re all filled up
         if(empty($first_name) || empty($last_name) || empty($username) ||empty($age) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
+            return;
+        }
+
+        //check if the firstname and has 2 character
+        if(!$trimedFirstName){
+            $this->jsonResponse(['message' => 'Invalid Firstname must contain two character'], 400);
+            return;
+        }
+        //check if the lastname and has 2 character
+        if(!$trimedLastName){
+            $this->jsonResponse(['message' => 'Invalid Lastname must contain two character'], 400);
             return;
         }
 

@@ -40,6 +40,7 @@ class Api extends BaseApi
         $this->route('POST', '/admin/register', function () {
             
             $this->responseBodyChecker();
+
             ['username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
 
             $adminController = new AdminAuthController(new Admin($this->db));
@@ -103,19 +104,18 @@ class Api extends BaseApi
             $this->responseBodyChecker();
 
             // Extract title and description from request body
-            $title = $this->requestBody['title'] ?? null;
-            $description = $this->requestBody['description'] ?? null;
+            $email = $this->requestBody['email'] ?? null;
+            $specialties = $this->requestBody['specialties'] ?? null;
+            $prefered_work_location = $this->requestBody['prefered_work_location'] ?? null;
+            $academic_background = $this->requestBody['academic_background'] ?? null;
+            $work_fee = $this->requestBody['work_fee'] ?? null;
+            $tradesman_full_name = $this->requestBody['tradesman_full_name'] ?? null;
+            $profile_pic = $_FILES['profile_pic'] ?? null;
 
-            // Check for missing data
-            if (!$title || !$description) {
-                echo json_encode(['message' => 'Title and description are required']);
-                http_response_code(400);
-                return;
-            }
 
             // Create ResumeController and store resume
             $ResumeController = new ResumeController(new Resume($this->db));
-            $ResumeController->StoreResume($userId, $title, $description);
+            $ResumeController->StoreResume($email,$userId,$specialties,$profile_pic,$prefered_work_location,$academic_background,$work_fee,$tradesman_full_name);
         });
 
         $this->route('POST', '/user/client/booktradesman', function ($userId) {
@@ -125,26 +125,25 @@ class Api extends BaseApi
             $phone_number = $this->requestBody['phone_number'] ?? null;
             $address = $this->requestBody['address'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
-            $task = $this->requestBody['task'] ?? null;
+            $task_description = $this->requestBody['task_description'] ?? null;
+            $booking_date = $this->requestBody['booking_date'] ?? null;
 
             $ClientController = new ClientController(new Client($this->db));
-            $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task);
+            $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task_description,$booking_date );
         });
 
-        $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
-
-            $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
-            $TradesmanBookingController->GetBookingFromClient($userId);
+        $this->route('GET', '/user/client/getbooking', function ($userId) {
+            $ClientBookingController = new ClientController(new Client($this->db));
+            $ClientBookingController->GetBookingClient($userId);
         });
 
-        $this->route('PUT', '/user/tradesman/bookings/status/{booking_id}', function ($userId,$booking_id) {
+        $this->route('PUT', '/user/client/work/status/{booking_id}', function ($userId,$booking_id) {
             $this->responseBodyChecker();
 
+            $work_status = $this->requestBody['work_status'] ?? null;
 
-            $book_status = $this->requestBody['book_status'] ?? null;
-
-            $TradesmanBookingStatus = new TradesmanController(new Tradesman($this->db));
-            $TradesmanBookingStatus->UpdateBookingFromClient($book_status,$booking_id,$userId);
+            $ClientWorkController = new ClientController(new Client($this->db));
+            $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$work_status);
         });
 
         $this->route('POST', '/user/client/create-job', function ($userId) {
@@ -187,6 +186,12 @@ class Api extends BaseApi
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
             $jobApplicationController->apply_job($userId, $jobId, $jobName, $jobType, $qualificationSummary, $status);
         });
+        $this->route('GET', '/user/getresumes', function () {
+            $ResumeController = new ResumeController(new Resume($this->db));
+            $ResumeController->GetAllResumes();
+        });
+
+
     }
 
 
