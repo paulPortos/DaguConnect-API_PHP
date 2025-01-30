@@ -3,6 +3,7 @@
 namespace DaguConnect\Routes;
 
 use Controller\AdminAuthController;
+use Controller\App\JobApplicationController;
 use Controller\App\JobController;
 use Controller\APP\ResumeController;
 use Controller\App\ClientController;
@@ -11,6 +12,7 @@ use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\Job;
+use DaguConnect\Model\Job_Application;
 use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
 use DaguConnect\Model\Tradesman;
@@ -164,10 +166,26 @@ class Api extends BaseApi
             $jobController->getAllJobs();
         });
 
-        $this->route('GET', '/user/client/job/view/{id}', function ($userId,$id) {
+        $this->route('GET', '/user/job/view/{id}', function ($userId,$id) {
 
             $jobController = new JobController(new Job($this->db));
             $jobController->viewJob($id);
+        });
+
+        $this->route('GET', '/user/tradesman/job-applications', function ($userId){
+            $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
+            $jobApplicationController->getMyJobApplications($userId);
+        });
+
+        $this->route('GET', '/user/tradesman/job-applications/{jobId}', function ($userId, $jobId){
+            $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
+            $jobApplicationController->viewMyJobApplication($jobId);
+        });
+
+        $this->route('POST', '/user/client/job/apply', function ($userId){
+            ['job_id' => $jobId, 'job_name' => $jobName, 'job_type' => $jobType, 'qualification_summary' => $qualificationSummary, 'status' => $status] = $this->requestBody;
+            $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
+            $jobApplicationController->apply_job($userId, $jobId, $jobName, $jobType, $qualificationSummary, $status);
         });
     }
 

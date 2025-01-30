@@ -148,7 +148,7 @@ class Job_Application extends BaseModel
 
             return (bool) $stmt->fetch(PDO::FETCH_COLUMN);
         } catch (PDOException $e) {
-            error_log("Error tracing table: ", $e->getMessage());
+            error_log("Error tracing table: " . $e->getMessage());
             return false;
         }
     }

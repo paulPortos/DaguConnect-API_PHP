@@ -30,7 +30,7 @@ class JobApplicationController extends BaseController
         $resume_id = $this->job_application_model->getResumeId($user_id);
 
         if ($resume_id == 0) {
-            $this->jsonResponse(['message' => 'Resume not found for the user.'], 400);
+            $this->jsonResponse(['message' => 'No resume found for this user.'], 400);
             return;
         }
 
@@ -80,13 +80,18 @@ class JobApplicationController extends BaseController
         if (!empty($myApplications)){
             $this->jsonResponse(['my_applications' => $myApplications], 200);
         } else {
-            $this->jsonResponse(['message' => 'Error getting my jobs'], 500);
+            $this->jsonResponse(['message' => 'You have not applied for any jobs yet.'], 200);
         }
     }
 
-    public function viewMyJobApplication($jobApplicationId) {
+    public function viewMyJobApplication($jobApplicationId): void
+    {
         $jobApplication = $this->job_application_model->viewJobApplication($jobApplicationId);
-
+        if (!empty($jobApplication)){
+            $this->jsonResponse(['job_application' => $jobApplication], 200);
+        } else {
+            $this->jsonResponse(['message' => 'Error getting job application'], 500);
+        }
 
     }
 }
