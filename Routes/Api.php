@@ -106,13 +106,14 @@ class Api extends BaseApi
             $specialties = $this->requestBody['specialties'] ?? null;
             $prefered_work_location = $this->requestBody['prefered_work_location'] ?? null;
             $academic_background = $this->requestBody['academic_background'] ?? null;
+            $work_fee = $this->requestBody['work_fee'] ?? null;
             $tradesman_full_name = $this->requestBody['tradesman_full_name'] ?? null;
             $profile_pic = $_FILES['profile_pic'] ?? null;
 
 
             // Create ResumeController and store resume
             $ResumeController = new ResumeController(new Resume($this->db));
-            $ResumeController->StoreResume($email,$userId,$specialties,$profile_pic,$prefered_work_location,$academic_background,$tradesman_full_name);
+            $ResumeController->StoreResume($email,$userId,$specialties,$profile_pic,$prefered_work_location,$academic_background,$work_fee,$tradesman_full_name);
         });
 
         $this->route('POST', '/user/client/booktradesman', function ($userId) {
@@ -123,9 +124,10 @@ class Api extends BaseApi
             $address = $this->requestBody['address'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
             $task_description = $this->requestBody['task_description'] ?? null;
+            $booking_date = $this->requestBody['booking_date'] ?? null;
 
             $ClientController = new ClientController(new Client($this->db));
-            $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task_description);
+            $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task_description,$booking_date );
         });
 
         $this->route('GET', '/user/client/getbooking', function ($userId) {

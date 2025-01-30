@@ -19,7 +19,7 @@ class Resume extends BaseModel
         parent::__construct($db);
     }
 
-    public function resume($email, $user_id, $specialties,$profile_pic, $prefered_work_location, $academic_background, $tradesman_full_name ): bool
+    public function resume($email, $user_id, $specialties,$profile_pic, $prefered_work_location, $academic_background, $work_fee,$tradesman_full_name ): bool
     {
         try {
             // Convert arrays/objects to JSON strings
@@ -36,8 +36,8 @@ class Resume extends BaseModel
 
             // Prepare and execute the insert query
             $query = "INSERT INTO $this->table 
-                    (email, user_id, specialties, profile_pic,prefered_work_location, academic_background, tradesman_full_name, updated_at, created_at) 
-                    VALUES(:email, :user_id, :specialties, :profile_pic,:prefered_work_location, :academic_background, :tradesman_full_name, NOW(), NOW())";
+                        (email, user_id, specialties, profile_pic,prefered_work_location, academic_background, work_fee, tradesman_full_name, updated_at, created_at) 
+                    VALUES(:email, :user_id, :specialties, :profile_pic,:prefered_work_location, :academic_background, :work_fee,:tradesman_full_name, NOW(), NOW())";
 
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':email', $email);
@@ -46,6 +46,7 @@ class Resume extends BaseModel
             $stmt->bindParam(':profile_pic', $profile_pic_path);
             $stmt->bindParam(':prefered_work_location', $prefered_work_location_json);
             $stmt->bindParam(':academic_background', $academic_background_json);
+            $stmt->bindParam(':work_fee', $work_fee);
             $stmt->bindParam(':tradesman_full_name', $tradesman_full_name);
 
 

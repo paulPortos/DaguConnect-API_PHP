@@ -25,10 +25,10 @@ class ClientController extends BaseController
         $this->client = $client;
     }
 
-    public function BookTradesman($user_id,$tradesman_id,$phone_number,$address,$task_type,$task_description): void
+    public function BookTradesman($user_id,$tradesman_id,$phone_number,$address,$task_type,$task_description,$booking_date): void
     {
         try{
-            if( empty($tradesman_id) ||  empty($phone_number) || empty($address) ||empty($task_type) || empty($task_description)){
+            if( empty($tradesman_id) ||  empty($phone_number) || empty($address) ||empty($task_type) || empty($task_description) || empty($booking_date) ){
                 $this->jsonResponse(['message' => 'Please fill all the fields.'],400);
                 return;
             }
@@ -52,7 +52,7 @@ class ClientController extends BaseController
                 return;
             }
 
-            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$address,$task_type,$task_description);
+            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$address,$task_type,$task_description,$booking_date );
 
 
             if($result){

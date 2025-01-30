@@ -29,7 +29,7 @@ class ResumeController extends BaseController
 
     }
     //post resume of the tradesman
-    public function StoreResume($email, $user_id, $specialties, $profile_pic,$prefered_work_location, $academic_background, $tradesman_full_name): void
+    public function StoreResume($email, $user_id, $specialties, $profile_pic,$prefered_work_location, $academic_background, $work_fee,$tradesman_full_name): void
     {
         if (empty($email) || empty($specialties) || empty($prefered_work_location) || empty($tradesman_full_name)) {
             $this->jsonResponse(['message' => 'Please fill all the fields.'], 400);
@@ -39,7 +39,7 @@ class ResumeController extends BaseController
         // Check if the file was uploaded
         if (isset($profile_pic) && $profile_pic['error'] === UPLOAD_ERR_OK) {
             try {
-                $result = $this->resumeModel->resume($email, $user_id, $specialties, $profile_pic, $prefered_work_location, $academic_background, $tradesman_full_name);
+                $result = $this->resumeModel->resume($email, $user_id, $specialties, $profile_pic, $prefered_work_location, $academic_background, $work_fee,$tradesman_full_name);
                 if ($result) {
                     $this->jsonResponse(['message' => 'Resume created successfully.'], 201);
                 } else {
