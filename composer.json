@@ -6,11 +6,11 @@
     },
   "autoload": {
     "psr-4": {
-      "Routes\\": "Api/",
+      "Routes\\": "Routes/",
       "Core\\": "Core/",
       "Controller\\": "Controller/",
       "Model\\": "Model/",
-      "DaguConnect\\": ""
+      "DaguConnect\\": "./"
     }
   }
 }

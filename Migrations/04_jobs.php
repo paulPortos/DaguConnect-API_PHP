@@ -2,6 +2,7 @@ CREATE TABLE jobs (
 id INT UNSIGNED AUTO_INCREMENT,
 user_id INT UNSIGNED NOT NULL,
 client_fullname VARCHAR(255) NOT NULL,
+client_profile_picture VARCHAR(255) NULL,
 salary DECIMAL(10,2) NOT NULL,
 job_type ENUM(
 'carpentry',

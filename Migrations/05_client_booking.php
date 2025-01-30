@@ -16,4 +16,4 @@ INDEX (`resume_id`),
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 FOREIGN KEY (resume_id) REFERENCES user_resume(id) ON DELETE CASCADE,
 FOREIGN KEY (tradesman_id) REFERENCES user_resume(user_id) ON DELETE CASCADE
-);
+)ENGINE = InnoDB;

@@ -125,8 +125,6 @@ class Api extends BaseApi
             $task_type = $this->requestBody['task_type'] ?? null;
             $task = $this->requestBody['task'] ?? null;
 
-
-
             $ClientController = new ClientController(new Client($this->db));
             $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task);
         });

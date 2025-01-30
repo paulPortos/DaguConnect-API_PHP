@@ -9,11 +9,11 @@ use DaguConnect\Services\IfDataExists;
 
 class JobController extends BaseController
 {
-    private array $job_type;
+    private array $job_type_enum;
     private Job $job_model;
     public function __construct(Job $job_model)
     {
-        $this->job_type = ['carpentry',
+        $this->job_type_enum = ['carpentry',
         'painting',
         'welding',
         'electrical_work',
@@ -45,7 +45,7 @@ class JobController extends BaseController
         }
 
         //Check if the job type is valid
-        if (!in_array($job_type, $this->job_type, true)) {
+        if (!in_array($job_type, $this->job_type_enum, true)) {
             $this->jsonResponse(['message' => "Invalid job type"], 400);
             return;
         }

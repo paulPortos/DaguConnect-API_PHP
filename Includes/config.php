@@ -10,7 +10,7 @@ require_once __DIR__ . '/../Services/Env.php';
 
 class config {
 
-    public $db;
+    public PDO $db;
 
     public function __construct()
     {
@@ -25,10 +25,12 @@ class config {
             $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             $this->db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            var_dump("PDOStatement setup done");
             if (!defined('APP_NAME')) {
                 define('APP_NAME', 'YourAppName');
             }
         } catch (PDOException $e) {
+            var_dump("PDOStatement setup failed");
             die("Database connection failed: " . $e->getMessage());
         }
     }
