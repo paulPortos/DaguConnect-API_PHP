@@ -13,7 +13,7 @@ INDEX (`user_id`),
 INDEX (`resume_id`),
 INDEX (`job_id`),
 FOREIGN KEY (user_id) REFERENCES users(id),
-FOREIGN KEY (resume_id) REFERENCES user_resume(id),
+FOREIGN KEY (resume_id) REFERENCES tradesman_resume(id),
 FOREIGN KEY (job_id) REFERENCES jobs(id)
 ) ENGINE = InnoDB;
 

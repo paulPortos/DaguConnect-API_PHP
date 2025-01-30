@@ -7,7 +7,6 @@ use Controller\App\JobApplicationController;
 use Controller\App\JobController;
 use Controller\APP\ResumeController;
 use Controller\App\ClientController;
-use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
@@ -15,7 +14,6 @@ use DaguConnect\Model\Job;
 use DaguConnect\Model\Job_Application;
 use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
-use DaguConnect\Model\Tradesman;
 use DaguConnect\Model\User;
 use Exception;
 
@@ -186,7 +184,7 @@ class Api extends BaseApi
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
             $jobApplicationController->apply_job($userId, $jobId, $jobName, $jobType, $qualificationSummary, $status);
         });
-        
+
         $this->route('GET', '/user/getresumes', function () {
             $ResumeController = new ResumeController(new Resume($this->db));
             $ResumeController->GetAllResumes();
