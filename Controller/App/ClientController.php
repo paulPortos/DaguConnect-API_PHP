@@ -20,7 +20,7 @@ class ClientController extends BaseController
 
     public function __construct(Client $client)
     {
-        $this->Book_type = ['Carpentry','Painting','Welding','Electrical_work','Plumbing','Masonry','Roofing','Ac repair','Mechanics','Drywalling','glazing'];
+        $this->Book_type = ['Carpentry','Painting','Welding','Electrician','Plumbing','Masonry','Roofing','AC repair','Mechanics','Cleaning'];
         $this->db = new config();
         $this->client = $client;
     }
@@ -93,6 +93,7 @@ class ClientController extends BaseController
                 'booking_id' => $booking_id,
                 'user_id' => $user_id],
                 400);
+            return;
         }
 
         // Ensure status is either 'Finished' or 'Failed'
@@ -105,7 +106,7 @@ class ClientController extends BaseController
         if($UpdateWorkStatus){
             $this->jsonResponse(['message' => 'Work status updated successfully.'],200);
         }else {
-            $this->jsonResponse(['message' => 'Failed to update work status.'], 500);
+            $this->jsonResponse(['message' => 'Failed to update work status.'], 400);
         }
 
 

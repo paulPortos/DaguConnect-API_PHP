@@ -3,7 +3,7 @@
 namespace DaguConnect\Model;
 
 use DaguConnect\Core\BaseModel;
-use DaguConnect\Services\FileUploader;
+
 use Exception;
 use PDO;
 use PDOException;
@@ -11,7 +11,7 @@ use PDOException;
 class Resume extends BaseModel
 {
     protected $table = 'tradesman_resume';
-    use  FileUploader;
+
 
 
     public function __construct(PDO $db)
@@ -19,21 +19,13 @@ class Resume extends BaseModel
         parent::__construct($db);
     }
 
-    public function resume($email, $user_id, $specialties,$profile_pic, $prefered_work_location, $academic_background, $work_fee,$tradesman_full_name ): bool
+    public function resume($email, $user_id, $specialties, $profile_pic, $prefered_work_location, $academic_background, $work_fee, $tradesman_full_name): bool
     {
         try {
             // Convert arrays/objects to JSON strings
             $specialties_json = json_encode($specialties);
             $prefered_work_location_json = json_encode($prefered_work_location);
             $academic_background_json = json_encode($academic_background);
-            $targetDir = "../uploads/profile_pictures/";
-
-            // If profile pic is provided, upload it
-            if ($profile_pic) {
-                $profile_pic_path = $this->uploadProfilePic($profile_pic, $targetDir);
-            } else {
-                $profile_pic_path = null;
-            }
 
             // Prepare and execute the insert query
             $query = "INSERT INTO $this->table 
@@ -44,7 +36,7 @@ class Resume extends BaseModel
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':specialties', $specialties_json);
-            $stmt->bindParam(':profile_pic', $profile_pic_path);
+            $stmt->bindParam(':profile_pic', $profile_pic);
             $stmt->bindParam(':prefered_work_location', $prefered_work_location_json);
             $stmt->bindParam(':academic_background', $academic_background_json);
             $stmt->bindParam(':work_fee', $work_fee);
