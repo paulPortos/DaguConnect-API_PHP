@@ -22,10 +22,6 @@ class Resume extends BaseModel
     public function resume($email, $user_id, $specialties, $profile_pic, $prefered_work_location, $academic_background, $work_fee, $tradesman_full_name): bool
     {
         try {
-            // Convert arrays/objects to JSON strings
-            $specialties_json = json_encode($specialties);
-            $prefered_work_location_json = json_encode($prefered_work_location);
-            $academic_background_json = json_encode($academic_background);
 
             // Prepare and execute the insert query
             $query = "INSERT INTO $this->table 
@@ -35,10 +31,10 @@ class Resume extends BaseModel
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':specialties', $specialties_json);
+            $stmt->bindParam(':specialties', $specialties);
             $stmt->bindParam(':profile_pic', $profile_pic);
-            $stmt->bindParam(':prefered_work_location', $prefered_work_location_json);
-            $stmt->bindParam(':academic_background', $academic_background_json);
+            $stmt->bindParam(':prefered_work_location', $prefered_work_location);
+            $stmt->bindParam(':academic_background', $academic_background);
             $stmt->bindParam(':work_fee', $work_fee);
             $stmt->bindParam(':tradesman_full_name', $tradesman_full_name);
 

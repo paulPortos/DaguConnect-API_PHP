@@ -42,10 +42,16 @@ class ResumeController extends BaseController
 
             try {
                 // Upload profile pic
+
+                // Convert arrays to JSON
+                $specialties_json = json_encode($specialties);
+                $prefered_work_location_json = json_encode($prefered_work_location);
+                $academic_background_json = json_encode($academic_background);
+
                 $relativePath = $this->uploadProfilePic($profile_pic, 'profile_pictures');
                 $fullProfilePicUrl = $this->baseUrl . $relativePath;
 
-                $result = $this->resumeModel->resume($email, $user_id, $specialties,  $fullProfilePicUrl, $prefered_work_location, $academic_background, $work_fee,$tradesman_full_name);
+                $result = $this->resumeModel->resume($email, $user_id, $specialties_json,  $fullProfilePicUrl, $prefered_work_location_json, $academic_background_json, $work_fee,$tradesman_full_name);
                 if ($result) {
                     $this->jsonResponse(['message' => 'Resume created successfully.'], 201);
                 } else {
