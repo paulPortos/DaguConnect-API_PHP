@@ -7,6 +7,7 @@ use Controller\App\JobApplicationController;
 use Controller\App\JobController;
 use Controller\APP\ResumeController;
 use Controller\App\ClientController;
+use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
@@ -14,6 +15,7 @@ use DaguConnect\Model\Job;
 use DaguConnect\Model\Job_Application;
 use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
+use DaguConnect\Model\Tradesman;
 use DaguConnect\Model\User;
 use Exception;
 
@@ -134,6 +136,23 @@ class Api extends BaseApi
             $ClientBookingController = new ClientController(new Client($this->db));
             $ClientBookingController->GetBookingClient($userId);
         });
+
+        $this->route('PUT', '/user/tradesman/bookings/status/{booking_id}', function ($userId,$booking_id) {
+            $this->responseBodyChecker();
+
+
+            $book_status = $this->requestBody['book_status'] ?? null;
+
+            $TradesmanBookingStatus = new TradesmanController(new Tradesman($this->db));
+            $TradesmanBookingStatus ->UpdateBookingFromClient($book_status,$booking_id,$userId);
+        });
+
+        $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
+
+            $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
+            $TradesmanBookingController->GetBookingFromClient($userId);
+        });
+
 
         $this->route('PUT', '/user/client/work/status/{booking_id}', function ($userId,$booking_id) {
             $this->responseBodyChecker();

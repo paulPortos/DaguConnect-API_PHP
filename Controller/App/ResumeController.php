@@ -31,7 +31,7 @@ class ResumeController extends BaseController
     //post resume of the tradesman
     public function StoreResume($email, $user_id, $specialties, $profile_pic,$prefered_work_location, $academic_background, $work_fee,$tradesman_full_name): void
     {
-        if (empty($email) || empty($specialties) || empty($prefered_work_location) || empty($tradesman_full_name)) {
+        if (empty($email) || empty($specialties) || empty($prefered_work_location) || empty($tradesman_full_name) || empty($work_fee)) {
             $this->jsonResponse(['message' => 'Please fill all the fields.'], 400);
             return;
         }
