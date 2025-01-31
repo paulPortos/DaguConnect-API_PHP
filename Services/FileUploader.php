@@ -6,17 +6,12 @@ use Exception;
 
 trait FileUploader
 {
-    private string $targetDir = "../uploads/profile_pictures/"; // Default target directory
+   
 
-    // Set the directory for profile pictures (this can be changed based on usage)
-    public function setTargetDirectory(string $directory): void
+    public function uploadProfilePic($file, $directory): string
     {
-        $this->targetDir = $directory;
-    }
-
-    public function uploadProfilePic($file): string
-    {
-        $targetFile = $this->targetDir . basename($file['name']);
+        $targetDir = $directory;
+        $targetFile = $targetDir . basename($file['name']);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
         // Check if the file is an image

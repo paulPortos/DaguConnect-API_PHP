@@ -26,10 +26,11 @@ class Resume extends BaseModel
             $specialties_json = json_encode($specialties);
             $prefered_work_location_json = json_encode($prefered_work_location);
             $academic_background_json = json_encode($academic_background);
+            $targetDir = "../uploads/profile_pictures/";
 
             // If profile pic is provided, upload it
             if ($profile_pic) {
-                $profile_pic_path = $this->uploadProfilePic($profile_pic);
+                $profile_pic_path = $this->uploadProfilePic($profile_pic, $targetDir);
             } else {
                 $profile_pic_path = null;
             }
