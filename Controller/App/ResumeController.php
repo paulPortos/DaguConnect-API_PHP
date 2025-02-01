@@ -18,6 +18,7 @@ class ResumeController extends BaseController
     {
         $this->targetDir = "../uploads/profile_pictures/";
         $this->baseUrl = 'http://' . $_SERVER['HTTP_HOST']; // Auto-detect domain
+       // $this->baseUrl = 'http://' . $_ENV['DOMAIN']; // Use The ip Address
         $this->resumeModel = $resume_Model;
     }
     //get the resume
@@ -33,16 +34,9 @@ class ResumeController extends BaseController
 
     }
     //post resume of the tradesman
-    public function StoreResume($email, $user_id, $specialties, $profile_pic,$prefered_work_location, $academic_background, $work_fee,$tradesman_full_name): void
+    public function UpdateResume($user_id, $specialties, $profile_pic,$prefered_work_location, $academic_background, $work_fee): void
     {
-        if (empty($email) || empty($specialties) || empty($prefered_work_location) || empty($tradesman_full_name) || empty($work_fee)) {
-            $this->jsonResponse(['message' => 'Please fill all the fields.'], 400);
-            return;
-        }
-
             try {
-                // Upload profile pic
-
                 // Convert arrays to JSON
                 $specialties_json = json_encode($specialties);
                 $prefered_work_location_json = json_encode($prefered_work_location);
@@ -51,9 +45,9 @@ class ResumeController extends BaseController
                 $relativePath = $this->uploadProfilePic($profile_pic, 'profile_pictures');
                 $fullProfilePicUrl = $this->baseUrl . $relativePath;
 
-                $result = $this->resumeModel->resume($email, $user_id, $specialties_json,  $fullProfilePicUrl, $prefered_work_location_json, $academic_background_json, $work_fee,$tradesman_full_name);
+                $result = $this->resumeModel->UpdateResume($user_id, $specialties_json,  $fullProfilePicUrl, $prefered_work_location_json, $academic_background_json, $work_fee);
                 if ($result) {
-                    $this->jsonResponse(['message' => 'Resume created successfully.'], 201);
+                    $this->jsonResponse(['message' => 'Resume Updated successfully.'], 201);
                 } else {
                     $this->jsonResponse(['message' => 'Something went wrong.'], 500);
                 }

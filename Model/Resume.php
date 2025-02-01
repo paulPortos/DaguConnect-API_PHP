@@ -19,32 +19,7 @@ class Resume extends BaseModel
         parent::__construct($db);
     }
 
-    public function resume($email, $user_id, $specialties, $profile_pic, $prefered_work_location, $academic_background, $work_fee, $tradesman_full_name): bool
-    {
-        try {
 
-            // Prepare and execute the insert query
-            $query = "INSERT INTO $this->table 
-                        (email, user_id, specialties, profile_pic,prefered_work_location, academic_background, work_fee, tradesman_full_name, updated_at, created_at) 
-                    VALUES(:email, :user_id, :specialties, :profile_pic,:prefered_work_location, :academic_background, :work_fee,:tradesman_full_name, NOW(), NOW())";
-
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':specialties', $specialties);
-            $stmt->bindParam(':profile_pic', $profile_pic);
-            $stmt->bindParam(':prefered_work_location', $prefered_work_location);
-            $stmt->bindParam(':academic_background', $academic_background);
-            $stmt->bindParam(':work_fee', $work_fee);
-            $stmt->bindParam(':tradesman_full_name', $tradesman_full_name);
-
-
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Error on posting a resume: " . $e->getMessage());
-            return false;
-        }
-    }
 
 
 
@@ -69,6 +44,36 @@ class Resume extends BaseModel
             return [];
         }
 
+    }
+
+    public function StoreResume($email, $user_id,$tradesman_full_name){
+
+        $query = "INSERT INTO $this->table 
+                (email, user_id,tradesman_full_name,updated_at,created_at) 
+                VALUES(:email, :user_id,:tradesman_full_name,NOW(), NOW())";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':tradesman_full_name', $tradesman_full_name);
+        return $stmt->execute();
+    }
+
+    public function UpdateResume($user_id,$specialties, $profile_pic, $prefered_work_location, $academic_background,$work_fee){
+        $query = "UPDATE $this->table SET
+                   specialties = :specialties,
+                   profile_pic = :profile_pic,
+                   prefered_work_location = :prefered_work_location,
+                   academic_background = :academic_background,
+                   work_fee = :work_fee,
+                   updated_at = NOW() WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':specialties', $specialties);
+        $stmt->bindParam(':profile_pic', $profile_pic);
+        $stmt->bindParam(':prefered_work_location', $prefered_work_location);
+        $stmt->bindParam(':academic_background', $academic_background);
+        $stmt->bindParam(':work_fee', $work_fee);
+        return $stmt->execute();
     }
 
 

@@ -90,4 +90,9 @@ class User extends BaseModel
         }
 
     }
+
+    public function getLastInsertId(): int
+    {
+        return (int) $this->db->lastInsertId();
+    }
 }

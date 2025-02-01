@@ -4,6 +4,7 @@ namespace Controller;
 
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
+use DaguConnect\Model\Resume;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
@@ -20,6 +21,7 @@ use DaguConnect\Services\ValidateEmailAddress;
 class AuthenticationController extends BaseController
 {
     private User $userModel;
+    private Resume $resumeModel;
 
 
 
@@ -31,15 +33,19 @@ class AuthenticationController extends BaseController
     use EmailVerification;
     use ValidateEmailAddress;
 
-    public function __construct(User $user_Model)
+    public function __construct(User $user_Model, Resume $resume_Model)
     {
 
         $this->db = new config();
         $this->userModel = $user_Model;
+        $this->resumeModel = $resume_Model;
     }
 
     public function register($first_name, $last_name, $username,$age, $email, $is_client ,$password, $confirm_password): void
     {
+
+        //creates the full name of the tradesman
+        $tradesman_fullname = $first_name." ".$last_name;
         //Check if password and confirm password match
         $match = $this->checkPassword($password, $confirm_password);
 
@@ -110,6 +116,12 @@ class AuthenticationController extends BaseController
         if($this->userModel->registerUser($first_name, $last_name, $username, $age, $email,$is_client, $password,)){
                 //send_email verification
                 Email_Sender::sendVerificationEmail($email);
+
+                //creates the table for the resume if the user is a tradesman
+            if(!$is_client){
+                $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$tradesman_fullname);
+            }
+
                 $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);
         }
     }

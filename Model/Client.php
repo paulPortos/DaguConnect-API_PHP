@@ -81,7 +81,7 @@ class Client extends BaseModel
     }
 
     //validate if the booking exist or if the booking belongs to the client
-    public function ValidateWorkUpdate($booking_id, $user_id): bool
+    public function ValidateWorkUpdate( $user_id,$booking_id): bool
     {
         $query = "SELECT COUNT(*) FROM $this->table WHERE id = :booking_id AND user_id = :user_id ";
         $stmt = $this->db->prepare($query);

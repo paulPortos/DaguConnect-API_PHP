@@ -9,7 +9,7 @@ trait Middleware
     {
         //endpoints that is protected by the middleware that needs a token
         $protectedRoutes = [
-            '/user/tradesman/resume',
+            '/user/tradesman/update/resume',
             '/user/client/booktradesman',
             '/user/tradesman/getbooking',
             '/user/client/create-job',

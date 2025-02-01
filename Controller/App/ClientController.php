@@ -88,7 +88,7 @@ class ClientController extends BaseController
     public function UpdateWorkFromTradesman($user_id,$booking_id,$work_status): void{
 
         //check if the booking belongs to the user and if exists
-        if($this->client->ValidateWorkUpdate($user_id,$booking_id)){
+        if(!$this->client->ValidateWorkUpdate($user_id,$booking_id)){
             $this->jsonResponse(['message' => 'Booking not found or does not belong to the client',
                 'booking_id' => $booking_id,
                 'user_id' => $user_id],
