@@ -9,7 +9,7 @@ use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\Trim;
-use DaguConnect\Services\TokenGenerator;
+use DaguConnect\Services\TokenHandler;
 use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\PhpMailer\EmailVerification;
 use DaguConnect\Services\ValidateFirstandLastName;
@@ -29,7 +29,7 @@ class AuthenticationController extends BaseController
     use ValidateFirstandLastName;
     use IfDataExists;
     use Trim;
-    use TokenGenerator;
+    use TokenHandler;
     use EmailVerification;
     use ValidateEmailAddress;
 
@@ -204,4 +204,19 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Email or password invalid' ], 400);
         }*/
     }
+
+    public function logout($token): void{
+        if (empty($token)) {
+            $this->jsonResponse(['message' => 'Token is required'], 400);
+            return;
+        }
+        $token = $this->deleteToken($token, $this->db->getDB());
+
+        if($token){
+            $this->jsonResponse(['message' => 'Logout successful'], 200);
+        }else{
+            $this->jsonResponse(['message' => 'Logout Error'], 500);
+        }
+    }
+
 }

@@ -21,7 +21,8 @@ trait Middleware
             '/user/tradesman/bookings/status/{booking_id}',
             '/user/client/work/status/{booking_id}',
             '/user/client/getbooking',
-            '/user/getresumes'
+            '/user/getresumes',
+            '/user/logout'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {
