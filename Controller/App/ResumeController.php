@@ -7,18 +7,18 @@ use DaguConnect\Model\Resume;
 use DaguConnect\Services\FileUploader;
 use Exception;
 
+
 class ResumeController extends BaseController
 {
     private Resume $resumeModel;
-    private string $baseUrl;
+
     use  FileUploader;
     protected $targetDir;
 
     public function __construct(Resume $resume_Model)
     {
-        $this->targetDir = "../uploads/profile_pictures/";
-        $this->baseUrl = 'http://' . $_SERVER['HTTP_HOST']; // Auto-detect domain
-       // $this->baseUrl = 'http://' . $_ENV['DOMAIN']; // Use The ip Address
+        $this->targetDir = "/uploads/profile_pictures/";
+        $this->initializeBaseUrl(); // Initialize baseUrl from FileUploader
         $this->resumeModel = $resume_Model;
     }
     //get the resume
@@ -42,8 +42,10 @@ class ResumeController extends BaseController
                 $prefered_work_location_json = json_encode($prefered_work_location);
                 $academic_background_json = json_encode($academic_background);
 
-                $relativePath = $this->uploadProfilePic($profile_pic, 'profile_pictures');
-                $fullProfilePicUrl = $this->baseUrl . $relativePath;
+                $fullProfilePicUrl = $this->uploadProfilePic($profile_pic, $this->targetDir);
+
+
+
 
                 $result = $this->resumeModel->UpdateResume($user_id, $specialties_json,  $fullProfilePicUrl, $prefered_work_location_json, $academic_background_json, $work_fee);
                 if ($result) {
@@ -56,6 +58,8 @@ class ResumeController extends BaseController
             }
 
     }
+
+
 
 
 

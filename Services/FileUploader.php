@@ -6,10 +6,23 @@ use Exception;
 
 trait FileUploader
 {
+    private string $baseUrl;
+
+    public function initializeBaseUrl()
+    {
+        $this->baseUrl = 'http://' . $_SERVER['HTTP_HOST']; // Auto-detect domain
+        // $this->baseUrl = 'http://' . $_ENV['DOMAIN']; // Use IP Address if needed
+    }
+
     public function uploadProfilePic($file, $directory): string
     {
+        // Ensure baseUrl is initialized
+        if (!isset($this->baseUrl)) {
+            $this->initializeBaseUrl();
+        }
+
         // Define upload directory relative to document root
-        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $directory . '/';
+        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . $directory ;
 
         // Ensure directory exists
         if (!is_dir($uploadDir)) {
@@ -43,7 +56,7 @@ trait FileUploader
             throw new Exception("Error uploading file.");
         }
 
-        // Return web-accessible relative path
-        return '/uploads/' . $directory . '/' . $uniqueFileName;
+        // Return full URL including base domain
+        return $this->baseUrl . $directory  . $uniqueFileName;
     }
 }
