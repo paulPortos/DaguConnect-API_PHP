@@ -162,14 +162,15 @@ class Api extends BaseApi
             $salary = $this->requestBody['salary'] ?? null;
             $job_type = $this->requestBody['job_type'] ?? null;
             $job_description = $this->requestBody['job_description'] ?? null;
+            $location = $this->requestBody['location'] ?? null;
             $status = $this->requestBody['status'] ?? null;
             $deadline = $this->requestBody['deadline'] ?? null;
 
             $jobController = new JobController(new Job($this->db));
-            $jobController->addJob($userId, $client_fullname, $salary, $job_type, $job_description, $status, $deadline);
+            $jobController->addJob($userId, $client_fullname, $salary, $job_type, $job_description, $location, $status, $deadline);
         });
 
-        $this->route('GET', '/user/client/jobs', function () {
+        $this->route('GET', '/user/jobs', function () {
             $jobController = new JobController(new Job($this->db));
             $jobController->getAllJobs();
         });

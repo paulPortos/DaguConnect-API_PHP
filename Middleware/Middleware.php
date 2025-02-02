@@ -14,7 +14,7 @@ trait Middleware
             '/user/tradesman/getbooking',
             '/user/client/create-job',
             '/user/tradesman/bookings/status/{booking_id}',
-            '/user/client/job/view/{id}',
+            '/user/job/view/{id}',
             '/user/tradesman/job-applications',
             '/user/tradesman/job-applications/{jobId}',
             '/user/client/job/apply',

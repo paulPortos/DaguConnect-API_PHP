@@ -131,9 +131,10 @@ class Job_Application extends BaseModel
             $stmt->execute();
 
             $id = $stmt->fetch(PDO::FETCH_COLUMN); // Fetch only the `id` column
+
             return $id !== false ? (int) $id : 0;
         } catch (PDOException $e) {
-            error_log("Error tracing table: ", $e->getMessage());
+            var_dump($e->getMessage());
             return 0;
         }
     }

@@ -37,20 +37,21 @@ class Job extends BaseModel
         }
     }
 
-    public function addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $status, $deadline): bool {
+    public function addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $location, $status, $deadline): bool {
         try {
-            $stmt = $this->db->prepare("INSERT INTO $this->table (user_id, client_fullname, salary, job_type, job_description, status, deadline, created_at) VALUES (:user_id, :client_fullname, :salary, :job_type, :job_description, :status, :deadline, NOW())");
+            $stmt = $this->db->prepare("INSERT INTO $this->table (user_id, client_fullname, salary, job_type, job_description, location, status, deadline, created_at) VALUES (:user_id, :client_fullname, :salary, :job_type, :job_description, :location, :status, :deadline, NOW())");
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':client_fullname', $client_fullname);
             $stmt->bindParam(':salary', $salary);
             $stmt->bindParam(':job_type', $job_type);
             $stmt->bindParam(':job_description', $job_description);
+            $stmt->bindParam(':location', $location);
             $stmt->bindParam(':status', $status);
             $stmt->bindParam(':deadline', $deadline);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            error_log("Error adding job: ", $e->getMessage());
+            error_log("Error inserting job: " . $e->getMessage());
             return false;
         }
     }

@@ -18,6 +18,7 @@ job_type ENUM(
 'cleaning'
 ) NOT NULL,
 job_description TEXT NOT NULL,
+location TEXT NOT NULL,
 status ENUM('available','ongoing','done') NOT NULL,
 deadline DATE NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
