@@ -61,26 +61,25 @@ class Admin extends BaseModel
     }
 
     public function createToken($email): string
-    {
-        // Check if the user exists
-        $query = "SELECT * FROM users WHERE email = :email LIMIT 1";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
+{
+    // Verify admin exists
+    $query = "SELECT * FROM $this->table WHERE email = :email LIMIT 1";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
 
-        // Generate a unique token
-        $token = bin2hex(random_bytes(32)); // Creates a 64-character token
+    // Generate token
+    $token = bin2hex(random_bytes(32));
 
-        // Store the token in the database
-        $updateQuery = "UPDATE $this->table SET token = :token WHERE email = :email";
-        $updateStmt = $this->db->prepare($updateQuery);
-        $updateStmt->bindParam(':token', $token);
-        $updateStmt->bindParam(':email', $email);
-        $updateStmt->execute();
+    // Update admin table
+    $updateQuery = "UPDATE $this->table SET token = :token WHERE email = :email";
+    $updateStmt = $this->db->prepare($updateQuery);
+    $updateStmt->bindParam(':token', $token);
+    $updateStmt->bindParam(':email', $email);
+    $updateStmt->execute();
 
-        // Return the token
-        return $token;
-    }
+    return $token;
+}
 
     public function getAllActiveUsers() {
         $query = "SELECT COUNT(*) AS total FROM user_tokens WHERE token IS NOT NULL AND token != ''";
