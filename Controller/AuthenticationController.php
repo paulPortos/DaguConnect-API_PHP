@@ -4,11 +4,12 @@ namespace Controller;
 
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
+use DaguConnect\Model\Resume;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\Trim;
-use DaguConnect\Services\TokenGenerator;
+use DaguConnect\Services\TokenHandler;
 use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\PhpMailer\EmailVerification;
 use DaguConnect\Services\ValidateFirstandLastName;
@@ -20,6 +21,7 @@ use DaguConnect\Services\ValidateEmailAddress;
 class AuthenticationController extends BaseController
 {
     private User $userModel;
+    private Resume $resumeModel;
 
 
 
@@ -27,19 +29,23 @@ class AuthenticationController extends BaseController
     use ValidateFirstandLastName;
     use IfDataExists;
     use Trim;
-    use TokenGenerator;
+    use TokenHandler;
     use EmailVerification;
     use ValidateEmailAddress;
 
-    public function __construct(User $user_Model)
+    public function __construct(User $user_Model, Resume $resume_Model)
     {
 
         $this->db = new config();
         $this->userModel = $user_Model;
+        $this->resumeModel = $resume_Model;
     }
 
     public function register($first_name, $last_name, $username, $age, $email, $is_client ,$password, $confirm_password): void
     {
+
+        //creates the full name of the tradesman
+        $tradesman_fullname = $first_name." ".$last_name;
         //Check if password and confirm password match
         $match = $this->checkPassword($password, $confirm_password);
 
@@ -110,6 +116,13 @@ class AuthenticationController extends BaseController
         if($this->userModel->registerUser($first_name, $last_name, $username, $age, $email,$is_client, $password,)){
                 //send_email verification
                 Email_Sender::sendVerificationEmail($email);
+
+                //creates the table for the resume if the user is a tradesman
+            if(!$is_client){
+                $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png'; // replace with your default picture path or URL
+                $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic,$tradesman_fullname);
+            }
+
                 $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);
         }
     }
@@ -192,4 +205,32 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Email or password invalid' ], 400);
         }*/
     }
+
+    public function logout(): void {
+        // Retrieve the token from the Authorization header
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? null;
+        if (!$authHeader) {
+            $this->jsonResponse(['message' => 'Authorization token is missing'], 400);
+            return;
+        }
+
+        // Extract the Bearer token from the Authorization header
+        if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+            $token = $matches[1];
+        } else {
+            $this->jsonResponse(['message' => 'Invalid Authorization header format'], 400);
+            return;
+        }
+
+        // Call the DeleteToken method to remove the token from the database
+        $tokenDeleted = $this->deleteToken($token, $this->db->getDB());
+
+        if ($tokenDeleted) {
+            $this->jsonResponse(['message' => 'Logout successful'], 200);
+        } else {
+            $this->jsonResponse(['message' => 'Logout Error'], 500);
+        }
+    }
+
+
 }

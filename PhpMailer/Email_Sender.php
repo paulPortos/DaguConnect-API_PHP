@@ -18,10 +18,8 @@ class Email_Sender
         $emailTemplate = file_get_contents($templatePath);
 
 
-        //localhost verification
-        //$verificationUrl = "http://localhost:8000/verify-email?email=" . urlencode($email);
         //Domain Ip verification
-         $verificationUrl = "http://" . $_ENV['DOMAIN'] .":8000/verify-email?email=" . urlencode($email);
+         $verificationUrl = "http://" . $_SERVER['HTTP_HOST'] ."/verify-email?email=" . urlencode($email);
 
         //body of the email
         $emailBody = str_replace('{{verification_url}}', $verificationUrl, $emailTemplate);

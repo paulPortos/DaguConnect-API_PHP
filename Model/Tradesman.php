@@ -51,7 +51,7 @@ class Tradesman extends BaseModel
     }
 
     //validate if the booking exist or if the booking belongs to the tradesman
-    public function ValidateBookingUpdate($booking_id, $tradesman_id): bool
+    public function ValidateBookingUpdate( $tradesman_id,$booking_id): bool
     {
         try {
             $query = "SELECT COUNT(*) FROM $this->table WHERE id = :booking_id AND tradesman_id = :tradesman_id";

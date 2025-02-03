@@ -6,40 +6,57 @@ use Exception;
 
 trait FileUploader
 {
-    private string $targetDir = "../uploads/profile_pictures/"; // Default target directory
+    private string $baseUrl;
 
-    // Set the directory for profile pictures (this can be changed based on usage)
-    public function setTargetDirectory(string $directory): void
+    public function initializeBaseUrl()
     {
-        $this->targetDir = $directory;
+        $this->baseUrl = 'http://' . $_SERVER['HTTP_HOST']; // Auto-detect domain
+        // $this->baseUrl = 'http://' . $_ENV['DOMAIN']; // Use IP Address if needed
     }
 
-    public function uploadProfilePic($file): string
+    public function uploadProfilePic($file, $directory): string
     {
-        $targetFile = $this->targetDir . basename($file['name']);
-        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-        // Check if the file is an image
-        $check = getimagesize($file['tmp_name']);
-        if ($check === false) {
-            throw new Exception("File is not an image.");
+        // Ensure baseUrl is initialized
+        if (!isset($this->baseUrl)) {
+            $this->initializeBaseUrl();
         }
 
-        // Check file size (limit to 5MB for example)
+        // Define upload directory relative to document root
+        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . $directory ;
+
+        // Ensure directory exists
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        // Get file extension
+        $imageFileType = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        // Generate unique filename
+        $uniqueFileName = uniqid('profile_', true) . '.' . $imageFileType;
+        $targetFile = $uploadDir . $uniqueFileName;
+
+        // Validate file type
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($mimeType, $allowedMimeTypes)) {
+            throw new Exception("Invalid file type. Only JPG, PNG, and GIF files are allowed.");
+        }
+
+        // Validate file size
         if ($file['size'] > 5000000) {
-            throw new Exception("File is too large.");
+            throw new Exception("File is too large. Max size allowed is 5MB.");
         }
 
-        // Allow certain file formats
-        if (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
-            throw new Exception("Only JPG, JPEG, PNG, and GIF files are allowed.");
-        }
-
-        // Move the uploaded file to the target directory
+        // Move uploaded file
         if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
-            throw new Exception("Sorry, there was an error uploading your file.");
+            throw new Exception("Error uploading file.");
         }
 
-        return $targetFile; // Return the file path to store in the database
+        // Return full URL including base domain
+        return $this->baseUrl . $directory  . $uniqueFileName;
     }
 }

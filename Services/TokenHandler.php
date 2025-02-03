@@ -4,7 +4,7 @@ namespace DaguConnect\Services;
 
 use PDO;
 
-trait TokenGenerator
+trait TokenHandler
 {
     protected $token_table = 'user_tokens';
     public function CreateToken( $user_id, PDO $db): ?string
@@ -26,5 +26,22 @@ trait TokenGenerator
             return false;
         }
     }
+
+    public function DeleteToken($token, PDO $db):bool{
+
+        try{
+            $query = "DELETE FROM $this->token_table WHERE token = :token";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':token', $token);
+            $stmt->execute();
+
+            return $stmt->rowCount() > 0;
+        }catch (\Exception $e){
+            error_log("Token generator error",$e->getMessage());
+            return false;
+        }
+
+    }
+
 
 }

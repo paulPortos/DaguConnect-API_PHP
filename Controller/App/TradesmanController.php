@@ -38,7 +38,7 @@ class TradesmanController extends BaseController
     }
 
     //update the booking if is accepted or rejected by the tradesman
-    public function UpdateBookingFromClient($booking_status,$booking_id,$tradesman_id):void{
+    public function UpdateBookingFromClient($tradesman_id,$booking_id,$booking_status):void{
 
         //ensure that all the required fields are filled up
         if(empty($booking_status)){
@@ -53,7 +53,7 @@ class TradesmanController extends BaseController
         $work_status = $booking_status == 'Accepted' ? 'Active' : null;
 
         //check if the booking exist or the booking belongs to the tradesman
-        if(!$this->tradesman->ValidateBookingUpdate($booking_id,$tradesman_id)){
+        if(!$this->tradesman->ValidateBookingUpdate($tradesman_id,$booking_id)){
             $this->jsonResponse([
                 'message' => 'Booking not found or does not belong to the tradesman.',
                 'booking_id' => $booking_id,
