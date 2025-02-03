@@ -205,18 +205,31 @@ class AuthenticationController extends BaseController
         }*/
     }
 
-    public function logout($token): void{
-        if (empty($token)) {
-            $this->jsonResponse(['message' => 'Token is required'], 400);
+    public function logout(): void {
+        // Retrieve the token from the Authorization header
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? null;
+        if (!$authHeader) {
+            $this->jsonResponse(['message' => 'Authorization token is missing'], 400);
             return;
         }
-        $token = $this->deleteToken($token, $this->db->getDB());
 
-        if($token){
+        // Extract the Bearer token from the Authorization header
+        if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+            $token = $matches[1];
+        } else {
+            $this->jsonResponse(['message' => 'Invalid Authorization header format'], 400);
+            return;
+        }
+
+        // Call the DeleteToken method to remove the token from the database
+        $tokenDeleted = $this->deleteToken($token, $this->db->getDB());
+
+        if ($tokenDeleted) {
             $this->jsonResponse(['message' => 'Logout successful'], 200);
-        }else{
+        } else {
             $this->jsonResponse(['message' => 'Logout Error'], 500);
         }
     }
+
 
 }

@@ -94,12 +94,9 @@ class Api extends BaseApi
         });
 
         $this->route('DELETE', '/user/logout', function () {
-            $this->responseBodyChecker();
-
-            ['token' => $token] = $this->requestBody;
 
             $authController = new AuthenticationController(new User($this->db), new Resume($this->db));
-            $authController->logout($token);
+            $authController->logout();
         });
 
         $this->route('GET', '/verify-email', function () {

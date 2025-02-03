@@ -29,7 +29,7 @@ class ResumeController extends BaseController
             $this->jsonResponse(['message'=>'No Resumes Found']);
             return;
         }else{
-            $this->jsonResponse(['resumes'=>$resume]);
+            $this->jsonResponse($resume);
         }
 
     }
