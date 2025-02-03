@@ -119,7 +119,8 @@ class AuthenticationController extends BaseController
 
                 //creates the table for the resume if the user is a tradesman
             if(!$is_client){
-                $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$tradesman_fullname);
+                $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png'; // replace with your default picture path or URL
+                $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic,$tradesman_fullname);
             }
 
                 $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);
