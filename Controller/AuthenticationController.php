@@ -41,7 +41,7 @@ class AuthenticationController extends BaseController
         $this->resumeModel = $resume_Model;
     }
 
-    public function register($first_name, $last_name, $username,$age, $email, $is_client ,$password, $confirm_password): void
+    public function register($first_name, $last_name, $username, $age, $email, $is_client ,$password, $confirm_password): void
     {
 
         //creates the full name of the tradesman

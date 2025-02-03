@@ -30,18 +30,18 @@ class AdminAuthController extends BaseController
             return;
         }
 
-        if (!strlen($username) >= 5) {
+        if (strlen($username) < 5) {  
             $this->jsonResponse(['message' => 'Username must be at least 5 characters long.'], 400);
             return;
         }
-
-        if (!strlen($password) >= 8) {
-            $this->jsonResponse(['message' => '"Password must be at least 8 characters long.'], 400);
+        
+        if (strlen($password) < 8) {  
+            $this->jsonResponse(['message' => 'Password must be at least 8 characters long.'], 400);
             return;
-        }
+        } 
 
         if (!$this->checkPassword($password, $confirm_password)) {
-            BaseController::jsonResponse(['message' => 'Passwords do not match.'], 400);
+            $this->jsonresponse(['message' => 'Passwords do not match.'], 400);
             return;
         }
 
@@ -63,27 +63,30 @@ class AdminAuthController extends BaseController
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
             return;
         }
-
-        if (strlen($username) >= 5) {
+    
+        if (strlen($username) < 5) {
             $this->jsonResponse(['message' => 'Username must be at least 5 characters long.'], 400);
+            return;
         }
-
-        if (strlen($password) >= 8) {
-            $this->jsonResponse(['message' => '"Password must be at least 8 characters long.'], 400);
+    
+        if (strlen($password) < 8) {
+            $this->jsonResponse(['message' => 'Password must be at least 8 characters long.'], 400);
+            return;
         }
-
-        if ($this->loggedIn($email, 'admin')){
+    
+        if ($this->loggedIn($email, 'admin')) {
             $this->jsonResponse(['message' => 'Already logged in on another device.'], 400);
             return;
         }
-
+    
         if (!$this->adminModel->loginUser($username, $email, $password)) {
             $this->jsonResponse(['message' => 'User does not exist.'], 400);
             return;
         }
-
+    
         $token = $this->adminModel->createToken($email);
-        $this->jsonResponse(['message' => 'Login successfully!',
+        $this->jsonResponse([
+            'message' => 'Login successfully!',
             'admin' => [
                 [
                     'token' => $token,

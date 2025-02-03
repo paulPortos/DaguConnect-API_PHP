@@ -28,6 +28,16 @@ class Api extends BaseApi
      */
     public function __construct()
     {
+        
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type");
+
+        // Handle preflight OPTIONS requests
+        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+            http_response_code(200);
+            exit(0);
+        }
         parent::__construct(); // Calling constructor
 
         $this->registeredRoutes();
@@ -36,10 +46,11 @@ class Api extends BaseApi
     }
 
     public function registeredRoutes(): void {
+       
         // Register a route for the AuthenticationController
         $this->route('POST', '/admin/register', function () {
             
-            $this->responseBodyChecker();
+            $this->responseBodyChecker();   
 
             ['username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
 
@@ -176,14 +187,15 @@ class Api extends BaseApi
             $salary = $this->requestBody['salary'] ?? null;
             $job_type = $this->requestBody['job_type'] ?? null;
             $job_description = $this->requestBody['job_description'] ?? null;
+            $location = $this->requestBody['location'] ?? null;
             $status = $this->requestBody['status'] ?? null;
             $deadline = $this->requestBody['deadline'] ?? null;
 
             $jobController = new JobController(new Job($this->db));
-            $jobController->addJob($userId, $client_fullname, $salary, $job_type, $job_description, $status, $deadline);
+            $jobController->addJob($userId, $client_fullname, $salary, $job_type, $job_description, $location, $status, $deadline);
         });
 
-        $this->route('GET', '/user/client/jobs', function () {
+        $this->route('GET', '/user/jobs', function () {
             $jobController = new JobController(new Job($this->db));
             $jobController->getAllJobs();
         });

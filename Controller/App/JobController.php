@@ -29,7 +29,7 @@ class JobController extends BaseController
     }
     use IfDataExists;
 
-    public function addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $status, $deadline): void
+    public function addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $location, $status, $deadline): void
     {
         $exist = $this->exists($user_id, "id", "users");
         //Check if user exists
@@ -49,8 +49,8 @@ class JobController extends BaseController
             $this->jsonResponse(['message' => "Invalid job type"], 400);
             return;
         }
-
-        if ($this->job_model->addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $status, $deadline)) {
+        $addJob = $this->job_model->addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $location, $status, $deadline);
+        if ($addJob) {
             $this->jsonResponse(['message' => "Job added successfully."], 200);
         } else {
             $this->jsonResponse(['message' => "Failed to add job."], 500);
