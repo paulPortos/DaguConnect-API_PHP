@@ -13,14 +13,17 @@ class Job extends BaseModel
         parent::__construct($db);
     }
 
-    public function getJobs(): array
+    public function getJobs(int $page = 1, int $limit = 15): array
     {
+        $offset = ($page - 1) * $limit; // Calculate the starting point
         try {
-            $stmt = $this->db->prepare("SELECT * FROM $this->table");
+            $stmt = $this->db->prepare("SELECT * FROM $this->table LIMIT :limit OFFSET :offset");
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
+
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error getting jobs: ", $e->getMessage());
             return [];
         }
     }
