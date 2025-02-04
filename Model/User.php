@@ -95,4 +95,14 @@ class User extends BaseModel
     {
         return (int) $this->db->lastInsertId();
     }
+
+
+    public function getClientDetails($user_id)
+    {
+        $query = "SELECT CONCAT(first_name, ' ', last_name) AS fullname FROM $this->table WHERE id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
