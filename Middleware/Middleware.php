@@ -22,7 +22,9 @@ trait Middleware
             '/user/client/work/status/{booking_id}',
             '/user/client/getbooking',
             '/user/getresumes',
-            '/user/logout'
+            '/user/logout',
+            '/user/message/send',
+            '/user/chat/get'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {

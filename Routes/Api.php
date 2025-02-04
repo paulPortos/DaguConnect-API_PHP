@@ -3,6 +3,7 @@
 namespace DaguConnect\Routes;
 
 use Controller\AdminAuthController;
+use Controller\App\ChatController;
 use Controller\App\JobApplicationController;
 use Controller\App\JobController;
 use Controller\APP\ResumeController;
@@ -11,6 +12,7 @@ use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
+use DaguConnect\Model\Chat;
 use DaguConnect\Model\Job;
 use DaguConnect\Model\Job_Application;
 use DaguConnect\Model\Resume;
@@ -225,6 +227,18 @@ class Api extends BaseApi
         $this->route('GET', '/user/getresumes', function () {
             $ResumeController = new ResumeController(new Resume($this->db));
             $ResumeController->GetAllResumes();
+        });
+
+        $this->route('POST', '/user/message/send', function ($userId){
+            ['receiver_id' => $receiverId, 'chat_id' => $chatId, 'message' => $message] = $this->requestBody;
+
+            $messageController = new ChatController(new Chat($this->db));
+            $messageController->messageUser($userId, $receiverId, $chatId, $message);
+        });
+
+        $this->route('GET', '/user/chat/get', function ($userId){
+            $messageController = new ChatController(new Chat($this->db));
+            $messageController->getChats($userId);
         });
     }
 

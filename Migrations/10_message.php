@@ -1,13 +1,13 @@
-CREATE TABLE chats (
+CREATE TABLE messages (
 id INT UNSIGNED AUTO_INCREMENT,
 user_id INT UNSIGNED NOT NULL,
 receiver_id INT UNSIGNED NOT NULL,
-latest_message TEXT NOT NULL,
+chat_id INT UNSIGNED NOT NULL,
+message TEXT NOT NULL,
 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
-UNIQUE KEY unique_chat_pair (user_id, receiver_id),
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
-INDEX idx_user_id (user_id),
-INDEX idx_receiver_id (receiver_id)
+FOREIGN KEY (chat_id) REFERENCES chats(id) ON DELETE CASCADE,
+INDEX idx_chat_id (chat_id)
 ) ENGINE = InnoDB;

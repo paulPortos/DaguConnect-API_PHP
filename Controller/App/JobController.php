@@ -13,17 +13,19 @@ class JobController extends BaseController
     private Job $job_model;
     public function __construct(Job $job_model)
     {
-        $this->job_type_enum = ['carpentry',
-        'painting',
-        'welding',
-        'electrical_work',
-        'plumbing',
-        'masonry',
-        'roofing',
-        'ac_repair',
-        'mechanics',
-        'drywalling',
-        'glazing'];
+        $this->job_type_enum = [
+            'carpenter',
+            'painter',
+            'welder',
+            'electrician',
+            'plumber',
+            'mason',
+            'roofer',
+            'ac_technician',
+            'mechanic',
+            'drywaller',
+            'cleaner'
+        ];
         $this->db = new config();
         $this->job_model = $job_model;
     }

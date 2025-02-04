@@ -21,10 +21,17 @@ class config {
         $db_username = $_ENV['DB_USERNAME'];
         $db_password = $_ENV['DB_PASSWORD'];
         try {
+            $pdo = new PDO("mysql:host=$db_host;charset=utf8", $db_username, $db_password);
+            $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
+            $pdo->exec("CREATE DATABASE IF NOT EXISTS `$db_name`");
+
+            // Now connect to the specified database
             $this->db = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_username, $db_password);
             $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             $this->db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
             if (!defined('APP_NAME')) {
                 define('APP_NAME', 'YourAppName');
             }

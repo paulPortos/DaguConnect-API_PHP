@@ -9,84 +9,94 @@ use PDOException;
 class Chat extends BaseModel
 {
 
-    protected string $table = 'chat';
-
+    protected string $table = 'chats';
+    protected string $message = 'messages';
     public function __construct(PDO $db){
         parent::__construct($db);
     }
 
-    public function sendMessage(int $user_id, int $receiver_id, String $message): bool {
-        try {
-            $query = "INSERT INTO $this->table 
-                    (sender_id, receiver_id, message, created_at) 
-                    VALUES (:user_id, :receiver_id, :message, NOW())";
+    public function sendMessage($user_id, $receiver_id, $message, $chat_id):bool{
+        try{
+            $query = "INSERT INTO $this->message (user_id, reciever_id, message, chat_id, created_at)
+                        VALUES (:user_id, :reciever_id, :message, :chat_id, NOW())";
 
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':receiver_id', $receiver_id);
             $stmt->bindParam(':message', $message);
+            $stmt->bindParam(':chat_id', $chat_id);
             $stmt->execute();
+
             return true;
-        } catch (PDOException $e){
+        } catch (PDOException $e) {
             error_log("Chat message insertion error: ", $e->getMessage());
             return false;
         }
     }
 
-    /**
-     * Retrieves the latest messages for each unique receiver associated with a user, with pagination.
-     *
-     * This function fetches the latest message exchanged between the specified user and each of their unique receivers,
-     * ordered by creation time in descending order. It supports pagination to limit the number of results returned.
-     *
-     * @param int $user_id The ID of the user whose messages are being retrieved.
-     * @param int $page The page number for pagination (default: 1).
-     * @param int $per_page The number of messages to return per page (default: 10).
-     *
-     * @return array An array of messages, each represented as an associative array.
-     *               Returns an empty array if an error occurs during retrieval.
-     */
-
-    public function getMessages(int $user_id, int $page = 1, int $per_page = 10): array {
-        try {
-            // Calculate the OFFSET
-            $offset = ($page - 1) * $per_page;
-
-            // Modified query to return the first/latest message of each unique receiver
-            $query = "
-        SELECT m.* 
-        FROM $this->table m
-        INNER JOIN (
-            SELECT 
-                GREATEST(user_id, receiver_id) AS unique_pair, 
-                LEAST(user_id, receiver_id) AS unique_pair_reverse,
-                MAX(created_at) AS latest_message_time
-            FROM $this->table 
-            WHERE user_id = :user_id 
-            GROUP BY 
-                GREATEST(user_id, receiver_id), 
-                LEAST(user_id, receiver_id)
-        ) AS latest_messages 
-        ON GREATEST(m.user_id, m.receiver_id) = latest_messages.unique_pair
-        AND LEAST(m.user_id, m.receiver_id) = latest_messages.unique_pair_reverse
-        AND m.created_at = latest_messages.latest_message_time
-        ORDER BY m.created_at DESC
-        LIMIT :per_page OFFSET :offset";
-
+    public function getChats($user_id): array{
+        try{
+            $receiver_id = $user_id;
+            $query = "SELECT * FROM $this->table 
+            WHERE user_id = :user_id OR receiver_id = :receiver_id
+            GROUP BY LEAST(user_id, receiver_id), GREATEST(user_id, receiver_id)
+            ORDER BY created_at DESC";
             $stmt = $this->db->prepare($query);
-
-            // Bind the parameters
-            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $stmt->bindParam(':per_page', $per_page, PDO::PARAM_INT);
-            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':receiver_id', $receiver_id);
             $stmt->execute();
 
-            // Return the results as an associative array
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Chat message retrieval error: " . $e->getMessage());
+            echo "An error occurred: " . $e->getMessage();
             return [];
+        }
+    }
+
+    public function getMessages($user_id, $chat_id): array{
+        try{
+            $query = "SELECT * FROM $this->message 
+            WHERE (user_id = :user_id AND receiver_id = :chat_id) 
+            OR (user_id = :chat_id AND receiver_id = :user_id)
+            ORDER BY created_at ASC";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':chat_id', $chat_id);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error fetching messages: ", $e->getMessage());
+            return [];
+        }
+    }
+
+    public function ensureChatExists($user_id, $receiver_id): ?int {
+        try {
+            // Check if a chat already exists between the two users
+            $query = "SELECT id FROM $this->table WHERE (user_id = :user_id AND reciever_id = :receiver_id) OR (user_id = :receiver_id AND reciever_id = :user_id)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':receiver_id', $receiver_id);
+            $stmt->execute();
+
+            // Fetch the chat ID if it exists
+            $chatId = $stmt->fetchColumn();
+
+            if (!$chatId) { // If no chat exists, create a new one
+                $insertQuery = "INSERT INTO $this->table (user_id, reciever_id, created_at) VALUES (:user_id, :receiver_id, NOW())";
+                $insertStmt = $this->db->prepare($insertQuery);
+                $insertStmt->bindParam(':user_id', $user_id);
+                $insertStmt->bindParam(':receiver_id', $receiver_id);
+                $insertStmt->execute();
+
+                $chatId = $this->db->lastInsertId();
+            }
+
+            return (int)$chatId;
+        } catch (PDOException $e) {
+            error_log("Chat existence check error: " . $e->getMessage());
+            return null;
         }
     }
 
