@@ -46,6 +46,15 @@ class Resume extends BaseModel
 
     }
 
+    public function viewResume($resume_id){
+
+        $query = "SELECT * FROM $this->table WHERE id = :resume_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':resume_id', $resume_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function StoreResume($email, $user_id,$default_pic,$tradesman_full_name){
 
         $query = "INSERT INTO $this->table 
@@ -77,5 +86,22 @@ class Resume extends BaseModel
         return $stmt->execute();
     }
 
+    public function getTradesmanDetails($resume_id)
+    {
+        $query = "SELECT tradesman_full_name, work_fee FROM $this->table WHERE id = :resume_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':resume_id', $resume_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getResumeIdByTradesmanId($tradesman_id): ?array
+    {
+        $query = "SELECT *FROM $this->table WHERE user_id = :tradesman_id ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':tradesman_id', $tradesman_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
 
 }

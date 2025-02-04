@@ -136,22 +136,21 @@ class Api extends BaseApi
             $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$prefered_work_location,$academic_background,$work_fee);
         });
 
-        $this->route('POST', '/user/client/booktradesman', function ($userId) {
+        $this->route('POST', '/user/client/booktradesman/{tradesman_id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
 
-            $tradesman_id= $this->requestBody['tradesman_id'] ?? null;
             $phone_number = $this->requestBody['phone_number'] ?? null;
             $address = $this->requestBody['address'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
             $task_description = $this->requestBody['task_description'] ?? null;
             $booking_date = $this->requestBody['booking_date'] ?? null;
 
-            $ClientController = new ClientController(new Client($this->db));
+            $ClientController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
             $ClientController->BookTradesman($userId,$tradesman_id,$phone_number,$address,$task_type,$task_description,$booking_date );
         });
 
         $this->route('GET', '/user/client/getbooking', function ($userId) {
-            $ClientBookingController = new ClientController(new Client($this->db));
+            $ClientBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
             $ClientBookingController->GetBookingClient($userId);
         });
 
@@ -177,7 +176,7 @@ class Api extends BaseApi
 
             $work_status = $this->requestBody['work_status'];
 
-            $ClientWorkController = new ClientController(new Client($this->db));
+            $ClientWorkController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
             $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$work_status);
         });
 
@@ -227,6 +226,11 @@ class Api extends BaseApi
         $this->route('GET', '/user/getresumes', function () {
             $ResumeController = new ResumeController(new Resume($this->db));
             $ResumeController->GetAllResumes();
+        });
+
+        $this->route('GET', '/user/getresume/{resumeId}', function ($userId,$resumeId) {
+            $ResumeController = new ResumeController(new Resume($this->db));
+            $ResumeController->ViewResume($resumeId);
         });
 
         $this->route('POST', '/user/message/send', function ($userId){

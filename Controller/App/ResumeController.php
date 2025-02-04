@@ -3,9 +3,11 @@
 namespace Controller\App;
 
 use DaguConnect\Core\BaseController;
+use DaguConnect\Includes\config;
 use DaguConnect\Model\Resume;
 use DaguConnect\Services\FileUploader;
 use Exception;
+use DaguConnect\Services\IfDataExists;
 
 
 class ResumeController extends BaseController
@@ -15,9 +17,11 @@ class ResumeController extends BaseController
     use  FileUploader;
     protected $targetDir;
 
+    use IfDataExists;
     public function __construct(Resume $resume_Model)
     {
         $this->targetDir = "/uploads/profile_pictures/";
+        $this->db = new config();
         $this->initializeBaseUrl(); // Initialize baseUrl from FileUploader
         $this->resumeModel = $resume_Model;
     }
@@ -32,6 +36,22 @@ class ResumeController extends BaseController
             $this->jsonResponse($resume);
         }
 
+    }
+
+    public function ViewResume($resume_id): void
+    {
+        $exist = $this->exists($resume_id, 'id', 'tradesman_resume');
+        if(!$exist){
+            $this->jsonResponse(['message'=>'Resume not found'], 404);
+            return;
+        }
+        $resume = $this->resumeModel->viewResume($resume_id);
+
+        if($resume){
+            $this->jsonResponse($resume);
+        } else{
+            $this->jsonResponse(['message'=>'Failed to view Resume'], 500);
+        }
     }
     //post resume of the tradesman
     public function UpdateResume($user_id, $specialties, $profile_pic,$prefered_work_location, $academic_background, $work_fee): void
