@@ -9,6 +9,7 @@ use DaguConnect\Services\IfDataExists;
 
 class JobController extends BaseController
 {
+    use IfDataExists;
     private array $job_type_enum;
     private Job $job_model;
     public function __construct(Job $job_model)
@@ -86,6 +87,42 @@ class JobController extends BaseController
             $this->jsonResponse(['job' => $job], 200);
         } else {
             $this->jsonResponse(['message' => "Failed to view job"], 500);
+        }
+    }
+
+    public function viewUserJobs($user_id): void{
+        if (!$this->exists($user_id, "id", "users")) { //Check if user exists
+            $this->jsonResponse(['message' => "User does not exist."]);
+        }
+
+        $user_job_post = $this->job_model->viewUserJob($user_id);
+
+        if (!$user_job_post) {
+            $this->jsonResponse(['message' => "No job posts found."], 200);
+        } else {
+            $this->jsonResponse(['job_posts' => $user_job_post], 200);
+        }
+    }
+
+    public function updateJob($id, $salary, $job_description, $location, $deadline): void{
+        if (empty($salary) || empty($job_description) || empty($location) || empty($deadline)) {
+            $this->jsonResponse(['message' => "Fields should not be empty."], 400);
+        }
+
+        $update_job = $this->job_model->updateJob($id, $salary, $job_description, $location, $deadline);
+        if ($update_job) {
+            $this->jsonResponse(['message' => "Job updated successfully."], 200);
+        } else {
+            $this->jsonResponse(['message' => "Failed to update job."], 500);
+        }
+    }
+
+    public function deleteJob($id, $user_id): void{
+        $delete_job = $this->job_model->deleteJob($id, $user_id);
+        if ($delete_job) {
+            $this->jsonResponse(['message' => "Job deleted successfully."], 200);
+        } else {
+            $this->jsonResponse(['message' => "Failed to delete job."], 500);
         }
     }
 }

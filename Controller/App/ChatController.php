@@ -17,9 +17,10 @@ class ChatController extends BaseController
         $this->model = $chat_model;
     }
 
-    public function messageUser(int $user_id, int $receiver_id, String $message, int $chat_id): void {
-        if (empty($user_id) || empty($receiver_id) || empty($chat_id)) {
+    public function messageUser(int $user_id, int $receiver_id, String $message): void {
+        if (empty($user_id) || empty($receiver_id)) {
             $this->jsonResponse(['message' => "Invalid user ID, receiver ID or chat ID"]);
+            return;
         }
 
         if (empty($message)) {
@@ -31,13 +32,13 @@ class ChatController extends BaseController
             $this->jsonResponse(['message' => "Your message cannot contain foul words."], 400);
             return;
         }
-        $chat_id_check = $this->model->ensureChatExists($user_id, $receiver_id);
-        // Create a user id if it doesn't exist'
-        if ($chat_id_check) {
-            $chat_id = $chat_id_check;
-        }
 
-        if ($this->model->sendMessage($user_id, $receiver_id, $message, $chat_id)) {
+        $chat_id = $this->model->ensureChatExists($user_id, $receiver_id, $message);
+
+        $this->model->changeLatestMessage($chat_id, $message);
+
+        $chat = $this->model->sendMessage($user_id, $receiver_id, $message, $chat_id);
+        if ($chat) {
             $this->jsonResponse(['message' => "Message sent successfully."], 201);
         } else {
             $this->jsonResponse(['message' => "Failed to send message."], 500);
@@ -53,22 +54,37 @@ class ChatController extends BaseController
         }
     }
 
+    public function deleteMessage(int $id, $user_id): void {
+        $exist = $this->exists($id, 'id', 'chats');
 
+        if (!$exist) {
+            $this->jsonResponse(['message' => "Message not found"], 404);
+            return;
+        } else {
+            $this->model->deleteMessage($id, $user_id);
+            $this->jsonResponse(['message' => "Message deleted successfully."], 200);
+        }
+    }
+
+    public function getMessages($user_id, $chat_id): void{
+        $messages = $this->model->getMessages($user_id, $chat_id);
+
+        if ($messages) {
+            $this->jsonResponse(['messages' => $messages], 200);
+        } else {
+            $this->jsonResponse(['message' => 'No messages found'], 200);
+        }
+    }
 
     public function hasFoulWords($message): bool {
-        // Define an array of foul words
-        $foulWords = ['fuck', 'fuck you', 'asshole', 'nigga', 'nigger', 'dick', 'pakyu', 'tang ina mo', 'tangina mo'];
+        $foulWords = ['gago', 'fuck', 'fuck you', 'asshole', 'nigga', 'nigger', 'dick', 'pakyu', 'tang ina mo', 'tangina mo'];
 
-        // Convert the message to lowercase for case-insensitive comparison
         $messageLower = strtolower($message);
-
-        // Check for foul words in the message
         foreach ($foulWords as $word) {
             if (str_contains($messageLower, $word)) {
-                return true; // Foul word found
+                return true;
             }
         }
-
-        return false; // No foul words found
+        return false;
     }
 }

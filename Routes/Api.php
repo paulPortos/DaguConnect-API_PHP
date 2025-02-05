@@ -24,13 +24,11 @@ use Exception;
 
 class Api extends BaseApi
 {
-
     /**
      * @throws Exception
      */
     public function __construct()
     {
-        
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type");
@@ -73,7 +71,6 @@ class Api extends BaseApi
             $this->responseBodyChecker();
 
             ['user_id' => $user_id, 'current_password' => $current_password, 'new_password' => $new_password] = $this->requestBody;
-
 
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->changePassword($user_id, $current_password, $new_password);
@@ -129,8 +126,6 @@ class Api extends BaseApi
             $academic_background = $this->requestBody['academic_background'];
             $work_fee = $this->requestBody['work_fee'];
 
-
-
             // Create ResumeController and store resume
             $ResumeController = new ResumeController(new Resume($this->db));
             $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$prefered_work_location,$academic_background,$work_fee);
@@ -157,7 +152,6 @@ class Api extends BaseApi
         $this->route('PUT', '/user/tradesman/bookings/status/{booking_id}', function ($userId,$booking_id) {
             $this->responseBodyChecker();
 
-
             $book_status = $this->requestBody['book_status'] ?? null;
 
             $TradesmanBookingStatus = new TradesmanController(new Tradesman($this->db));
@@ -170,7 +164,6 @@ class Api extends BaseApi
             $TradesmanBookingController->GetBookingFromClient($userId);
         });
 
-
         $this->route('PUT', '/user/client/work/status/{booking_id}', function ($userId,$booking_id) {
             $this->responseBodyChecker();
 
@@ -179,7 +172,6 @@ class Api extends BaseApi
             $ClientWorkController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
             $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$work_status);
         });
-
 
         $this->route('POST', '/user/client/create-job', function ($userId) {
             $this->responseBodyChecker();
@@ -234,15 +226,30 @@ class Api extends BaseApi
         });
 
         $this->route('POST', '/user/message/send', function ($userId){
-            ['receiver_id' => $receiverId, 'chat_id' => $chatId, 'message' => $message] = $this->requestBody;
+            ['receiver_id' => $receiverId, 'message' => $message] = $this->requestBody;
 
             $messageController = new ChatController(new Chat($this->db));
-            $messageController->messageUser($userId, $receiverId, $chatId, $message);
+            $messageController->messageUser($userId, $receiverId, $message);
         });
 
         $this->route('GET', '/user/chat/get', function ($userId){
             $messageController = new ChatController(new Chat($this->db));
             $messageController->getChats($userId);
+        });
+
+        $this->route('GET', '/client/jobs/view/{userId}', function ($userId){
+            $jobController = new JobController(new Job($this->db));
+            $jobController->viewUserJobs($userId);
+        });
+
+        $this->route('DELETE', '/client/jobs/delete/{jobId}', function ($jobId, $userId){
+            $jobController = new JobController(new Job($this->db));
+            $jobController->deleteJob($jobId, $userId);
+        });
+
+        $this->route('DELETE', '/user/message/delete{messageId}', function ($message_id, $userId){
+            $messageController = new ChatController(new Chat($this->db));
+            $messageController->deleteMessage($message_id, $userId);
         });
     }
 

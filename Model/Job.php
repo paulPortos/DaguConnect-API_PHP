@@ -17,7 +17,7 @@ class Job extends BaseModel
     {
         $offset = ($page - 1) * $limit; // Calculate the starting point
         try {
-            $stmt = $this->db->prepare("SELECT * FROM $this->table LIMIT :limit OFFSET :offset");
+            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE status = 'available' LIMIT :limit OFFSET :offset");
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
@@ -35,7 +35,7 @@ class Job extends BaseModel
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error getting job: ", $e->getMessage());
+            error_log("Error getting job: " . $e->getMessage());
             return "Job does not exist";
         }
     }
@@ -59,7 +59,46 @@ class Job extends BaseModel
         }
     }
 
-    public function deleteJob() {
-        // TODO: Implement job deletion logic
+    public function updateJob($id, $salary, $job_description, $location, $deadline): bool {
+        try{
+            $stmt = $this->db->prepare("UPDATE $this->table SET salary = :salary, job_description = :job_description, location = :location, deadline = :deadline WHERE id = :id");
+            $stmt->bindParam(':salary', $salary);
+            $stmt->bindParam(':job_description', $job_description);
+            $stmt->bindParam(':location', $location);
+            $stmt->bindParam(':deadline', $deadline);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e){
+            error_log("Error updating job: ". $e->getMessage());
+            return false;
+        }
+    }
+
+    public function viewUserJob($user_id): array {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error getting user's jobs: " . $e->getMessage());
+            return [];
+        }
+    }
+
+
+
+    public function deleteJob($id, $user_id): bool{
+        try {
+            $stmt = $this->db->prepare("DELETE FROM $this->table WHERE id = :id AND user_id = :user_id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Error deleting job: ". $e->getMessage());
+            return false;
+        }
     }
 }

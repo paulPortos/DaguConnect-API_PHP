@@ -25,7 +25,8 @@ trait Middleware
             '/user/logout',
             '/user/message/send',
             '/user/chat/get',
-            '/user/getresume/{userId}'
+            '/user/getresume/{userId}',
+            '/client/jobs/delete/{jobId}'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {

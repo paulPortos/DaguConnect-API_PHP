@@ -125,6 +125,35 @@ class Admin extends BaseModel
         return false;
     }
 
+    public function getJobAvailableCount(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'available'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return the count as an integer
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
+
+    public function getJobOngoingCount(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'ongoing'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return the count as an integer
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
+
+    public function getJobCompletedCount(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'done'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return the count as an integer
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
 
     public function logoutUser($userId):bool {
         try {
