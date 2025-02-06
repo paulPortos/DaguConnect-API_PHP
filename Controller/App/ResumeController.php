@@ -54,20 +54,19 @@ class ResumeController extends BaseController
         }
     }
     //post resume of the tradesman
-    public function UpdateResume($user_id, $specialties, $profile_pic,$prefered_work_location, $academic_background, $work_fee): void
+    public function UpdateResume($user_id, $specialties, $profile_pic,$about_me,$prefered_work_location, $work_fee): void
     {
             try {
                 // Convert arrays to JSON
                 $specialties_json = json_encode($specialties);
                 $prefered_work_location_json = json_encode($prefered_work_location);
-                $academic_background_json = json_encode($academic_background);
 
                 $fullProfilePicUrl = $this->uploadProfilePic($profile_pic, $this->targetDir);
 
 
 
 
-                $result = $this->resumeModel->UpdateResume($user_id, $specialties_json,  $fullProfilePicUrl, $prefered_work_location_json, $academic_background_json, $work_fee);
+                $result = $this->resumeModel->UpdateResume($user_id, $specialties_json,  $fullProfilePicUrl,$about_me ,$prefered_work_location_json, $work_fee);
                 if ($result) {
                     $this->jsonResponse(['message' => 'Resume Updated successfully.'], 201);
                 } else {

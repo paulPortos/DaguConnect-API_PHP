@@ -123,15 +123,15 @@ class Api extends BaseApi
             // Extract title and description from request body
             $specialties = $this->requestBody['specialties'] ;
             $profile_pic = $_FILES['profile_pic'];
+            $about_me = $this->requestBody['about_me'] ;
             $prefered_work_location = $this->requestBody['prefered_work_location'] ;
-            $academic_background = $this->requestBody['academic_background'];
             $work_fee = $this->requestBody['work_fee'];
 
 
 
             // Create ResumeController and store resume
             $ResumeController = new ResumeController(new Resume($this->db));
-            $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$prefered_work_location,$academic_background,$work_fee);
+            $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$about_me,$prefered_work_location,$work_fee);
         });
 
         $this->route('POST', '/user/client/booktradesman/{tradesman_id}', function ($userId,$tradesman_id) {
@@ -172,10 +172,10 @@ class Api extends BaseApi
         $this->route('PUT', '/user/client/work/status/{booking_id}', function ($userId,$booking_id) {
             $this->responseBodyChecker();
 
-            $work_status = $this->requestBody['work_status'];
+            $booking_status = $this->requestBody['work_status'];
 
             $ClientWorkController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
-            $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$work_status);
+            $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$booking_status);
         });
 
 

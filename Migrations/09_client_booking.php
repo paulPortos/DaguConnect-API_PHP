@@ -11,9 +11,8 @@ address VARCHAR(255) NOT NULL,
 task_type ENUM('Carpentry','Painting','Welding','Electrical_work','Plumbing','Masonry','Roofing','Ac repair','Mechanics','Drywalling','glazing') NOT NULL,
 task_description TEXT NOT NULL,
 booking_date DATETIME NULL,
-booking_status ENUM('Pending', 'Accepted', 'Rejected') NOT NULL,
+booking_status ENUM('Pending', 'Active', 'Rejected','Completed','Failed') NOT NULL,
 cancel_reason VARCHAR(255) NULL,
-work_status ENUM('Active', 'Finished', 'Failed') NULL,
 created_at DATETIME NOT NULL,
 INDEX (`user_id`),
 INDEX (`tradesman_id`),
@@ -22,4 +21,5 @@ FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 FOREIGN KEY (resume_id) REFERENCES tradesman_resume(id) ON DELETE CASCADE,
 FOREIGN KEY (tradesman_id) REFERENCES tradesman_resume(user_id) ON DELETE CASCADE
 )ENGINE = InnoDB;
+
 

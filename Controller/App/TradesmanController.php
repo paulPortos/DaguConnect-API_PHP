@@ -50,7 +50,7 @@ class TradesmanController extends BaseController
             $this->jsonResponse(['message' => 'Invalid status provided.'], 400);
             return;
         }
-        $work_status = $booking_status == 'Accepted' ? 'Active' : null;
+        $booking_update = $booking_status == 'Accepted' ? 'Active' : null;
 
         //check if the booking exist or the booking belongs to the tradesman
         if(!$this->tradesman->ValidateBookingUpdate($tradesman_id,$booking_id)){
@@ -62,7 +62,7 @@ class TradesmanController extends BaseController
             return;
         }
         //update the booking_status
-        $updatebooking = $this->tradesman->UpdateBookStatus($booking_status, $work_status, $booking_id, $tradesman_id);
+        $updatebooking = $this->tradesman->UpdateBookStatus($booking_update, $booking_id, $tradesman_id);
 
         //check if the booking is accepted or declined
         if($updatebooking){
