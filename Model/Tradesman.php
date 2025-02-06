@@ -27,16 +27,15 @@ class Tradesman extends BaseModel
     }
 
     //update the booking_status if it is rejected or accepted
-    public function UpdateBookStatus($booking_status,$work_status,$booking_id,$tradesman_id):bool
+    public function UpdateBookStatus($booking_status,$booking_id,$tradesman_id):bool
     {
         try {
             $query = "UPDATE $this->table SET
-                  booking_status = :booking_status,work_status = :work_status
+                  booking_status = :booking_status
                   WHERE id = :booking_id AND tradesman_id = :tradesman_id";
 
             $stmt = $this->db->prepare($query);
             $stmt ->bindParam(':booking_status', $booking_status);
-            $stmt ->bindParam(':work_status', $work_status);
             $stmt ->bindParam(':booking_id', $booking_id);
             $stmt ->bindParam(':tradesman_id', $tradesman_id);
 

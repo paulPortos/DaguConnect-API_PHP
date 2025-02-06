@@ -35,7 +35,6 @@ class Resume extends BaseModel
             foreach ($resumes as &$resume) {
                 $resume['specialties'] = json_decode($resume['specialties'], true);
                 $resume['prefered_work_location'] = json_decode($resume['prefered_work_location'], true);
-                $resume['academic_background'] = json_decode($resume['academic_background'], true);
             }
 
             return $resumes;
@@ -68,20 +67,20 @@ class Resume extends BaseModel
         return $stmt->execute();
     }
 
-    public function UpdateResume($user_id,$specialties, $profile_pic, $prefered_work_location, $academic_background,$work_fee){
+    public function UpdateResume($user_id,$specialties, $profile_pic,$about_me, $prefered_work_location,$work_fee){
         $query = "UPDATE $this->table SET
                    specialties = :specialties,
                    profile_pic = :profile_pic,
+                   about_me = :about_me,  
                    prefered_work_location = :prefered_work_location,
-                   academic_background = :academic_background,
                    work_fee = :work_fee,
                    updated_at = NOW() WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':specialties', $specialties);
         $stmt->bindParam(':profile_pic', $profile_pic);
+        $stmt->bindParam(':about_me', $about_me);
         $stmt->bindParam(':prefered_work_location', $prefered_work_location);
-        $stmt->bindParam(':academic_background', $academic_background);
         $stmt->bindParam(':work_fee', $work_fee);
         return $stmt->execute();
     }

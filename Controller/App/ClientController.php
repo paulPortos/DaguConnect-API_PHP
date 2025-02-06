@@ -109,7 +109,7 @@ class ClientController extends BaseController
         }
     }
 
-    public function UpdateWorkFromTradesman($user_id,$booking_id,$work_status): void{
+    public function UpdateWorkFromTradesman($user_id,$booking_id,$booking_status): void{
 
         //check if the booking belongs to the user and if exists
         if(!$this->client->ValidateWorkUpdate($user_id,$booking_id)){
@@ -121,12 +121,12 @@ class ClientController extends BaseController
         }
 
         // Ensure status is either 'Finished' or 'Failed'
-        if (!in_array($work_status, ['Finished', 'Failed'])) {
+        if (!in_array($booking_status, ['Completed', 'Failed'])) {
             $this->jsonResponse(['message' => 'Invalid status provided.'], 400);
             return;
         }
         //update the work_status if the client mark it as finish or not
-        $UpdateWorkStatus = $this->client->UpdateWorkStatus($user_id,$booking_id,$work_status);
+        $UpdateWorkStatus = $this->client->UpdateWorkStatus($user_id,$booking_id,$booking_status);
         if($UpdateWorkStatus){
             $this->jsonResponse(['message' => 'Work status updated successfully.'],200);
         }else {
