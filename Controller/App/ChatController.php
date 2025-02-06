@@ -47,11 +47,30 @@ class ChatController extends BaseController
 
     public function getChats(int $user_id): void {
         $chat = $this->model->getChats($user_id);
-        if($chat){
-            $this->jsonResponse(['chats' => $chat], 200);
-        } else {
-            $this->jsonResponse(['message' => 'No chats found'], 200);
+        $full_name = null;
+        $profile_picture = null;
+        if ($chat['user_id1'] == $user_id) {
+            $full_name = $this->model->getFullName($chat['user_id2']);
+            $profile_picture = $this->model->getProfilePicture($chat['user_id2']);
+        } else if ($chat['user_id2']) {
+            $full_name = $this->model->getFullName($chat['user_id1']);
+            $profile_picture = $this->model->getProfilePicture($chat['user_id1']);
         }
+
+        $chat_return = [
+            'chats' => [
+                'id' => $chat['id'],
+                'user_id1' => $chat['user_id1'],
+                'user_id2' => $chat['user_id2'],
+                'full_name' => $full_name,
+                'latest_message' => $chat['latest_message'],
+                'profile_picture' => $profile_picture,
+                'created_at' => $chat['created_at'],
+                'updated_at' => $chat['updated_at'],
+        ]];
+
+        $this->jsonResponse($chat_return, 200);
+
     }
 
     public function deleteMessage(int $id, $user_id): void {
@@ -77,7 +96,18 @@ class ChatController extends BaseController
     }
 
     public function hasFoulWords($message): bool {
-        $foulWords = ['gago', 'fuck', 'fuck you', 'asshole', 'nigga', 'nigger', 'dick', 'pakyu', 'tang ina mo', 'tangina mo'];
+        $foulWords = [
+            'gago',
+            'fuck',
+            'fuck you',
+            'asshole',
+            'nigga',
+            'nigger',
+            'dick',
+            'pakyu',
+            'tang ina mo',
+            'tangina mo'
+        ];
 
         $messageLower = strtolower($message);
         foreach ($foulWords as $word) {

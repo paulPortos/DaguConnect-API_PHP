@@ -25,7 +25,7 @@ class Chat extends BaseModel
             $stmt->bindParam(':receiver_id', $receiver_id);
             $stmt->bindParam(':message', $message);
             $stmt->bindParam(':chat_id', $chat_id);
-
+            $this->update_updatedAt($chat_id);
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Chat message insertion error: " . $e->getMessage());
@@ -35,14 +35,14 @@ class Chat extends BaseModel
 
     public function getChats($user_id): array{
         try{
-            $receiver_id = $user_id;
+            $user_id2 = $user_id;
             $query = "SELECT * FROM $this->table 
-            WHERE user_id = :user_id OR receiver_id = :receiver_id
-            GROUP BY LEAST(user_id, receiver_id), GREATEST(user_id, receiver_id)
+            WHERE user_id1 = :user_id1 OR user_id2 = :user_id2
+            GROUP BY LEAST(user_id1, user_id2), GREATEST(user_id1, user_id2)
             ORDER BY created_at DESC";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':receiver_id', $receiver_id);
+            $stmt->bindParam(':user_id1', $user_id);
+            $stmt->bindParam(':user_id2', $user_id2);
             $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -98,6 +98,54 @@ class Chat extends BaseModel
             return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             error_log("Error changing latest message: ". $e->getMessage());
+            return false;
+        }
+    }
+
+    public function getFullName($user_id)
+    {
+        $query = "SELECT CONCAT(first_name, ' ', last_name) AS fullname FROM users WHERE id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getProfilePicture($user_id){
+        try {
+            $query = "SELECT is_client FROM users WHERE id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+            $isClient = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($isClient['is_client'] == 0) {
+                $query = "SELECT profile_pic FROM tradesman_resume WHERE user_id = :user_id";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindParam(':user_id', $user_id);
+                $stmt->execute();
+                return $stmt->fetch(PDO::FETCH_ASSOC)['profile_pic'];
+            } else {
+                $query = "SELECT profile_pic FROM users WHERE user_id = :user_id";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindParam(':user_id', $user_id);
+                $stmt->execute();
+                return $stmt->fetch(PDO::FETCH_ASSOC)['profile_pic'];
+            }
+        } catch (PDOException $e){
+            error_log("Error getting profile picture: ". $e->getMessage());
+            return null;
+        }
+    }
+
+    public function update_updatedAt($chat_id){
+        try {
+            $query = "UPDATE $this->table SET updated_at = CURRENT_TIMESTAMP WHERE id = :chat_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':chat_id', $chat_id, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e){
+            error_log("Error updating updatedAt: ". $e->getMessage());
             return false;
         }
     }

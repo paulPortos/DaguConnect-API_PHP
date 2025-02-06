@@ -1,14 +1,14 @@
 CREATE TABLE chats (
 id INT UNSIGNED AUTO_INCREMENT,
-user_id INT UNSIGNED NOT NULL,
-receiver_id INT UNSIGNED NOT NULL,
-receiver_name VARCHAR(255) NOT NULL,
+user1_id INT UNSIGNED NOT NULL,
+user2_id INT UNSIGNED NOT NULL,
 latest_message TEXT NOT NULL,
 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
-UNIQUE KEY unique_chat_pair (user_id, receiver_id),
-FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
-INDEX idx_user_id (user_id),
-INDEX idx_receiver_id (receiver_id)
+UNIQUE KEY unique_chat_pair (user1_id, user2_id),
+FOREIGN KEY (user1_id) REFERENCES users(id) ON DELETE CASCADE,
+FOREIGN KEY (user2_id) REFERENCES users(id) ON DELETE CASCADE,
+INDEX idx_user1_id (user1_id),
+INDEX idx_user2_id (user2_id)
 ) ENGINE = InnoDB;
