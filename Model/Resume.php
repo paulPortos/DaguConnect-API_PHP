@@ -23,10 +23,13 @@ class Resume extends BaseModel
 
 
 
-    public function GetResume():array{
+    public function GetResume(int $page = 1 , int $limit =15):array{
         try {
-            $query = "SELECT * FROM $this->table";
+            $offset = ($page - 1) * $limit; // Calculate the starting point
+            $query = "SELECT * FROM $this->table LIMIT :limit OFFSET :offset";
             $stmt = $this->db->prepare($query);
+            $stmt ->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt ->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
 
             $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -57,8 +60,8 @@ class Resume extends BaseModel
     public function StoreResume($email, $user_id,$default_pic,$tradesman_full_name){
 
         $query = "INSERT INTO $this->table 
-                (email, user_id,profile_pic,tradesman_full_name,updated_at,created_at) 
-                VALUES(:email, :user_id,:deafault_pic,:tradesman_full_name,NOW(), NOW())";
+                (email, user_id,profile_pic,tradesman_full_name,updated_at,created_at,is_active) 
+                VALUES(:email, :user_id,:deafault_pic,:tradesman_full_name,NOW(), NOW(),false)";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':user_id', $user_id);
@@ -74,7 +77,9 @@ class Resume extends BaseModel
                    about_me = :about_me,  
                    prefered_work_location = :prefered_work_location,
                    work_fee = :work_fee,
-                   updated_at = NOW() WHERE user_id = :user_id";
+                   updated_at = NOW(),
+                   is_active = true
+                   WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':specialties', $specialties);

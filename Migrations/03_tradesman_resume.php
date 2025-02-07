@@ -10,5 +10,6 @@ work_fee INT NULL,
 tradesman_full_name VARCHAR(255) NULL,
 updated_at  DATETIME NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+is_active TINYINT(1) NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
