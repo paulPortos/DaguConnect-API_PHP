@@ -35,7 +35,7 @@ class ChatController extends BaseController
 
         $chat_id = $this->model->ensureChatExists($user_id, $receiver_id, $message);
 
-        $this->model->changeLatestMessage($chat_id, $message);
+        $this->model->changeLatestMessage($chat_id, $message, $user_id);
 
         $chat = $this->model->sendMessage($user_id, $receiver_id, $message, $chat_id);
         if ($chat) {
@@ -46,32 +46,40 @@ class ChatController extends BaseController
     }
 
     public function getChats(int $user_id): void {
-        $chat = $this->model->getChats($user_id);
-        $full_name = null;
-        $profile_picture = null;
-        if ($chat['user_id1'] == $user_id) {
-            $full_name = $this->model->getFullName($chat['user_id2']);
-            $profile_picture = $this->model->getProfilePicture($chat['user_id2']);
-        } else if ($chat['user_id2']) {
-            $full_name = $this->model->getFullName($chat['user_id1']);
-            $profile_picture = $this->model->getProfilePicture($chat['user_id1']);
-        }
+        $chats = $this->model->getChats($user_id);
+        $chat_return = ['chats' => []];
 
-        $chat_return = [
-            'chats' => [
+        foreach ($chats as $chat) {
+            $full_name = null;
+            $profile_picture = null;
+
+            if ($chat['user1_id'] == $user_id) {
+                $full_name = $this->model->getFullName($chat['user2_id'])['fullname'] ?? null;
+                $profile_picture = $this->model->getProfilePicture($chat['user2_id']);
+            } else if ($chat['user2_id']) {
+                $full_name = $this->model->getFullName($chat['user1_id'])['fullname'] ?? null;
+                $profile_picture = $this->model->getProfilePicture($chat['user1_id']);
+            }
+
+            $is_read = $chat['is_read'] == 1;
+
+            $chat_return['chats'][] = [
                 'id' => $chat['id'],
-                'user_id1' => $chat['user_id1'],
-                'user_id2' => $chat['user_id2'],
-                'full_name' => $full_name,
+                'user1_id' => $chat['user1_id'],
+                'user2_id' => $chat['user2_id'],
+                'full_name' => $full_name,  // Now correctly a string
                 'latest_message' => $chat['latest_message'],
                 'profile_picture' => $profile_picture,
+                'last_sender_id' => $chat['last_sender_id'],
+                'is_read' => $is_read,
                 'created_at' => $chat['created_at'],
                 'updated_at' => $chat['updated_at'],
-        ]];
+            ];
+        }
 
         $this->jsonResponse($chat_return, 200);
-
     }
+
 
     public function deleteMessage(int $id, $user_id): void {
         $exist = $this->exists($id, 'id', 'chats');
@@ -87,6 +95,8 @@ class ChatController extends BaseController
 
     public function getMessages($user_id, $chat_id): void{
         $messages = $this->model->getMessages($user_id, $chat_id);
+        $this->model->markAsReadChat($chat_id, $user_id);
+        $this->model->markAsReadMessage($chat_id, $user_id);
 
         if ($messages) {
             $this->jsonResponse(['messages' => $messages], 200);
