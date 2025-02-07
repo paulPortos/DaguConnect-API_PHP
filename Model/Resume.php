@@ -60,8 +60,8 @@ class Resume extends BaseModel
     public function StoreResume($email, $user_id,$default_pic,$tradesman_full_name){
 
         $query = "INSERT INTO $this->table 
-                (email, user_id,profile_pic,tradesman_full_name,updated_at,created_at,is_active) 
-                VALUES(:email, :user_id,:deafault_pic,:tradesman_full_name,NOW(), NOW(),false)";
+                (email, user_id,specialties,profile_pic,prefered_work_location,tradesman_full_name,updated_at,created_at,is_active) 
+                VALUES(:email, :user_id,'null',:deafault_pic,'null',:tradesman_full_name,NOW(), NOW(),false)";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':user_id', $user_id);
