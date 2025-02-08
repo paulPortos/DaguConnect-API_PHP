@@ -131,6 +131,7 @@ class Admin extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
 
+
     public function getAllUserCount():Int {
         $query = "SELECT COUNT(*) AS count FROM users";
         $stmt = $this->db->prepare($query);
@@ -139,6 +140,13 @@ class Admin extends BaseModel
         // Fetch the result as an associative array and return the count as an integer
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return (int)$result['count'];
+    }
+
+    public function getBookingList(){
+        $query = "SELECT * FROM client_booking";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function changeAdminPassword($userId, $current_password, $new_password): bool {

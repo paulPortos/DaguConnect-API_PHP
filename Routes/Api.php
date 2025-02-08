@@ -78,9 +78,14 @@ class Api extends BaseApi
             $adminController->changePassword($user_id, $current_password, $new_password);
         });
 
-        $this->route('GET', '/admin/userStatistic', function () {
+        $this->route('GET', '/admin/users/statistic', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->userStatistics();
+        });
+
+        $this->route('GET', '/admin/booking/statistics', function () {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->bookingStatistics();
         });
 
         $this->route('POST', '/user/register', function () {

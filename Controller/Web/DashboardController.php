@@ -39,5 +39,30 @@ class DashboardController extends BaseController
 
     public function bookingStatistics() {
 
+        $totalBookings = $this->admin_model->getAllBookings();
+        $totalActiveBookings = $this->admin_model->getActiveBookings();
+        $totalCompletedBookings = $this->admin_model->getCompletedBookings();
+        $totalCancelledBookings = $this->admin_model->getCancelledBookings();
+        $bookings = $this->admin_model->getBookingList();
+
+        $id = $bookings['id'];
+        $title = $bookings['task_description'];
+        $category = $bookings['task_type'];
+        $status = $bookings['booking_status'];
+
+        $this -> jsonResponse(
+            [
+                "total_bookings" => $totalBookings,
+                "active_bookings" => $totalActiveBookings,
+                "completed_bookings" => $totalCompletedBookings,
+                "cancelled_bookings" => $totalCancelledBookings,
+                "bookings" => [
+                    "id" => $id,
+                    "title" => $title,
+                    "category" => $category,
+                    "status" => $status
+                ]
+            ]
+        );
     }
 }
