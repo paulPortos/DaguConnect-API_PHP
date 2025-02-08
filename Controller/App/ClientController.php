@@ -49,6 +49,12 @@ class ClientController extends BaseController
                 $this->jsonResponse(['message'=>'Invalid phone number']);
                 return;
             }
+            // Check if user already has a pending or active booking with this tradesman
+            if ($this->client->CheckExistingBooking($user_id, $tradesman_id)) {
+                $this->jsonResponse(['message' => 'You are already booked with this tradesman.'], 400);
+                return;
+            }
+
             // get resume ID by tradesman ID and task_type
             $resume_id = $this->resume->getResumeIdByTradesmanId($tradesman_id);
 
