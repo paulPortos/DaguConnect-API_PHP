@@ -9,6 +9,7 @@ use Controller\APP\ResumeController;
 use Controller\App\ClientController;
 use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
+use Controller\Web\DashboardController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\Job;
@@ -75,6 +76,11 @@ class Api extends BaseApi
 
             $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->changePassword($user_id, $current_password, $new_password);
+        });
+
+        $this->route('GET', '/admin/userStatistic', function () {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->userStatistics();
         });
 
         $this->route('POST', '/user/register', function () {

@@ -83,7 +83,7 @@ class Admin extends BaseModel
 
 
     public function getPendingBookings(){
-        $query = "SELECT COUNT(*) AS totalPending FROM client_booking Where booking_status = 'pending' ";
+        $query = "SELECT COUNT(*) AS totalPending FROM client_booking Where booking_status = 'Pending' ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         // Fetch all the total pending from bookings and return them as an associative array
@@ -91,22 +91,40 @@ class Admin extends BaseModel
     }
 
     public function getActiveBookings(){
-        $query = "SELECT COUNT(*) AS totalActive FROM client_booking where booking_status = 'active' ";
+        $query = "SELECT COUNT(*) AS totalActive FROM client_booking where booking_status = 'Active' ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         // Fetch all the total active from bookings and return them as an associative array
         return $stmt->fetch(PDO::FETCH_ASSOC)['totalActive'];
     }
 
+
     public function getCancelledBookings(){
-        $query = "SELECT COUNT(*) AS totalCancelled FROM client_booking where booking_status = 'cancelled' ";
+        $query = "SELECT COUNT(*) AS totalCancelled FROM client_booking where booking_status = 'Cancelled' ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         // Fetch all the total cancelled from bookings and return them as an associative array
         return $stmt->fetch(PDO::FETCH_ASSOC)['totalCancelled'];
     }
+
+    public function getCompletedBookings(){
+        $query = "SELECT COUNT(*) AS totalCompleted FROM client_booking where booking_status = 'Completed' ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total completed from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalCompleted'];
+    }
+    public function getAllBookings(){
+        $query = "SELECT COUNT(*) AS total FROM client_booking";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+
     public function getAllActiveUsers() {
-        $query = "SELECT COUNT(*) AS total FROM user_tokens WHERE token IS NOT NULL AND token != ''";
+        $query = "SELECT COUNT(DISTINCT user_id) AS total FROM user_tokens WHERE token IS NOT NULL AND token != ''";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         // Fetch all the active users and return them as an associative array

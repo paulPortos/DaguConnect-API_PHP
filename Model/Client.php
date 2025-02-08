@@ -96,6 +96,21 @@ class Client extends BaseModel
         return $stmt->fetchColumn() > 0;
     }
 
+    public function CheckExistingBooking($user_id, $tradesman_id): bool
+    {
+        $query = "SELECT COUNT(*) FROM $this->table 
+              WHERE user_id = :user_id 
+              AND tradesman_id = :tradesman_id 
+              AND booking_status IN ('Pending', 'Active')";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':tradesman_id', $tradesman_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchColumn() > 0;
+    }
+
 
 
 }
