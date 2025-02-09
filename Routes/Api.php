@@ -200,8 +200,11 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/jobs', function () {
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+
             $jobController = new JobController(new Job($this->db));
-            $jobController->getAllJobs();
+            $jobController->getAllJobs($page, $limit);
         });
 
         $this->route('GET', '/user/job/view/{id}', function ($userId,$id) {

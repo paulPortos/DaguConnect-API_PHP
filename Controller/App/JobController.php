@@ -11,6 +11,7 @@ class JobController extends BaseController
 {
     use IfDataExists;
     private array $job_type_enum;
+    private array $job_status;
     private Job $job_model;
     public function __construct(Job $job_model)
     {
@@ -27,6 +28,10 @@ class JobController extends BaseController
             'drywaller',
             'cleaner'
         ];
+
+        $this->job_status = [
+            'pending','active','declined','complete','cancelled'
+        ];
         $this->db = new config();
         $this->job_model = $job_model;
     }
@@ -37,7 +42,7 @@ class JobController extends BaseController
         $exist = $this->exists($user_id, "id", "users");
         //Check if user exists
         if (!$exist) {
-            $this->jsonResponse(['message' => "User not found"], 400);
+            $this->jsonResponse(['message' => "User not found"], 404);
             return;
         }
 
@@ -52,6 +57,7 @@ class JobController extends BaseController
             $this->jsonResponse(['message' => "Invalid job type"], 400);
             return;
         }
+
         $addJob = $this->job_model->addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $location, $status, $deadline);
         if ($addJob) {
             $this->jsonResponse(['message' => "Job added successfully."], 200);
@@ -61,24 +67,29 @@ class JobController extends BaseController
         }
     }
 
-    public function getAllJobs(): void
+    public function getAllJobs(int $page = 1, int $limit = 10): void
     {
-        $jobs = $this->job_model->getJobs();
-        if (empty($jobs)) {
+        $result = $this->job_model->getJobs($page, $limit);
+
+        if (empty($result['jobs'])) {
             $this->jsonResponse(['message' => "No jobs available"], 200);
             return;
-        } else {
-            $this->jsonResponse(['jobs' => $jobs], 200);
-            return;
         }
+
+        $this->jsonResponse([
+            'jobs' => $result['jobs'],
+            'current_page' => $result['current_page'],
+            'total_pages' => $result['total_pages']
+        ], 200);
     }
+
 
     public function viewJob($id): void
     {
         $exist = $this->exists($id, "id", "jobs");
 
         if(!$exist) {
-            $this->jsonResponse(['message' => "Job not found"], 400);
+            $this->jsonResponse(['message' => "Job not found"], 404);
             return;
         }
 
@@ -91,8 +102,8 @@ class JobController extends BaseController
     }
 
     public function viewUserJobs($user_id): void{
-        if (!$this->exists($user_id, "id", "users")) { //Check if user exists
-            $this->jsonResponse(['message' => "User does not exist."]);
+        if (!$this->exists($user_id, "id", "users")) {
+            $this->jsonResponse(['message' => "User does not exist."], 404);
         }
 
         $user_job_post = $this->job_model->viewUserJob($user_id);

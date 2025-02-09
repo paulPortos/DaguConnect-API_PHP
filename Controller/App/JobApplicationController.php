@@ -11,15 +11,15 @@ use http\Message;
 class JobApplicationController extends BaseController
 {
     private $job_type_enum;
-    private $status_enum;
+    private $application_status;
     private Job_Application $job_application_model;
     private config $db;
     public function __construct(Job_Application $job_application)
     {
         $this->db = new config();
         $this->job_application_model = $job_application;
-        $this->status_enum = [
-            'pending','accepted','declined'
+        $this->application_status = [
+            'pending','active','declined','complete','cancelled'
         ];
         $this->job_type_enum = [
             'carpentry','painting','welding','electrical_work','plumbing','masonry','roofing','ac_repair','mechanics','drywalling','glazing'
@@ -44,6 +44,11 @@ class JobApplicationController extends BaseController
             return;
         }
 
+        if(!in_array($status, $this->application_status, true)) {
+            $this->jsonResponse(['message' => "Invalid status"], 400);
+            return;
+        }
+
         if (trim(strlen($qualifications_summary)) < 150) {
             $this->jsonResponse(['message' => 'Summary field must be at least 150 characters'], 400);
             return;
@@ -54,7 +59,7 @@ class JobApplicationController extends BaseController
             return;
         }
 
-        if (!in_array($status, $this->status_enum, true)) {
+        if (!in_array($status, $this->application_status, true)) {
             $this->jsonResponse(['message' => 'Invalid status.'], 400);
             return;
         }
