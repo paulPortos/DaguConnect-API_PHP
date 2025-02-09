@@ -67,6 +67,9 @@ class ClientController extends BaseController
             //gets the tradesman_fullaname
             $tradesman_fullname = $tradesmanDetails['tradesman_full_name'];
 
+            //gets the tredesman_profile
+            $tradesman_profile = $tradesmanDetails['profile_pic'];
+
             //gets the work_fee
             $work_fee = $tradesmanDetails['work_fee'];
 
@@ -81,9 +84,7 @@ class ClientController extends BaseController
                 return;
             }
 
-
-
-            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$tradesman_fullname,$work_fee,$clients_fullname,$address,$task_type,$task_description,$booking_date );
+            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$tradesman_fullname,$tradesman_profile,$work_fee,$clients_fullname,$address,$task_type,$task_description,$booking_date );
 
 
             if($result){
