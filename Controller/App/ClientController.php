@@ -73,8 +73,11 @@ class ClientController extends BaseController
             //gets the work_fee
             $work_fee = $tradesmanDetails['work_fee'];
 
+
             //gets the clients_fullname
             $clients_fullname = $clientDetails['fullname'];
+
+
 
 
 
