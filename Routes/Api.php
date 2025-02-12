@@ -200,8 +200,8 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/jobs', function () {
-            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
 
             $jobController = new JobController(new Job($this->db));
             $jobController->getAllJobs($page, $limit);
@@ -230,8 +230,11 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/getresumes', function () {
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+
             $ResumeController = new ResumeController(new Resume($this->db));
-            $ResumeController->GetAllResumes();
+            $ResumeController->GetAllResumes($page, $limit);
         });
 
         $this->route('GET', '/user/getresume/{resumeId}', function ($userId,$resumeId) {

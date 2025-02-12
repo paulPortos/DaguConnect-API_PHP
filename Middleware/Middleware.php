@@ -21,7 +21,6 @@ trait Middleware
             '/user/tradesman/bookings/status/{booking_id}',
             '/user/client/work/status/{booking_id}',
             '/user/client/getbooking',
-            '/user/getresumes',
             '/user/logout',
             '/user/message/send',
             '/user/chat/get',
