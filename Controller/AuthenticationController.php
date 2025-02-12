@@ -41,7 +41,7 @@ class AuthenticationController extends BaseController
         $this->resumeModel = $resume_Model;
     }
 
-    public function register($first_name, $last_name, $username, $age, $email, $is_client ,$password, $confirm_password): void
+    public function register($first_name, $last_name, $username, $birthdate, $email, $is_client ,$password, $confirm_password): void
     {
 
         //creates the full name of the tradesman
@@ -64,7 +64,7 @@ class AuthenticationController extends BaseController
 
 
         //check if the fields a re all filled up
-        if(empty($first_name) || empty($last_name) || empty($username) ||empty($age) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
+        if(empty($first_name) || empty($last_name) || empty($username) ||empty($birthdate) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
             return;
         }
@@ -113,7 +113,7 @@ class AuthenticationController extends BaseController
             return;
         }
         //stored the data in the database
-        if($this->userModel->registerUser($first_name, $last_name, $username, $age, $email,$is_client, $password,)){
+        if($this->userModel->registerUser($first_name, $last_name, $username, $birthdate, $email,$is_client, $password,)){
                 //send_email verification
                 Email_Sender::sendVerificationEmail($email);
 

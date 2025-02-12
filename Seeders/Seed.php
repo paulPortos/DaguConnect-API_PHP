@@ -8,6 +8,8 @@ class Seed {
     use Job_Seed;
     use Chat_Seed;
     use Admin_Seed;
+    use Resume_Seed;
+    use clientbooking_Seed;
     private PDO $db;
 
     public function __construct(PDO $db) {
@@ -20,6 +22,8 @@ class Seed {
         self::seed_jobs();
         self::seed_chat_message();
         self::seed_admin();
+        self::seedResume();
+        self::seedClientBooking();
     }
 
 }

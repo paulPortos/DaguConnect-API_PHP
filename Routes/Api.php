@@ -94,7 +94,7 @@ class Api extends BaseApi
                 'first_name' => $first_name,
                 'last_name' => $last_name,
                 'username' => $username,
-                'age' => $age,
+                'birthdate' => $birthdate,
                 'email' => $email,
                 'is_client' => $is_client,
                 'password' => $password,
@@ -102,7 +102,7 @@ class Api extends BaseApi
             ] = $this->requestBody;
 
             $AuthController = new AuthenticationController(new User($this->db), new Resume($this->db));
-            $AuthController->register($first_name, $last_name, $username,$age, $email,$is_client ,$password, $confirm_password);
+            $AuthController->register($first_name, $last_name, $username,$birthdate, $email,$is_client ,$password, $confirm_password);
         });
 
         $this->route('POST', '/user/login', function () {
@@ -200,8 +200,8 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/jobs', function () {
-            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
 
             $jobController = new JobController(new Job($this->db));
             $jobController->getAllJobs($page, $limit);
@@ -230,8 +230,11 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/getresumes', function () {
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+
             $ResumeController = new ResumeController(new Resume($this->db));
-            $ResumeController->GetAllResumes();
+            $ResumeController->GetAllResumes($page, $limit);
         });
 
         $this->route('GET', '/user/getresume/{resumeId}', function ($userId,$resumeId) {
