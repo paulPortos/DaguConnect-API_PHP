@@ -27,8 +27,8 @@ class DashboardController extends BaseController
             $this->jsonResponse(["Message" => "No users detected"], 200);
         }
         $this->jsonResponse(["users" => [
-            "count" => $totalUserCount,
-            "active" => $totalActiveUsers,
+            "totaluser" => $totalUserCount,
+            "activeuser" => $totalActiveUsers,
             "Pending" => $totalBookingPending,
             "Active" => $totalBookingActive,
             "Cancelled" => $totalBookingCancelled,
@@ -64,5 +64,9 @@ class DashboardController extends BaseController
                 ]
             ]
         );
+    }
+
+    public function userManagement(){
+        
     }
 }
