@@ -44,7 +44,7 @@ class Job_Application extends BaseModel
             $stmt->bindParam(':status', $status);
             return  $stmt->execute();
         } catch (PDOException $e) {
-            error_log("Error applying for job: ", $e->getMessage());
+            error_log("Error applying for job: ". $e->getMessage());
             return false;
         }
     }
@@ -68,7 +68,7 @@ class Job_Application extends BaseModel
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error getting job applications: ", $e->getMessage());
+            error_log("Error getting job applications: ". $e->getMessage());
             return [];
         }
     }
@@ -88,12 +88,23 @@ class Job_Application extends BaseModel
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error viewing job application: ", $e->getMessage());
+            error_log("Error viewing job application: ". $e->getMessage());
             return "Job application does not exist";
         }
     }
 
-    //Accept or Decline job application
+    /**
+     * Updates the status of a job application to either accept or decline it.
+     *
+     * This function modifies the status of a specific job application in the database.
+     * It can be used to accept or decline a job application based on the provided status.
+     *
+     * @param int $job_application_id The unique identifier of the job application to update.
+     * @param string $status The new status to set for the job application (e.g., 'accepted', 'declined').
+     *
+     * @return bool Returns true if the update was successful and affected at least one row,
+     *              false if the update failed or no rows were affected.
+     */
     public function acceptOrDeclineJobApplication(int $job_application_id, string $status): bool
     {
         try{
@@ -103,7 +114,7 @@ class Job_Application extends BaseModel
             $stmt->execute();
             return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
-            error_log("Error accepting or declining job application: ", $e->getMessage());
+            error_log("Error accepting or declining job application: ". $e->getMessage());
             return false;
         }
     }
@@ -118,7 +129,7 @@ class Job_Application extends BaseModel
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error tracing table: ", $e->getMessage());
+            error_log("Error tracing table: ". $e->getMessage());
             return [];
         }
     }
@@ -134,7 +145,7 @@ class Job_Application extends BaseModel
 
             return $id !== false ? (int) $id : 0;
         } catch (PDOException $e) {
-            var_dump($e->getMessage());
+            error_log($e->getMessage());
             return 0;
         }
     }
