@@ -18,6 +18,13 @@ trait Resume_Seed
         $this->seedResume3();
         $this->seedResume4();
         $this->seedResume5();
+        $this->seedResume6();
+        $this->seedResume7();
+        $this->seedResume8();
+        $this->seedResume9();
+        $this->seedResume10();
+        $this->seedResume11();
+        $this->seedResume12();
         echo"Seeding resume complete". PHP_EOL;
     }
 
@@ -105,5 +112,119 @@ trait Resume_Seed
         ]);
     }
 
+    public function seedResume6(): void
+    {
+
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt->execute([
+            "test9@gmail.com",
+            9,
+            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "http://192.168.1.217:8000/uploads/profile_pictures/Default.png",
+            "hello this is a tester",
+            json_encode(["Lingayen","Dagupan"]),
+            200,
+            "tester son",
+            1
+        ]);
+    }
+    public function seedResume7(): void
+    {
+
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt->execute([
+            "test10@gmail.com",
+            10,
+            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "http://192.168.1.217:8000/uploads/profile_pictures/Default.png",
+            "hello this is a tester",
+            json_encode(["Lingayen","Dagupan"]),
+            200,
+            "tester son",
+            1
+        ]);
+    }
+    public function seedResume8(): void
+    {
+
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt->execute([
+            "test11@gmail.com",
+            11,
+            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "http://192.168.1.217:8000/uploads/profile_pictures/Default.png",
+            "hello this is a tester",
+            json_encode(["Lingayen","Dagupan"]),
+            200,
+            "tester son",
+            1
+        ]);
+    }
+
+    public function seedResume9(): void
+    {
+
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt->execute([
+            "test12@gmail.com",
+            12,
+            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "http://192.168.1.217:8000/uploads/profile_pictures/Default.png",
+            "hello this is a tester",
+            json_encode(["Lingayen","Dagupan"]),
+            200,
+            "tester son",
+            1
+        ]);
+    }
+
+    public function seedResume10(): void
+    {
+
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt->execute([
+            "test13@gmail.com",
+            13,
+            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "http://192.168.1.217:8000/uploads/profile_pictures/Default.png",
+            "hello this is a tester",
+            json_encode(["Lingayen","Dagupan"]),
+            200,
+            "tester son",
+            1
+        ]);
+    }
+    public function seedResume11(): void
+    {
+
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt->execute([
+            "test14@gmail.com",
+            14,
+            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "http://192.168.1.217:8000/uploads/profile_pictures/Default.png",
+            "hello this is a tester",
+            json_encode(["Lingayen","Dagupan"]),
+            200,
+            "tester son",
+            1
+        ]);
+    }
+    public function seedResume12(): void
+    {
+
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt->execute([
+            "test15@gmail.com",
+            15,
+            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "http://192.168.1.217:8000/uploads/profile_pictures/Default.png",
+            "hello this is a tester",
+            json_encode(["Lingayen","Dagupan"]),
+            200,
+            "tester son",
+            1
+        ]);
+    }
 
 }

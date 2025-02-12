@@ -25,6 +25,11 @@ trait User_Seed
         $this->seedUser8();
         $this->seedUser9();
         $this->seedUser10();
+        $this->seedUser11();
+        $this->seedUser12();
+        $this->seedUser13();
+        $this->seedUser14();
+        $this->seedUser15();
         echo "Seeding users table complete" . PHP_EOL;
     }
 
@@ -76,11 +81,40 @@ trait User_Seed
     private function seedUser9(): void {
         $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
         $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)");
-        $stmt->execute(['test9', 'test9', 'test9', '1999-03-21' , 0, 'test9@gmail.com', 1, $hashed_password]);
+        $stmt->execute(['test9', 'test9', 'test9', '1999-03-21' , 0, 'test9@gmail.com', 0, $hashed_password]);
     }
     private function seedUser10(): void {
         $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
         $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)");
-        $stmt->execute(['test10', 'test10', 'test10', '1999-03-21' , 0, 'test10@gmail.com', 1, $hashed_password]);
+        $stmt->execute(['test10', 'test10', 'test10', '1999-03-21' , 0, 'test10@gmail.com', 0, $hashed_password]);
     }
+    private function seedUser11(): void {
+    $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
+    $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)");
+    $stmt->execute(['test11', 'test11', 'test11', '1999-03-21' , 0, 'test11@gmail.com', 0, $hashed_password]);
+    }
+    private function seedUser12(): void {
+        $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
+        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)");
+        $stmt->execute(['test12', 'test12', 'test12', '1999-03-21' , 0, 'test12@gmail.com', 0, $hashed_password]);
+    }
+    private function seedUser13(): void {
+        $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
+        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)");
+        $stmt->execute(['test13', 'test13', 'test13', '1999-03-21' , 0, 'test13@gmail.com', 0, $hashed_password]);
+    }
+    private function seedUser14(): void {
+        $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
+        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)");
+        $stmt->execute(['test14', 'test14', 'test14', '1999-03-21' , 0, 'test14@gmail.com', 0, $hashed_password]);
+    }
+    private function seedUser15(): void {
+        $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
+        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)");
+        $stmt->execute(['test15', 'test15', 'test15', '1999-03-21' , 0, 'test15@gmail.com', 0, $hashed_password]);
+    }
+
+
+
+
 }
