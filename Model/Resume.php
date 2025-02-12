@@ -23,16 +23,20 @@ class Resume extends BaseModel
 
 
 
-    public function GetResume(int $page = 1 , int $limit =15):array{
+    public function GetResume(int $page, int $limit):array{
+        $offset = ($page - 1) * $limit; // Calculate the starting point
         try {
-            $offset = ($page - 1) * $limit; // Calculate the starting point
-            $query = "SELECT * FROM $this->table LIMIT :limit OFFSET :offset";
+            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE is_active = 1");
+            $countStmt->execute();
+            $totalResume = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int to avoid errors
+
+            $query = "SELECT * FROM $this->table WHERE is_active = 1 LIMIT :limit OFFSET :offset";
             $stmt = $this->db->prepare($query);
             $stmt ->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt ->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
-
             $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
             // Decode JSON fields for each resume
             foreach ($resumes as &$resume) {
@@ -40,13 +44,18 @@ class Resume extends BaseModel
                 $resume['prefered_work_location'] = json_decode($resume['prefered_work_location'], true);
             }
 
-            return $resumes;
-        }catch (PDOException $e){
-            error_log("Error getting resume's: ", $e->getMessage());
+            $totalPages = max(1, ceil($totalResume / $limit));
+            return [
+                'resumes' => $resumes,
+                'current_page' => $page,
+                'total_pages' => $totalPages
+            ];
+        } catch (PDOException $e) {
+            error_log("Error getting resumes: " . $e->getMessage());
             return [];
         }
-
     }
+
 
     public function viewResume($resume_id){
 

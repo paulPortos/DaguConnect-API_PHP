@@ -26,15 +26,20 @@ class ResumeController extends BaseController
         $this->resumeModel = $resume_Model;
     }
     //get the resume
-    public function GetAllResumes():void{
-        $resume = $this->resumeModel->GetResume();
+    public function GetAllResumes(int $page = 1, int $limit = 10):void{
+
+        $resume = $this->resumeModel->GetResume($page, $limit);
         //check if there are existing resume's
         if(empty($resume)){
             $this->jsonResponse(['message'=>'No Resumes Found']);
             return;
-        }else{
-            $this->jsonResponse($resume);
         }
+
+            $this->jsonResponse([
+                'resume' => $resume['resumes'],
+                'current_page' => $resume['current_page'],
+                'total_pages' => $resume['total_pages']
+            ], 200);
 
     }
 
