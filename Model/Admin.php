@@ -205,15 +205,28 @@ class Admin extends BaseModel
         return (int)$result['count'];
     }
 
-    public function logoutUser($userId):bool {
+    public function logoutUser($userId): bool
+    {
         try {
-            $query = "UPDATE $this->table SET token = NULL WHERE id = :id";
+            $query = "UPDATE admin SET token = NULL WHERE id = :id";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':id', $userId);
             return $stmt->execute();
-        } catch (PDOException $e){
-            error_log("Error logging out user: ", $e->getMessage());
+        } catch (PDOException $e) {
+            error_log("Error logging out admin: " . $e->getMessage());
             return false;
         }
+    }
+
+    public function validateAdminToken($token): ?array
+    {
+        $query = "SELECT id FROM admin WHERE token = :token LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+
+        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $admin ?: null;
     }
 }

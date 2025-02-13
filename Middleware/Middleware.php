@@ -1,13 +1,15 @@
 <?php
 
 namespace DaguConnect\Middleware;
+
 use DaguConnect\Model\Token;
+use DaguConnect\Model\Admin;
 
 trait Middleware
 {
     public function Auth($requestUri, $db): ?int
     {
-        //endpoints that is protected by the middleware that needs a token
+        // Endpoints that are protected by the middleware that needs a token
         $protectedRoutes = [
             '/user/tradesman/update/resume',
             '/user/client/booktradesman',
@@ -25,7 +27,8 @@ trait Middleware
             '/user/message/send',
             '/user/chat/get',
             '/user/getresume/{userId}',
-            '/client/jobs/delete/{jobId}'
+            '/client/jobs/delete/{jobId}',
+            '/admin/logout'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {
@@ -43,11 +46,20 @@ trait Middleware
                     return null; // Token is missing
                 }
 
-                // Validate the token
-                $tokenModel = new Token($db);
-                $tokenData = $tokenModel->validateToken($token);
+                // Check if the route is an admin route
+                if (strpos($protectedRoute, '/admin/') === 0) {
+                    // Validate the token against the admin table
+                    $adminModel = new Admin($db);
+                    $adminData = $adminModel->validateAdminToken($token);
 
-                return $tokenData['user_id'] ?? null;
+                    return $adminData['id'] ?? null;
+                } else {
+                    // Validate the token against the user_tokens table
+                    $tokenModel = new Token($db);
+                    $tokenData = $tokenModel->validateToken($token);
+
+                    return $tokenData['user_id'] ?? null;
+                }
             }
         }
 

@@ -68,6 +68,11 @@ class Api extends BaseApi
             $adminController->login($username, $email, $password);
         });
 
+        $this->route('DELETE', '/admin/logout', function ($adminId) {
+           $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->logout($adminId);
+        });
+
         $this->route('PUT', '/admin/change_password', function () {
             $this->responseBodyChecker();
 
@@ -142,7 +147,7 @@ class Api extends BaseApi
             $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$about_me,$prefered_work_location,$work_fee);
         });
 
-        $this->route('POST', '/user/client/booktradesman/{tradesman_id}', function ($userId,$tradesman_id) {
+        $this->route('POST', '/user/client/booktradesman/{tradesman_Id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
 
             $phone_number = $this->requestBody['phone_number'] ?? null;

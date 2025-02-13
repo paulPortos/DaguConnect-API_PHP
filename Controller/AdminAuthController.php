@@ -105,4 +105,12 @@ class AdminAuthController extends BaseController
         }
         $this->jsonResponse(['message' => 'Incorrect password.'], 200);
     }
+
+    public function logout($token): void {
+        if ($this->adminModel->logoutUser($token)) {
+            $this->jsonResponse(['message' => 'Logged out successfully.'], 200);
+        } else {
+            $this->jsonResponse(['message' => 'Logout failed.'], 400);
+        }
+    }
 }
