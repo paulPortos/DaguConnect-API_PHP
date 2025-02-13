@@ -92,6 +92,11 @@ class Api extends BaseApi
             $adminController->bookingStatistics();
         });
 
+        $this -> route('GET', '/admin/usermanagement', function () {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->userManagement();
+        });
+
         $this->route('POST', '/user/register', function () {
             $this->responseBodyChecker();
 

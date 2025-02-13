@@ -45,10 +45,16 @@ class DashboardController extends BaseController
         $totalCancelledBookings = $this->admin_model->getCancelledBookings();
         $bookings = $this->admin_model->getBookingList();
 
-        $id = $bookings['id'];
-        $title = $bookings['task_description'];
-        $category = $bookings['task_type'];
-        $status = $bookings['booking_status'];
+
+        $filteredBookings = array_map(function($booking){
+
+            return [
+                'id' => $booking['id'],
+                'title' => $booking['task_description'],
+                'category' => $booking['task_type'],
+               'status' => $booking['booking_status'],
+            ];
+        }, $bookings);
 
         $this -> jsonResponse(
             [
@@ -56,17 +62,39 @@ class DashboardController extends BaseController
                 "active_bookings" => $totalActiveBookings,
                 "completed_bookings" => $totalCompletedBookings,
                 "cancelled_bookings" => $totalCancelledBookings,
-                "bookings" => [
-                    "id" => $id,
-                    "title" => $title,
-                    "category" => $category,
-                    "status" => $status
-                ]
+                "bookings" => $filteredBookings
             ]
         );
     }
 
     public function userManagement(){
-        
+        $totalUserCount = $this->admin_model->getAllUserCount();
+        $totalTradesmanCount = $this->admin_model->getTradesman();
+        $totalClientCount = $this->admin_model->getClient();
+        $totalSuspendedCount = $this->admin_model->getAllSuspendedUsers();
+        $users = $this->admin_model->getUsersList();
+
+        // Filter user data to include only specific keys
+        $filteredUsers = array_map(function($user) {
+            $role = ($user['is_client'] == 1) ? "Client" : "Tradesman";
+            return [
+                'first_name' => $user['first_name'],
+                'last_name' => $user['last_name'],
+                'email' => $user['email'],
+                'birthdate' => $user['birthdate'],
+                'is_client' => $role
+            ];
+        }, $users);
+
+
+        $this->jsonResponse(
+            [
+                "total_user" => $totalUserCount,
+                "total_tradesman" => $totalTradesmanCount,
+                "total_client" => $totalClientCount,
+                "total_suspended" =>$totalSuspendedCount,
+                "user" => $filteredUsers
+            ]
+        );
     }
 }

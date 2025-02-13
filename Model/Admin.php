@@ -107,6 +107,22 @@ class Admin extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC)['totalCancelled'];
     }
 
+    public function getTradesman(){
+        $query = "SELECT COUNT(*) AS totalTradesman FROM users WHERE is_client = 0";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total tradesman and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalTradesman'];
+    }
+
+    public function getClient(){
+        $query = "SELECT COUNT(*) AS totalClients FROM users WHERE is_client = 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total tradesman and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalClients'];
+    }
+
     public function getCompletedBookings(){
         $query = "SELECT COUNT(*) AS totalCompleted FROM client_booking where booking_status = 'Completed' ";
         $stmt = $this->db->prepare($query);
@@ -142,11 +158,26 @@ class Admin extends BaseModel
         return (int)$result['count'];
     }
 
+    public function getAllSuspendedUsers(){
+        $query = "SELECT COUNT(*) AS totalSuspended FROM users WHERE suspend = 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total suspended users and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalSuspended'];
+    }
+
     public function getBookingList(){
         $query = "SELECT * FROM client_booking";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getUsersList(){
+        $query = "SELECT * FROM users";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function changeAdminPassword($userId, $current_password, $new_password): bool {
