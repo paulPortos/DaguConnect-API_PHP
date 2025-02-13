@@ -30,12 +30,17 @@ class AdminAuthController extends BaseController
             return;
         }
 
-        if (strlen($username) < 5) {  
+        if (strlen($username) <= 5) {
             $this->jsonResponse(['message' => 'Username must be at least 5 characters long.'], 400);
             return;
         }
-        
-        if (strlen($password) < 8) {  
+
+        if (str_contains($password, ' ')) {
+            $this->jsonResponse(['message' => 'Password should not contain spaces.'], 400);
+            return;
+        }
+
+        if (strlen($password) <= 8) {
             $this->jsonResponse(['message' => 'Password must be at least 8 characters long.'], 400);
             return;
         } 
@@ -64,12 +69,12 @@ class AdminAuthController extends BaseController
             return;
         }
     
-        if (strlen($username) < 5) {
+        if (strlen($username) <= 5) {
             $this->jsonResponse(['message' => 'Username must be at least 5 characters long.'], 400);
             return;
         }
     
-        if (strlen($password) < 8) {
+        if (strlen($password) <= 8) {
             $this->jsonResponse(['message' => 'Password must be at least 8 characters long.'], 400);
             return;
         }
