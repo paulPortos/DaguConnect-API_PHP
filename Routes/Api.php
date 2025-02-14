@@ -32,7 +32,7 @@ class Api extends BaseApi
     {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type");
+        header("Access-Control-Allow-Headers: *");
 
         // Handle preflight OPTIONS requests
         if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -68,7 +68,7 @@ class Api extends BaseApi
             $adminController->login($username, $email, $password);
         });
 
-        $this->route('DELETE', '/admin/logout', function ($adminId) {
+            $this->route('DELETE', '/admin/logout', function ($adminId) {
            $adminController = new AdminAuthController(new Admin($this->db));
             $adminController->logout($adminId);
         });
