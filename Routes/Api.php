@@ -32,7 +32,7 @@ class Api extends BaseApi
     {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type");
+        header("Access-Control-Allow-Headers: *");
 
         // Handle preflight OPTIONS requests
         if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -68,6 +68,11 @@ class Api extends BaseApi
             $adminController->login($username, $email, $password);
         });
 
+            $this->route('DELETE', '/admin/logout', function ($adminId) {
+           $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->logout($adminId);
+        });
+
         $this->route('PUT', '/admin/change_password', function () {
             $this->responseBodyChecker();
 
@@ -85,6 +90,11 @@ class Api extends BaseApi
         $this->route('GET', '/admin/booking/statistics', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->bookingStatistics();
+        });
+
+        $this -> route('GET', '/admin/usermanagement', function () {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->userManagement();
         });
 
         $this->route('POST', '/user/register', function () {
@@ -142,7 +152,7 @@ class Api extends BaseApi
             $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$about_me,$prefered_work_location,$work_fee);
         });
 
-        $this->route('POST', '/user/client/booktradesman/{tradesman_id}', function ($userId,$tradesman_id) {
+        $this->route('POST', '/user/client/booktradesman/{tradesman_Id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
 
             $phone_number = $this->requestBody['phone_number'] ?? null;
