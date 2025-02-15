@@ -169,6 +169,10 @@ class Api extends BaseApi
             $ClientBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
             $ClientBookingController->GetBookingClient($userId);
         });
+        $this ->route('GET','/user/client/viewbooking/{resumeId}' , function ($userID,$resumeId) {
+            $ViewBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
+            $ViewBookingController->viewClientBooking($resumeId);
+        });
 
         $this->route('PUT', '/user/tradesman/bookings/status/{booking_id}', function ($userId,$booking_id) {
             $this->responseBodyChecker();

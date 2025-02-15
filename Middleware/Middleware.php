@@ -26,7 +26,6 @@ trait Middleware
             '/user/logout',
             '/user/message/send',
             '/user/chat/get',
-            '/user/getresume/{userId}',
             '/client/jobs/delete/{jobId}',
             '/admin/logout'
         ];
