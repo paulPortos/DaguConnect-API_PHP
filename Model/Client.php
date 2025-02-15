@@ -60,6 +60,14 @@ class Client extends BaseModel
         }
 
     }
+    public function ViewBooking($resumeId){
+        $query = "SELECT * FROM $this->table WHERE resume_id = :resume_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':resume_id', $resumeId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    }
 
     //update the work_status of the client_booking
     public function UpdateWorkStatus($user_id, $booking_id,$booking_status): bool

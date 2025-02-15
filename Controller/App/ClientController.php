@@ -119,6 +119,19 @@ class ClientController extends BaseController
         }
     }
 
+    public function viewClientBooking($resumeId){
+        try{
+            $viewbooking = $this->client->ViewBooking($resumeId);
+            if(!$viewbooking){
+                $this->jsonResponse(['message' => "No booking found"], 400);
+            }
+            $this->jsonResponse($viewbooking);
+
+        }catch (\Exception $e){
+            $this->jsonResponse(['message' => $e->getMessage()],500);
+        }
+    }
+
     public function UpdateWorkFromTradesman($user_id,$booking_id,$booking_status): void{
 
         //check if the booking belongs to the user and if exists
