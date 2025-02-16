@@ -2,7 +2,7 @@ CREATE TABLE jobs (
 id INT UNSIGNED AUTO_INCREMENT,
 user_id INT UNSIGNED NOT NULL,
 client_fullname VARCHAR(255) NOT NULL,
-client_profile_picture VARCHAR(255) NULL,
+client_profile_picture VARCHAR(255) NOT NULL,
 salary DECIMAL(10,2) NOT NULL,
 job_type ENUM(
 'Carpenter',
@@ -17,10 +17,10 @@ job_type ENUM(
 'Cleaner'
 ) NOT NULL,
 job_description TEXT NOT NULL,
-location TEXT NOT NULL,
+address TEXT NOT NULL,
 latitude DECIMAL(9,6) NULL,
 longitude DECIMAL(9,6) NULL,
-status ENUM('available','ongoing','done') NOT NULL,
+status ENUM('Pending','Active','Declined','Completed','Failed','Cancelled') NOT NULL,
 deadline DATE NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),

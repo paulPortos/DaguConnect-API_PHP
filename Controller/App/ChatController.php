@@ -23,7 +23,7 @@ class ChatController extends BaseController
             return;
         }
 
-        if (empty($message)) {
+        if (empty($message) || trim($message) === "") {
             $this->jsonResponse(['message' => "Cannot send empty message"], 400);
             return;
         }
@@ -53,6 +53,7 @@ class ChatController extends BaseController
             $full_name = null;
             $profile_picture = null;
 
+            //If the sender is user1_id then it will return the full name and profile of the receiver
             if ($chat['user1_id'] == $user_id) {
                 $full_name = $this->model->getFullName($chat['user2_id'])['fullname'] ?? null;
                 $profile_picture = $this->model->getProfilePicture($chat['user2_id']);

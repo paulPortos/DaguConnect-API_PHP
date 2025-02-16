@@ -35,11 +35,12 @@ class Job extends BaseModel
                 'total_pages' => $totalPages
             ];
         } catch (PDOException $e) {
-            error_log("Database Error: " . $e->getMessage()); // ✅ Log database errors
+            error_log("Database Error: " . $e->getMessage());
             return [];
         }
     }
 
+    // Explain this code in detail
 
     public function viewJob($id){
         try {
@@ -53,15 +54,15 @@ class Job extends BaseModel
         }
     }
 
-    public function addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $location, $status, $deadline): bool {
+    public function addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $address, $status, $deadline): bool {
         try {
-            $stmt = $this->db->prepare("INSERT INTO $this->table (user_id, client_fullname, salary, job_type, job_description, location, status, deadline, created_at) VALUES (:user_id, :client_fullname, :salary, :job_type, :job_description, :location, :status, :deadline, NOW())");
+            $stmt = $this->db->prepare("INSERT INTO $this->table (user_id, client_fullname, salary, job_type, job_description, address, status, deadline, created_at) VALUES (:user_id, :client_fullname, :salary, :job_type, :job_description, :address, :status, :deadline, NOW())");
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':client_fullname', $client_fullname);
             $stmt->bindParam(':salary', $salary);
             $stmt->bindParam(':job_type', $job_type);
             $stmt->bindParam(':job_description', $job_description);
-            $stmt->bindParam(':location', $location);
+            $stmt->bindParam(':address', $address);
             $stmt->bindParam(':status', $status);
             $stmt->bindParam(':deadline', $deadline);
             $stmt->execute();
@@ -72,12 +73,12 @@ class Job extends BaseModel
         }
     }
 
-    public function updateJob($id, $salary, $job_description, $location, $deadline): bool {
+    public function updateJob($id, $salary, $job_description, $address, $deadline): bool {
         try{
-            $stmt = $this->db->prepare("UPDATE $this->table SET salary = :salary, job_description = :job_description, location = :location, deadline = :deadline WHERE id = :id");
+            $stmt = $this->db->prepare("UPDATE $this->table SET salary = :salary, job_description = :job_description, address = :address, deadline = :deadline WHERE id = :id");
             $stmt->bindParam(':salary', $salary);
             $stmt->bindParam(':job_description', $job_description);
-            $stmt->bindParam(':location', $location);
+            $stmt->bindParam(':address', $address);
             $stmt->bindParam(':deadline', $deadline);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
@@ -99,8 +100,6 @@ class Job extends BaseModel
             return [];
         }
     }
-
-
 
     public function deleteJob($id, $user_id): bool{
         try {
