@@ -36,7 +36,7 @@ trait Resume_Seed
             "vahron24@gmail.com",
             2,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
@@ -53,7 +53,7 @@ trait Resume_Seed
             "test4@gmail.com",
             4,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
@@ -69,11 +69,11 @@ trait Resume_Seed
             "test5@gmail.com",
             5,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "karlos son",
+            "test5 test5",
             1
         ]);
     }
@@ -86,11 +86,11 @@ trait Resume_Seed
             "test6@gmail.com",
             6,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "karlos son",
+            "test6 test6",
             1
         ]);
 
@@ -103,11 +103,11 @@ trait Resume_Seed
             "test7@gmail.com",
             7,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "karlos son",
+            "test7 test7",
             1
         ]);
     }
@@ -120,11 +120,11 @@ trait Resume_Seed
             "test9@gmail.com",
             9,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "tester son",
+            "test9 test9",
             1
         ]);
     }
@@ -136,11 +136,11 @@ trait Resume_Seed
             "test10@gmail.com",
             10,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "tester son",
+            "test10 test10",
             1
         ]);
     }
@@ -152,11 +152,11 @@ trait Resume_Seed
             "test11@gmail.com",
             11,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "tester son",
+            "test11 test11",
             1
         ]);
     }
@@ -169,11 +169,11 @@ trait Resume_Seed
             "test12@gmail.com",
             12,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "tester son",
+            "test12 test12",
             1
         ]);
     }
@@ -186,11 +186,11 @@ trait Resume_Seed
             "test13@gmail.com",
             13,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "tester son",
+            "test13 test13",
             1
         ]);
     }
@@ -202,11 +202,11 @@ trait Resume_Seed
             "test14@gmail.com",
             14,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "tester son",
+            "test14 test14",
             1
         ]);
     }
@@ -218,11 +218,11 @@ trait Resume_Seed
             "test15@gmail.com",
             15,
             json_encode(["Carpentry", "Painting", "Electrician"]),
-            "http://". $_SERVER['HTTP_HOST'] ."/uploads/profile_pictures/Default.png",
+            "http://192.168.1.217/uploads/profile_pictures/Default.png",
             "hello this is a tester",
             json_encode(["Lingayen","Dagupan"]),
             200,
-            "tester son",
+            "test15 test15",
             1
         ]);
     }

@@ -1,0 +1,14 @@
+[16-Feb-2025 03:49:05 UTC] Query: SELECT COUNT(*) FROM client_booking 
+              WHERE user_id = :user_id 
+              AND tradesman_id = :tradesman_id 
+              AND booking_status IN ('Pending', 'Active')
+[16-Feb-2025 03:49:05 UTC] User ID: 1
+[16-Feb-2025 03:49:05 UTC] Tradesman ID: 2
+[16-Feb-2025 03:49:05 UTC] Count: 5
+[16-Feb-2025 03:53:25 UTC] Query: SELECT COUNT(*) FROM client_booking 
+              WHERE user_id = :user_id 
+              AND tradesman_id = :tradesman_id 
+              AND booking_status IN ('Pending', 'Active')
+[16-Feb-2025 03:53:25 UTC] User ID: 1
+[16-Feb-2025 03:53:25 UTC] Tradesman ID: 2
+[16-Feb-2025 03:53:25 UTC] Count: 5
