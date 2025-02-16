@@ -24,7 +24,7 @@ class ClientController extends BaseController
 
     public function __construct(Client $client,Resume $resume_model, User $user_model)
     {
-        $this->Book_type = ['Carpentry','Painting','Welding','Electrician','Plumbing','Masonry','Roofing','AC repair','Mechanics','Cleaning'];
+        $this->Book_type = ['Carpentry','Painting','Welding','Electrician','Plumbing','Masonry','Roofing','ACRepair','Mechanics','Cleaning'];
         $this->db = new config();
         $this->client = $client;
         $this->resume = $resume_model;
