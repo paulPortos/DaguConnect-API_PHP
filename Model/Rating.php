@@ -5,7 +5,7 @@ namespace DaguConnect\Model;
 use DaguConnect\Core\BaseModel;
 use PDO;
 
-class Rate extends BaseModel
+class Rating extends BaseModel
 {
     protected $table = 'tradesman_rate';
 
