@@ -148,7 +148,7 @@ class Api extends BaseApi
             $work_fee = $this->requestBody['work_fee'];
 
             // Create ResumeController and store resume
-            $ResumeController = new ResumeController(new Resume($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db));
             $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$about_me,$prefered_work_location,$work_fee);
         });
 
@@ -168,6 +168,10 @@ class Api extends BaseApi
         $this->route('GET', '/user/client/getbooking', function ($userId) {
             $ClientBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
             $ClientBookingController->GetBookingClient($userId);
+        });
+        $this ->route('GET','/user/client/viewbooking/{resumeId}' , function ($userID,$resumeId) {
+            $ViewBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
+            $ViewBookingController->viewClientBooking($resumeId);
         });
 
         $this->route('PUT', '/user/tradesman/bookings/status/{booking_id}', function ($userId,$booking_id) {
@@ -243,12 +247,12 @@ class Api extends BaseApi
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
 
-            $ResumeController = new ResumeController(new Resume($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db),new Client($this->db));
             $ResumeController->GetAllResumes($page, $limit);
         });
 
         $this->route('GET', '/user/getresume/{resumeId}', function ($userId,$resumeId) {
-            $ResumeController = new ResumeController(new Resume($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db),new Client($this->db));
             $ResumeController->ViewResume($resumeId);
         });
 

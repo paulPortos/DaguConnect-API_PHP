@@ -18,6 +18,9 @@
     /*
    remove the semicolon in extensions=gd in php.ini to access the files that is being uploaded
  */
+/*
+  remove the semicolon in error_log = /var/log/php_errors.log to access the error_log
+ */
 
 
 

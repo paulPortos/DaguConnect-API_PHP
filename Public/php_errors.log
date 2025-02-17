@@ -1,0 +1,48 @@
+[16-Feb-2025 03:49:05 UTC] Query: SELECT COUNT(*) FROM client_booking 
+              WHERE user_id = :user_id 
+              AND tradesman_id = :tradesman_id 
+              AND booking_status IN ('Pending', 'Active')
+[16-Feb-2025 03:49:05 UTC] User ID: 1
+[16-Feb-2025 03:49:05 UTC] Tradesman ID: 2
+[16-Feb-2025 03:49:05 UTC] Count: 5
+[16-Feb-2025 03:53:25 UTC] Query: SELECT COUNT(*) FROM client_booking 
+              WHERE user_id = :user_id 
+              AND tradesman_id = :tradesman_id 
+              AND booking_status IN ('Pending', 'Active')
+[16-Feb-2025 03:53:25 UTC] User ID: 1
+[16-Feb-2025 03:53:25 UTC] Tradesman ID: 2
+[16-Feb-2025 03:53:25 UTC] Count: 5
+[17-Feb-2025 05:56:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method DaguConnect\Includes\config::prepare() in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php:96
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(77): Controller\App\ResumeController->updateTradesmanProfileInBookings(4, 'http://192.168....')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(152): Controller\App\ResumeController->UpdateResume(4, Array, Array, 'pangit mo', 'Dagupan', '300')
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(46): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php on line 96
+[17-Feb-2025 06:03:43 UTC] PHP Parse error:  syntax error, unexpected token ";", expecting ")" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 151
+[17-Feb-2025 06:04:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Controller\App\updateTradesmanProfileInBookings() in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php:79
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(152): Controller\App\ResumeController->UpdateResume(4, Array, Array, 'pangit mo', 'Dagupan', '300')
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(46): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php on line 79
+[17-Feb-2025 06:41:38 UTC] error failed to validate: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.user_tokens' doesn't exist
+[17-Feb-2025 08:58:41 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.tradesman_resume' doesn't exist in C:\xampp\htdocs\DaguConnect-API_PHP\Services\IfDataExists.php:22
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\IfDataExists.php(22): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(49): Controller\App\ResumeController->exists(5, 'id', 'tradesman_resum...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(256): Controller\App\ResumeController->ViewResume(5)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(46): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\IfDataExists.php on line 22
+[17-Feb-2025 08:58:42 UTC] Error getting resumes: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.tradesman_resume' doesn't exist
+[17-Feb-2025 08:58:46 UTC] error failed to validate: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.user_tokens' doesn't exist

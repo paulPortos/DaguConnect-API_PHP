@@ -5,86 +5,85 @@ namespace Controller\App;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Resume;
+use DaguConnect\Model\Client;
 use DaguConnect\Services\FileUploader;
 use Exception;
 use DaguConnect\Services\IfDataExists;
 
-
 class ResumeController extends BaseController
 {
     private Resume $resumeModel;
-
-    use  FileUploader;
+    private Client $clientBookingModel;
+    use FileUploader;
     protected $targetDir;
 
     use IfDataExists;
-    public function __construct(Resume $resume_Model)
+    public function __construct(Resume $resume_Model, Client $client_booking)
     {
         $this->targetDir = "/uploads/profile_pictures/";
         $this->db = new config();
         $this->initializeBaseUrl(); // Initialize baseUrl from FileUploader
         $this->resumeModel = $resume_Model;
+        $this->clientBookingModel = $client_booking;
     }
-    //get the resume
-    public function GetAllResumes(int $page = 1, int $limit = 10):void{
 
+    //get the resume
+    public function GetAllResumes(int $page = 1, int $limit = 10): void
+    {
         $resume = $this->resumeModel->GetResume($page, $limit);
         //check if there are existing resume's
-        if(empty($resume)){
-            $this->jsonResponse(['message'=>'No Resumes Found']);
+        if (empty($resume)) {
+            $this->jsonResponse(['message' => 'No Resumes Found']);
             return;
         }
 
-            $this->jsonResponse([
-                'resume' => $resume['resumes'],
-                'current_page' => $resume['current_page'],
-                'total_pages' => $resume['total_pages']
-            ], 200);
-
+        $this->jsonResponse([
+            'resume' => $resume['resumes'],
+            'current_page' => $resume['current_page'],
+            'total_pages' => $resume['total_pages']
+        ], 200);
     }
 
     public function ViewResume($resume_id): void
     {
         $exist = $this->exists($resume_id, 'id', 'tradesman_resume');
-        if(!$exist){
-            $this->jsonResponse(['message'=>'Resume not found'], 404);
+        if (!$exist) {
+            $this->jsonResponse(['message' => 'Resume not found'], 404);
             return;
         }
         $resume = $this->resumeModel->viewResume($resume_id);
 
-        if($resume){
+        if ($resume) {
             $this->jsonResponse($resume);
-        } else{
-            $this->jsonResponse(['message'=>'Failed to view Resume'], 500);
+        } else {
+            $this->jsonResponse(['message' => 'Failed to view Resume'], 500);
         }
     }
+
     //post resume of the tradesman
-    public function UpdateResume($user_id, $specialties, $profile_pic,$about_me,$prefered_work_location, $work_fee): void
+    public function UpdateResume($user_id, $specialties, $profile_pic, $about_me, $prefered_work_location, $work_fee): void
     {
-            try {
-                // Convert arrays to JSON
-                $specialties_json = json_encode($specialties);
-                $prefered_work_location_json = json_encode($prefered_work_location);
+        try {
+            // Convert arrays to JSON
+            $specialties_json = json_encode($specialties);
+            $prefered_work_location_json = json_encode($prefered_work_location);
 
-                $fullProfilePicUrl = $this->uploadProfilePic($profile_pic, $this->targetDir);
+            // Upload the profile picture and get the full URL
+            $fullProfilePicUrl = $this->uploadProfilePic($profile_pic, $this->targetDir);
 
+            // Update the resume in the tradesman_resume table
+            $result = $this->resumeModel->UpdateResume($user_id, $specialties_json, $fullProfilePicUrl, $about_me, $prefered_work_location_json, $work_fee);
 
+            if ($result) {
+                // Update the tradesman_profile in the client_booking table
+                $this->clientBookingModel->updateTradesmanProfileInBookings($user_id, $fullProfilePicUrl);
 
-
-                $result = $this->resumeModel->UpdateResume($user_id, $specialties_json,  $fullProfilePicUrl,$about_me ,$prefered_work_location_json, $work_fee);
-                if ($result) {
-                    $this->jsonResponse(['message' => 'Resume Updated successfully.'], 201);
-                } else {
-                    $this->jsonResponse(['message' => 'Something went wrong.'], 500);
-                }
-            } catch (Exception $e) {
-                $this->jsonResponse(['message' => $e->getMessage()], 500);
+                $this->jsonResponse(['message' => 'Resume Updated successfully.'], 201);
+            } else {
+                $this->jsonResponse(['message' => 'Something went wrong.'], 500);
             }
-
+        } catch (Exception $e) {
+            $this->jsonResponse(['message' => $e->getMessage()], 500);
+        }
     }
-
-
-
-
-
 }

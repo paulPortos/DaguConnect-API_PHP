@@ -66,7 +66,8 @@ class Resume extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function StoreResume($email, $user_id,$default_pic,$tradesman_full_name){
+    public function StoreResume($email, $user_id,$default_pic,$tradesman_full_name): bool
+    {
 
         $query = "INSERT INTO $this->table 
                 (email, user_id,specialties,profile_pic,prefered_work_location,tradesman_full_name,updated_at,created_at,is_active) 
@@ -79,16 +80,17 @@ class Resume extends BaseModel
         return $stmt->execute();
     }
 
-    public function UpdateResume($user_id,$specialties, $profile_pic,$about_me, $prefered_work_location,$work_fee){
+    public function UpdateResume($user_id, $specialties, $profile_pic, $about_me, $prefered_work_location, $work_fee): bool
+    {
         $query = "UPDATE $this->table SET
-                   specialties = :specialties,
-                   profile_pic = :profile_pic,
-                   about_me = :about_me,  
-                   prefered_work_location = :prefered_work_location,
-                   work_fee = :work_fee,
-                   updated_at = NOW(),
-                   is_active = true
-                   WHERE user_id = :user_id";
+                specialties = :specialties,
+                profile_pic = :profile_pic,
+                about_me = :about_me,  
+                prefered_work_location = :prefered_work_location,
+                work_fee = :work_fee,
+                updated_at = NOW(),
+                is_active = true
+                WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':specialties', $specialties);
