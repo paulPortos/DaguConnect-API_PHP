@@ -76,7 +76,7 @@ trait User_Seed
     private function seedUser8(): void {
         $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
         $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)");
-        $stmt->execute(['test8', 'test8', 'test8', '1999-03-21' , 0, 'test8@gmail.com', 1, $hashed_password]);
+        $stmt->execute(['Test 8', 'Client', 'test8', '1999-03-21' , 0, 'test8Client@gmail.com', 1, $hashed_password]);
     }
     private function seedUser9(): void {
         $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);

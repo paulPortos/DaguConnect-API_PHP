@@ -4,6 +4,7 @@ namespace Controller;
 
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
+use DaguConnect\Model\Client_Profile;
 use DaguConnect\Model\Resume;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
@@ -23,7 +24,7 @@ class AuthenticationController extends BaseController
     private User $userModel;
     private Resume $resumeModel;
 
-
+    private Client_Profile $clientProfileModel;
 
     use Confirm_Password;
     use ValidateFirstandLastName;
@@ -33,19 +34,20 @@ class AuthenticationController extends BaseController
     use EmailVerification;
     use ValidateEmailAddress;
 
-    public function __construct(User $user_Model, Resume $resume_Model)
+    public function __construct(User $user_Model, Resume $resume_Model, Client_Profile $clientProfile_Model)
     {
 
         $this->db = new config();
         $this->userModel = $user_Model;
         $this->resumeModel = $resume_Model;
+        $this->clientProfileModel = $clientProfile_Model;
     }
 
     public function register($first_name, $last_name, $username, $birthdate, $email, $is_client ,$password, $confirm_password): void
     {
 
         //creates the full name of the tradesman
-        $tradesman_fullname = $first_name." ".$last_name;
+        $fullname = $first_name." ".$last_name;
         //Check if password and confirm password match
         $match = $this->checkPassword($password, $confirm_password);
 
@@ -120,7 +122,9 @@ class AuthenticationController extends BaseController
                 //creates the table for the resume if the user is a tradesman
             if(!$is_client){
                 $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png'; // replace with your default picture path or URL
-                $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic,$tradesman_fullname);
+                $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic, $fullname);
+            } else {
+                $this->clientProfileModel->initialProfile($fullname, $email, $this->userModel->getLastInsertId());
             }
 
                 $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);

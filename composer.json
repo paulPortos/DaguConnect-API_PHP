@@ -4,7 +4,10 @@
       "ext-pdo": "*",
         "phpmailer/phpmailer": "^6.9",
       "ext-gd": "*",
-      "ext-fileinfo": "*"
+      "ext-fileinfo": "*",
+      "ext-posix": "*",
+      "ext-pcntl": "*",
+      "ext-pthreads": "*"
     },
   "autoload": {
     "psr-4": {
