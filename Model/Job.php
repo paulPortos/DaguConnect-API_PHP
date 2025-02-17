@@ -13,7 +13,7 @@ class Job extends BaseModel
         parent::__construct($db);
     }
 
-    public function getJobs(int $page, int $limit ): array
+    public function getJobs(int $page, int $limit): array
     {
         $offset = ($page - 1) * $limit;
 
@@ -23,6 +23,33 @@ class Job extends BaseModel
             $totalJobs = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int to avoid errors
 
             $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE status = 'available' LIMIT :limit OFFSET :offset");
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $totalPages = max(1, ceil($totalJobs / $limit));
+            return [
+                'jobs' => $jobs,
+                'current_page' => $page,
+                'total_pages' => $totalPages
+            ];
+        } catch (PDOException $e) {
+            error_log("Database Error: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function getAllRecentJobs(int $page, int $limit): array
+    {
+        $offset = ($page - 1) * $limit;
+
+        try {
+            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE status = 'available'");
+            $countStmt->execute();
+            $totalJobs = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int to avoid errors
+
+            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE status = 'available' ORDER BY created_at DESC LIMIT :limit OFFSET :offset");
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();

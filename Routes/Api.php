@@ -278,6 +278,14 @@ class Api extends BaseApi
             $messageController = new ChatController(new Chat($this->db));
             $messageController->deleteMessage($message_id, $userId);
         });
+
+        $this->route('GET', '/user/jobs/recent', function () {
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
+
+            $jobController = new JobController(new Job($this->db));
+            $jobController->getAllRecentJobs($page, $limit);
+        });
     }
 
     //Check if the response body for POST is empty

@@ -81,7 +81,6 @@ class ChatController extends BaseController
         $this->jsonResponse($chat_return, 200);
     }
 
-
     public function deleteMessage(int $id, $user_id): void {
         $exist = $this->exists($id, 'id', 'chats');
 

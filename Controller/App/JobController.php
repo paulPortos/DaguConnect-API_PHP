@@ -66,6 +66,22 @@ class JobController extends BaseController
         }
     }
 
+    function getAllRecentJobs(int $page = 1, int $limit = 10): void
+    {
+        $result = $this->job_model->getAllRecentJobs($page, $limit);
+
+        if (empty($result['jobs'])) {
+            $this->jsonResponse(['message' => "No jobs available"], 200);
+            return;
+        }
+
+        $this->jsonResponse([
+            'jobs' => $result['jobs'],
+            'current_page' => $result['current_page'],
+            'total_pages' => $result['total_pages']
+        ], 200);
+    }
+
     public function getAllJobs(int $page = 1, int $limit = 10): void
     {
         $result = $this->job_model->getJobs($page, $limit);
