@@ -66,7 +66,8 @@ class Resume extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function StoreResume($email, $user_id,$default_pic,$tradesman_full_name){
+    public function StoreResume($email, $user_id,$default_pic,$tradesman_full_name): bool
+    {
 
         $query = "INSERT INTO $this->table 
                 (email, user_id,specialties,profile_pic,prefered_work_location,tradesman_full_name,updated_at,created_at,is_active) 

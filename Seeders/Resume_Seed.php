@@ -38,7 +38,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Dagupan",
             200,
             "Ahron Paul Villacote",
             1
@@ -55,7 +55,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test4 test4",
             1
@@ -71,7 +71,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test5 test5",
             1
@@ -88,7 +88,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test6 test6",
             1
@@ -105,7 +105,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test7 test7",
             1
@@ -122,7 +122,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test9 test9",
             1
@@ -138,7 +138,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test10 test10",
             1
@@ -154,7 +154,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test11 test11",
             1
@@ -171,7 +171,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test12 test12",
             1
@@ -188,7 +188,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test13 test13",
             1
@@ -204,7 +204,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "ACRepair", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test14 test14",
             1
@@ -220,7 +220,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             "http://192.168.1.157:8000/uploads/profile_pictures/Default.png",
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "test15 test15",
             1
