@@ -29,7 +29,7 @@ class JobController extends BaseController
         ];
 
         $this->job_status = [
-            'pending','active','declined','complete','cancelled'
+            'Cancelled','Available','On_going','Completed','Failed','Deadline_end'
         ];
         $this->db = new config();
         $this->job_model = $job_model;
