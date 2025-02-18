@@ -22,19 +22,23 @@ class DashboardController extends BaseController
         $totalBookingCancelled = $this->admin_model->getCancelledBookings();
         $totalBookingCompleted = $this->admin_model->getCompletedBookings();
         $totalBooking = $this->admin_model->getAllBookings();
+        $userCountsByDate = $this->admin_model->getUsersCountByDate(); // NEW FUNCTION
 
         if ($totalUserCount <= 0 ) {
             $this->jsonResponse(["Message" => "No users detected"], 200);
         }
-        $this->jsonResponse(["users" => [
-            "totaluser" => $totalUserCount,
-            "activeuser" => $totalActiveUsers,
-            "Pending" => $totalBookingPending,
-            "Active" => $totalBookingActive,
-            "Cancelled" => $totalBookingCancelled,
-            "Completed" => $totalBookingCompleted,
-            "TotalBooking" => $totalBooking
-        ]]);
+        $this->jsonResponse([
+            "users" => [
+                "totaluser" => $totalUserCount,
+                "activeuser" => $totalActiveUsers,
+                "Pending" => $totalBookingPending,
+                "Active" => $totalBookingActive,
+                "Cancelled" => $totalBookingCancelled,
+                "Completed" => $totalBookingCompleted,
+                "TotalBooking" => $totalBooking,
+                "UserCountsByDate" => $userCountsByDate // RETURNING USER CREATION COUNTS
+                ]
+            ]);
     }
 
     public function bookingStatistics() {
