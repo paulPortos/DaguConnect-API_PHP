@@ -125,20 +125,20 @@ class Api extends BaseApi
 
             ['email' => $email, 'password' => $password] = $this->requestBody;
 
-            $authController = new AuthenticationController(new User($this->db),new Resume($this->db));
+            $authController = new AuthenticationController(new User($this->db),new Resume($this->db),new Client_Profile($this->db));
             $authController->login($email, $password);
         });
 
         $this->route('DELETE', '/user/logout', function () {
 
-            $authController = new AuthenticationController(new User($this->db), new Resume($this->db));
+            $authController = new AuthenticationController(new User($this->db), new Resume($this->db),new Client_Profile($this->db));
             $authController->logout();
         });
 
         $this->route('GET', '/verify-email', function () {
             $email = $_GET['email'] ?? null;
 
-            $AuthController = new AuthenticationController(new User($this->db),new Resume($this->db));
+            $AuthController = new AuthenticationController(new User($this->db),new Resume($this->db),new Client_Profile($this->db));
             $AuthController->verifyEmail($email);
         });
 

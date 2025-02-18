@@ -197,3 +197,30 @@ Stack trace:
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 124
 [18-Feb-2025 06:16:40 UTC] PHP Warning:  Undefined array key "birthdate" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 111
+[18-Feb-2025 06:55:02 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Controller\AuthenticationController::__construct(), 2 passed in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 128 and exactly 3 expected in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AuthenticationController.php:37
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(128): Controller\AuthenticationController->__construct(Object(DaguConnect\Model\User), Object(DaguConnect\Model\Resume))
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AuthenticationController.php on line 37
+[18-Feb-2025 06:55:17 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Controller\AuthenticationController::__construct(), 2 passed in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 128 and exactly 3 expected in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AuthenticationController.php:37
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(128): Controller\AuthenticationController->__construct(Object(DaguConnect\Model\User), Object(DaguConnect\Model\Resume))
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AuthenticationController.php on line 37
+[18-Feb-2025 06:56:02 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Controller\AuthenticationController::__construct(), 2 passed in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 128 and exactly 3 expected in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AuthenticationController.php:37
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(128): Controller\AuthenticationController->__construct(Object(DaguConnect\Model\User), Object(DaguConnect\Model\Resume))
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AuthenticationController.php on line 37
