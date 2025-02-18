@@ -46,3 +46,154 @@ Stack trace:
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\IfDataExists.php on line 22
 [17-Feb-2025 08:58:42 UTC] Error getting resumes: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.tradesman_resume' doesn't exist
 [17-Feb-2025 08:58:46 UTC] error failed to validate: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.user_tokens' doesn't exist
+[17-Feb-2025 10:46:56 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'rating' in 'field list' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:20
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(20): PDO->prepare('INSERT INTO rat...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman(3, 4, 4, 'adwasdawdawds', 'test4 test4')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(162): Controller\App\RatingsController->rateTradesman(3, 4, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 20
+[17-Feb-2025 10:47:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`tradesman_id`) REFERENCES `client_booking` (`tradesman_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman('3', '4', '4', 'adwasdawdawds', 'test4 test4')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(162): Controller\App\RatingsController->rateTradesman(3, 4, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[17-Feb-2025 10:49:35 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`tradesman_id`) REFERENCES `client_booking` (`tradesman_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman('3', '4', '4', 'adwasdawdawds', 'test4 test4')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(162): Controller\App\RatingsController->rateTradesman(3, 4, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[17-Feb-2025 10:49:54 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`tradesman_id`) REFERENCES `client_booking` (`tradesman_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman('3', '4', '4', 'adwasdawdawds', 'test4 test4')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(162): Controller\App\RatingsController->rateTradesman(3, 4, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[17-Feb-2025 10:51:28 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`tradesman_id`) REFERENCES `client_booking` (`tradesman_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman('3', '3', '4', 'adwasdawdawds', 'Alice Johnson')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(162): Controller\App\RatingsController->rateTradesman(3, 3, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[17-Feb-2025 10:54:19 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`tradesman_id`) REFERENCES `client_booking` (`tradesman_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman('3', '3', '4', 'adwasdawdawds', 'Alice Johnson')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(162): Controller\App\RatingsController->rateTradesman(3, 3, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[17-Feb-2025 10:54:50 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`tradesman_id`) REFERENCES `client_booking` (`tradesman_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman('3', '3', '4', 'adwasdawdawds', 'Alice Johnson')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(162): Controller\App\RatingsController->rateTradesman(3, 3, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[17-Feb-2025 10:57:05 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`tradesman_id`) REFERENCES `client_booking` (`tradesman_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman('3', '3', '4', 'adwasdawdawds', 'Alice Johnson')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(163): Controller\App\RatingsController->rateTradesman(3, 3, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[17-Feb-2025 12:46:36 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`tradesman_id`) REFERENCES `client_booking` (`tradesman_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(24): DaguConnect\Model\Rating->RateTradesman('3', '3', '4', 'adwasdawdawds', 'Alice Johnson')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(163): Controller\App\RatingsController->rateTradesman(3, 3, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[17-Feb-2025 13:28:47 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:32
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(32): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(37): DaguConnect\Model\Rating->ExistingRating(8, 3)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(163): Controller\App\RatingsController->rateTradesman(8, 3, 4, 'adwasdawdawds')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(48): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 32
+[18-Feb-2025 05:16:29 UTC] PHP Warning:  Undefined array key "message" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 161
+[18-Feb-2025 05:16:29 UTC] PHP Warning:  Undefined array key "rating" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 162
+[18-Feb-2025 05:16:29 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'ratings' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:26
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(26): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(42): DaguConnect\Model\Rating->RateTradesman('8', '3', NULL, NULL, 'test8 test8')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(165): Controller\App\RatingsController->rateTradesman(8, 3, NULL, NULL)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(50): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 26
+[18-Feb-2025 05:33:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 38
+[18-Feb-2025 05:34:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 38
+[18-Feb-2025 05:34:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 38
+[18-Feb-2025 05:54:28 UTC] PHP Parse error:  syntax error, unexpected token "public", expecting "," or ";" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 14
+[18-Feb-2025 05:54:37 UTC] PHP Parse error:  syntax error, unexpected token "public", expecting "," or ";" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 14
+[18-Feb-2025 05:54:54 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tradesman_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php:124
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php(124): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(21): DaguConnect\Model\Resume->ExistingTrademsn(4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(176): Controller\App\ReportController->reportTradesman(1, 4, 'harassment', 'sdawdasdawd')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(50): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 124
+[18-Feb-2025 05:54:56 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tradesman_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php:124
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php(124): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(21): DaguConnect\Model\Resume->ExistingTrademsn(4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(176): Controller\App\ReportController->reportTradesman(1, 4, 'harassment', 'sdawdasdawd')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(50): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 124
+[18-Feb-2025 06:16:40 UTC] PHP Warning:  Undefined array key "birthdate" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 111

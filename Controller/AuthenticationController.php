@@ -112,14 +112,14 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Password must be at least 6 characters long.'], 400);
             return;
         }
+        $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png'; // replace with your default picture path or URL
         //stored the data in the database
-        if($this->userModel->registerUser($first_name, $last_name, $username, $birthdate, $email,$is_client, $password,)){
+        if($this->userModel->registerUser($first_name, $last_name, $username, $birthdate, $email,$default_pic,$is_client, $password,)){
                 //send_email verification
                 Email_Sender::sendVerificationEmail($email);
 
                 //creates the table for the resume if the user is a tradesman
             if(!$is_client){
-                $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png'; // replace with your default picture path or URL
                 $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic,$tradesman_fullname);
             }
 

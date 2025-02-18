@@ -8,6 +8,7 @@ profile_picture VARCHAR(255) NULL,
 suspend TINYINT(1) NOT NULL,
 email_verified_at DATE NULL,
 email VARCHAR(255) NOT NULL,
+profile VARCHAR(255) NULL,
 is_client TINYINT(1) NULL,
 password VARCHAR(255) NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
