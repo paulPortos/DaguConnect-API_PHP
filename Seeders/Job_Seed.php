@@ -2,6 +2,7 @@
 
 namespace DaguConnect\Seeders;
 
+use DaguConnect\Services\Env;
 use PDO;
 
 trait Job_Seed
@@ -9,12 +10,13 @@ trait Job_Seed
     private PDO $db;
 
     public function __construct(PDO $db) {
+        new Env();
         $this->db = $db;
     }
 
     public function seed_jobs(): void {
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $url = "http://{$host}/uploads/profile_pictures/Default.png";
+        $host = $_ENV['IP_ADDRESS'];
+        $url = "http://{$host}:8000/uploads/profile_pictures/Default.png";
         $this->seedJob1($url);
         $this->seedJob2($url);
         $this->seedJob3($url);

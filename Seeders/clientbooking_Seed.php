@@ -2,6 +2,7 @@
 
 namespace DaguConnect\Seeders;
 
+use DaguConnect\Services\Env;
 use PDO;
 
 trait clientbooking_Seed
@@ -10,11 +11,12 @@ trait clientbooking_Seed
     public function __construct(PDO $db)
     {
         $this->db = $db;
+        new Env();
     }
 
     public function seedClientBooking():void{
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $url = "http://{$host}/uploads/profile_pictures/Default.png";
+        $host = $_ENV['IP_ADDRESS'];
+        $url = "http://{$host}:8000/uploads/profile_pictures/Default.png";
         $this->seedClientBooking1($url);
         $this->seedClientBooking2($url);
         $this->seedClientBooking3($url);

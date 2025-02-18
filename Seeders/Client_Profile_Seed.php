@@ -2,6 +2,7 @@
 
 namespace DaguConnect\Seeders;
 
+use DaguConnect\Services\Env;
 use PDO;
 
 trait Client_Profile_Seed
@@ -9,13 +10,14 @@ trait Client_Profile_Seed
     private PDO $db;
 
     public function __construct(PDO $db) {
+        new Env();
         $this->db = $db;
     }
 
     public function seed_client_profile(): void
     {
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $url = "http://{$host}/uploads/profile_pictures/Default.png";
+        $host = $_ENV['IP_ADDRESS'];
+        $url = "http://{$host}:8000/uploads/profile_pictures/Default.png";
         $this->seedClientProfile1($url);
         $this->seedClientProfile2($url);
         $this->seedClientProfile3($url);

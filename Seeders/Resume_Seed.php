@@ -2,19 +2,21 @@
 
 namespace DaguConnect\Seeders;
 
+use DaguConnect\Services\Env;
 use PDO;
 
 trait Resume_Seed
 {
     private PDO $db;
     public function __construct(PDO $db){
+        new Env();
         $this->db = $db;
     }
 
     public function seedResume(): void
     {
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $url = "http://{$host}/uploads/profile_pictures/Default.png";
+        $host = $_ENV['IP_ADDRESS'];
+        $url = "http://{$host}:8000/uploads/profile_pictures/Default.png";
         $this->seedResume1($url);
         $this->seedResume2($url);
         $this->seedResume3($url);
