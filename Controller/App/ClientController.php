@@ -83,7 +83,7 @@ class ClientController extends BaseController
 
             // Handle case where tradesman does not exist
             if (!$resume_id) {
-                $this->jsonResponse(['message' => "Tradesman with ID $tradesman_id does not exist."], 404);
+                $this->jsonResponse(['message' => "Tradesman with ID $tradesman_id does not exist."], 400);
                 return;
             }
 

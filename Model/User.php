@@ -20,14 +20,14 @@ class User extends BaseModel
         parent::__construct($db);
     }
 
-    public function registerUser($first_name, $last_name, $username, $birthdate, $email, $is_client, $password): bool
+    public function registerUser($first_name, $last_name, $username, $birthdate, $email,$profile_pic, $is_client, $password): bool
     {
         try {
             $hash_password = password_hash($password, PASSWORD_ARGON2ID);
 
             $query = "INSERT INTO $this->table 
-                (first_name, last_name, username, birthdate, suspend, email, is_client, password, created_at)
-                VALUES (:first_name, :last_name,:username ,:birthdate, false, :email, :is_client, :password, NOW())";
+                (first_name, last_name, username, birthdate, suspend, email,profile, is_client, password, created_at)
+                VALUES (:first_name, :last_name,:username ,:birthdate, false, :email, :profile_pic, :is_client, :password, NOW())";
 
             $stmt = $this->db->prepare($query);
 
@@ -36,6 +36,7 @@ class User extends BaseModel
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':birthdate', $birthdate);
             $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':profile_pic', $profile_pic);
             $stmt->bindParam(':is_client', $is_client);
             $stmt->bindParam(':password', $hash_password);
             // Execute the query
@@ -104,5 +105,21 @@ class User extends BaseModel
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    public function updateUserProfile($user_id, $profile_pic_url): void
+    {
+        try {
+            $query = "UPDATE $this->table 
+                  SET profile = :profile_pic_url 
+                  WHERE id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':profile_pic_url', $profile_pic_url);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error updating tradesman profile in bookings: " . $e->getMessage());
+        }
     }
 }

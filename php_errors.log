@@ -20,3 +20,12 @@
 [16-Feb-2025 04:11:16 UTC] PHP Warning:  Undefined array key "HTTP_HOST" in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\clientbooking_Seed.php on line 71
 [16-Feb-2025 04:11:16 UTC] PHP Warning:  Undefined array key "HTTP_HOST" in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\clientbooking_Seed.php on line 90
 [16-Feb-2025 04:11:16 UTC] PHP Warning:  Undefined array key "HTTP_HOST" in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\clientbooking_Seed.php on line 109
+[18-Feb-2025 06:13:13 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1 in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\User_Seed.php:38
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\User_Seed.php(38): PDO->prepare('INSERT INTO use...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\User_Seed.php(18): DaguConnect\Seeders\Seed->seedUser1()
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(21): DaguConnect\Seeders\Seed->seed_user()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(17): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\User_Seed.php on line 38

@@ -45,6 +45,7 @@ class AuthenticationController extends BaseController
 
     public function register($first_name, $last_name, $username, $birthdate, $email, $is_client ,$password, $confirm_password): void
     {
+
         //creates the full name of the tradesman
         $fullname = $first_name." ".$last_name;
         //Check if password and confirm password match
@@ -113,7 +114,6 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Password must be at least 6 characters long.'], 400);
             return;
         }
-
         //stored the data in the database
         if($this->userModel->registerUser($first_name, $last_name, $username, $birthdate, $email, $is_client, $password,)){
             //send_email verification
@@ -121,10 +121,9 @@ class AuthenticationController extends BaseController
             $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png';
             //creates the table for the resume if the user is a tradesman
             if(!$is_client) {
-                var_dump("Tradesman");
                 $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic, $fullname);
             } else {
-                $created = $this->clientProfileModel->initialProfile($fullname, $email, $this->userModel->getLastInsertId());
+                $this->clientProfileModel->initialProfile($fullname, $email, $this->userModel->getLastInsertId());
             }
 
             $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);

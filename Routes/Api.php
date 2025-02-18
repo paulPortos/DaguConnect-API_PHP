@@ -6,6 +6,8 @@ use Controller\AdminAuthController;
 use Controller\App\ChatController;
 use Controller\App\JobApplicationController;
 use Controller\App\JobController;
+use Controller\App\RatingsController;
+use Controller\App\ReportController;
 use Controller\APP\ResumeController;
 use Controller\App\ClientController;
 use Controller\App\TradesmanController;
@@ -17,6 +19,8 @@ use DaguConnect\Model\Chat;
 use DaguConnect\Model\Client_Profile;
 use DaguConnect\Model\Job;
 use DaguConnect\Model\Job_Application;
+use DaguConnect\Model\Rating;
+use DaguConnect\Model\Report;
 use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
 use DaguConnect\Model\Tradesman;
@@ -149,8 +153,28 @@ class Api extends BaseApi
             $work_fee = $this->requestBody['work_fee'];
 
             // Create ResumeController and store resume
-            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db));
             $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$about_me,$prefered_work_location,$work_fee);
+        });
+
+        $this->route('POST', '/user/client/ratetradesman/{booking_id}', function ($userId,$booking_id) {
+            $this->responseBodyChecker();
+            $message = $this->requestBody['message'];
+            $rating = $this->requestBody['rating'];
+
+            $RatingController = new RatingsController(new Rating($this->db), new User($this->db),new Client($this->db));
+            $RatingController->rateTradesman($userId,$booking_id,$rating,$message);
+
+        });
+
+        $this->route('POST', '/user/client/reporttradesman/{tradesman_Id}', function($userId,$tradesman_Id){
+            $this->responseBodyChecker();
+
+            $report_reason = $this->requestBody['report_reason'];
+            $report_details = $this->requestBody['report_details'];
+
+            $ReportController = new ReportController(new Report($this->db),new Resume($this->db));
+            $ReportController->reportTradesman($userId,$tradesman_Id,$report_reason,$report_details);
         });
 
         $this->route('POST', '/user/client/booktradesman/{tradesman_Id}', function ($userId,$tradesman_id) {
@@ -248,12 +272,12 @@ class Api extends BaseApi
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
 
-            $ResumeController = new ResumeController(new Resume($this->db),new Client($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db),new Client($this->db),new User($this->db));
             $ResumeController->GetAllResumes($page, $limit);
         });
 
         $this->route('GET', '/user/getresume/{resumeId}', function ($userId,$resumeId) {
-            $ResumeController = new ResumeController(new Resume($this->db),new Client($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db),new Client($this->db),new User($this->db));
             $ResumeController->ViewResume($resumeId);
         });
 

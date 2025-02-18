@@ -6,6 +6,7 @@ use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
+use DaguConnect\Model\User;
 use DaguConnect\Services\FileUploader;
 use Exception;
 use DaguConnect\Services\IfDataExists;
@@ -13,18 +14,21 @@ use DaguConnect\Services\IfDataExists;
 class ResumeController extends BaseController
 {
     private Resume $resumeModel;
+
+    private User $userModel;
     private Client $clientBookingModel;
     use FileUploader;
     protected $targetDir;
 
     use IfDataExists;
-    public function __construct(Resume $resume_Model, Client $client_booking)
+    public function __construct(Resume $resume_Model, Client $client_booking, User $user_model)
     {
         $this->targetDir = "/uploads/profile_pictures/";
         $this->db = new config();
         $this->initializeBaseUrl(); // Initialize baseUrl from FileUploader
         $this->resumeModel = $resume_Model;
         $this->clientBookingModel = $client_booking;
+        $this->userModel = $user_model;
     }
 
     //get the resume
@@ -75,6 +79,8 @@ class ResumeController extends BaseController
             $result = $this->resumeModel->UpdateResume($user_id, $specialties_json, $fullProfilePicUrl, $about_me, $prefered_work_location_json, $work_fee);
 
             if ($result) {
+                //updates the profile in the users table
+                $this->userModel->updateUserProfile($user_id, $fullProfilePicUrl);
                 // Update the tradesman_profile in the client_booking table
                 $this->clientBookingModel->updateTradesmanProfileInBookings($user_id, $fullProfilePicUrl);
 
