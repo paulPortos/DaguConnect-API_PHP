@@ -2,6 +2,7 @@
 
 namespace DaguConnect\Seeders;
 
+use DaguConnect\Services\Env;
 use PDO;
 
 trait User_Seed
@@ -10,13 +11,14 @@ trait User_Seed
     private PDO $db;
 
     public function __construct(PDO $db) {
+        new Env();
         $this->$db = $db;
 
     }
 
     public function seed_user(): void {
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $url = "http://{$host}/uploads/profile_pictures/Default.png";
+        $host = $_ENV['IP_ADDRESS'];
+        $url = "http://{$host}:8000/uploads/profile_pictures/Default.png";
         $this->seedUser1($url);
         $this->seedUser2($url);
         $this->seedUser3($url);
@@ -90,9 +92,9 @@ trait User_Seed
         $stmt->execute(['test10', 'test10', 'test10', '1999-03-21' , 0, 'test10@gmail.com',$url, 0, $hashed_password]);
     }
     private function seedUser11($url): void {
-    $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
-    $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email,profile, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?,?)");
-    $stmt->execute(['test11', 'test11', 'test11', '1999-03-21' , 0, 'test11@gmail.com', $url, 0, $hashed_password]);
+        $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
+        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, birthdate, suspend, email_verified_at, email,profile, is_client, password) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?,?)");
+        $stmt->execute(['test11', 'test11', 'test11', '1999-03-21' , 0, 'test11@gmail.com', $url, 0, $hashed_password]);
     }
     private function seedUser12($url): void {
         $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
