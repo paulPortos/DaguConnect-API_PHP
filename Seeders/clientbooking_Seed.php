@@ -20,7 +20,6 @@ trait clientbooking_Seed
         $this->seedClientBooking3($url);
         $this->seedClientBooking4($url);
         $this->seedClientBooking5($url);
-        echo "Seeding client bookings completed". PHP_EOL;
     }
 
     public function seedClientBooking1($url):void{

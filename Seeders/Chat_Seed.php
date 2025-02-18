@@ -14,7 +14,6 @@ trait Chat_Seed {
     public function seed_chat_message(): void {
         $this->seedChat1();
         $this->seedChat2();
-        echo "Seeding chats table and messages table complete" . PHP_EOL;
     }
 
     private function seedChat1(): void {

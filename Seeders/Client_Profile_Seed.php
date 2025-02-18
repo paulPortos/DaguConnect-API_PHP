@@ -19,7 +19,6 @@ trait Client_Profile_Seed
         $this->seedClientProfile1($url);
         $this->seedClientProfile2($url);
         $this->seedClientProfile3($url);
-        echo "Seeding client_profile completed". PHP_EOL;
     }
 
     public function seedClientProfile1($url): void

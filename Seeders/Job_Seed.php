@@ -27,7 +27,6 @@ trait Job_Seed
         $this->seedJob10($url);
         $this->seedJob11($url);
         $this->seedJob12($url);
-        echo "Seeding jobs table complete" . PHP_EOL;
     }
 
     private function seedJob1($url): void {

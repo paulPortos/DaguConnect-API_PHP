@@ -14,6 +14,7 @@ use Controller\Web\DashboardController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\Chat;
+use DaguConnect\Model\Client_Profile;
 use DaguConnect\Model\Job;
 use DaguConnect\Model\Job_Application;
 use DaguConnect\Model\Resume;
@@ -111,7 +112,7 @@ class Api extends BaseApi
                 'confirm_password' => $confirm_password
             ] = $this->requestBody;
 
-            $AuthController = new AuthenticationController(new User($this->db), new Resume($this->db));
+            $AuthController = new AuthenticationController(new User($this->db), new Resume($this->db), new Client_Profile($this->db));
             $AuthController->register($first_name, $last_name, $username,$birthdate, $email,$is_client ,$password, $confirm_password);
         });
 

@@ -69,7 +69,7 @@ class Client_Profile extends BaseModel
             $stmt->bindParam(':full_name' , $full_name);
             $stmt->bindParam(':email' , $email);
             $stmt->bindParam(':address' , $address);
-            $stmt->bindParam(':profile_picture' , $defaul_profile);
+            $stmt->bindParam(':profile_picture' , $default_profile);
             $stmt->execute();
 
             return true;

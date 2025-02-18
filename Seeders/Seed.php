@@ -13,6 +13,11 @@ class Seed {
     use clientbooking_Seed;
     use Client_Profile_Seed;
     private PDO $db;
+    const RED = "\033[31m";
+    const GREEN = "\033[32m";
+    const YELLOW = "\033[33m";
+    const BLUE = "\033[34m";
+    const RESET = "\033[0m"; // Resets text color to default
 
     public function __construct(PDO $db) {
         $this->db = $db;
@@ -20,8 +25,7 @@ class Seed {
     }
 
     private function seed_data(): void {
-        echo "Seeding" . PHP_EOL;
-
+        echo self::YELLOW . "--Seeding database--" . self::RESET . PHP_EOL;
         $seeders = [
             'seed_user' => 'User',
             'seed_jobs' => 'Jobs',
@@ -33,7 +37,7 @@ class Seed {
         ];
 
         foreach ($seeders as $method => $name) {
-            echo "Seeding $name ";
+            echo "Seeding $name           ";
             for ($i = 0; $i < 3; $i++) {
                 echo ".";
                 usleep(500000); // 0.5-second delay for effect

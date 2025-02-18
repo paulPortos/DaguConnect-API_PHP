@@ -30,7 +30,6 @@ trait User_Seed
         $this->seedUser13();
         $this->seedUser14();
         $this->seedUser15();
-        echo "Seeding users table complete" . PHP_EOL;
     }
 
     private function seedUser1 (): void {

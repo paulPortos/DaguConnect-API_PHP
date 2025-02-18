@@ -45,7 +45,6 @@ class AuthenticationController extends BaseController
 
     public function register($first_name, $last_name, $username, $birthdate, $email, $is_client ,$password, $confirm_password): void
     {
-
         //creates the full name of the tradesman
         $fullname = $first_name." ".$last_name;
         //Check if password and confirm password match
@@ -114,20 +113,23 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Password must be at least 6 characters long.'], 400);
             return;
         }
-        //stored the data in the database
-        if($this->userModel->registerUser($first_name, $last_name, $username, $birthdate, $email,$is_client, $password,)){
-                //send_email verification
-                Email_Sender::sendVerificationEmail($email);
 
-                //creates the table for the resume if the user is a tradesman
-            if(!$is_client){
-                $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png'; // replace with your default picture path or URL
+        //stored the data in the database
+        if($this->userModel->registerUser($first_name, $last_name, $username, $birthdate, $email, $is_client, $password,)){
+            //send_email verification
+            Email_Sender::sendVerificationEmail($email);
+            $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png';
+            //creates the table for the resume if the user is a tradesman
+            if(!$is_client) {
+                var_dump("Tradesman");
                 $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic, $fullname);
             } else {
-                $this->clientProfileModel->initialProfile($fullname, $email, $this->userModel->getLastInsertId());
+                $created = $this->clientProfileModel->initialProfile($fullname, $email, $this->userModel->getLastInsertId());
             }
 
-                $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);
+            $this->jsonResponse(['message' => "Account created successfully.Please verify your email"], 201);
+        } else {
+            $this->jsonResponse(["message" => "Internal Server Error"], 500);
         }
     }
 

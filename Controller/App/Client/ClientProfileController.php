@@ -27,6 +27,11 @@ class ClientProfileController extends BaseController
     }
 
     public function updateProfileAddress(int $user_id, String $address): void {
+        
+        if (empty($address)) {
+            $this->jsonResponse(['message' => "Address cannot be empty."], 400);
+        }
+
         $profile = $this->model->updateProfileAddress($user_id, $address);
         if ($profile) {
             $this->jsonResponse(['message' => "Updated successfully!"], 200);

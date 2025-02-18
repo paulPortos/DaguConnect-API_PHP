@@ -27,7 +27,6 @@ trait Resume_Seed
         $this->seedResume10($url);
         $this->seedResume11($url);
         $this->seedResume12($url);
-        echo"Seeding resume complete". PHP_EOL;
     }
 
     public function seedResume1($url): void
