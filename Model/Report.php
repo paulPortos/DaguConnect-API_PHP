@@ -42,4 +42,19 @@ class Report extends BaseModel
         return $stmt->fetchColumn() > 0;
     }
 
+    public function updateTradesmanProfileInReport($user_id, $profile_pic_url): void
+    {
+        try {
+            $query = "UPDATE $this->table 
+                  SET tradesman_profile = :profile_pic_url 
+                  WHERE tradesman_id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':profile_pic_url', $profile_pic_url);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error updating tradesman profile in report: " . $e->getMessage());
+        }
+    }
+
 }

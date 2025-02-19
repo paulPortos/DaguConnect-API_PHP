@@ -4,6 +4,7 @@ namespace Controller\App;
 
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
+use DaguConnect\Model\Report;
 use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
 use DaguConnect\Model\User;
@@ -15,13 +16,16 @@ class ResumeController extends BaseController
 {
     private Resume $resumeModel;
 
+    private Report $reportModel;
     private User $userModel;
     private Client $clientBookingModel;
     use FileUploader;
     protected $targetDir;
 
     use IfDataExists;
-    public function __construct(Resume $resume_Model, Client $client_booking, User $user_model)
+
+
+    public function __construct(Resume $resume_Model, Client $client_booking, User $user_model,Report $report_model)
     {
         $this->targetDir = "/uploads/profile_pictures/";
         $this->db = new config();
@@ -29,6 +33,7 @@ class ResumeController extends BaseController
         $this->resumeModel = $resume_Model;
         $this->clientBookingModel = $client_booking;
         $this->userModel = $user_model;
+        $this->reportModel = $report_model;
     }
 
     //get the resume
@@ -83,6 +88,8 @@ class ResumeController extends BaseController
                 $this->userModel->updateUserProfile($user_id, $fullProfilePicUrl);
                 // Update the tradesman_profile in the client_booking table
                 $this->clientBookingModel->updateTradesmanProfileInBookings($user_id, $fullProfilePicUrl);
+                //update the Report_profile in the client_booking table
+                $this->reportModel->updateTradesmanProfileInReport($user_id, $fullProfilePicUrl);
 
                 $this->jsonResponse(['message' => 'Resume Updated successfully.'], 201);
             } else {
