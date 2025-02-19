@@ -32,10 +32,11 @@ trait Job_Seed
     }
 
     private function seedJob1($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1,
             'John Doe',
+            1,
             $url,
             1500.00,
             5,
@@ -50,10 +51,11 @@ trait Job_Seed
     }
 
     private function seedJob2($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3,
             'Jane Smith',
+            2,
             $url,
             2000.00,
             5,
@@ -68,10 +70,11 @@ trait Job_Seed
     }
 
     private function seedJob3($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1, // user_id
             'Alice Johnson',
+            1,
             $url,
             1800.00,
             5,
@@ -86,10 +89,11 @@ trait Job_Seed
     }
 
     private function seedJob4($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1, // user_id
             'Alice Johnson',
+            1,
             $url,
             1800.00,
             5,
@@ -104,10 +108,11 @@ trait Job_Seed
     }
 
     private function seedJob5($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
             'Bob Brown',
+            2,
             $url,
             2200.00,
             5,
@@ -122,10 +127,11 @@ trait Job_Seed
     }
 
     private function seedJob6($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
             'Kuya Doc',
+            2,
             $url,
             2200.00,
             5,
@@ -140,10 +146,11 @@ trait Job_Seed
     }
 
     private function seedJob7($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
             'Lolo Diga',
+            2,
             $url,
             2200.00,
             5,
@@ -158,10 +165,11 @@ trait Job_Seed
     }
 
     private function seedJob8($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1, // user_id
             'Ladies Choice Mayonnaise',
+            1,
             $url,
             1800.00,
             5,
@@ -176,10 +184,11 @@ trait Job_Seed
     }
 
     private function seedJob9($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1, // user_id
             'Mr Clean',
+            1,
             $url,
             1800.00,
             5,
@@ -194,10 +203,11 @@ trait Job_Seed
     }
 
     private function seedJob10($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
             'Aqua Boy',
+            2,
             $url,
             1800.00,
             5,
@@ -212,10 +222,11 @@ trait Job_Seed
     }
 
     private function seedJob11($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
             'Rapper D',
+            2,
             $url,
             1800.00,
             5,
@@ -230,10 +241,11 @@ trait Job_Seed
     }
 
     private function seedJob12($url): void {
-        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
             'Vladdy Boy',
+            2,
             $url,
             1800.00,
             5,

@@ -4,6 +4,7 @@ namespace DaguConnect\Routes;
 
 use Controller\AdminAuthController;
 use Controller\App\ChatController;
+use Controller\App\Client\ClientProfileController;
 use Controller\App\JobApplicationController;
 use Controller\App\JobController;
 use Controller\App\RatingsController;
@@ -131,7 +132,7 @@ class Api extends BaseApi
 
         $this->route('DELETE', '/user/logout', function () {
 
-            $authController = new AuthenticationController(new User($this->db), new Resume($this->db),new Client_Profile($this->db));
+            $authController = new AuthenticationController(new User($this->db), new Resume($this->db), new Client_Profile($this->db));
             $authController->logout();
         });
 
@@ -226,7 +227,7 @@ class Api extends BaseApi
         $this->route('POST', '/user/client/create-job', function ($userId) {
             $this->responseBodyChecker();
 
-            $client_fullname = $this->requestBody['client_fullname'] ?? null;
+            $applicant_limit_count = $this->requestBody['applicant_limit_count'] ?? null;
             $salary = $this->requestBody['salary'] ?? null;
             $job_type = $this->requestBody['job_type'] ?? null;
             $job_description = $this->requestBody['job_description'] ?? null;
@@ -235,7 +236,7 @@ class Api extends BaseApi
             $deadline = $this->requestBody['deadline'] ?? null;
 
             $jobController = new JobController(new Job($this->db));
-            $jobController->addJob($userId, $client_fullname, $salary, $job_type, $job_description, $location, $status, $deadline);
+            $jobController->addJob($userId, $salary, $applicant_limit_count, $job_type, $job_description, $location, $status, $deadline);
         });
 
         $this->route('GET', '/user/jobs', function () {
@@ -282,6 +283,7 @@ class Api extends BaseApi
         });
 
         $this->route('POST', '/user/message/send', function ($userId){
+            $this->responseBodyChecker();
             ['receiver_id' => $receiverId, 'message' => $message] = $this->requestBody;
 
             $messageController = new ChatController(new Chat($this->db));
@@ -314,6 +316,22 @@ class Api extends BaseApi
 
             $jobController = new JobController(new Job($this->db));
             $jobController->getAllRecentJobs($page, $limit);
+        });
+
+        $this->route('POST', '/client/update/profile_picture', function ($userId){
+            $this->responseBodyChecker();
+
+            ['profile_picture' => $profile_picture] = $this->requestBody;
+            $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
+            $clientProfileController->updateProfilePicture($userId, $profile_picture);
+        });
+
+        $this->route('POST', '/client/update/profile_address', function ($userId){
+            $this->responseBodyChecker();
+            var_dump($userId);
+            ['address' => $profile_address] = $this->requestBody;
+            $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
+            $clientProfileController->updateProfileAddress($userId, $profile_address);
         });
     }
 

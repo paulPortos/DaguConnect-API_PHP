@@ -9,6 +9,7 @@ use DaguConnect\Model\Resume;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Model\User;
 use DaguConnect\Services\IfDataExists;
+use DaguConnect\Services\RFCEmail;
 use DaguConnect\Services\Trim;
 use DaguConnect\Services\TokenHandler;
 use DaguConnect\PhpMailer\Email_Sender;
@@ -33,6 +34,7 @@ class AuthenticationController extends BaseController
     use TokenHandler;
     use EmailVerification;
     use ValidateEmailAddress;
+    use RFCEmail;
 
     public function __construct(User $user_Model, Resume $resume_Model, Client_Profile $clientProfile_Model)
     {
@@ -49,20 +51,20 @@ class AuthenticationController extends BaseController
         //creates the full name of the tradesman
         $fullname = $first_name." ".$last_name;
         //Check if password and confirm password match
-        $match = $this->checkPassword($password, $confirm_password);
+        $match = self::confirmPassword($password, $confirm_password);
 
         //trim the password and check if the characters are 6 above
-        $CorrectPass = $this->TrimPassword($password);
+        $CorrectPass = self::trimPassword($password);
 
         //trim firstname and last name and check if the character is 1 above
-        $trimedFirstName = $this->TrimFirstName($first_name);
-        $trimedLastName = $this->TrimLastName($last_name);
+        $trimedFirstName = self::trimFirstName($first_name);
+        $trimedLastName = self::trimLastName($last_name);
 
         //checks if the first name and last name has numerical value or not
-        $firstNameandLastnameValidation = $this->validateFirstAndLastName($first_name, $last_name);
+        $firstNameandLastnameValidation = self::validateFirstAndLastName($first_name, $last_name);
 
         //check if the user enters a valid email
-        $emailValidation = $this->validateEmailAddress($email);
+        $emailValidation = self::checkEmail($email);
 
 
         //check if the fields a re all filled up
@@ -76,6 +78,7 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Invalid Firstname must contain two character'], 400);
             return;
         }
+
         //check if the lastname and has 2 character
         if(!$trimedLastName){
             $this->jsonResponse(['message' => 'Invalid Lastname must contain two character'], 400);
@@ -93,9 +96,9 @@ class AuthenticationController extends BaseController
             return;
         }
         //checks if the user
-        //checks the first_name and lastname if it contains a invalid character
+        //checks the first_name and lastname if it contains an invalid character
         if(!$firstNameandLastnameValidation){
-            $this->jsonResponse(['message' => 'First name and Last name should not contain any numerical value.'], 400);
+            $this->jsonResponse(['message' => 'First and Last name should not contain any numerical value.'], 400);
             return;
         }
         //check if the username already exist or not
@@ -152,6 +155,13 @@ class AuthenticationController extends BaseController
         //gets the id by email inputed
         $user = $this->userModel->getUserByEmail($email);
 
+        if (empty($email)){
+            $this->jsonResponse(['message' => "Email address is required."], 400);
+        }
+
+        if (empty($password)){
+            $this->jsonResponse(['message' => "Password is required."], 400);
+        }
 
         //check if the user exist
         if(!$user){
@@ -170,7 +180,7 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Email or password invalid' ], 400);
         }else{
             //generates the token if all the requirements are met
-            $token = $this->CreateToken($user['id'], $this -> db->getDB());
+            $token = $this->createToken($user['id'], $this -> db->getDB());
             if($token){
                 //exclude the pass and the confirm_password from the json response
                 unset($user['password'], $user['confirm_password']);

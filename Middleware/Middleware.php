@@ -30,7 +30,9 @@ trait Middleware
             '/admin/logout',
             '/user/client/booktradesman/{tradesman_Id}',
             '/user/client/ratetradesman/{tradesman_Id}',
-            'user/client/reporttradesman/{tradesman_Id}'
+            'user/client/reporttradesman/{tradesman_Id}',
+            '/client/update/profile_address',
+            '/client/update/profile_picture'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {

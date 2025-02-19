@@ -32,7 +32,7 @@ trait Client_Profile_Seed
     public function seedClientProfile2($url): void
     {
         $stmt = $this->db->prepare("INSERT INTO client_profile (user_id, full_name, email, address, profile_picture) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([2, 'Alice Johnson', 'test@gmail.com', 'San Fabian, Pangasinan', $url]);
+        $stmt->execute([3, 'Alice Johnson', 'test@gmail.com', 'San Fabian, Pangasinan', $url]);
     }
 
     public function seedClientProfile3($url): void

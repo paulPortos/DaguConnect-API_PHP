@@ -2,6 +2,7 @@ CREATE TABLE jobs (
 id INT UNSIGNED AUTO_INCREMENT,
 user_id INT UNSIGNED NOT NULL,
 client_fullname VARCHAR(255) NOT NULL,
+client_profile_id INT UNSIGNED NOT NULL,
 client_profile_picture VARCHAR(255) NOT NULL,
 salary DECIMAL(10,2) NOT NULL,
 applicant_limit_count TINYINT NOT NULL,
@@ -26,6 +27,7 @@ deadline DATE NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+FOREIGN KEY (client_profile_id) REFERENCES client_profile(id) ON DELETE CASCADE,
 INDEX idx_job_type (job_type),
 INDEX idx_location_coords (latitude, longitude)
 ) ENGINE = InnoDB;

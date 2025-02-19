@@ -4,7 +4,7 @@ namespace DaguConnect\Services;
 
 trait Confirm_Password
 {
-    public function checkPassword($password, $confirm_password): bool {
+    public static function confirmPassword($password, $confirm_password): bool {
         if ($password == $confirm_password) {
             return true;
         }

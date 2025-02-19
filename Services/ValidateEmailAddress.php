@@ -10,6 +10,5 @@ trait ValidateEmailAddress
             return false;
         }
         return true;
-
     }
 }

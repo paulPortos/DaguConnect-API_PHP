@@ -60,8 +60,55 @@ class Admin extends BaseModel
         return false; // Login failed
     }
 
+    public function passwordValidation($email, $password): bool
+    {
+        try {
+            $query = "SELECT password FROM $this->table WHERE email = :email";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            $stored_password = $stmt->fetchColumn();
+            if ($stored_password && password_verify($password, $stored_password)){
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public function emailValidation($email): bool {
+        try {
+            $query = "SELECT * FROM $this->table WHERE email = :email";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public function usernameValidation($username): bool {
+        try {
+            $query = "SELECT * FROM $this->table WHERE username = :username";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
     public function createToken($email): string
-{
+    {
     // Verify admin exists
     $query = "SELECT * FROM $this->table WHERE email = :email LIMIT 1";
     $stmt = $this->db->prepare($query);

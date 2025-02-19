@@ -45,7 +45,7 @@ class AdminAuthController extends BaseController
             return;
         } 
 
-        if (!$this->checkPassword($password, $confirm_password)) {
+        if (!self::confirmPassword($password, $confirm_password)) {
             $this->jsonresponse(['message' => 'Passwords do not match.'], 400);
             return;
         }
@@ -64,12 +64,23 @@ class AdminAuthController extends BaseController
 
     public function login($username, $email, $password): void
     {
-        if (empty($username) || empty($email) || empty($password)) {
-            $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
+
+        if (empty($username)){
+            $this->jsonResponse(['message' => 'Username field is required.'], 400);
             return;
         }
-    
-        if (strlen($username) <= 5) {
+
+        if (empty($email)){
+            $this->jsonResponse(['message' => 'Email field is required.'], 400);
+            return;
+        }
+
+        if (empty($password)){
+            $this->jsonResponse(['message' => 'Password field is required.'], 400);
+            return;
+        }
+
+        if (strlen($username) < 5) {
             $this->jsonResponse(['message' => 'Username must be at least 5 characters long.'], 400);
             return;
         }
@@ -78,14 +89,29 @@ class AdminAuthController extends BaseController
             $this->jsonResponse(['message' => 'Password must be at least 8 characters long.'], 400);
             return;
         }
-    
-        if ($this->loggedIn($email, 'admin')) {
-            $this->jsonResponse(['message' => 'Already logged in on another device.'], 400);
+
+        if (!$this->adminModel->usernameValidation($username)) {
+            $this->jsonResponse(['message' => 'Username does not exists.'], 400);
             return;
         }
-    
+
+        if (!$this->adminModel->emailValidation($email)){
+            $this->jsonResponse(['message' => 'Email does not exist!'], 400);
+            return;
+        }
+
+        if ($this->loggedIn($email, 'admin') || $this->isLoggedInUsername($username, 'admin')) {
+            $this->jsonResponse(['message' => 'Already logged in on another device!'], 400);
+            return;
+        }
+
+        if (!$this->adminModel->passwordValidation($email, $password)){
+            $this->jsonResponse(['message' => 'Incorrect password!'], 400);
+            return;
+        }
+
         if (!$this->adminModel->loginUser($username, $email, $password)) {
-            $this->jsonResponse(['message' => 'User does not exist.'], 400);
+            $this->jsonResponse(['message' => 'Internal Server Error.'], 500);
             return;
         }
     

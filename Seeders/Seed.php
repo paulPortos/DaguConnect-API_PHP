@@ -28,12 +28,13 @@ class Seed {
         echo self::YELLOW . "--Seeding database--" . self::RESET . PHP_EOL;
         $seeders = [
             'seed_user' => 'User',
+            'seed_client_profile' => 'Client Profiles',
             'seed_jobs' => 'Jobs',
             'seed_chat_message' => 'Chat Messages',
             'seed_admin' => 'Admin',
             'seedResume' => 'Resumes',
             'seedClientBooking' => 'Client Bookings',
-            'seed_client_profile' => 'Client Profiles',
+
         ];
         $maxLength = max(array_map('strlen', $seeders)); // Find the longest name
 

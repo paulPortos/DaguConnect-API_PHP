@@ -4,7 +4,7 @@ namespace DaguConnect\Services;
 
 trait Trim
 {
-    public function TrimPassword($password): bool
+    public static function trimPassword($password): bool
     {
         $TrimmedPass = trim($password);
 
@@ -15,7 +15,7 @@ trait Trim
         return true;
     }
 
-    public function TrimFirstName($first_name): bool{
+    public static function trimFirstName($first_name): bool{
         $TrimmedFirstName = trim($first_name);
         // Check if the length of the trimmed firstname is at least 2 character
         if (strlen($TrimmedFirstName) < 2) {
@@ -24,7 +24,7 @@ trait Trim
         return true;
     }
 
-    public function TrimLastName($first_name): bool{
+    public static function trimLastName($first_name): bool{
         $TrimmedLastName = trim($first_name);
     // Check if the length of the trimmed lastname is at least 2 character
         if (strlen($TrimmedLastName) < 2) {

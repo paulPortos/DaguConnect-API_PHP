@@ -36,7 +36,7 @@ class JobController extends BaseController
     }
     use IfDataExists;
 
-    public function addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $address, $status, $deadline): void
+    public function addJob($user_id, $salary, $applicant_limit_count, $job_type, $job_description, $address, $status, $deadline): void
     {
         $exist = $this->exists($user_id, "id", "users");
         //Check if user exists
@@ -46,7 +46,7 @@ class JobController extends BaseController
         }
 
         //Check if all required fields are provided and not empty.
-        if (empty($client_fullname) || empty($salary) || empty($job_type) || empty($job_description) || empty($status) || empty($deadline)) {
+        if (empty($salary) || empty($job_type) || empty($job_description) || empty($status) || empty($deadline)) {
             $this->jsonResponse(['message' => "All fields are required and must not be empty."], 400);
             return;
         }
@@ -57,12 +57,19 @@ class JobController extends BaseController
             return;
         }
 
-        $addJob = $this->job_model->addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $address, $status, $deadline);
+        if ($salary <= 100 || $salary > 1000000) {
+            $this->jsonResponse(["message" => "Should be within 100 to 1M pesos"], 400);
+            return;
+        }
+
+        $client_profile_id = $this->job_model->getProfileIdByUserId($user_id);
+        $client_profile_picture = $this->job_model->getProfilePictureById($client_profile_id);
+        $client_fullname = $this->job_model->getFullnameById($client_profile_id);
+        $addJob = $this->job_model->addJob($user_id, $client_fullname, $client_profile_id, $client_profile_picture, $salary, $applicant_limit_count, $job_type, $job_description, $address, $status, $deadline);
         if ($addJob) {
-            $this->jsonResponse(['message' => "Job added successfully."], 200);
+            $this->jsonResponse(['message' => "Job added successfully."], 201);
         } else {
             $this->jsonResponse(['message' => "Failed to add job."], 500);
-            return;
         }
     }
 
@@ -119,6 +126,7 @@ class JobController extends BaseController
     public function viewUserJobs($user_id): void{
         if (!$this->exists($user_id, "id", "users")) {
             $this->jsonResponse(['message' => "User does not exist."], 404);
+            return;
         }
 
         $user_job_post = $this->job_model->viewUserJob($user_id);
@@ -133,6 +141,7 @@ class JobController extends BaseController
     public function updateJob($id, $salary, $job_description, $location, $deadline): void{
         if (empty($salary) || empty($job_description) || empty($location) || empty($deadline)) {
             $this->jsonResponse(['message' => "Fields should not be empty."], 400);
+            return;
         }
 
         $update_job = $this->job_model->updateJob($id, $salary, $job_description, $location, $deadline);

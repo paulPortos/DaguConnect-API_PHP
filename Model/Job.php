@@ -81,12 +81,15 @@ class Job extends BaseModel
         }
     }
 
-    public function addJob($user_id, $client_fullname, $salary, $job_type, $job_description, $address, $status, $deadline): bool {
+    public function addJob($user_id, $client_fullname, $client_profile_id, $client_profile_picture, $salary, $applicant_limit_count, $job_type, $job_description, $address, $status, $deadline): bool {
         try {
-            $stmt = $this->db->prepare("INSERT INTO $this->table (user_id, client_fullname, salary, job_type, job_description, address, status, deadline, created_at) VALUES (:user_id, :client_fullname, :salary, :job_type, :job_description, :address, :status, :deadline, NOW())");
+            $stmt = $this->db->prepare("INSERT INTO $this->table (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, status, deadline, created_at) VALUES (:user_id, :client_fullname, :client_profile_id, :client_profile_picture, :salary, :applicant_limit_count, :job_type, :job_description, :address, :status, :deadline, NOW())");
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':client_fullname', $client_fullname);
+            $stmt->bindParam(':client_profile_id', $client_profile_id);
+            $stmt->bindParam(':client_profile_picture', $client_profile_picture);
             $stmt->bindParam(':salary', $salary);
+            $stmt->bindParam(':applicant_limit_count', $applicant_limit_count);
             $stmt->bindParam(':job_type', $job_type);
             $stmt->bindParam(':job_description', $job_description);
             $stmt->bindParam(':address', $address);
@@ -138,6 +141,43 @@ class Job extends BaseModel
         } catch (PDOException $e) {
             error_log("Error deleting job: ". $e->getMessage());
             return false;
+        }
+    }
+
+    public function getProfileIdByUserId($user_id): int
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT id FROM client_profile WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting profile: " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    public function getProfilePictureById($id):string {
+        try {
+            $stmt = $this->db->prepare("SELECT profile_picture FROM client_profile WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting profile picture: " . $e->getMessage());
+            return "";
+        }
+    }
+
+    public function getFullnameById($id):string {
+        try {
+            $stmt = $this->db->prepare("SELECT full_name FROM client_profile WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting profile picture: " . $e->getMessage());
+            return "";
         }
     }
 }

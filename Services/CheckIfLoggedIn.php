@@ -22,4 +22,17 @@ trait CheckIfLoggedIn
         }
         return false;
     }
+
+    public function isLoggedInUsername($username, $table): bool {
+        $query = "SELECT * FROM $table WHERE username = :username AND token IS NOT NULL";
+
+        $stmt = $this->db->getDB()->prepare($query);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result !== false) {
+            return true;
+        }
+        return false;
+    }
 }
