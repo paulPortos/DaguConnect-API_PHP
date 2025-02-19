@@ -156,7 +156,7 @@ trait Resume_Seed
             json_encode(["Carpentry", "Painting", "Electrician"]),
             $url,
             "hello this is a tester",
-            json_encode(["Lingayen","Dagupan"]),
+            "Lingayen",
             200,
             "tester son",
             1
