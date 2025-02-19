@@ -60,12 +60,13 @@ class Admin extends BaseModel
         return false; // Login failed
     }
 
-    public function passwordValidation($email, $password): bool
+    public function passwordValidation($email, $username, $password): bool
     {
         try {
-            $query = "SELECT password FROM $this->table WHERE email = :email";
+            $query = "SELECT password FROM $this->table WHERE email = :email AND username = :username";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':username', $username);
             $stmt->execute();
 
             $stored_password = $stmt->fetchColumn();
@@ -86,7 +87,10 @@ class Admin extends BaseModel
             $stmt->bindParam(':email', $email);
             $stmt->execute();
 
-            return true;
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }
+            return false;
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;
@@ -100,7 +104,10 @@ class Admin extends BaseModel
             $stmt->bindParam(':username', $username);
             $stmt->execute();
 
-            return true;
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }
+            return false;
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;

@@ -100,13 +100,13 @@ class AdminAuthController extends BaseController
             return;
         }
 
-        if ($this->loggedIn($email, 'admin') || $this->isLoggedInUsername($username, 'admin')) {
-            $this->jsonResponse(['message' => 'Already logged in on another device!'], 400);
+        if (!$this->adminModel->passwordValidation($email, $username, $password)){
+            $this->jsonResponse(['message' => 'Incorrect password!'], 400);
             return;
         }
 
-        if (!$this->adminModel->passwordValidation($email, $password)){
-            $this->jsonResponse(['message' => 'Incorrect password!'], 400);
+        if ($this->loggedIn($email, 'admin') || $this->isLoggedInUsername($username, 'admin')) {
+            $this->jsonResponse(['message' => 'Already logged in on another device!'], 400);
             return;
         }
 
