@@ -13,14 +13,18 @@ class Report extends BaseModel
         parent::__construct($db);
     }
 
-    public function ReportTradesman($tradesman_id,$client_id,$report_reason,$report_details):bool{
-        $query = "INSERT INTO $this->table(tradesman_id, client_id,report_reason,report_details,report_status,reported_date)
-                    VALUES(:tradesman_id,:client_id,:reason,:details,'Pending',NOW())";
+    public function ReportTradesman($tradesman_id,$client_id,$report_reason,$report_details,$tradesman_email,$tradesman_profile,$tradesman_fullname,$client_fullname):bool{
+        $query = "INSERT INTO $this->table(tradesman_id, client_id,report_reason,report_details,tradesman_email,tradesman_profile,tradesman_fullname,client_fullname,report_status,reported_date)
+                    VALUES(:tradesman_id,:client_id,:reason,:details,:tradesman_email,:tradesman_profile,:tradesman_fullname,:client_fullname,'Pending',NOW())";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':tradesman_id', $tradesman_id);
         $stmt->bindParam(':client_id', $client_id);
         $stmt->bindParam(':reason', $report_reason);
         $stmt->bindParam(':details', $report_details);
+        $stmt->bindParam(':tradesman_email', $tradesman_email);
+        $stmt->bindParam(':tradesman_profile', $tradesman_profile);
+        $stmt->bindParam(':tradesman_fullname', $tradesman_fullname);
+        $stmt->bindParam(':client_fullname', $client_fullname);
 
         return $stmt->execute();
     }
@@ -36,6 +40,21 @@ class Report extends BaseModel
         $stmt->bindParam(':client_id', $client_id);
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
+    }
+
+    public function updateTradesmanProfileInReport($user_id, $profile_pic_url): void
+    {
+        try {
+            $query = "UPDATE $this->table 
+                  SET tradesman_profile = :profile_pic_url 
+                  WHERE tradesman_id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':profile_pic_url', $profile_pic_url);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error updating tradesman profile in report: " . $e->getMessage());
+        }
     }
 
 }

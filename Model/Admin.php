@@ -205,6 +205,19 @@ class Admin extends BaseModel
         return (int)$result['count'];
     }
 
+    public function getUsersCountByDate(): array
+    {
+        $query = "SELECT DATE(created_at) AS created_date, COUNT(*) AS user_created 
+              FROM users 
+              GROUP BY DATE(created_at) 
+              ORDER BY created_date";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getAllSuspendedUsers(){
         $query = "SELECT COUNT(*) AS totalSuspended FROM users WHERE suspend = 1";
         $stmt = $this->db->prepare($query);
