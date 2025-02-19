@@ -173,7 +173,7 @@ class Api extends BaseApi
             $report_reason = $this->requestBody['report_reason'];
             $report_details = $this->requestBody['report_details'];
 
-            $ReportController = new ReportController(new Report($this->db),new Resume($this->db));
+            $ReportController = new ReportController(new Report($this->db),new Resume($this->db), new User($this->db));
             $ReportController->reportTradesman($userId,$tradesman_Id,$report_reason,$report_details);
         });
 

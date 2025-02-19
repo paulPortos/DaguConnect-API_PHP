@@ -224,3 +224,192 @@ Stack trace:
 #4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #5 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AuthenticationController.php on line 37
+[18-Feb-2025 08:11:00 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 149
+[18-Feb-2025 08:11:00 UTC] PHP Warning:  Undefined array key "profile_pic" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 150
+[18-Feb-2025 08:11:00 UTC] PHP Warning:  Undefined array key "about_me" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 151
+[18-Feb-2025 08:11:00 UTC] PHP Warning:  Undefined array key "prefered_work_location" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 152
+[18-Feb-2025 08:11:00 UTC] PHP Warning:  Undefined array key "work_fee" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 153
+[18-Feb-2025 08:11:00 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:11:00 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:11:00 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:11:00 UTC] PHP Deprecated:  finfo_file(): Passing null to parameter #2 ($filename) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:11:00 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(76): Controller\App\ResumeController->uploadProfilePic(NULL, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(157): Controller\App\ResumeController->UpdateResume(3, NULL, NULL, NULL, NULL, NULL)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(67): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:11:41 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:11:41 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:11:41 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:11:41 UTC] PHP Deprecated:  finfo_file(): Passing null to parameter #2 ($filename) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:11:41 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(76): Controller\App\ResumeController->uploadProfilePic(NULL, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(157): Controller\App\ResumeController->UpdateResume(3, NULL, NULL, NULL, NULL, NULL)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(67): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:16:55 UTC] PHP Deprecated:  Creation of dynamic property DaguConnect\Routes\Api::$files is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 32
+[18-Feb-2025 08:16:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 149
+[18-Feb-2025 08:16:55 UTC] PHP Warning:  Undefined array key "about_me" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 151
+[18-Feb-2025 08:16:55 UTC] PHP Warning:  Undefined array key "prefered_work_location" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 152
+[18-Feb-2025 08:16:55 UTC] PHP Warning:  Undefined array key "work_fee" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 153
+[18-Feb-2025 08:16:56 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:16:56 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:16:56 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:16:56 UTC] PHP Deprecated:  finfo_file(): Passing null to parameter #2 ($filename) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:16:56 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(76): Controller\App\ResumeController->uploadProfilePic(NULL, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(157): Controller\App\ResumeController->UpdateResume(3, NULL, NULL, NULL, NULL, NULL)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(67): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:17:25 UTC] PHP Deprecated:  Creation of dynamic property DaguConnect\Routes\Api::$files is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 32
+[18-Feb-2025 08:17:40 UTC] PHP Deprecated:  Creation of dynamic property DaguConnect\Routes\Api::$files is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 32
+[18-Feb-2025 08:17:40 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 149
+[18-Feb-2025 08:17:40 UTC] PHP Warning:  Undefined array key "profile_pic" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 150
+[18-Feb-2025 08:17:40 UTC] PHP Warning:  Undefined array key "about_me" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 151
+[18-Feb-2025 08:17:40 UTC] PHP Warning:  Undefined array key "prefered_work_location" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 152
+[18-Feb-2025 08:17:40 UTC] PHP Warning:  Undefined array key "work_fee" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 153
+[18-Feb-2025 08:17:40 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:17:40 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:17:40 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:17:40 UTC] PHP Deprecated:  finfo_file(): Passing null to parameter #2 ($filename) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:17:40 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(76): Controller\App\ResumeController->uploadProfilePic(NULL, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(157): Controller\App\ResumeController->UpdateResume(3, NULL, NULL, NULL, NULL, NULL)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(67): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:20:43 UTC] PHP Warning:  Undefined array key "profile_pic" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 150
+[18-Feb-2025 08:20:43 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:20:43 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:20:43 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:20:43 UTC] PHP Deprecated:  finfo_file(): Passing null to parameter #2 ($filename) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:20:43 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(76): Controller\App\ResumeController->uploadProfilePic(NULL, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(157): Controller\App\ResumeController->UpdateResume(3, Array, NULL, 'tester', 'dagupan', 300)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:20:51 UTC] PHP Warning:  Undefined array key "profile_pic" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 150
+[18-Feb-2025 08:20:51 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:20:51 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[18-Feb-2025 08:20:51 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:20:51 UTC] PHP Deprecated:  finfo_file(): Passing null to parameter #2 ($filename) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 08:20:51 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(76): Controller\App\ResumeController->uploadProfilePic(NULL, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(157): Controller\App\ResumeController->UpdateResume(3, Array, NULL, 'tester', 'dagupan', 300)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[18-Feb-2025 10:03:27 UTC] Error getting resumes: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.tradesman_resume' doesn't exist
+[19-Feb-2025 00:31:51 UTC] error: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away
+[19-Feb-2025 01:57:05 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 62
+[19-Feb-2025 01:57:05 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 27
+[19-Feb-2025 01:57:05 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_email' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:29
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(29): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(69): DaguConnect\Model\Report->ReportTradesman('6', '3', 'Unprofessional ...', 'tae', NULL, 'http://192.168....', 'karlos son', 'Array')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(177): Controller\App\ReportController->reportTradesman(3, 6, 'Unprofessional ...', 'tae')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 6)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 29
+[19-Feb-2025 01:57:20 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 62
+[19-Feb-2025 01:57:20 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 27
+[19-Feb-2025 01:57:20 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_email' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:29
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(29): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(69): DaguConnect\Model\Report->ReportTradesman('6', '3', 'Unprofessional ...', 'tae', NULL, 'http://192.168....', 'karlos son', 'Array')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(177): Controller\App\ReportController->reportTradesman(3, 6, 'Unprofessional ...', 'tae')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 6)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 29
+[19-Feb-2025 01:59:31 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 62
+[19-Feb-2025 01:59:31 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 27
+[19-Feb-2025 01:59:31 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_email' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:29
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(29): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(69): DaguConnect\Model\Report->ReportTradesman('6', '3', 'Unprofessional ...', 'tae', NULL, 'http://192.168....', 'karlos son', 'Array')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(177): Controller\App\ReportController->reportTradesman(3, 6, 'Unprofessional ...', 'tae')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 6)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 29
+[19-Feb-2025 01:59:47 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 62
+[19-Feb-2025 01:59:47 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 27
+[19-Feb-2025 01:59:47 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_email' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:29
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(29): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(69): DaguConnect\Model\Report->ReportTradesman('6', '3', 'Unprofessional ...', 'tae', NULL, 'http://192.168....', 'karlos son', 'Array')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(177): Controller\App\ReportController->reportTradesman(3, 6, 'Unprofessional ...', 'tae')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 6)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 29
+[19-Feb-2025 02:01:29 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 62
+[19-Feb-2025 02:01:29 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 27
+[19-Feb-2025 02:01:29 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_email' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:29
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(29): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(69): DaguConnect\Model\Report->ReportTradesman('4', '8', 'Poor Quality of...', 'fjjf', NULL, 'http://192.168....', 'test4 test4', 'Array')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(177): Controller\App\ReportController->reportTradesman(8, 4, 'Poor Quality of...', 'fjjf')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 29
+[19-Feb-2025 02:03:00 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 62
+[19-Feb-2025 02:03:00 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 27
+[19-Feb-2025 02:03:00 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_email' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:29
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(29): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(69): DaguConnect\Model\Report->ReportTradesman('4', '8', 'Poor Quality of...', 'fjjf', NULL, 'http://192.168....', 'test4 test4', 'Array')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(177): Controller\App\ReportController->reportTradesman(8, 4, 'Poor Quality of...', 'fjjf')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(51): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 29

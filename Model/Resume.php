@@ -103,7 +103,7 @@ class Resume extends BaseModel
 
     public function getTradesmanDetails($resume_id)
     {
-        $query = "SELECT tradesman_full_name, work_fee, profile_pic FROM $this->table WHERE id = :resume_id";
+        $query = "SELECT tradesman_full_name, work_fee, profile_pic, email FROM $this->table WHERE id = :resume_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':resume_id', $resume_id);
         $stmt->execute();
