@@ -114,9 +114,9 @@ class AdminAuthController extends BaseController
                 [
                     'first_name' => $name['first_name'] ?? '',
                     'last_name' => $name['last_name'] ?? '',
-                    'token' => $token,
                     'username' => $username,
                     'email' => $email,
+                    'token' => $token,
                 ]
             ]
         ], 200);
