@@ -31,10 +31,10 @@ trait Middleware
             '/admin/logout',
             '/user/client/booktradesman/{tradesman_Id}',
             '/user/client/ratetradesman/{tradesman_Id}',
-            '/user/client/reporttradesman/{tradesman_Id}',
+            '/user/client/report/tradesman/{tradesman_Id}',
             '/client/update/profile_address',
             '/client/update/profile_picture',
-            '/user/tradesman/update/resumedetails',
+            '/user/tradesman/update/resume/details',
             '/client/update/profile_picture',
             '/user/message/{chatId}/{receiver_id}',
             '/user/chat/get'

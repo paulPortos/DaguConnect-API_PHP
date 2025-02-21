@@ -5,25 +5,28 @@ namespace Controller\App;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Model\Report;
 use DaguConnect\Model\Resume;
+use DaguConnect\Services\FileUploader;
 use DaguConnect\Model\User;
 
 class ReportController extends BaseController
 {
     private Report $report;
     private Resume $resume;
-
+    protected $reportDir;
+    use FileUploader;
     private User $user;
 
     public function __construct(Report $report_model,Resume $resume_model, User $user_model){
         $this->report = $report_model;
         $this->resume = $resume_model;
         $this->user = $user_model;
+        $this->reportDir = "/uploads/reports/";
     }
 
-    public function reportTradesman($client_id,$tradesman_id,$report_reason,$report_details,){
+    public function reportTradesman($client_id,$tradesman_id,$report_reason,$report_details,$report_attachment){
 
 
-        if(empty($report_reason) || empty($report_reason)){
+        if(empty($report_reason) || empty($report_details)|| empty($report_attachment)){
             $this->jsonResponse(['message' => 'Please fill all the fields.'],400);
             return;
         }
@@ -48,6 +51,9 @@ class ReportController extends BaseController
         // get resume ID by tradesman ID and task_type
         $resume_id = $this->resume->getResumeIdByTradesmanId($tradesman_id);
 
+        // Upload the report attachment and get the full URL
+        $fullReportUrl = $this->uploadFile($report_attachment, $this->reportDir);
+
         //gets the values from the resume by resume_id
         $tradesmanDetails = $this->resume->getTradesmanDetails($resume_id['id']);
 
@@ -69,7 +75,7 @@ class ReportController extends BaseController
 
 
 
-        $report = $this->report->ReportTradesman($tradesman_id,$client_id,$report_reason,$report_details,$tradesman_email,$tradesman_profile,$tradesman_fullname,$clients_fullname);
+        $report = $this->report->ReportTradesman($tradesman_id,$client_id,$report_reason,$report_details,$tradesman_email,$tradesman_profile,$tradesman_fullname,$clients_fullname,$fullReportUrl);
 
         if(!$report){
             $this->jsonResponse([

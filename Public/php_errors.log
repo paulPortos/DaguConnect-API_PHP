@@ -656,3 +656,61 @@ Stack trace:
 #4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #5 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 138
+[21-Feb-2025 14:39:49 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 201
+[21-Feb-2025 14:39:49 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 202
+[21-Feb-2025 14:39:49 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 203
+[21-Feb-2025 14:39:49 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:49 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:51 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 201
+[21-Feb-2025 14:39:51 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 202
+[21-Feb-2025 14:39:51 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 203
+[21-Feb-2025 14:39:51 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:51 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:54 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 201
+[21-Feb-2025 14:39:54 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 202
+[21-Feb-2025 14:39:54 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 203
+[21-Feb-2025 14:39:54 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:54 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:40:00 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 202
+[21-Feb-2025 14:40:00 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 203
+[21-Feb-2025 14:40:00 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:40:00 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:41:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Controller\App\ReportController::uploadFile() in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php:54
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'harassblablabla', Array)
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 54
+[21-Feb-2025 14:42:28 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:32
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(55): Controller\App\ReportController->uploadFile('harassblablabla', '/uploads/report...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'harassblablabla', Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[21-Feb-2025 14:43:48 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:32
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(55): Controller\App\ReportController->uploadFile('harassblablabla', '/uploads/report...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'harassblablabla', Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[21-Feb-2025 14:43:58 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:32
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(55): Controller\App\ReportController->uploadFile('tester', '/uploads/report...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'tester', Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32

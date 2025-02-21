@@ -9,7 +9,6 @@ use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
 use DaguConnect\Model\User;
 use DaguConnect\Services\FileUploader;
-use Exception;
 use DaguConnect\Services\IfDataExists;
 
 class ResumeController extends BaseController
@@ -130,9 +129,9 @@ class ResumeController extends BaseController
 
     }
 
-    public function updateTradesmanDetails($user_id,$about_me,$prefered_work_location,$work_fee){
+    public function updateTradesmanDetails($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number){
 
-        $updateResume = $this->resumeModel->updateResume($user_id,$about_me,$prefered_work_location,$work_fee);
+        $updateResume = $this->resumeModel->updateResume($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number);
 
         if($updateResume){
             $this->jsonResponse([

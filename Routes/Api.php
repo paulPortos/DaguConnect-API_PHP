@@ -206,15 +206,16 @@ class Api extends BaseApi
             $ResumeController->submitResume($userId,$specialty,$about_me,$prefered_location,$work_fee,$document,$valid_id_front,$valid_id_back);
         });
 
-        $this->route('PUT', '/user/tradesman/update/resumedetails', function ($userId){
+        $this->route('PUT', '/user/tradesman/update/resume/details', function ($userId){
             $this->responseBodyChecker();
 
             $about_me = $this->requestBody['about_me'];
             $prefered_work_location = $this->requestBody['prefered_work_location'];
             $work_fee = $this->requestBody['work_fee'];
+            $phone_number = $this->requestBody['phone_number'];
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
-            $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee);
+            $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee,$phone_number);
         });
 
 
@@ -228,14 +229,15 @@ class Api extends BaseApi
 
         });
 
-        $this->route('POST', '/user/client/reporttradesman/{tradesman_Id}', function($client_Id,$tradesman_Id){
+        $this->route('POST', '/user/client/report/tradesman/{tradesman_Id}', function($client_Id,$tradesman_Id){
             $this->responseBodyChecker();
 
             $report_reason = $this->requestBody['report_reason'];
             $report_details = $this->requestBody['report_details'];
+            $report_attachment = $_FILES['report_attachment'];
 
             $ReportController = new ReportController(new Report($this->db),new Resume($this->db), new User($this->db));
-            $ReportController->reportTradesman($client_Id,$tradesman_Id,$report_reason,$report_details);
+            $ReportController->reportTradesman($client_Id,$tradesman_Id,$report_reason,$report_details,$report_attachment);
         });
 
         $this->route('POST', '/user/client/booktradesman/{tradesman_Id}', function ($userId,$tradesman_id) {

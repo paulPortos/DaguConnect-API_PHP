@@ -161,12 +161,15 @@ class DashboardController extends BaseController
     public function validateResume($user_id,$status_of_approval){
 
         $is_approve = 0 ;
+        $is_active = 0 ;
         if($status_of_approval == 'Approved'){
             $is_approve = 1;
+            $is_active = 1;
         }
 
 
-        $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve);
+
+        $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve,$is_active);
 
         if($resumeValidataion){
             $this->jsonResponse(['message' => 'Resume validation updated successfully.'],200);
