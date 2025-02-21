@@ -297,8 +297,8 @@ class Admin extends BaseModel
         return false;
     }
 
-    public function getJobAvailableCount(): int {
-        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'available'";
+    public function getAllJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
@@ -307,8 +307,15 @@ class Admin extends BaseModel
         return (int)$result['count'];
     }
 
-    public function getJobOngoingCount(): int {
-        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'ongoing'";
+    public function getJobsList(): array {
+        $query = "SELECT * FROM jobs";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAvailableJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE status = 'Available'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
@@ -317,8 +324,28 @@ class Admin extends BaseModel
         return (int)$result['count'];
     }
 
-    public function getJobCompletedCount(): int {
-        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'done'";
+    public function getOngoingJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE status = 'On_going'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return the count as an integer
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
+
+    public function getCancelledJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE status = 'Cancelled'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return the count as an integer
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
+
+    public function getCompletedJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE status = 'Completed'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 

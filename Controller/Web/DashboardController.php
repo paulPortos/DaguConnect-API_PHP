@@ -22,26 +22,44 @@ class DashboardController extends BaseController
         $totalBookingCancelled = $this->admin_model->getCancelledBookings();
         $totalBookingCompleted = $this->admin_model->getCompletedBookings();
         $totalBooking = $this->admin_model->getAllBookings();
+        $totalJobsAvailable = $this->admin_model->getAvailableJobs();
+        $totalJobsOngoing = $this->admin_model->getOngoingJobs();
+        $totalJobsCompleted = $this->admin_model->getCompletedJobs();
+        $totalJobsCancelled = $this->admin_model->getCancelledJobs();
+        $totalJobs = $this->admin_model->getAllJobs();
         $userCountsByDate = $this->admin_model->getUsersCountByDate(); // NEW FUNCTION
 
         if ($totalUserCount <= 0 ) {
             $this->jsonResponse(["Message" => "No users detected"], 200);
         }
+
+
+
         $this->jsonResponse([
             "users" => [
-                "totaluser" => $totalUserCount,
-                "activeuser" => $totalActiveUsers,
-                "Pending" => $totalBookingPending,
-                "Active" => $totalBookingActive,
-                "Cancelled" => $totalBookingCancelled,
-                "Completed" => $totalBookingCompleted,
-                "TotalBooking" => $totalBooking,
-                "UserCountsByDate" => $userCountsByDate // RETURNING USER CREATION COUNTS
+                "Total_user" => $totalUserCount,
+                "active_user" => $totalActiveUsers,
+                "user_counts_by_date" => $userCountsByDate // RETURNING USER CREATION COUNTS
+                ],
+            "bookings" => [
+                "pending" => $totalBookingPending,
+                "active" => $totalBookingActive,
+                "cancelled" => $totalBookingCancelled,
+                "completed" => $totalBookingCompleted,
+                "total_Booking" => $totalBooking,
+                ],
+            "jobs" => [
+                "available" => $totalJobsAvailable,
+                "ongoing" => $totalJobsOngoing,
+                "cancelled" => $totalJobsCancelled,
+                "completed" => $totalJobsCompleted,
+                "totalJobs" => $totalJobs
                 ]
             ]);
     }
 
-    public function bookingStatistics() {
+    public function bookingStatistics(): void
+    {
 
         $totalBookings = $this->admin_model->getAllBookings();
         $totalActiveBookings = $this->admin_model->getActiveBookings();
@@ -71,7 +89,43 @@ class DashboardController extends BaseController
         );
     }
 
-    public function userManagement(){
+    public function jobsStatistics(): void
+    {
+        $totalJobsAvailable = $this->admin_model->getAvailableJobs();
+        $totalJobsOngoing = $this->admin_model->getOngoingJobs();
+        $totalJobsCompleted = $this->admin_model->getCompletedJobs();
+        $totalJobsCancelled = $this->admin_model->getCancelledJobs();
+        $totalJobs = $this->admin_model->getAllJobs();
+        $jobs = $this->admin_model->getJobsList();
+
+
+        $filteredJobs = array_map(function($jobs){
+
+            return [
+                'fullname' => $jobs['client_fullname'],
+                'job_type' => $jobs['job_type'],
+                'salary' => $jobs['salary'],
+                'applicant_limit_count' => $jobs['applicant_limit_count'],
+                'address' => $jobs['address'],
+                'deadline' => $jobs['deadline'],
+                'status' => $jobs['status'],
+            ];
+        }, $jobs);
+
+        $this -> jsonResponse(
+            [
+                "total_bookings" => $totalJobs,
+                "available" => $totalJobsAvailable,
+                "ongoing" => $totalJobsOngoing,
+                "completed" => $totalJobsCompleted,
+                "cancelled" => $totalJobsCancelled,
+                "jobs" => $filteredJobs
+            ]
+        );
+    }
+
+    public function userManagement(): void
+    {
         $totalUserCount = $this->admin_model->getAllUserCount();
         $totalTradesmanCount = $this->admin_model->getTradesman();
         $totalClientCount = $this->admin_model->getClient();

@@ -74,9 +74,9 @@ class Api extends BaseApi
             $adminController->login($username, $password);
         });
 
-            $this->route('DELETE', '/admin/logout', function ($adminId) {
+        $this->route('DELETE', '/admin/logout', function ($adminId) {
            $adminController = new AdminAuthController(new Admin($this->db));
-            $adminController->logout($adminId);
+           $adminController->logout($adminId);
         });
 
         $this->route('PUT', '/admin/change_password', function () {
@@ -91,6 +91,11 @@ class Api extends BaseApi
         $this->route('GET', '/admin/users/statistic', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->userStatistics();
+        });
+
+        $this->route('GET', '/admin/job/statistic', function () {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->jobsStatistics();
         });
 
         $this->route('GET', '/admin/booking/statistics', function () {
@@ -291,14 +296,24 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/chat/get', function ($userId){
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
             $messageController = new ChatController(new Chat($this->db));
-            $messageController->getChats($userId);
+            $messageController->getChats($userId, $page, $limit);
         });
 
         $this->route('GET', '/client/jobs/view/{userId}', function ($userId){
             $jobController = new JobController(new Job($this->db));
             $jobController->viewUserJobs($userId);
         });
+
+        $this->route('GET', '/user/message/{chatId}', function ($user_id, $chat_id) {
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
+            $messageController = new ChatController(new Chat($this->db));
+            $messageController->getMessages($user_id, $chat_id, $page, $limit);
+        });
+
 
         $this->route('DELETE', '/client/jobs/delete/{jobId}', function ($jobId, $userId){
             $jobController = new JobController(new Job($this->db));

@@ -33,42 +33,92 @@ class Chat extends BaseModel
         }
     }
 
-    public function getChats($user_id): array{
-        try{
-            $user2_id = $user_id;
+    public function getChats(int $user_id, int $page, int $limit): array {
+        $offset = ($page - 1) * $limit;
+
+        try {
+            // Corrected count query
+            $user_id2 = $user_id;
+            $countStmt = $this->db->prepare("SELECT COUNT(DISTINCT CONCAT(LEAST(user1_id, user2_id), '_', GREATEST(user1_id, user2_id))) AS total 
+                                         FROM $this->table 
+                                         WHERE user1_id = :user1_id OR user2_id = :user2_id");
+            $countStmt->bindParam(':user1_id', $user_id, PDO::PARAM_INT);
+            $countStmt->bindParam(':user2_id', $user_id2, PDO::PARAM_INT);
+            $countStmt->execute();
+            $totalChats = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+            // Fetch paginated chats
             $query = "SELECT * FROM $this->table 
-            WHERE user1_id = :user1_id OR user2_id = :user2_id
-            GROUP BY LEAST(user1_id, user2_id), GREATEST(user1_id, user2_id)
-            ORDER BY created_at DESC";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':user1_id', $user_id);
-            $stmt->bindParam(':user2_id', $user2_id);
-            $stmt->execute();
+                  WHERE user1_id = :user1_id OR user2_id = :user2_id
+                  ORDER BY created_at DESC
+                  LIMIT :limit OFFSET :offset";
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user1_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':user2_id', $user_id2, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT); // Use bindValue
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Calculate total pages
+            $totalPages = max(1, ceil($totalChats / $limit));
+
+            return [
+                'chats' => $chats,
+                'current_page' => $page,
+                'total_pages' => $totalPages
+            ];
         } catch (PDOException $e) {
-            echo "An error occurred: " . $e->getMessage();
+            error_log("Error fetching chats: " . $e->getMessage());
             return [];
         }
     }
 
-    public function getMessages($user_id, $chat_id): array{
-        try{
+
+    public function getMessages(int $user_id, int $chat_id, int $page, int $limit): array {
+        $offset = ($page - 1) * $limit;
+        var_dump($user_id);
+        try {
+            // Get total number of messages in the chat
+            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->message 
+                                         WHERE (user_id = :user_id AND receiver_id = :chat_id) 
+                                         OR (user_id = :chat_id AND receiver_id = :user_id)");
+            $countStmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $countStmt->bindParam(':chat_id', $chat_id, PDO::PARAM_INT);
+            $countStmt->execute();
+            $totalMessages = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // Cast to int
+
+            // Fetch paginated messages
             $query = "SELECT * FROM $this->message 
-            WHERE (user_id = :user_id AND receiver_id = :chat_id) 
-            OR (user_id = :chat_id AND receiver_id = :user_id)
-            ORDER BY created_at ASC";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':chat_id', $chat_id);
-            $stmt->execute();
+                  WHERE (user_id = :user_id AND receiver_id = :chat_id) 
+                  OR (user_id = :chat_id AND receiver_id = :user_id)
+                  ORDER BY created_at ASC
+                  LIMIT :limit OFFSET :offset";
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':chat_id', $chat_id, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Calculate total pages
+            $totalPages = max(1, ceil($totalMessages / $limit));
+
+            return [
+                'messages' => $messages,
+                'current_page' => $page,
+                'total_pages' => $totalPages
+            ];
         } catch (PDOException $e) {
-            error_log("Error fetching messages: ". $e->getMessage());
+            error_log("Error fetching messages: " . $e->getMessage());
             return [];
         }
     }
+
+
 
     public function deleteMessage($id, $user_id): bool
     {

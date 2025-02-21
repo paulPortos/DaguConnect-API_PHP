@@ -8,13 +8,14 @@ use DaguConnect\Model\Admin;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\CheckIfLoggedIn;
+use DaguConnect\Services\ValidateFirstandLastName;
 
 class AdminAuthController extends BaseController
 {
     use Confirm_Password;
     use IfDataExists;
     use CheckIfLoggedIn;
-
+    use ValidateFirstandLastName;
     private Admin $adminModel;
 
     public function __construct(Admin $admin_model)
@@ -27,6 +28,11 @@ class AdminAuthController extends BaseController
     {
         if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
+            return;
+        }
+
+        if (!$this->validateFirstAndLastName($first_name, $last_name)) {
+            $this->jsonResponse(['message' => 'Name must not contain special characters.'], 400);
             return;
         }
 
