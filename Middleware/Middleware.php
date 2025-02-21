@@ -34,7 +34,7 @@ trait Middleware
             '/user/client/reporttradesman/{tradesman_Id}',
             '/client/update/profile_address',
             '/client/update/profile_picture',
-            '/user/tradesman/update/resumedetails'
+            '/user/tradesman/update/resumedetails',
             '/client/update/profile_picture',
             '/user/message/{chatId}/{receiver_id}',
             '/user/chat/get'
