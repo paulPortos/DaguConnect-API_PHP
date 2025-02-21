@@ -637,3 +637,22 @@ Stack trace:
 [21-Feb-2025 10:28:56 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 191
 [21-Feb-2025 10:28:56 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
 [21-Feb-2025 10:28:56 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 11:16:31 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 191
+[21-Feb-2025 11:16:31 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 192
+[21-Feb-2025 11:16:31 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 193
+[21-Feb-2025 11:16:31 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 11:16:31 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 11:16:40 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 191
+[21-Feb-2025 11:16:40 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 192
+[21-Feb-2025 11:16:40 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 193
+[21-Feb-2025 11:16:40 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 11:16:40 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 12:30:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method DaguConnect\Model\Admin::getPendingResume() in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(108): Controller\Web\DashboardController->resumeManagement()
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 138

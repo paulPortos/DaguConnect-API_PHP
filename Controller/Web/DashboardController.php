@@ -54,7 +54,7 @@ class DashboardController extends BaseController
 
             return [
                 'id' => $booking['id'],
-                'title' => $booking['task_description'],
+                'description' => $booking['task_description'],
                 'category' => $booking['task_type'],
                'status' => $booking['booking_status'],
             ];
@@ -106,13 +106,11 @@ class DashboardController extends BaseController
 
     public function validateResume($user_id,$status_of_approval){
 
-        $is_approve = null ;
+        $is_approve = 0 ;
         if($status_of_approval == 'Approved'){
             $is_approve = 1;
         }
-        else if($status_of_approval == 'Declined'){
-            $is_approve = 0;
-        }
+
 
         $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve);
 
@@ -126,11 +124,39 @@ class DashboardController extends BaseController
 
     public function viewUserDetail($user_id){
 
-        $userData = $this->admin_model->viewviewUserDetail($user_id);
+        $userData = $this->admin_model->viewUserDetail($user_id);
         if($userData){
             $this->jsonResponse($userData,200);
         } else {
             $this->jsonResponse(['message' => 'User Not Found'], 400);
         }
+    }
+
+
+    public function resumeManagement(): void
+    {
+        $totalResumeCount = $this->admin_model->getAllResumeCount();
+        $pendingResumeCount = $this->admin_model->getPendingResume();
+        $approvedResumeCount = $this->admin_model->getApprovedResume();
+        $declinedResumeCount = $this->admin_model->getDeclined();
+        $resumes = $this->admin_model->getResumeList();
+
+        // Filter resume data to include only specific keys
+        $filteredResumes = array_map(function($resume) {
+            return [
+                'resume_id' => $resume['user_id'],
+                'name' => $resume['tradesman_full_name'],
+                'email' => $resume['email'],
+                'status' => $resume['status_of_approval']
+            ];
+        }, $resumes);
+
+        $this->jsonResponse([
+            "total_resume" => $totalResumeCount,
+            "pending_resume" => $pendingResumeCount,
+            "approved_resume" => $approvedResumeCount,
+            "declined_resume" => $declinedResumeCount,
+            "resume" => $filteredResumes
+        ],200);
     }
 }

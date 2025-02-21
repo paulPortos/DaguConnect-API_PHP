@@ -364,7 +364,7 @@ class Admin extends BaseModel
     }
 
 
-    public function viewviewUserDetail($user_id){
+    public function viewUserDetail($user_id){
         $query = "SELECT  * FROM tradesman_resume WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $user_id);
@@ -372,6 +372,50 @@ class Admin extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
 
     }
+
+    public function getAllResumeCount(){
+        $query = "SELECT COUNT(*) AS totalResume FROM tradesman_resume WHERE status_of_approval IS NOT NULL";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalResume'];
+
+    }
+
+    public function getPendingResume(){
+        $query = "SELECT COUNT(*) AS totalPending FROM tradesman_resume WHERE status_of_approval = 'Pending'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalPending'];
+    }
+
+    public function getApprovedResume(){
+        $query = "SELECT COUNT(*) AS totalApproved FROM tradesman_resume WHERE status_of_approval = 'Approved'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalApproved'];
+    }
+    public function getDeclined(){
+        $query = "SELECT COUNT(*) AS totalDeclined FROM tradesman_resume WHERE status_of_approval = 'Declined'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalDeclined'];
+
+    }
+
+    public function getResumeList(){
+        $query = "SELECT * FROM tradesman_resume WHERE status_of_approval IS NOT NULL";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+
 
 
 }

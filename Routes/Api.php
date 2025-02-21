@@ -98,9 +98,14 @@ class Api extends BaseApi
             $adminController->bookingStatistics();
         });
 
-        $this -> route('GET', '/admin/usermanagement', function () {
+        $this -> route('GET', '/admin/user/management', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->userManagement();
+        });
+
+        $this -> route('GET', '/admin/resume/management', function () {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->resumeManagement();
         });
 
         $this->route('PUT', '/admin/validate/Resume/{tradesman_id}',function ($user_id,$tradesman_id){
