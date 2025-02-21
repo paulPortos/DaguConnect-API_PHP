@@ -186,12 +186,14 @@ class Api extends BaseApi
 
             $specialty = $this->requestBody['specialty'] ;
             $about_me = $this->requestBody['about_me'];
-            $certificate = $_FILES['certificate'];
+            $work_fee = $this->requestBody['work_fee'];
+            $prefered_location = $this->requestBody['prefered_location'];
+            $document = $_FILES['document'];
             $valid_id_front = $_FILES['valid_id_front'];
             $valid_id_back = $_FILES['valid_id_back'];
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
-            $ResumeController->submitResume($userId,$specialty,$about_me,$certificate,$valid_id_front,$valid_id_back);
+            $ResumeController->submitResume($userId,$specialty,$about_me,$work_fee,$prefered_location,$document,$valid_id_front,$valid_id_back);
         });
 
         $this->route('PUT', '/user/tradesman/update/resumedetails', function ($userId){

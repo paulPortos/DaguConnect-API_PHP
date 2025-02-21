@@ -47,3 +47,5 @@ Stack trace:
 #4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
 #5 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 36
+[21-Feb-2025 08:48:30 UTC] PHP Warning:  POST Content-Length of 15384055 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[21-Feb-2025 08:48:58 UTC] PHP Warning:  POST Content-Length of 15384055 bytes exceeds the limit of 8388608 bytes in Unknown on line 0

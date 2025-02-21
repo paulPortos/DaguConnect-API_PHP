@@ -66,16 +66,17 @@ class Resume extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function StoreResume($email, $user_id,$default_pic,$tradesman_full_name): bool
+    public function StoreResume($email, $user_id,$default_pic,$birthdate,$tradesman_full_name): bool
     {
 
         $query = "INSERT INTO $this->table 
-                (email, user_id,specialties,profile_pic,prefered_work_location,tradesman_full_name,updated_at,created_at,is_active) 
-                VALUES(:email, :user_id,'null',:deafault_pic,'null',:tradesman_full_name,NOW(), NOW(),false)";
+                (email, user_id,specialty,profile_pic,phone_number,birthdate,prefered_work_location,tradesman_full_name,updated_at,created_at,is_active) 
+                VALUES(:email, :user_id,'null',:deafault_pic,NULL,:birthdate,NULL,:tradesman_full_name,NOW(), NOW(),false)";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':deafault_pic', $default_pic);
+        $stmt->bindParam(':birthdate',$birthdate);
         $stmt->bindParam(':tradesman_full_name', $tradesman_full_name);
         return $stmt->execute();
     }
@@ -126,12 +127,14 @@ class Resume extends BaseModel
         return $stmt->rowCount() > 0;
     }
 
-    public function SubmitResume($user_id, $specialty, $about_me, $certificate, $Valid_Id_Front, $Valid_Id_Back): bool
+    public function SubmitResume($user_id, $specialty,$about_me, $document,$work_fee,$prefered_work_location, $Valid_Id_Front, $Valid_Id_Back): bool
     {
         $query = "UPDATE $this->table 
               SET specialty = :specialty, 
                   about_me = :about_me, 
-                  certificate = :certificate,
+                  documents = :document,
+                  work_fee = :work_fee,
+                  prefered_work_location = :prefered_work_location,
                   valid_id_front = :Valid_Id_Front, 
                   valid_id_Back = :Valid_Id_Back, 
                   status_of_approval = 'Pending'  
@@ -140,8 +143,10 @@ class Resume extends BaseModel
 
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':specialty', $specialty);
+        $stmt->bindParam(':document', $document);
         $stmt->bindParam(':about_me', $about_me);
-        $stmt->bindParam(':certificate', $certificate);
+        $stmt->bindParam(':work_fee', $work_fee);
+        $stmt->bindParam(':prefered_work_location', $prefered_work_location);
         $stmt->bindParam(':Valid_Id_Front', $Valid_Id_Front);
         $stmt->bindParam(':Valid_Id_Back', $Valid_Id_Back);
         $stmt->bindParam(':user_id', $user_id);

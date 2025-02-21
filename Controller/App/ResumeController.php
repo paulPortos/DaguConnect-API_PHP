@@ -21,7 +21,7 @@ class ResumeController extends BaseController
     private Client $clientBookingModel;
     use FileUploader;
     protected $profileDir;
-    protected $certificateDir;
+    protected $documentDir;
 
     protected  $IdfrontDir;
 
@@ -33,7 +33,7 @@ class ResumeController extends BaseController
     public function __construct(Resume $resume_Model, Client $client_booking, User $user_model,Report $report_model)
     {
         $this->profileDir = "/uploads/profile_pictures/";
-        $this->certificateDir = "/uploads/certificate/";
+        $this->documentDir = "/uploads/document/";
         $this->IdfrontDir = "/uploads/IDFRONT/";
         $this->IdbackDir = "/uploads/IDBACK/";
         $this->db = new config();
@@ -145,7 +145,7 @@ class ResumeController extends BaseController
         }
     }
 
-    public function submitResume($user_id,$specialty,$about_me,$certificate,$Valid_Id_Front,$Valid_Id_Back){
+    public function submitResume($user_id,$specialty,$about_me,$work_fee,$prefered_location,$document,$Valid_Id_Front,$Valid_Id_Back){
 
         // Check if the resume is already pending
         $status = $this->resumeModel->getResumeStatus($user_id);
@@ -155,7 +155,7 @@ class ResumeController extends BaseController
         }
 
         // Validate Certificate File Type (Allow PDF, DOC, DOCX)
-        if (!$this->isValidFileType($certificate, ['pdf', 'doc', 'docx'])) {
+        if (!$this->isValidFileType($document, ['pdf', 'doc', 'docx'])) {
             $this->jsonResponse(['message' => 'Invalid certificate format. Only PDF, DOC, and DOCX files are allowed.'], 400);
             return;
         }
@@ -173,7 +173,7 @@ class ResumeController extends BaseController
 
 
         // Upload the certificate and get the full URL
-        $fullcertificateUrl = $this->uploadFile($certificate, $this->certificateDir);
+        $fulldocumentUrl = $this->uploadFile($document, $this->documentDir);
 
         //Upload valid id front and get the full URL
         $fullIdFrontUrl = $this->uploadFile($Valid_Id_Front,$this->IdfrontDir);
@@ -181,7 +181,7 @@ class ResumeController extends BaseController
         //Upload valid id back and get the full URL
         $fullIdBackUrl = $this->uploadFile($Valid_Id_Back,$this->IdbackDir);
 
-        $Resume = $this->resumeModel->SubmitResume($user_id,$specialty,$about_me,$fullcertificateUrl,$fullIdFrontUrl,$fullIdBackUrl);
+        $Resume = $this->resumeModel->SubmitResume($user_id,$specialty,$about_me,$work_fee,$prefered_location,$fulldocumentUrl,$fullIdFrontUrl,$fullIdBackUrl);
 
         if($Resume){
             $this->jsonResponse(['message' => 'Resume Submitted Successfully.'], 201);
