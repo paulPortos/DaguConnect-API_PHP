@@ -145,7 +145,7 @@ class ResumeController extends BaseController
         }
     }
 
-    public function submitResume($user_id,$specialty,$about_me,$work_fee,$prefered_location,$document,$Valid_Id_Front,$Valid_Id_Back){
+    public function submitResume($user_id,$specialty,$about_me,$prefered_location,$work_fee,$document,$Valid_Id_Front,$Valid_Id_Back){
 
         // Check if the resume is already pending
         $status = $this->resumeModel->getResumeStatus($user_id);
@@ -181,7 +181,7 @@ class ResumeController extends BaseController
         //Upload valid id back and get the full URL
         $fullIdBackUrl = $this->uploadFile($Valid_Id_Back,$this->IdbackDir);
 
-        $Resume = $this->resumeModel->SubmitResume($user_id,$specialty,$about_me,$work_fee,$prefered_location,$fulldocumentUrl,$fullIdFrontUrl,$fullIdBackUrl);
+        $Resume = $this->resumeModel->SubmitResume($user_id,$specialty,$about_me,$prefered_location,$work_fee,$fulldocumentUrl,$fullIdFrontUrl,$fullIdBackUrl);
 
         if($Resume){
             $this->jsonResponse(['message' => 'Resume Submitted Successfully.'], 201);

@@ -620,3 +620,20 @@ Stack trace:
 #6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 119
+[21-Feb-2025 10:27:01 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'documents' in 'field list' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php:144
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php(144): PDO->prepare('UPDATE tradesma...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(184): DaguConnect\Model\Resume->SubmitResume(13, 'Welding', 'hello i am who ...', '300', 'Dagupan', 'http://192.168....', 'http://192.168....', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(196): Controller\App\ResumeController->submitResume(13, 'Welding', 'hello i am who ...', '300', 'Dagupan', Array, Array, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(13)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 144
+[21-Feb-2025 10:27:07 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 191
+[21-Feb-2025 10:27:07 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 10:27:07 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 10:28:56 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 191
+[21-Feb-2025 10:28:56 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 10:28:56 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146

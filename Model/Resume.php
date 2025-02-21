@@ -127,14 +127,14 @@ class Resume extends BaseModel
         return $stmt->rowCount() > 0;
     }
 
-    public function SubmitResume($user_id, $specialty,$about_me, $document,$work_fee,$prefered_work_location, $Valid_Id_Front, $Valid_Id_Back): bool
+    public function SubmitResume($user_id, $specialty,$about_me,$prefered_work_location,$work_fee, $document,$Valid_Id_Front, $Valid_Id_Back): bool
     {
         $query = "UPDATE $this->table 
               SET specialty = :specialty, 
                   about_me = :about_me, 
-                  documents = :document,
+                    prefered_work_location = :prefered_work_location,
                   work_fee = :work_fee,
-                  prefered_work_location = :prefered_work_location,
+                   documents = :document,
                   valid_id_front = :Valid_Id_Front, 
                   valid_id_Back = :Valid_Id_Back, 
                   status_of_approval = 'Pending'  
@@ -144,9 +144,9 @@ class Resume extends BaseModel
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':specialty', $specialty);
         $stmt->bindParam(':document', $document);
-        $stmt->bindParam(':about_me', $about_me);
-        $stmt->bindParam(':work_fee', $work_fee);
         $stmt->bindParam(':prefered_work_location', $prefered_work_location);
+        $stmt->bindParam(':work_fee', $work_fee);
+        $stmt->bindParam(':about_me', $about_me);
         $stmt->bindParam(':Valid_Id_Front', $Valid_Id_Front);
         $stmt->bindParam(':Valid_Id_Back', $Valid_Id_Back);
         $stmt->bindParam(':user_id', $user_id);

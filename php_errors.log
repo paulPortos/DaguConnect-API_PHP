@@ -49,3 +49,39 @@ Stack trace:
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 36
 [21-Feb-2025 08:48:30 UTC] PHP Warning:  POST Content-Length of 15384055 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
 [21-Feb-2025 08:48:58 UTC] PHP Warning:  POST Content-Length of 15384055 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[21-Feb-2025 10:40:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.tradesman_resume' doesn't exist in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php:36
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(36): PDO->prepare('INSERT INTO tra...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(20): DaguConnect\Seeders\Seed->seedResume1('http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(50): DaguConnect\Seeders\Seed->seedResume()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(24): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 36
+[21-Feb-2025 10:42:22 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.tradesman_resume' doesn't exist in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php:36
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(36): PDO->prepare('INSERT INTO tra...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(20): DaguConnect\Seeders\Seed->seedResume1('http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(50): DaguConnect\Seeders\Seed->seedResume()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(24): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 36
+[21-Feb-2025 10:48:24 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php:37
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(37): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(20): DaguConnect\Seeders\Seed->seedResume1('http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(50): DaguConnect\Seeders\Seed->seedResume()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(24): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 37
+[21-Feb-2025 10:50:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php:37
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(37): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(20): DaguConnect\Seeders\Seed->seedResume1('http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(50): DaguConnect\Seeders\Seed->seedResume()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(24): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 37
