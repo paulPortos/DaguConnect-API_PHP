@@ -373,9 +373,76 @@ class Admin extends BaseModel
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':token', $token);
         $stmt->execute();
-
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
-
         return $admin ?: null;
     }
+
+    public function validateresume($user_id, $status_of_approval, $is_approve) {
+        $query = "UPDATE tradesman_resume 
+              SET status_of_approval = :status_of_approval, is_approve = :status 
+              WHERE user_id = :user_id AND status_of_approval = 'Pending'";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':status_of_approval', $status_of_approval);
+        $stmt->bindParam(':status', $is_approve);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0; // Check if any row was updated
+    }
+
+
+    public function viewUserDetail($user_id){
+        $query = "SELECT  * FROM tradesman_resume WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    }
+
+    public function getAllResumeCount(){
+        $query = "SELECT COUNT(*) AS totalResume FROM tradesman_resume WHERE status_of_approval IS NOT NULL";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalResume'];
+
+    }
+
+    public function getPendingResume(){
+        $query = "SELECT COUNT(*) AS totalPending FROM tradesman_resume WHERE status_of_approval = 'Pending'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalPending'];
+    }
+
+    public function getApprovedResume(){
+        $query = "SELECT COUNT(*) AS totalApproved FROM tradesman_resume WHERE status_of_approval = 'Approved'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalApproved'];
+    }
+    public function getDeclined(){
+        $query = "SELECT COUNT(*) AS totalDeclined FROM tradesman_resume WHERE status_of_approval = 'Declined'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from bookings and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalDeclined'];
+
+    }
+
+    public function getResumeList(){
+        $query = "SELECT * FROM tradesman_resume WHERE status_of_approval IS NOT NULL";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+
+
+
 }

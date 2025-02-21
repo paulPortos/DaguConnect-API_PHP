@@ -125,7 +125,7 @@ class AuthenticationController extends BaseController
 
             //creates the table for the resume if the user is a tradesman
             if(!$is_client) {
-                $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic, $fullname);
+                $this->resumeModel->StoreResume($email,$this->userModel->getLastInsertId(),$default_pic,$birthdate,$fullname);
             } else {
                 $this->clientProfileModel->initialProfile($fullname, $email, $this->userModel->getLastInsertId());
             }
