@@ -118,10 +118,6 @@ class Api extends BaseApi
         });
 
 
-        $this->route('PUT', '/admin/view/update/userdetails',function ($user_id,$tradesman_id){
-
-        });
-
         $this->route('POST', '/user/register', function () {
             $this->responseBodyChecker();
 
