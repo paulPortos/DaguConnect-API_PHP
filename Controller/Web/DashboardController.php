@@ -117,7 +117,8 @@ class DashboardController extends BaseController
 
         if($resumeValidataion){
             $this->jsonResponse(['message' => 'Resume validation updated successfully.'],200);
-        } else {
+        }
+        else {
             $this->jsonResponse(['message' => 'Resume Is Not Pending'], 400);
         }
     }

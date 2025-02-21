@@ -147,7 +147,6 @@ class Resume extends BaseModel
         $stmt->bindParam(':user_id', $user_id);
 
         $stmt->execute();
-
         // Check if any row was updated
         return $stmt->rowCount() > 0;
     }
