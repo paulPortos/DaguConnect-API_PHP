@@ -130,6 +130,21 @@ class ResumeController extends BaseController
 
     }
 
+    public function updateTradesmanDetails($user_id,$about_me,$prefered_work_location,$work_fee){
+
+        $updateResume = $this->resumeModel->updateResume($user_id,$about_me,$prefered_work_location,$work_fee);
+
+        if($updateResume){
+            $this->jsonResponse([
+                'message' => 'Updated Successfully'
+            ],200);
+        }else{
+            $this->jsonResponse([
+                'message' => 'User not yet Approved'
+            ], 500);
+        }
+    }
+
     public function submitResume($user_id,$specialty,$about_me,$certificate,$Valid_Id_Front,$Valid_Id_Back){
 
         // Check if the resume is already pending

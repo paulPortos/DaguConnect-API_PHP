@@ -109,6 +109,23 @@ class Resume extends BaseModel
         return $stmt->execute();
     }
 
+    public function updateResume($user_id,$about_me,$prefered_work_location,$work_fee): bool
+    {
+        $query = "UPDATE $this->table 
+                    SET about_me = :about_me ,
+                        prefered_work_location = :prefered_work_location, 
+                        work_fee = :work_fee 
+                    WHERE user_id = :user_id AND status_of_approval = 'Approved' ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':about_me', $about_me);
+        $stmt->bindParam(':prefered_work_location', $prefered_work_location);
+        $stmt->bindParam(':work_fee', $work_fee);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        // Check if any row was updated
+        return $stmt->rowCount() > 0;
+    }
+
     public function SubmitResume($user_id, $specialty, $about_me, $certificate, $Valid_Id_Front, $Valid_Id_Back): bool
     {
         $query = "UPDATE $this->table 

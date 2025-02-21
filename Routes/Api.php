@@ -117,6 +117,11 @@ class Api extends BaseApi
             $adminController->viewUserDetail($tradesman_id);
         });
 
+
+        $this->route('PUT', '/admin/view/update/userdetails',function ($user_id,$tradesman_id){
+
+        });
+
         $this->route('POST', '/user/register', function () {
             $this->responseBodyChecker();
 
@@ -191,7 +196,17 @@ class Api extends BaseApi
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
             $ResumeController->submitResume($userId,$specialty,$about_me,$certificate,$valid_id_front,$valid_id_back);
+        });
 
+        $this->route('PUT', '/user/tradesman/update/resumedetails', function ($userId){
+            $this->responseBodyChecker();
+
+            $about_me = $this->requestBody['about_me'];
+            $prefered_work_location = $this->requestBody['prefered_work_location'];
+            $work_fee = $this->requestBody['work_fee'];
+
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
+            $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee);
         });
 
 

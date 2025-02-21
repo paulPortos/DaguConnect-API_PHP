@@ -598,3 +598,25 @@ Stack trace:
 #6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php on line 340
+[21-Feb-2025 01:20:43 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php:123
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php(123): PDOStatement->bindParam(':user_id', '13')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(135): DaguConnect\Model\Resume->updateResume('13', 'tester', 'Dagupan', '200')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(209): Controller\App\ResumeController->updateTradesmanDetails(13, 'tester', 'Dagupan', 200)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(13)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 123
+[21-Feb-2025 01:21:47 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHEREuser_id = ? AND status_of_approval = 'Approved'' at line 5 in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php:119
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php(119): PDO->prepare('UPDATE tradesma...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(135): DaguConnect\Model\Resume->updateResume(13, 'tester', 'Dagupan', 200)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(209): Controller\App\ResumeController->updateTradesmanDetails(13, 'tester', 'Dagupan', 200)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(13)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 119
