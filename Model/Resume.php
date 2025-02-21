@@ -80,7 +80,7 @@ class Resume extends BaseModel
         return $stmt->execute();
     }
 
-    public function UpdateResume($user_id, $specialties, $profile_pic, $about_me, $prefered_work_location, $work_fee): bool
+    /*public function UpdateResume($user_id, $specialties, $profile_pic, $about_me, $prefered_work_location, $work_fee): bool
     {
         $query = "UPDATE $this->table SET
                 specialties = :specialties,
@@ -99,6 +99,40 @@ class Resume extends BaseModel
         $stmt->bindParam(':prefered_work_location', $prefered_work_location);
         $stmt->bindParam(':work_fee', $work_fee);
         return $stmt->execute();
+    }*/
+
+    public function UpdateTradesmanProfile($user_Id,$profile_pic):bool{
+        $query = "UPDATE $this->table SET profile_pic = :profile_pic WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':profile_pic', $profile_pic);
+        $stmt->bindParam(':user_id', $user_Id);
+        return $stmt->execute();
+    }
+
+    public function SubmitResume($user_id, $specialty, $about_me, $certificate, $Valid_Id_Front, $Valid_Id_Back): bool
+    {
+        $query = "UPDATE $this->table 
+              SET specialty = :specialty, 
+                  about_me = :about_me, 
+                  certificate = :certificate,
+                  valid_id_front = :Valid_Id_Front, 
+                  valid_id_Back = :Valid_Id_Back, 
+                  status_of_approval = 'Pending'  
+              WHERE user_id = :user_id 
+              AND (status_of_approval IS NULL OR status_of_approval = 'Declined')";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':specialty', $specialty);
+        $stmt->bindParam(':about_me', $about_me);
+        $stmt->bindParam(':certificate', $certificate);
+        $stmt->bindParam(':Valid_Id_Front', $Valid_Id_Front);
+        $stmt->bindParam(':Valid_Id_Back', $Valid_Id_Back);
+        $stmt->bindParam(':user_id', $user_id);
+
+        $stmt->execute();
+
+        // Check if any row was updated
+        return $stmt->rowCount() > 0;
     }
 
     public function getTradesmanDetails($resume_id)
@@ -125,6 +159,16 @@ class Resume extends BaseModel
         $stmt->bindParam(':tradesman_id', $tradesman_id);
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
+    }
 
+    public function getResumeStatus($user_id)
+    {
+        $query = "SELECT status_of_approval FROM $this->table WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result ? $result['status_of_approval'] : null;
     }
 }

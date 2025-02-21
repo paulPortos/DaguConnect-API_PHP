@@ -13,7 +13,7 @@ trait FileUploader
         $this->baseUrl = 'http://' . $_SERVER['HTTP_HOST']; // Auto-detect domain
     }
 
-    public function uploadProfilePic($file, $directory): string
+    public function uploadFile($file, $directory): string
     {
         // Ensure baseUrl is initialized
         if (!isset($this->baseUrl)) {
@@ -29,10 +29,10 @@ trait FileUploader
         }
 
         // Get file extension
-        $imageFileType = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
         // Generate unique filename
-        $uniqueFileName = uniqid('profile_', true) . '.' . $imageFileType;
+        $uniqueFileName = uniqid('upload_', true) . '.' . $fileExtension;
         $targetFile = $uploadDir . $uniqueFileName;
 
         // Validate file type
@@ -40,19 +40,32 @@ trait FileUploader
         $mimeType = finfo_file($finfo, $file['tmp_name']);
         finfo_close($finfo);
 
-        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $allowedMimeTypes = [
+            'image/jpeg', 'image/png', 'image/gif',
+            'application/pdf', 'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'text/plain'
+        ];
+
         if (!in_array($mimeType, $allowedMimeTypes)) {
-            throw new Exception("Invalid file type. Only JPG, PNG, and GIF files are allowed.");
+            throw new Exception("Invalid file type. Only JPG, PNG, GIF, PDF, DOC, DOCX, and TXT files are allowed.");
         }
 
-        // Validate file size (max 5MB)
-        if ($file['size'] > 5000000) {
-            throw new Exception("File is too large. Max size allowed is 5MB.");
+        // Validate file size (max 10MB)
+        if ($file['size'] > 10000000) {
+            throw new Exception("File is too large. Max size allowed is 10MB.");
         }
 
-        // Resize image to 1080x1080
-        if (!$this->resizeImage($file['tmp_name'], $targetFile, 1080, 1080, $mimeType)) {
-            throw new Exception("Error resizing image.");
+        // If it's an image, resize it
+        if (in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif'])) {
+            if (!$this->resizeImage($file['tmp_name'], $targetFile, 1080, 1080, $mimeType)) {
+                throw new Exception("Error resizing image.");
+            }
+        } else {
+            // Move non-image files directly
+            if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
+                throw new Exception("Error uploading file.");
+            }
         }
 
         // Return full URL including base domain
@@ -92,13 +105,11 @@ trait FileUploader
         $destAspect = $newWidth / $newHeight;
 
         if ($srcAspect > $destAspect) {
-            // Source is wider than destination, crop width
             $newHeightFit = $newHeight;
             $newWidthFit = (int) ($newHeight * $srcAspect);
             $srcX = (int) (($newWidthFit - $newWidth) / 2);
             $srcY = 0;
         } else {
-            // Source is taller than destination, crop height
             $newWidthFit = $newWidth;
             $newHeightFit = (int) ($newWidth / $srcAspect);
             $srcX = 0;
@@ -128,5 +139,11 @@ trait FileUploader
         imagedestroy($newImage);
 
         return true;
+    }
+
+    private function isValidFileType($file, $allowedExtensions)
+    {
+        $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        return in_array($fileExtension, $allowedExtensions);
     }
 }

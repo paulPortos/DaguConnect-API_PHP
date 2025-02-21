@@ -320,4 +320,29 @@ class Admin extends BaseModel
 
         return $admin ?: null;
     }
+
+    public function validateresume($user_id, $status_of_approval, $is_approve) {
+        $query = "UPDATE tradesman_resume 
+              SET status_of_approval = :status_of_approval, is_approve = :status 
+              WHERE user_id = :user_id AND status_of_approval = 'Pending'";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':status_of_approval', $status_of_approval);
+        $stmt->bindParam(':status', $is_approve);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0; // Check if any row was updated
+    }
+
+
+    public function viewviewUserDetail($user_id){
+        $query = "SELECT  * FROM tradesman_resume WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    }
+
+
 }

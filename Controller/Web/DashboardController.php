@@ -101,4 +101,34 @@ class DashboardController extends BaseController
             ]
         );
     }
+
+
+    public function validateResume($user_id,$status_of_approval){
+
+        $is_approve = null ;
+        if($status_of_approval == 'Approved'){
+            $is_approve = 1;
+        }
+        else if($status_of_approval == 'Declined'){
+            $is_approve = 0;
+        }
+
+        $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve);
+
+        if($resumeValidataion){
+            $this->jsonResponse(['message' => 'Resume validation updated successfully.'],200);
+        } else {
+            $this->jsonResponse(['message' => 'Resume Is Not Pending'], 400);
+        }
+    }
+
+    public function viewUserDetail($user_id){
+
+        $userData = $this->admin_model->viewviewUserDetail($user_id);
+        if($userData){
+            $this->jsonResponse($userData,200);
+        } else {
+            $this->jsonResponse(['message' => 'User Not Found'], 400);
+        }
+    }
 }

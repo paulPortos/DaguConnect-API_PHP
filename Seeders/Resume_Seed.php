@@ -33,11 +33,11 @@ trait Resume_Seed
 
     public function seedResume1($url): void
     {
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "vahron24@gmail.com",
             2,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "Electrician",
             $url,
             "hello this is a tester",
             "Dagupan",
@@ -50,11 +50,11 @@ trait Resume_Seed
     public function seedResume2($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test4@gmail.com",
             4,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "Painting",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -66,11 +66,11 @@ trait Resume_Seed
     public function seedResume3($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test5@gmail.com",
             5,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "Electrician",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -83,11 +83,11 @@ trait Resume_Seed
     public function seedResume4($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test6@gmail.com",
             6,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+           "Carpentry",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -100,11 +100,11 @@ trait Resume_Seed
     public function seedResume5($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test7@gmail.com",
             7,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+           "Painting",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -117,11 +117,11 @@ trait Resume_Seed
     public function seedResume6($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test9@gmail.com",
             9,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+          "Electrician",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -133,11 +133,11 @@ trait Resume_Seed
     public function seedResume7($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test10@gmail.com",
             10,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "Painting",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -149,11 +149,11 @@ trait Resume_Seed
     public function seedResume8($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test11@gmail.com",
             11,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "Electrician",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -166,11 +166,11 @@ trait Resume_Seed
     public function seedResume9($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test12@gmail.com",
             12,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+           "Painting",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -183,11 +183,11 @@ trait Resume_Seed
     public function seedResume10($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test13@gmail.com",
             13,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "Carpentry",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -199,11 +199,11 @@ trait Resume_Seed
     public function seedResume11($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test14@gmail.com",
             14,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "Carpentry",
             $url,
             "hello this is a tester",
             "Lingayen",
@@ -215,11 +215,11 @@ trait Resume_Seed
     public function seedResume12($url): void
     {
 
-        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialties, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
+        $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic, about_me, prefered_work_location, work_fee, tradesman_full_name, updated_at, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)");
         $stmt->execute([
             "test15@gmail.com",
             15,
-            json_encode(["Carpentry", "Painting", "Electrician"]),
+            "Carpentry",
             $url,
             "hello this is a tester",
             "Lingayen",
