@@ -37,7 +37,7 @@ class DashboardController extends BaseController
 
         $this->jsonResponse([
             "users" => [
-                "Total_user" => $totalUserCount,
+                "total_user" => $totalUserCount,
                 "active_user" => $totalActiveUsers,
                 "user_counts_by_date" => $userCountsByDate // RETURNING USER CREATION COUNTS
                 ],
