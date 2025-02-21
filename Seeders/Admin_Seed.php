@@ -20,9 +20,7 @@ trait Admin_Seed
     private function seedAdmin1(): void {
         $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
 
-        $token = bin2hex(random_bytes(16));
-
-        $stmt = $this->db->prepare("INSERT INTO admin (username, email, password, token) VALUES (?, ?, ?, ?)");
-        $stmt->execute(['EzBoy', 'test@gmail.com', $hashed_password, $token]);
+        $stmt = $this->db->prepare("INSERT INTO admin (first_name, last_name, username, email, password) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute(['Ezekiel', 'Vidal', 'EzeBoy', 'test@gmail.com', $hashed_password]);
     }
 }

@@ -18,54 +18,55 @@ class Admin extends BaseModel
         parent::__construct($db);
     }
 
-    public function registerUser($username, $email, $password):bool {
-        $hash_password = password_hash($password, PASSWORD_ARGON2ID);
+    public function registerUser($first_name, $last_name, $username, $email, $password):bool {
+        try {
+            $hash_password = password_hash($password, PASSWORD_ARGON2ID);
 
-        $query = "INSERT INTO $this->table 
-            (username, email, password, created_at)
-            VALUES (:username, :email, :password, NOW())
+            $query = "INSERT INTO $this->table 
+            (first_name, last_name, username, email, password, created_at)
+            VALUES (:first_name, :last_name, :username, :email, :password, NOW())
             ";
 
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hash_password);
-        return $stmt->execute();
-    }
-
-    public function loginUser($username, $email, $password): bool
-    {
-
-        // Query to check if the user exists
-        $query = "SELECT * FROM $this->table WHERE username = :username AND email = :email LIMIT 1";
-
-        // Prepare the statement
-        $stmt = $this->db->prepare($query);
-
-        // Bind the parameters
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-
-        // Execute the query
-        $stmt->execute();
-
-        // Fetch the user record
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // If user is found, verify the password
-        if ($user && password_verify($password, $user['password'])) {
-            return true; // Login successful
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':first_name', $first_name);
+            $stmt->bindParam(':last_name', $last_name);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hash_password);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Error in registerUser: ' . $e->getMessage());
+            return false;
         }
-
-        return false; // Login failed
     }
 
-    public function passwordValidation($email, $password): bool
+    public function loginUser($username, $password): bool
     {
         try {
-            $query = "SELECT password FROM $this->table WHERE email = :email";
+            $query = "SELECT * FROM $this->table WHERE username = :username LIMIT 1";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // If user is found, verify the password
+            if ($user && password_verify($password, $user['password'])) {
+                return true; // Login successful
+            } else {
+                return false; // Login failed
+            }
+        } catch (PDOException $e) {
+            error_log("Error logging in: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function passwordValidation( $username, $password): bool
+    {
+        try {
+            $query = "SELECT password FROM $this->table WHERE username = :username";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
             $stmt->execute();
 
             $stored_password = $stmt->fetchColumn();
@@ -79,19 +80,6 @@ class Admin extends BaseModel
         }
     }
 
-    public function emailValidation($email): bool {
-        try {
-            $query = "SELECT * FROM $this->table WHERE email = :email";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-
-            return true;
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return false;
-        }
-    }
 
     public function usernameValidation($username): bool {
         try {
@@ -100,34 +88,77 @@ class Admin extends BaseModel
             $stmt->bindParam(':username', $username);
             $stmt->execute();
 
-            return true;
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }
+            return false;
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;
         }
     }
 
-    public function createToken($email): string
+    public function createToken($username): string
     {
-    // Verify admin exists
-    $query = "SELECT * FROM $this->table WHERE email = :email LIMIT 1";
-    $stmt = $this->db->prepare($query);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
+        try {
+            // Verify admin exists
+            $query = "SELECT * FROM $this->table WHERE username = :username LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
 
-    // Generate token
-    $token = bin2hex(random_bytes(32));
+            // Fetch result
+            $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Update admin table
-    $updateQuery = "UPDATE $this->table SET token = :token WHERE email = :email";
-    $updateStmt = $this->db->prepare($updateQuery);
-    $updateStmt->bindParam(':token', $token);
-    $updateStmt->bindParam(':email', $email);
-    $updateStmt->execute();
+            // If admin does not exist, return null or handle error
+            if (!$admin) {
+                return ""; // Or you can throw an exception
+            }
 
-    return $token;
-}
+            // Generate token
+            $token = bin2hex(random_bytes(32));
 
+            // Update admin table with the new token
+            $updateQuery = "UPDATE $this->table SET token = :token WHERE username = :username";
+            $updateStmt = $this->db->prepare($updateQuery);
+            $updateStmt->bindParam(':token', $token);
+            $updateStmt->bindParam(':username', $username);
+            $updateStmt->execute();
+
+            return $token;
+        } catch (PDOException $e) {
+            error_log("Error creating token: " . $e->getMessage());
+            return "";
+        }
+    }
+
+    public function getName($username) {
+        try {
+            $query = "SELECT first_name, last_name FROM $this->table WHERE username = :username";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error getting name: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function getEmail($username) {
+        try {
+            $query = "SELECT email FROM $this->table WHERE username = :username";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting email: " . $e->getMessage());
+            return "";
+        }
+    }
 
     public function getPendingBookings(){
         $query = "SELECT COUNT(*) AS totalPending FROM client_booking Where booking_status = 'Pending' ";

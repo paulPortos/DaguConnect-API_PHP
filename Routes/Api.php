@@ -59,19 +59,19 @@ class Api extends BaseApi
             
             $this->responseBodyChecker();   
 
-            ['username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
+            ['first_name' => $first_name, 'last_name' => $last_name, 'username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
 
             $adminController = new AdminAuthController(new Admin($this->db));
-            $adminController->register($username, $email, $password, $confirm_password);
+            $adminController->register($first_name, $last_name, $username, $email, $password, $confirm_password);
         });
 
         $this->route('POST', '/admin/login', function () {
             $this->responseBodyChecker();
 
-            ['username' => $username, 'email' => $email, 'password' => $password] = $this->requestBody;
+            ['username' => $username, 'password' => $password] = $this->requestBody;
 
             $adminController = new AdminAuthController(new Admin($this->db));
-            $adminController->login($username, $email, $password);
+            $adminController->login($username, $password);
         });
 
             $this->route('DELETE', '/admin/logout', function ($adminId) {
