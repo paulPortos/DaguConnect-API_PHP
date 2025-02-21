@@ -82,6 +82,7 @@ class DashboardController extends BaseController
         $filteredUsers = array_map(function($user) {
             $role = ($user['is_client'] == 1) ? "Client" : "Tradesman";
             return [
+                'id' => $user['id'],
                 'first_name' => $user['first_name'],
                 'last_name' => $user['last_name'],
                 'email' => $user['email'],
