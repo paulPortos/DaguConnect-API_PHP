@@ -315,9 +315,7 @@ class Admin extends BaseModel
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':token', $token);
         $stmt->execute();
-
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
-
         return $admin ?: null;
     }
 
