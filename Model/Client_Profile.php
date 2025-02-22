@@ -78,4 +78,14 @@ class Client_Profile extends BaseModel
             return false;
         }
     }
+
+    public function getClientDetails($client_id)
+    {
+        $query = "SELECT full_name, email, profile_picture FROM $this->table WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $client_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 }

@@ -30,7 +30,7 @@ trait Middleware
             '/client/jobs/delete/{jobId}',
             '/admin/logout',
             '/user/client/booktradesman/{tradesman_Id}',
-            '/user/client/ratetradesman/{tradesman_Id}',
+            '/user/client/rate/tradesman/{booking_id}',
             '/user/client/report/tradesman/{tradesman_Id}',
             '/client/update/profile_address',
             '/client/update/profile_picture',

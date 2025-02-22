@@ -49,13 +49,12 @@ class ReportController extends BaseController
             return;
         }
         // get resume ID by tradesman ID and task_type
-        $resume_id = $this->resume->getResumeIdByTradesmanId($tradesman_id);
 
         // Upload the report attachment and get the full URL
         $fullReportUrl = $this->uploadFile($report_attachment, $this->reportDir);
 
         //gets the values from the resume by resume_id
-        $tradesmanDetails = $this->resume->getTradesmanDetails($resume_id['id']);
+        $tradesmanDetails = $this->resume->getTradesmanDetails($tradesman_id);
 
 
         //gets the tradesman_fullaname
