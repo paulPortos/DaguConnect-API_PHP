@@ -219,13 +219,13 @@ class Api extends BaseApi
         });
 
 
-        $this->route('POST', '/user/client/ratetradesman/{booking_id}', function ($userId,$booking_id) {
+        $this->route('POST', '/user/client/rate/tradesman/{booking_id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
             $message = $this->requestBody['message'];
             $rating = $this->requestBody['rating'];
 
-            $RatingController = new RatingsController(new Rating($this->db), new User($this->db),new Client($this->db));
-            $RatingController->rateTradesman($userId,$booking_id,$rating,$message);
+            $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
+            $RatingController->rateTradesman($userId,$tradesman_id,$rating,$message);
 
         });
 
@@ -246,7 +246,7 @@ class Api extends BaseApi
             $phone_number = $this->requestBody['phone_number'] ?? null;
             $address = $this->requestBody['address'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
-            $task_description = $this->requestBody['task_description'] ?? null;
+                $task_description = $this->requestBody['task_description'] ?? null;
             $booking_date = $this->requestBody['booking_date'] ?? null;
 
             $ClientController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));

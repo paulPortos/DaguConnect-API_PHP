@@ -59,7 +59,7 @@ class ClientController extends BaseController
             $resume_id = $this->resume->getResumeIdByTradesmanId($tradesman_id);
 
             //gets the values from the resume by resume_id
-            $tradesmanDetails = $this->resume->getTradesmanDetails($resume_id['id']);
+            $tradesmanDetails = $this->resume->getTradesmanDetails($tradesman_id);
 
             // Get client details from users table
             $clientDetails = $this->user->getClientDetails($user_id);
