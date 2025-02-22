@@ -28,6 +28,10 @@ class Job extends BaseModel
             $stmt->execute();
             $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            foreach ($jobs as &$job) {
+                $job['total_applicants'] = $this->getApplicantsCount($job['id']);
+            }
+
             $totalPages = max(1, ceil($totalJobs / $limit));
             return [
                 'jobs' => $jobs,
@@ -37,6 +41,19 @@ class Job extends BaseModel
         } catch (PDOException $e) {
             error_log("Database Error: " . $e->getMessage());
             return [];
+        }
+    }
+
+    public function getApplicantsCount($job_id): int
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT COUNT(*) as total FROM job_applications WHERE job_id = :job_id");
+            $stmt->bindParam(':job_id', $job_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting applicants count: " . $e->getMessage());
+            return 0;
         }
     }
 
