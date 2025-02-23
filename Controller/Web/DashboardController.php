@@ -243,5 +243,14 @@ class DashboardController extends BaseController
         ]);
     }
 
+    public function viewReportDetail($id){
+        $reportData = $this->admin_model->viewReportDetail($id);
+        if($reportData){
+            $this->jsonResponse($reportData,200);
+        } else {
+            $this->jsonResponse(['message' => 'User Not Found'], 400);
+        }
+    }
+
 
 }

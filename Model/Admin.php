@@ -481,5 +481,15 @@ class Admin extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC)['totalDismissedReports'];
     }
 
+    public function viewReportDetail($id){
+        $query = "SELECT  * FROM reports WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+
 
 }
