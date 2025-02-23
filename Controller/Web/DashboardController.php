@@ -252,7 +252,7 @@ class DashboardController extends BaseController
             $this->jsonResponse(['message' => 'User Not Found'], 400);
         }
     }
-
+    
     public function suspendedReported ($reported_id,$report_status){
 
         $suspend = 0;

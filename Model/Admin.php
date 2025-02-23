@@ -474,7 +474,7 @@ class Admin extends BaseModel
     }
 
     public function getDissmissReport(){
-        $query = "SELECT COUNT(*) AS totalDismissedReports FROM reports WHERE report_status = 'Dismiss'";
+        $query = "SELECT COUNT(*) AS totalDismissedReports FROM reports WHERE report_status = 'Dismissed'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         // Fetch all the total resolved from reports and return them as an associative array
