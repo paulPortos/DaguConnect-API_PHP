@@ -103,16 +103,21 @@ class Job extends BaseModel
         }
     }
 
-    public function updateJob($id, $salary, $job_description, $address, $deadline): bool {
+    public function updateJob($id, $user_id, $salary, $job_description, $address, $deadline): bool {
         try{
-            $stmt = $this->db->prepare("UPDATE $this->table SET salary = :salary, job_description = :job_description, address = :address, deadline = :deadline WHERE id = :id");
+            $stmt = $this->db->prepare("UPDATE $this->table SET salary = :salary, job_description = :job_description, address = :address, deadline = :deadline WHERE id = :id AND user_id = :user_id");
             $stmt->bindParam(':salary', $salary);
             $stmt->bindParam(':job_description', $job_description);
             $stmt->bindParam(':address', $address);
             $stmt->bindParam(':deadline', $deadline);
+            $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            return $stmt->rowCount() > 0;
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (PDOException $e){
             error_log("Error updating job: ". $e->getMessage());
             return false;
@@ -137,9 +142,14 @@ class Job extends BaseModel
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
-            return $stmt->rowCount() > 0;
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (PDOException $e) {
             error_log("Error deleting job: ". $e->getMessage());
+            var_dump($e->getMessage());
             return false;
         }
     }

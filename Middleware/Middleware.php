@@ -32,7 +32,8 @@ trait Middleware
             '/user/client/ratetradesman/{tradesman_Id}',
             'user/client/reporttradesman/{tradesman_Id}',
             '/client/update/profile_address',
-            '/client/update/profile_picture'
+            '/client/update/profile_picture',
+            '/client/job/update/{jobId}'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {
