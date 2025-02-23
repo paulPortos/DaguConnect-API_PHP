@@ -989,3 +989,14 @@ Stack trace:
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 36
 [23-Feb-2025 06:07:04 UTC] PHP Warning:  Undefined array key "report" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 230
 [23-Feb-2025 06:07:04 UTC] PHP Warning:  Undefined array key "report" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 230
+[23-Feb-2025 06:44:23 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php:505
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php(505): PDOStatement->bindParam(':id', '4')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php(261): DaguConnect\Model\Admin->updateSuspendStatus('4', '0')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(137): Controller\Web\DashboardController->suspendedReported(4, 'Suspend')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php on line 505

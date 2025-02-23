@@ -252,5 +252,24 @@ class DashboardController extends BaseController
         }
     }
 
+    public function suspendedReported ($reported_id,$report_status){
+
+        $suspend = 0;
+        if($report_status == 'Suspend'){
+            $suspend = 1;
+        }
+        $updateReportedStatus = $this->admin_model->updateSuspendStatus($reported_id,$suspend);
+        $updateReportStatus = $this->admin_model->updateReportStatus($reported_id,$report_status);
+
+        if($updateReportStatus || $updateReportedStatus){
+            $this->jsonResponse(['message' => 'Report status updated successfully.'],200);
+        }
+        else {
+            $this->jsonResponse(['message' => 'Report status not updated'], 400);
+        }
+
+
+    }
+
 
 }

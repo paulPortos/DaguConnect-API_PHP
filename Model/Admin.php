@@ -489,7 +489,24 @@ class Admin extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function updateReportStatus($reported_id,$report_status){
+     $query = "UPDATE reports SET report_status = :report_status WHERE reported_id = :reported_id";
+     $stmt = $this->db->prepare($query);
+     $stmt->bindParam(':report_status', $report_status);
+     $stmt->bindParam(':reported_id', $reported_id);
+     $stmt->execute();
+     return $stmt->rowCount() > 0; // Check if any row was updated
+    }
 
+    public function updateSuspendStatus($userId,$suspend){
+        $query = "UPDATE users SET suspend = :suspend WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':suspend', $suspend);
+        $stmt->bindParam(':id', $userId);
+        $stmt->execute();
+        return $stmt->rowCount() > 0; // Check if any row was updated
+
+    }
 
 
 }

@@ -128,6 +128,15 @@ class Api extends BaseApi
             $adminController->validateResume($tradesman_id, $status_of_approval);
         });
 
+        $this->route('PUT', '/admin/suspend/report/{reported_id}', function ($user_id,$reported_id) {
+            $this->responseBodyChecker();
+
+            $report_status = $this->requestBody['report_status'];
+
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->suspendedReported($reported_id,$report_status);
+        });
+
 
 
         $this->route('GET', '/admin/view/user/details/{tradesman_id}', function ($user_id,$tradesman_id) {
