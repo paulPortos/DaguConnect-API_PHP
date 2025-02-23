@@ -37,7 +37,9 @@ trait Middleware
             '/user/tradesman/update/resumedetails',
             '/client/update/profile_picture',
             '/user/message/{chatId}/{receiver_id}',
-            '/user/chat/get'
+            '/client/jobs/view/my_jobs',
+            '/user/chat/get',
+            '/client/profile'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {

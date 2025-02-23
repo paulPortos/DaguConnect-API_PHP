@@ -357,9 +357,12 @@ class Api extends BaseApi
             $messageController->getChats($userId, $page, $limit);
         });
 
-        $this->route('GET', '/client/jobs/view/{userId}', function ($userId){
+        $this->route('GET', '/client/jobs/view/my_jobs', function ($userId){
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
+
             $jobController = new JobController(new Job($this->db));
-            $jobController->viewUserJobs($userId);
+            $jobController->viewUserJobs($userId, $page, $limit);
         });
 
         $this->route('GET', '/user/message/{chatId}', function ($user_id, $chat_id) {
@@ -402,6 +405,11 @@ class Api extends BaseApi
             ['address' => $profile_address] = $this->requestBody;
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
             $clientProfileController->updateProfileAddress($userId, $profile_address);
+        });
+
+        $this->route('GET', '/client/profile', function ($user_id) {
+            $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
+            $clientProfileController->getProfile($user_id);
         });
     }
 

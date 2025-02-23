@@ -65,6 +65,7 @@ class JobController extends BaseController
         $client_profile_id = $this->job_model->getProfileIdByUserId($user_id);
         $client_profile_picture = $this->job_model->getProfilePictureById($client_profile_id);
         $client_fullname = $this->job_model->getFullnameById($client_profile_id);
+
         $addJob = $this->job_model->addJob($user_id, $client_fullname, $client_profile_id, $client_profile_picture, $salary, $applicant_limit_count, $job_type, $job_description, $address, $status, $deadline);
         if ($addJob) {
             $this->jsonResponse(['message' => "Job added successfully."], 201);
@@ -123,13 +124,13 @@ class JobController extends BaseController
         }
     }
 
-    public function viewUserJobs($user_id): void{
+    public function viewUserJobs($user_id, int $page, int $limit): void{
         if (!$this->exists($user_id, "id", "users")) {
             $this->jsonResponse(['message' => "User does not exist."], 404);
             return;
         }
 
-        $user_job_post = $this->job_model->viewUserJob($user_id);
+        $user_job_post = $this->job_model->viewUserJob($user_id, $page, $limit);
 
         if (!$user_job_post) {
             $this->jsonResponse(['message' => "No job posts found."], 200);
