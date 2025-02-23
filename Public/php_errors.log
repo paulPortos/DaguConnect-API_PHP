@@ -656,3 +656,467 @@ Stack trace:
 #4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #5 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 138
+[21-Feb-2025 14:39:49 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 201
+[21-Feb-2025 14:39:49 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 202
+[21-Feb-2025 14:39:49 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 203
+[21-Feb-2025 14:39:49 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:49 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:51 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 201
+[21-Feb-2025 14:39:51 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 202
+[21-Feb-2025 14:39:51 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 203
+[21-Feb-2025 14:39:51 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:51 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:54 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 201
+[21-Feb-2025 14:39:54 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 202
+[21-Feb-2025 14:39:54 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 203
+[21-Feb-2025 14:39:54 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:39:54 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:40:00 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 202
+[21-Feb-2025 14:40:00 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 203
+[21-Feb-2025 14:40:00 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:40:00 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[21-Feb-2025 14:41:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Controller\App\ReportController::uploadFile() in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php:54
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'harassblablabla', Array)
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 54
+[21-Feb-2025 14:42:28 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:32
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(55): Controller\App\ReportController->uploadFile('harassblablabla', '/uploads/report...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'harassblablabla', Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[21-Feb-2025 14:43:48 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:32
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(55): Controller\App\ReportController->uploadFile('harassblablabla', '/uploads/report...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'harassblablabla', Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[21-Feb-2025 14:43:58 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:32
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(55): Controller\App\ReportController->uploadFile('tester', '/uploads/report...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'tester', Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 32
+[22-Feb-2025 01:06:59 UTC] PHP Warning:  Undefined array key "report_attachment" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 237
+[22-Feb-2025 01:27:08 UTC] PHP Warning:  Undefined array key "fullname" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 27
+[22-Feb-2025 01:27:08 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'trademan_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php:143
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php(143): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(31): DaguConnect\Model\Client->CheckCompletedBookings(8, 5)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(228): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php on line 143
+[22-Feb-2025 01:27:26 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'trademan_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php:143
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php(143): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(31): DaguConnect\Model\Client->CheckCompletedBookings(8, 5)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(228): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php on line 143
+[22-Feb-2025 01:27:44 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'trademan_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php:143
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php(143): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(31): DaguConnect\Model\Client->CheckCompletedBookings(8, 5)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(228): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php on line 143
+[22-Feb-2025 01:28:35 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'trademan_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php:143
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php(143): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(31): DaguConnect\Model\Client->CheckCompletedBookings(8, 5)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(228): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php on line 143
+[22-Feb-2025 01:28:51 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile' in 'field list' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:20
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(20): PDO->prepare('INSERT INTO rat...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(48): DaguConnect\Model\Rating->RateTradesman(8, 5, 4, 'tester', 'Test 8 Client', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(228): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 20
+[22-Feb-2025 01:47:45 UTC] PHP Warning:  Undefined array key "client_fullname" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 72
+[22-Feb-2025 01:47:45 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'client_fullname' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:30
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(30): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(76): DaguConnect\Model\Report->ReportTradesman('4', '8', 'Harassment', 'tester', 'test4@gmail.com', 'http://192.168....', 'test4 test4', NULL, 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'tester', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 30
+[22-Feb-2025 01:49:11 UTC] PHP Warning:  Undefined array key "client_fullname" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 75
+[22-Feb-2025 01:49:11 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'client_fullname' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:30
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(30): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(79): DaguConnect\Model\Report->ReportTradesman('4', '8', 'Harassment', 'tester', 'test4@gmail.com', 'http://192.168....', 'test4 test4', NULL, 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(240): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'tester', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 30
+[22-Feb-2025 01:50:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Controller\App\RatingsController::__construct(), 3 passed in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 227 and exactly 4 expected in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php:20
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(227): Controller\App\RatingsController->__construct(Object(DaguConnect\Model\Rating), Object(DaguConnect\Model\Client_Profile), Object(DaguConnect\Model\Client))
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 20
+[22-Feb-2025 01:53:16 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 42
+[22-Feb-2025 01:53:16 UTC] PHP Warning:  Undefined property: Controller\App\RatingsController::$Array in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 42
+[22-Feb-2025 01:53:16 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 42
+[22-Feb-2025 01:53:16 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_fullname' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(28): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(60): DaguConnect\Model\Rating->RateTradesman('8', '5', '4', 'tester', 'Test 8 Client', 'http://192.168....', NULL)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(228): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 28
+[22-Feb-2025 01:55:35 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 42
+[22-Feb-2025 01:55:35 UTC] PHP Warning:  Undefined property: Controller\App\RatingsController::$Array in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 42
+[22-Feb-2025 01:55:35 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 42
+[22-Feb-2025 01:55:35 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_fullname' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(28): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(61): DaguConnect\Model\Rating->RateTradesman('8', '5', '4', 'tester', 'Test 8 Client', 'http://192.168....', NULL)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(228): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 28
+[22-Feb-2025 01:56:47 UTC] PHP Warning:  Array to string conversion in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 45
+[22-Feb-2025 01:56:47 UTC] PHP Warning:  Undefined property: Controller\App\RatingsController::$Array in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 45
+[22-Feb-2025 01:56:47 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 45
+[22-Feb-2025 01:56:47 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tradesman_fullname' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(28): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(64): DaguConnect\Model\Rating->RateTradesman('8', '5', '4', 'tester', 'Test 8 Client', 'http://192.168....', NULL)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(228): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 28
+[22-Feb-2025 01:58:28 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 42
+[22-Feb-2025 01:58:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 45
+[22-Feb-2025 02:07:24 UTC] PHP Warning:  Undefined variable $resume_id in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ClientController.php on line 85
+[22-Feb-2025 02:08:15 UTC] PHP Warning:  Undefined variable $resume_id in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ClientController.php on line 90
+[22-Feb-2025 02:08:15 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ClientController.php on line 90
+[23-Feb-2025 04:00:26 UTC] PHP Warning:  Undefined array key "report_attachment" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 237
+[23-Feb-2025 04:09:19 UTC] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 225
+[23-Feb-2025 04:09:19 UTC] PHP Warning:  Undefined array key "tradesman_full_name" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 226
+[23-Feb-2025 04:09:19 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 227
+[23-Feb-2025 04:09:19 UTC] PHP Warning:  Undefined array key "status_of_approval" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 228
+[23-Feb-2025 04:58:08 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tradesman_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:39
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(39): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(43): DaguConnect\Model\Report->ExistingReport(4, 8)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(248): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'tester', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 39
+[23-Feb-2025 05:00:14 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'client_id' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:39
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(39): PDO->prepare('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(43): DaguConnect\Model\Report->ExistingReport(4, 8)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(248): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'tester', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 39
+[23-Feb-2025 05:03:13 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(40): PDOStatement->bindParam(':reported_by', '4')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(43): DaguConnect\Model\Report->ExistingReport('4', 8)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(248): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'tester', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 40
+[23-Feb-2025 05:03:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(40): PDOStatement->bindParam(':reported_by', '4')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(43): DaguConnect\Model\Report->ExistingReport('4', 8)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(248): Controller\App\ReportController->reportTradesman(8, 4, 'Harassment', 'tester', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 40
+[23-Feb-2025 05:50:23 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 130
+[23-Feb-2025 05:50:23 UTC] PHP Warning:  Undefined array key "profile_picture" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 140
+[23-Feb-2025 05:50:23 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 143
+[23-Feb-2025 05:50:23 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(43): PDOStatement->bindParam(':tradesman_full...', NULL)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(147): DaguConnect\Model\Report->ReportClient('1', '3', 'Harassment', 'report client f...', NULL, NULL, NULL, 'Alice Johnson', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(259): Controller\App\ReportController->reportClient(1, 3, 'Harassment', 'report client f...', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 43
+[23-Feb-2025 05:52:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 130
+[23-Feb-2025 05:52:00 UTC] PHP Warning:  Undefined array key "profile_picture" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 140
+[23-Feb-2025 05:52:00 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 143
+[23-Feb-2025 05:52:00 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(43): PDOStatement->bindParam(':tradesman_full...', NULL)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(147): DaguConnect\Model\Report->ReportClient('1', '3', 'Harassment', 'report client f...', NULL, NULL, NULL, 'Alice Johnson', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(259): Controller\App\ReportController->reportClient(1, 3, 'Harassment', 'report client f...', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 43
+[23-Feb-2025 05:54:12 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 130
+[23-Feb-2025 05:54:12 UTC] PHP Warning:  Undefined array key "fullname" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 137
+[23-Feb-2025 05:54:12 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(43): PDOStatement->bindParam(':tradesman_full...', NULL)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(147): DaguConnect\Model\Report->ReportClient('1', '3', 'Harassment', 'report client f...', 'test@gmail.com', 'http://192.168....', NULL, NULL, 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(259): Controller\App\ReportController->reportClient(1, 3, 'Harassment', 'report client f...', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 43
+[23-Feb-2025 05:57:01 UTC] PHP Warning:  Undefined array key "fullname" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 137
+[23-Feb-2025 05:57:01 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(43): PDOStatement->bindParam(':tradesman_full...', 'test13 test13')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(147): DaguConnect\Model\Report->ReportClient('13', '3', 'Harassment', 'report client f...', 'test@gmail.com', 'http://192.168....', 'test13 test13', NULL, 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(259): Controller\App\ReportController->reportClient(13, 3, 'Harassment', 'report client f...', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(13, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 43
+[23-Feb-2025 05:58:16 UTC] PHP Warning:  Undefined array key "fullname" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 137
+[23-Feb-2025 05:58:16 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(43): PDOStatement->bindParam(':tradesman_full...', 'test13 test13')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(147): DaguConnect\Model\Report->ReportClient('13', '3', 'Harassment', 'report client f...', 'test@gmail.com', 'http://192.168....', 'test13 test13', NULL, 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(259): Controller\App\ReportController->reportClient(13, 3, 'Harassment', 'report client f...', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(13, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 43
+[23-Feb-2025 05:58:32 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(43): PDOStatement->bindParam(':tradesman_full...', 'test13 test13')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(147): DaguConnect\Model\Report->ReportClient('13', '3', 'Harassment', 'report client f...', 'test@gmail.com', 'http://192.168....', 'test13 test13', 'Alice Johnson', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(259): Controller\App\ReportController->reportClient(13, 3, 'Harassment', 'report client f...', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(13, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 43
+[23-Feb-2025 06:00:11 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1 in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:36
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(36): PDO->prepare('INSERT INTO rep...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(147): DaguConnect\Model\Report->ReportClient(13, 3, 'Harassment', 'report client f...', 'test@gmail.com', 'http://192.168....', 'test13 test13', 'Alice Johnson', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(259): Controller\App\ReportController->reportClient(13, 3, 'Harassment', 'report client f...', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(13, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 36
+[23-Feb-2025 06:07:04 UTC] PHP Warning:  Undefined array key "report" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 230
+[23-Feb-2025 06:07:04 UTC] PHP Warning:  Undefined array key "report" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 230
+[23-Feb-2025 06:44:23 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php:505
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php(505): PDOStatement->bindParam(':id', '4')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php(261): DaguConnect\Model\Admin->updateSuspendStatus('4', '0')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(137): Controller\Web\DashboardController->suspendedReported(4, 'Suspend')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php on line 505
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43

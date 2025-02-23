@@ -52,12 +52,13 @@ class Api extends BaseApi
         $this->handleRequest();
     }
 
-    public function registeredRoutes(): void {
-       
+    public function registeredRoutes(): void
+    {
+
         // Register a route for the AuthenticationController
         $this->route('POST', '/admin/register', function () {
-            
-            $this->responseBodyChecker();   
+
+            $this->responseBodyChecker();
 
             ['first_name' => $first_name, 'last_name' => $last_name, 'username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
 
@@ -75,8 +76,8 @@ class Api extends BaseApi
         });
 
         $this->route('DELETE', '/admin/logout', function ($adminId) {
-           $adminController = new AdminAuthController(new Admin($this->db));
-           $adminController->logout($adminId);
+            $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->logout($adminId);
         });
 
         $this->route('PUT', '/admin/change_password', function () {
@@ -103,28 +104,49 @@ class Api extends BaseApi
             $adminController->bookingStatistics();
         });
 
-        $this -> route('GET', '/admin/user/management', function () {
+        $this->route('GET', '/admin/user/management', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->userManagement();
         });
 
-        $this -> route('GET', '/admin/resume/management', function () {
+        $this->route('GET', '/admin/resume/management', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->resumeManagement();
         });
+        $this->route('GET', '/admin/report/management', function () {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->reportManagement();
+        });
 
-        $this->route('PUT', '/admin/validate/Resume/{tradesman_id}',function ($user_id,$tradesman_id){
+
+        $this->route('PUT', '/admin/validate/Resume/{tradesman_id}', function ($user_id, $tradesman_id) {
             $this->responseBodyChecker();
 
             $status_of_approval = $this->requestBody['status_of_approval'];
 
             $adminController = new DashboardController(new Admin($this->db));
-            $adminController->validateResume($tradesman_id,$status_of_approval);
+            $adminController->validateResume($tradesman_id, $status_of_approval);
         });
 
-        $this->route('GET', '/admin/view/userdetails/{tradesman_id}', function ($user_id,$tradesman_id) {
+        $this->route('PUT', '/admin/suspend/report/{reported_id}', function ($user_id,$reported_id) {
+            $this->responseBodyChecker();
+
+            $report_status = $this->requestBody['report_status'];
+
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->suspendedReported($reported_id,$report_status);
+        });
+
+
+
+        $this->route('GET', '/admin/view/user/details/{tradesman_id}', function ($user_id,$tradesman_id) {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->viewUserDetail($tradesman_id);
+        });
+
+        $this->route('GET', '/admin/view/report/details/{id}', function ($user_id,$id) {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->viewReportDetail($id);
         });
 
 
@@ -206,37 +228,52 @@ class Api extends BaseApi
             $ResumeController->submitResume($userId,$specialty,$about_me,$prefered_location,$work_fee,$document,$valid_id_front,$valid_id_back);
         });
 
-        $this->route('PUT', '/user/tradesman/update/resumedetails', function ($userId){
+        $this->route('PUT', '/user/tradesman/update/resume/details', function ($userId){
             $this->responseBodyChecker();
 
             $about_me = $this->requestBody['about_me'];
             $prefered_work_location = $this->requestBody['prefered_work_location'];
             $work_fee = $this->requestBody['work_fee'];
+            $phone_number = $this->requestBody['phone_number'];
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
-            $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee);
+            $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee,$phone_number);
         });
 
 
-        $this->route('POST', '/user/client/ratetradesman/{booking_id}', function ($userId,$booking_id) {
+        $this->route('POST', '/user/client/rate/tradesman/{booking_id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
             $message = $this->requestBody['message'];
             $rating = $this->requestBody['rating'];
 
-            $RatingController = new RatingsController(new Rating($this->db), new User($this->db),new Client($this->db));
-            $RatingController->rateTradesman($userId,$booking_id,$rating,$message);
+            $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
+            $RatingController->rateTradesman($userId,$tradesman_id,$rating,$message);
 
         });
 
-        $this->route('POST', '/user/client/reporttradesman/{tradesman_Id}', function($client_Id,$tradesman_Id){
+        $this->route('POST', '/user/client/report/tradesman/{tradesman_Id}', function($client_Id,$tradesman_Id){
             $this->responseBodyChecker();
 
             $report_reason = $this->requestBody['report_reason'];
             $report_details = $this->requestBody['report_details'];
+            $report_attachment = $_FILES['report_attachment'];
 
-            $ReportController = new ReportController(new Report($this->db),new Resume($this->db), new User($this->db));
-            $ReportController->reportTradesman($client_Id,$tradesman_Id,$report_reason,$report_details);
+            $ReportController = new ReportController(new Report($this->db),new Resume($this->db), new User($this->db),new Client_Profile($this->db));
+            $ReportController->reportTradesman($client_Id,$tradesman_Id,$report_reason,$report_details,$report_attachment);
         });
+
+        $this->route('POST', '/user/tradesman/report/client/{client_Id}', function($tradesman_Id,$client_Id){
+            $this->responseBodyChecker();
+
+            $report_reason = $this->requestBody['report_reason'];
+            $report_details = $this->requestBody['report_details'];
+            $report_attachment = $_FILES['report_attachment'];
+
+            $ReportController = new ReportController(new Report($this->db),new Resume($this->db), new User($this->db),new Client_Profile($this->db));
+            $ReportController->reportClient($tradesman_Id,$client_Id,$report_reason,$report_details,$report_attachment);
+        });
+
+
 
         $this->route('POST', '/user/client/booktradesman/{tradesman_Id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
@@ -244,7 +281,7 @@ class Api extends BaseApi
             $phone_number = $this->requestBody['phone_number'] ?? null;
             $address = $this->requestBody['address'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
-            $task_description = $this->requestBody['task_description'] ?? null;
+                $task_description = $this->requestBody['task_description'] ?? null;
             $booking_date = $this->requestBody['booking_date'] ?? null;
 
             $ClientController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));

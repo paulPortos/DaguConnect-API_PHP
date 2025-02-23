@@ -140,6 +140,7 @@ class DashboardController extends BaseController
                 'first_name' => $user['first_name'],
                 'last_name' => $user['last_name'],
                 'email' => $user['email'],
+                'verified' => $user['email_verified_at'],
                 'birthdate' => $user['birthdate'],
                 'is_client' => $role
             ];
@@ -161,12 +162,15 @@ class DashboardController extends BaseController
     public function validateResume($user_id,$status_of_approval){
 
         $is_approve = 0 ;
+        $is_active = 0 ;
         if($status_of_approval == 'Approved'){
             $is_approve = 1;
+            $is_active = 1;
         }
 
 
-        $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve);
+
+        $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve,$is_active);
 
         if($resumeValidataion){
             $this->jsonResponse(['message' => 'Resume validation updated successfully.'],200);
@@ -213,4 +217,60 @@ class DashboardController extends BaseController
             "resume" => $filteredResumes
         ],200);
     }
+
+    public function reportManagement(){
+
+        $totalReports = $this->admin_model->getAllReportCount();
+        $pendingReports = $this->admin_model->getPendingReport();
+        $resolvedReports = $this->admin_model->getSuspendedReport();
+        $dissmissedReports = $this->admin_model->getDissmissReport();
+        $reportList = $this->admin_model->getReportList();
+        $filteredResumes = array_map(function($reports) {
+            return [
+                'id' => $reports['id'],
+                'reported_by' => $reports['reported_by'],
+                'reported' => $reports['reported'],
+                'report_type' => $reports['report_reason'],
+                'reporter' => $reports['reporter'],
+                'report_status' => $reports['report_status']
+            ];
+        }, $reportList);
+        $this->jsonResponse([
+            "total_reports" => $totalReports,
+            "pending_reports" => $pendingReports,
+            "suspended_reports" => $resolvedReports,
+            "dismissed_reports" => $dissmissedReports,
+            "report_list" => $filteredResumes
+        ]);
+    }
+
+    public function viewReportDetail($id){
+        $reportData = $this->admin_model->viewReportDetail($id);
+        if($reportData){
+            $this->jsonResponse($reportData,200);
+        } else {
+            $this->jsonResponse(['message' => 'User Not Found'], 400);
+        }
+    }
+    
+    public function suspendedReported ($reported_id,$report_status){
+
+        $suspend = 0;
+        if($report_status == 'Suspend'){
+            $suspend = 1;
+        }
+        $updateReportedStatus = $this->admin_model->updateSuspendStatus($reported_id,$suspend);
+        $updateReportStatus = $this->admin_model->updateReportStatus($reported_id,$report_status);
+
+        if($updateReportStatus || $updateReportedStatus){
+            $this->jsonResponse(['message' => 'Report status updated successfully.'],200);
+        }
+        else {
+            $this->jsonResponse(['message' => 'Report status not updated'], 400);
+        }
+
+
+    }
+
+
 }

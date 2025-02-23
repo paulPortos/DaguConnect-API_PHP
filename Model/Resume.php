@@ -38,12 +38,6 @@ class Resume extends BaseModel
             $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-            // Decode JSON fields for each resume
-            foreach ($resumes as &$resume) {
-                $resume['specialties'] = json_decode($resume['specialties'], true);
-                $resume['prefered_work_location'] = json_decode($resume['prefered_work_location'], true);
-            }
-
             $totalPages = max(1, ceil($totalResume / $limit));
             return [
                 'resumes' => $resumes,
@@ -110,17 +104,19 @@ class Resume extends BaseModel
         return $stmt->execute();
     }
 
-    public function updateResume($user_id,$about_me,$prefered_work_location,$work_fee): bool
+    public function updateResume($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number): bool
     {
         $query = "UPDATE $this->table 
                     SET about_me = :about_me ,
                         prefered_work_location = :prefered_work_location, 
-                        work_fee = :work_fee 
+                        work_fee = :work_fee,
+                        phone_number = :phone_number
                     WHERE user_id = :user_id AND status_of_approval = 'Approved' ";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':about_me', $about_me);
         $stmt->bindParam(':prefered_work_location', $prefered_work_location);
         $stmt->bindParam(':work_fee', $work_fee);
+        $stmt->bindParam(':phone_number', $phone_number);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         // Check if any row was updated
@@ -156,11 +152,11 @@ class Resume extends BaseModel
         return $stmt->rowCount() > 0;
     }
 
-    public function getTradesmanDetails($resume_id)
+    public function getTradesmanDetails($tradesman_id)
     {
-        $query = "SELECT tradesman_full_name, work_fee, profile_pic, email FROM $this->table WHERE id = :resume_id";
+        $query = "SELECT tradesman_full_name, work_fee, profile_pic, email FROM $this->table WHERE user_id = :tradesman_id";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':resume_id', $resume_id);
+        $stmt->bindParam(':tradesman_id', $tradesman_id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -174,7 +170,7 @@ class Resume extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
-    public function ExistingTrademsn($tradesman_id){
+    public function ExistingTrademan($tradesman_id){
         $query = "SELECT COUNT(*) FROM $this->table WHERE user_id = :tradesman_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':tradesman_id', $tradesman_id);
