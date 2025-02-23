@@ -227,6 +227,7 @@ class DashboardController extends BaseController
         $reportList = $this->admin_model->getReportList();
         $filteredResumes = array_map(function($reports) {
             return [
+                'id' => $reports['id'],
                 'reported_by' => $reports['reported_by'],
                 'reported' => $reports['reported'],
                 'report_type' => $reports['report_reason'],
