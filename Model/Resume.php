@@ -176,7 +176,7 @@ class Resume extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
-    public function ExistingTrademsn($tradesman_id){
+    public function ExistingTrademan($tradesman_id){
         $query = "SELECT COUNT(*) FROM $this->table WHERE user_id = :tradesman_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':tradesman_id', $tradesman_id);

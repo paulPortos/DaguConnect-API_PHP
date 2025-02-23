@@ -52,12 +52,13 @@ class Api extends BaseApi
         $this->handleRequest();
     }
 
-    public function registeredRoutes(): void {
-       
+    public function registeredRoutes(): void
+    {
+
         // Register a route for the AuthenticationController
         $this->route('POST', '/admin/register', function () {
-            
-            $this->responseBodyChecker();   
+
+            $this->responseBodyChecker();
 
             ['first_name' => $first_name, 'last_name' => $last_name, 'username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
 
@@ -75,8 +76,8 @@ class Api extends BaseApi
         });
 
         $this->route('DELETE', '/admin/logout', function ($adminId) {
-           $adminController = new AdminAuthController(new Admin($this->db));
-           $adminController->logout($adminId);
+            $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->logout($adminId);
         });
 
         $this->route('PUT', '/admin/change_password', function () {
@@ -103,24 +104,31 @@ class Api extends BaseApi
             $adminController->bookingStatistics();
         });
 
-        $this -> route('GET', '/admin/user/management', function () {
+        $this->route('GET', '/admin/user/management', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->userManagement();
         });
 
-        $this -> route('GET', '/admin/resume/management', function () {
+        $this->route('GET', '/admin/resume/management', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->resumeManagement();
         });
+        $this->route('GET', '/admin/report/management', function () {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->reportManagement();
+        });
 
-        $this->route('PUT', '/admin/validate/Resume/{tradesman_id}',function ($user_id,$tradesman_id){
+
+        $this->route('PUT', '/admin/validate/Resume/{tradesman_id}', function ($user_id, $tradesman_id) {
             $this->responseBodyChecker();
 
             $status_of_approval = $this->requestBody['status_of_approval'];
 
             $adminController = new DashboardController(new Admin($this->db));
-            $adminController->validateResume($tradesman_id,$status_of_approval);
+            $adminController->validateResume($tradesman_id, $status_of_approval);
         });
+
+
 
         $this->route('GET', '/admin/view/userdetails/{tradesman_id}', function ($user_id,$tradesman_id) {
             $adminController = new DashboardController(new Admin($this->db));
@@ -236,9 +244,22 @@ class Api extends BaseApi
             $report_details = $this->requestBody['report_details'];
             $report_attachment = $_FILES['report_attachment'];
 
-            $ReportController = new ReportController(new Report($this->db),new Resume($this->db), new User($this->db));
+            $ReportController = new ReportController(new Report($this->db),new Resume($this->db), new User($this->db),new Client_Profile($this->db));
             $ReportController->reportTradesman($client_Id,$tradesman_Id,$report_reason,$report_details,$report_attachment);
         });
+
+        $this->route('POST', '/user/tradesman/report/client/{client_Id}', function($tradesman_Id,$client_Id){
+            $this->responseBodyChecker();
+
+            $report_reason = $this->requestBody['report_reason'];
+            $report_details = $this->requestBody['report_details'];
+            $report_attachment = $_FILES['report_attachment'];
+
+            $ReportController = new ReportController(new Report($this->db),new Resume($this->db), new User($this->db),new Client_Profile($this->db));
+            $ReportController->reportClient($tradesman_Id,$client_Id,$report_reason,$report_details,$report_attachment);
+        });
+
+
 
         $this->route('POST', '/user/client/booktradesman/{tradesman_Id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();

@@ -405,7 +405,7 @@ class Admin extends BaseModel
         $query = "SELECT COUNT(*) AS totalResume FROM tradesman_resume WHERE status_of_approval IS NOT NULL";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        // Fetch all the total pending from bookings and return them as an associative array
+        // Fetch all the total resume from resume and return them as an associative array
         return $stmt->fetch(PDO::FETCH_ASSOC)['totalResume'];
 
     }
@@ -414,7 +414,7 @@ class Admin extends BaseModel
         $query = "SELECT COUNT(*) AS totalPending FROM tradesman_resume WHERE status_of_approval = 'Pending'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        // Fetch all the total pending from bookings and return them as an associative array
+        // Fetch all the total pending from resune and return them as an associative array
         return $stmt->fetch(PDO::FETCH_ASSOC)['totalPending'];
     }
 
@@ -422,14 +422,14 @@ class Admin extends BaseModel
         $query = "SELECT COUNT(*) AS totalApproved FROM tradesman_resume WHERE status_of_approval = 'Approved'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        // Fetch all the total pending from bookings and return them as an associative array
+        // Fetch all the total approved from resume and return them as an associative array
         return $stmt->fetch(PDO::FETCH_ASSOC)['totalApproved'];
     }
     public function getDeclined(){
         $query = "SELECT COUNT(*) AS totalDeclined FROM tradesman_resume WHERE status_of_approval = 'Declined'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        // Fetch all the total pending from bookings and return them as an associative array
+        // Fetch all the total declined from resume and return them as an associative array
         return $stmt->fetch(PDO::FETCH_ASSOC)['totalDeclined'];
 
     }
@@ -442,8 +442,44 @@ class Admin extends BaseModel
     }
 
 
+    public function getReportList(){
+        $query = "SELECT * FROM reports";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
+    public function getAllReportCount(){
+        $query = "SELECT COUNT(*) AS totalReports FROM reports";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total reports from reports and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalReports'];
+    }
 
+    public function getPendingReport(){
+        $query = "SELECT COUNT(*) AS totalPendingReports FROM reports WHERE report_status = 'Pending'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from reports and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalPendingReports'];
+    }
+
+    public function getSuspendedReport(){
+        $query = "SELECT COUNT(*) AS totalSuspendedReports FROM reports WHERE report_status = 'Suspend'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total resolved from reports and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalSuspendedReports'];
+    }
+
+    public function getDissmissReport(){
+        $query = "SELECT COUNT(*) AS totalDismissedReports FROM reports WHERE report_status = 'Dismiss'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total resolved from reports and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalDismissedReports'];
+    }
 
 
 }

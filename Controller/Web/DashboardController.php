@@ -140,6 +140,7 @@ class DashboardController extends BaseController
                 'first_name' => $user['first_name'],
                 'last_name' => $user['last_name'],
                 'email' => $user['email'],
+                'verified' => $user['email_verified_at'],
                 'birthdate' => $user['birthdate'],
                 'is_client' => $role
             ];
@@ -216,4 +217,31 @@ class DashboardController extends BaseController
             "resume" => $filteredResumes
         ],200);
     }
+
+    public function reportManagement(){
+
+        $totalReports = $this->admin_model->getAllReportCount();
+        $pendingReports = $this->admin_model->getPendingReport();
+        $resolvedReports = $this->admin_model->getSuspendedReport();
+        $dissmissedReports = $this->admin_model->getDissmissReport();
+        $reportList = $this->admin_model->getReportList();
+        $filteredResumes = array_map(function($reports) {
+            return [
+                'reported_by' => $reports['reported_by'],
+                'reported' => $reports['reported'],
+                'report_type' => $reports['report_reason'],
+                'reporter' => $reports['reporter'],
+                'report_status' => $reports['report_status']
+            ];
+        }, $reportList);
+        $this->jsonResponse([
+            "total_reports" => $totalReports,
+            "pending_reports" => $pendingReports,
+            "suspended_reports" => $resolvedReports,
+            "dismissed_reports" => $dissmissedReports,
+            "report_list" => $filteredResumes
+        ]);
+    }
+
+
 }

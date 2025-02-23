@@ -32,6 +32,7 @@ trait Middleware
             '/user/client/booktradesman/{tradesman_Id}',
             '/user/client/rate/tradesman/{booking_id}',
             '/user/client/report/tradesman/{tradesman_Id}',
+            '/user/tradesman/report/client/{client_Id}',
             '/client/update/profile_address',
             '/client/update/profile_picture',
             '/user/tradesman/update/resume/details',
