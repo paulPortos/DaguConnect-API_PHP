@@ -14,15 +14,15 @@ trait Admin_Seed
     }
 
     public function seed_admin(): void {
-        $this->seedAdmin1();
+        $host = $_ENV['IP_ADDRESS'];
+        $url = "http://{$host}:8000/uploads/profile_pictures/EzeBoi.png";
+        $this->seedAdmin1($url);
     }
 
-    private function seedAdmin1(): void {
+    private function seedAdmin1($url): void {
         $hashed_password = password_hash('password123', PASSWORD_ARGON2ID);
 
-        $token = bin2hex(random_bytes(16));
-
-        $stmt = $this->db->prepare("INSERT INTO admin (username, email, password, token) VALUES (?, ?, ?, ?)");
-        $stmt->execute(['EzBoy', 'test@gmail.com', $hashed_password, $token]);
+        $stmt = $this->db->prepare("INSERT INTO admin (first_name, last_name, profile_picture, username, email, password) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute(['Ezekiel', 'Vidal', $url, 'EzeBoy', 'test@gmail.com', $hashed_password]);
     }
 }

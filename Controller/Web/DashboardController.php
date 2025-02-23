@@ -22,26 +22,44 @@ class DashboardController extends BaseController
         $totalBookingCancelled = $this->admin_model->getCancelledBookings();
         $totalBookingCompleted = $this->admin_model->getCompletedBookings();
         $totalBooking = $this->admin_model->getAllBookings();
+        $totalJobsAvailable = $this->admin_model->getAvailableJobs();
+        $totalJobsOngoing = $this->admin_model->getOngoingJobs();
+        $totalJobsCompleted = $this->admin_model->getCompletedJobs();
+        $totalJobsCancelled = $this->admin_model->getCancelledJobs();
+        $totalJobs = $this->admin_model->getAllJobs();
         $userCountsByDate = $this->admin_model->getUsersCountByDate(); // NEW FUNCTION
 
         if ($totalUserCount <= 0 ) {
             $this->jsonResponse(["Message" => "No users detected"], 200);
         }
+
+
+
         $this->jsonResponse([
             "users" => [
-                "totaluser" => $totalUserCount,
-                "activeuser" => $totalActiveUsers,
-                "Pending" => $totalBookingPending,
-                "Active" => $totalBookingActive,
-                "Cancelled" => $totalBookingCancelled,
-                "Completed" => $totalBookingCompleted,
-                "TotalBooking" => $totalBooking,
-                "UserCountsByDate" => $userCountsByDate // RETURNING USER CREATION COUNTS
+                "total_user" => $totalUserCount,
+                "active_user" => $totalActiveUsers,
+                "user_counts_by_date" => $userCountsByDate // RETURNING USER CREATION COUNTS
+                ],
+            "bookings" => [
+                "pending" => $totalBookingPending,
+                "active" => $totalBookingActive,
+                "cancelled" => $totalBookingCancelled,
+                "completed" => $totalBookingCompleted,
+                "total_Booking" => $totalBooking,
+                ],
+            "jobs" => [
+                "available" => $totalJobsAvailable,
+                "ongoing" => $totalJobsOngoing,
+                "cancelled" => $totalJobsCancelled,
+                "completed" => $totalJobsCompleted,
+                "totalJobs" => $totalJobs
                 ]
             ]);
     }
 
-    public function bookingStatistics() {
+    public function bookingStatistics(): void
+    {
 
         $totalBookings = $this->admin_model->getAllBookings();
         $totalActiveBookings = $this->admin_model->getActiveBookings();
@@ -54,7 +72,7 @@ class DashboardController extends BaseController
 
             return [
                 'id' => $booking['id'],
-                'title' => $booking['task_description'],
+                'description' => $booking['task_description'],
                 'category' => $booking['task_type'],
                'status' => $booking['booking_status'],
             ];
@@ -71,7 +89,43 @@ class DashboardController extends BaseController
         );
     }
 
-    public function userManagement(){
+    public function jobsStatistics(): void
+    {
+        $totalJobsAvailable = $this->admin_model->getAvailableJobs();
+        $totalJobsOngoing = $this->admin_model->getOngoingJobs();
+        $totalJobsCompleted = $this->admin_model->getCompletedJobs();
+        $totalJobsCancelled = $this->admin_model->getCancelledJobs();
+        $totalJobs = $this->admin_model->getAllJobs();
+        $jobs = $this->admin_model->getJobsList();
+
+
+        $filteredJobs = array_map(function($jobs){
+
+            return [
+                'fullname' => $jobs['client_fullname'],
+                'job_type' => $jobs['job_type'],
+                'salary' => $jobs['salary'],
+                'applicant_limit_count' => $jobs['applicant_limit_count'],
+                'address' => $jobs['address'],
+                'deadline' => $jobs['deadline'],
+                'status' => $jobs['status'],
+            ];
+        }, $jobs);
+
+        $this -> jsonResponse(
+            [
+                "total_bookings" => $totalJobs,
+                "available" => $totalJobsAvailable,
+                "ongoing" => $totalJobsOngoing,
+                "completed" => $totalJobsCompleted,
+                "cancelled" => $totalJobsCancelled,
+                "jobs" => $filteredJobs
+            ]
+        );
+    }
+
+    public function userManagement(): void
+    {
         $totalUserCount = $this->admin_model->getAllUserCount();
         $totalTradesmanCount = $this->admin_model->getTradesman();
         $totalClientCount = $this->admin_model->getClient();
@@ -82,9 +136,11 @@ class DashboardController extends BaseController
         $filteredUsers = array_map(function($user) {
             $role = ($user['is_client'] == 1) ? "Client" : "Tradesman";
             return [
+                'id' => $user['id'],
                 'first_name' => $user['first_name'],
                 'last_name' => $user['last_name'],
                 'email' => $user['email'],
+                'verified' => $user['email_verified_at'],
                 'birthdate' => $user['birthdate'],
                 'is_client' => $role
             ];
@@ -101,4 +157,120 @@ class DashboardController extends BaseController
             ]
         );
     }
+
+
+    public function validateResume($user_id,$status_of_approval){
+
+        $is_approve = 0 ;
+        $is_active = 0 ;
+        if($status_of_approval == 'Approved'){
+            $is_approve = 1;
+            $is_active = 1;
+        }
+
+
+
+        $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve,$is_active);
+
+        if($resumeValidataion){
+            $this->jsonResponse(['message' => 'Resume validation updated successfully.'],200);
+        }
+        else {
+            $this->jsonResponse(['message' => 'Resume Is Not Pending'], 400);
+        }
+    }
+
+    public function viewUserDetail($user_id){
+
+        $userData = $this->admin_model->viewUserDetail($user_id);
+        if($userData){
+            $this->jsonResponse($userData,200);
+        } else {
+            $this->jsonResponse(['message' => 'User Not Found'], 400);
+        }
+    }
+
+
+    public function resumeManagement(): void
+    {
+        $totalResumeCount = $this->admin_model->getAllResumeCount();
+        $pendingResumeCount = $this->admin_model->getPendingResume();
+        $approvedResumeCount = $this->admin_model->getApprovedResume();
+        $declinedResumeCount = $this->admin_model->getDeclined();
+        $resumes = $this->admin_model->getResumeList();
+
+        // Filter resume data to include only specific keys
+        $filteredResumes = array_map(function($resume) {
+            return [
+                'resume_id' => $resume['user_id'],
+                'name' => $resume['tradesman_full_name'],
+                'email' => $resume['email'],
+                'status' => $resume['status_of_approval']
+            ];
+        }, $resumes);
+
+        $this->jsonResponse([
+            "total_resume" => $totalResumeCount,
+            "pending_resume" => $pendingResumeCount,
+            "approved_resume" => $approvedResumeCount,
+            "declined_resume" => $declinedResumeCount,
+            "resume" => $filteredResumes
+        ],200);
+    }
+
+    public function reportManagement(){
+
+        $totalReports = $this->admin_model->getAllReportCount();
+        $pendingReports = $this->admin_model->getPendingReport();
+        $resolvedReports = $this->admin_model->getSuspendedReport();
+        $dissmissedReports = $this->admin_model->getDissmissReport();
+        $reportList = $this->admin_model->getReportList();
+        $filteredResumes = array_map(function($reports) {
+            return [
+                'id' => $reports['id'],
+                'reported_by' => $reports['reported_by'],
+                'reported' => $reports['reported'],
+                'report_type' => $reports['report_reason'],
+                'reporter' => $reports['reporter'],
+                'report_status' => $reports['report_status']
+            ];
+        }, $reportList);
+        $this->jsonResponse([
+            "total_reports" => $totalReports,
+            "pending_reports" => $pendingReports,
+            "suspended_reports" => $resolvedReports,
+            "dismissed_reports" => $dissmissedReports,
+            "report_list" => $filteredResumes
+        ]);
+    }
+
+    public function viewReportDetail($id){
+        $reportData = $this->admin_model->viewReportDetail($id);
+        if($reportData){
+            $this->jsonResponse($reportData,200);
+        } else {
+            $this->jsonResponse(['message' => 'User Not Found'], 400);
+        }
+    }
+    
+    public function suspendedReported ($reported_id,$report_status){
+
+        $suspend = 0;
+        if($report_status == 'Suspend'){
+            $suspend = 1;
+        }
+        $updateReportedStatus = $this->admin_model->updateSuspendStatus($reported_id,$suspend);
+        $updateReportStatus = $this->admin_model->updateReportStatus($reported_id,$report_status);
+
+        if($updateReportStatus || $updateReportedStatus){
+            $this->jsonResponse(['message' => 'Report status updated successfully.'],200);
+        }
+        else {
+            $this->jsonResponse(['message' => 'Report status not updated'], 400);
+        }
+
+
+    }
+
+
 }

@@ -28,6 +28,10 @@ class Job extends BaseModel
             $stmt->execute();
             $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            foreach ($jobs as &$job) {
+                $job['total_applicants'] = $this->getApplicantsCount($job['id']);
+            }
+
             $totalPages = max(1, ceil($totalJobs / $limit));
             return [
                 'jobs' => $jobs,
@@ -37,6 +41,19 @@ class Job extends BaseModel
         } catch (PDOException $e) {
             error_log("Database Error: " . $e->getMessage());
             return [];
+        }
+    }
+
+    public function getApplicantsCount($job_id): int
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT COUNT(*) as total FROM job_applications WHERE job_id = :job_id");
+            $stmt->bindParam(':job_id', $job_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting applicants count: " . $e->getMessage());
+            return 0;
         }
     }
 
@@ -124,14 +141,34 @@ class Job extends BaseModel
         }
     }
 
-    public function viewUserJob($user_id): array {
+    public function viewUserJob($user_id, int $page, int $limit): array {
+        $offset = ($page - 1) * $limit;
+
         try {
-            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE user_id = :user_id");
+            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE user_id = :user_id");
+            $countStmt->bindParam(':user_id', $user_id);
+            $countStmt->execute();
+            $totalJobs = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int to avoid errors
+
+            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE user_id = :user_id LIMIT :limit OFFSET :offset");
             $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($jobs as &$job) {
+                $job['total_applicants'] = $this->getApplicantsCount($job['id']);
+            }
+
+            $totalPages = max(1, ceil($totalJobs / $limit));
+            return [
+                'jobs' => $jobs,
+                'current_page' => $page,
+                'total_pages' => $totalPages
+            ];
         } catch (PDOException $e) {
-            error_log("Error getting user's jobs: " . $e->getMessage());
+            error_log("Database Error: " . $e->getMessage());
             return [];
         }
     }

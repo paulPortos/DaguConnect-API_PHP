@@ -78,4 +78,32 @@ class Client_Profile extends BaseModel
             return false;
         }
     }
+
+    public function getClientDetails($client_id)
+    {
+        $query = "SELECT full_name, email, profile_picture FROM $this->table WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $client_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function ExistingClient($client_id){
+        $query = "SELECT COUNT(*) FROM $this->table WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $client_id);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+
+    }
+
+    public function getclientsDetails($client_id)
+    {
+        $query = "SELECT full_name, email, profile_picture FROM $this->table WHERE user_id = :client_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':client_id', $client_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 }

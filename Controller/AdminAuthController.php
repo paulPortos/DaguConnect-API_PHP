@@ -8,13 +8,14 @@ use DaguConnect\Model\Admin;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\CheckIfLoggedIn;
+use DaguConnect\Services\ValidateFirstandLastName;
 
 class AdminAuthController extends BaseController
 {
     use Confirm_Password;
     use IfDataExists;
     use CheckIfLoggedIn;
-
+    use ValidateFirstandLastName;
     private Admin $adminModel;
 
     public function __construct(Admin $admin_model)
@@ -23,10 +24,15 @@ class AdminAuthController extends BaseController
         $this->adminModel = $admin_model;
     }
 
-    public function register($username, $email, $password, $confirm_password): void
+    public function register($first_name, $last_name, $username, $email, $password, $confirm_password): void
     {
         if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
+            return;
+        }
+
+        if (!$this->validateFirstAndLastName($first_name, $last_name)) {
+            $this->jsonResponse(['message' => 'Name must not contain special characters.'], 400);
             return;
         }
 
@@ -55,23 +61,18 @@ class AdminAuthController extends BaseController
             return;
         }
 
-        if ($this->adminModel->registerUser($username, $email, $password)) {
+        if ($this->adminModel->registerUser($first_name, $last_name, $username, $email, $password)) {
             $this->jsonResponse(['message' => 'Account successfully created.'], 201);
         } else {
             $this->jsonResponse(['message' => 'Registration failed.'], 400);
         }
     }
 
-    public function login($username, $email, $password): void
+    public function login($username, $password): void
     {
 
         if (empty($username)){
             $this->jsonResponse(['message' => 'Username field is required.'], 400);
-            return;
-        }
-
-        if (empty($email)){
-            $this->jsonResponse(['message' => 'Email field is required.'], 400);
             return;
         }
 
@@ -95,34 +96,33 @@ class AdminAuthController extends BaseController
             return;
         }
 
-        if (!$this->adminModel->emailValidation($email)){
-            $this->jsonResponse(['message' => 'Email does not exist!'], 400);
-            return;
-        }
-
-        if (!$this->adminModel->passwordValidation($email, $username, $password)){
+        if (!$this->adminModel->passwordValidation($username, $password)){
             $this->jsonResponse(['message' => 'Incorrect password!'], 400);
             return;
         }
 
-        if ($this->loggedIn($email, 'admin') || $this->isLoggedInUsername($username, 'admin')) {
+        if ($this->isLoggedInUsername($username, 'admin')) {
             $this->jsonResponse(['message' => 'Already logged in on another device!'], 400);
             return;
         }
 
-        if (!$this->adminModel->loginUser($username, $email, $password)) {
+        if (!$this->adminModel->loginUser($username, $password)) {
             $this->jsonResponse(['message' => 'Internal Server Error.'], 500);
             return;
         }
     
-        $token = $this->adminModel->createToken($email);
+        $token = $this->adminModel->createToken($username);
+        $email = $this->adminModel->getEmail($username);
+        $name = $this->adminModel->getName($username);
         $this->jsonResponse([
             'message' => 'Login successfully!',
             'admin' => [
                 [
-                    'token' => $token,
+                    'first_name' => $name['first_name'] ?? '',
+                    'last_name' => $name['last_name'] ?? '',
                     'username' => $username,
                     'email' => $email,
+                    'token' => $token,
                 ]
             ]
         ], 200);

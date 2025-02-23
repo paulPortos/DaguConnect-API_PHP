@@ -9,7 +9,6 @@ use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
 use DaguConnect\Model\User;
 use DaguConnect\Services\FileUploader;
-use Exception;
 use DaguConnect\Services\IfDataExists;
 
 class ResumeController extends BaseController
@@ -20,14 +19,22 @@ class ResumeController extends BaseController
     private User $userModel;
     private Client $clientBookingModel;
     use FileUploader;
-    protected $targetDir;
+    protected $profileDir;
+    protected $documentDir;
+
+    protected  $IdfrontDir;
+
+    protected  $IdbackDir;
 
     use IfDataExists;
 
 
     public function __construct(Resume $resume_Model, Client $client_booking, User $user_model,Report $report_model)
     {
-        $this->targetDir = "/uploads/profile_pictures/";
+        $this->profileDir = "/uploads/profile_pictures/";
+        $this->documentDir = "/uploads/document/";
+        $this->IdfrontDir = "/uploads/IDFRONT/";
+        $this->IdbackDir = "/uploads/IDBACK/";
         $this->db = new config();
         $this->initializeBaseUrl(); // Initialize baseUrl from FileUploader
         $this->resumeModel = $resume_Model;
@@ -70,7 +77,7 @@ class ResumeController extends BaseController
     }
 
     //post resume of the tradesman
-    public function UpdateResume($user_id, $specialties, $profile_pic, $about_me, $prefered_work_location, $work_fee): void
+   /* public function UpdateResume($user_id, $specialties, $profile_pic, $about_me, $prefered_work_location, $work_fee): void
     {
         try {
             // Convert arrays to JSON
@@ -97,6 +104,86 @@ class ResumeController extends BaseController
             }
         } catch (Exception $e) {
             $this->jsonResponse(['message' => $e->getMessage()], 500);
+        }
+    }*/
+
+    public function updateTradesmanProfile($user_Id,$tradesman_profile){
+
+        // Upload the profile picture and get the full URL
+        $fullProfilePicUrl = $this->uploadFile($tradesman_profile, $this->profileDir);
+
+        $profile_update = $this->resumeModel->UpdateTradesmanProfile($user_Id,$fullProfilePicUrl);
+
+            if($profile_update){
+                //updates the profile in the users table
+                $this->userModel->updateUserProfile($user_Id, $fullProfilePicUrl);
+                // Update the tradesman_profile in the client_booking table
+                $this->clientBookingModel->updateTradesmanProfileInBookings($user_Id, $fullProfilePicUrl);
+                //update the Report_profile in the client_booking table
+                $this->reportModel->updateTradesmanProfileInReport($user_Id, $fullProfilePicUrl);
+
+                $this->jsonResponse(['message' => 'Profile Updated successfully.'], 201);
+            } else {
+                $this->jsonResponse(['message' => 'Failed to update profile.'], 500);
+            }
+
+    }
+
+    public function updateTradesmanDetails($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number){
+
+        $updateResume = $this->resumeModel->updateResume($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number);
+
+        if($updateResume){
+            $this->jsonResponse([
+                'message' => 'Updated Successfully'
+            ],200);
+        }else{
+            $this->jsonResponse([
+                'message' => 'User not yet Approved'
+            ], 500);
+        }
+    }
+
+    public function submitResume($user_id,$specialty,$about_me,$prefered_location,$work_fee,$document,$Valid_Id_Front,$Valid_Id_Back){
+
+        // Check if the resume is already pending
+        $status = $this->resumeModel->getResumeStatus($user_id);
+        if ($status === 'Pending') {
+            $this->jsonResponse(['message' => 'Resume Already Pending'], 400);
+            return;
+        }
+
+        // Validate Certificate File Type (Allow PDF, DOC, DOCX)
+        if (!$this->isValidFileType($document, ['pdf', 'doc', 'docx'])) {
+            $this->jsonResponse(['message' => 'Invalid certificate format. Only PDF, DOC, and DOCX files are allowed.'], 400);
+            return;
+        }
+
+        // Validate Valid ID Front (Only Image Formats)
+        if (!$this->isValidFileType($Valid_Id_Front, ['jpg', 'jpeg', 'png'])) {
+            $this->jsonResponse(['message' => 'Invalid ID front format. Only JPG, JPEG, and PNG are allowed.'], 400);
+            return;
+        }
+        // Validate Valid ID Back (Only Image Formats)
+        if (!$this->isValidFileType($Valid_Id_Back, ['jpg', 'jpeg', 'png'])) {
+            $this->jsonResponse(['message' => 'Invalid ID back format. Only JPG, JPEG, and PNG are allowed.'], 400);
+            return;
+        }
+
+
+        // Upload the certificate and get the full URL
+        $fulldocumentUrl = $this->uploadFile($document, $this->documentDir);
+
+        //Upload valid id front and get the full URL
+        $fullIdFrontUrl = $this->uploadFile($Valid_Id_Front,$this->IdfrontDir);
+
+        //Upload valid id back and get the full URL
+        $fullIdBackUrl = $this->uploadFile($Valid_Id_Back,$this->IdbackDir);
+
+        $Resume = $this->resumeModel->SubmitResume($user_id,$specialty,$about_me,$prefered_location,$work_fee,$fulldocumentUrl,$fullIdFrontUrl,$fullIdBackUrl);
+
+        if($Resume){
+            $this->jsonResponse(['message' => 'Resume Submitted Successfully.'], 201);
         }
     }
 }

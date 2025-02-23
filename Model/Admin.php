@@ -18,54 +18,54 @@ class Admin extends BaseModel
         parent::__construct($db);
     }
 
-    public function registerUser($username, $email, $password):bool {
-        $hash_password = password_hash($password, PASSWORD_ARGON2ID);
+    public function registerUser($first_name, $last_name, $username, $email, $password):bool {
+        try {
+            $hash_password = password_hash($password, PASSWORD_ARGON2ID);
 
-        $query = "INSERT INTO $this->table 
-            (username, email, password, created_at)
-            VALUES (:username, :email, :password, NOW())
+            $query = "INSERT INTO $this->table 
+            (first_name, last_name, username, email, password, created_at)
+            VALUES (:first_name, :last_name, :username, :email, :password, NOW())
             ";
 
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hash_password);
-        return $stmt->execute();
-    }
-
-    public function loginUser($username, $email, $password): bool
-    {
-
-        // Query to check if the user exists
-        $query = "SELECT * FROM $this->table WHERE username = :username AND email = :email LIMIT 1";
-
-        // Prepare the statement
-        $stmt = $this->db->prepare($query);
-
-        // Bind the parameters
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-
-        // Execute the query
-        $stmt->execute();
-
-        // Fetch the user record
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // If user is found, verify the password
-        if ($user && password_verify($password, $user['password'])) {
-            return true; // Login successful
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':first_name', $first_name);
+            $stmt->bindParam(':last_name', $last_name);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hash_password);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Error in registerUser: ' . $e->getMessage());
+            return false;
         }
-
-        return false; // Login failed
     }
 
-    public function passwordValidation($email, $username, $password): bool
+    public function loginUser($username, $password): bool
     {
         try {
-            $query = "SELECT password FROM $this->table WHERE email = :email AND username = :username";
+            $query = "SELECT * FROM $this->table WHERE username = :username LIMIT 1";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // If user is found, verify the password
+            if ($user && password_verify($password, $user['password'])) {
+                return true; // Login successful
+            } else {
+                return false; // Login failed
+            }
+        } catch (PDOException $e) {
+            error_log("Error logging in: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function passwordValidation( $username, $password): bool
+    {
+        try {
+            $query = "SELECT password FROM $this->table WHERE username = :username";
+            $stmt = $this->db->prepare($query);
             $stmt->bindParam(':username', $username);
             $stmt->execute();
 
@@ -80,22 +80,6 @@ class Admin extends BaseModel
         }
     }
 
-    public function emailValidation($email): bool {
-        try {
-            $query = "SELECT * FROM $this->table WHERE email = :email";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                return true;
-            }
-            return false;
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return false;
-        }
-    }
 
     public function usernameValidation($username): bool {
         try {
@@ -114,27 +98,67 @@ class Admin extends BaseModel
         }
     }
 
-    public function createToken($email): string
+    public function createToken($username): string
     {
-    // Verify admin exists
-    $query = "SELECT * FROM $this->table WHERE email = :email LIMIT 1";
-    $stmt = $this->db->prepare($query);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
+        try {
+            // Verify admin exists
+            $query = "SELECT * FROM $this->table WHERE username = :username LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
 
-    // Generate token
-    $token = bin2hex(random_bytes(32));
+            // Fetch result
+            $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Update admin table
-    $updateQuery = "UPDATE $this->table SET token = :token WHERE email = :email";
-    $updateStmt = $this->db->prepare($updateQuery);
-    $updateStmt->bindParam(':token', $token);
-    $updateStmt->bindParam(':email', $email);
-    $updateStmt->execute();
+            // If admin does not exist, return null or handle error
+            if (!$admin) {
+                return ""; // Or you can throw an exception
+            }
 
-    return $token;
-}
+            // Generate token
+            $token = bin2hex(random_bytes(32));
 
+            // Update admin table with the new token
+            $updateQuery = "UPDATE $this->table SET token = :token WHERE username = :username";
+            $updateStmt = $this->db->prepare($updateQuery);
+            $updateStmt->bindParam(':token', $token);
+            $updateStmt->bindParam(':username', $username);
+            $updateStmt->execute();
+
+            return $token;
+        } catch (PDOException $e) {
+            error_log("Error creating token: " . $e->getMessage());
+            return "";
+        }
+    }
+
+    public function getName($username) {
+        try {
+            $query = "SELECT first_name, last_name FROM $this->table WHERE username = :username";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error getting name: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function getEmail($username) {
+        try {
+            $query = "SELECT email FROM $this->table WHERE username = :username";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting email: " . $e->getMessage());
+            return "";
+        }
+    }
 
     public function getPendingBookings(){
         $query = "SELECT COUNT(*) AS totalPending FROM client_booking Where booking_status = 'Pending' ";
@@ -273,8 +297,8 @@ class Admin extends BaseModel
         return false;
     }
 
-    public function getJobAvailableCount(): int {
-        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'available'";
+    public function getAllJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
@@ -283,8 +307,15 @@ class Admin extends BaseModel
         return (int)$result['count'];
     }
 
-    public function getJobOngoingCount(): int {
-        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'ongoing'";
+    public function getJobsList(): array {
+        $query = "SELECT * FROM jobs";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAvailableJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE status = 'Available'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
@@ -293,8 +324,28 @@ class Admin extends BaseModel
         return (int)$result['count'];
     }
 
-    public function getJobCompletedCount(): int {
-        $query = "SELECT COUNT(*) AS count FROM jobs WHERE id = 'done'";
+    public function getOngoingJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE status = 'On_going'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return the count as an integer
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
+
+    public function getCancelledJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE status = 'Cancelled'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        // Fetch the result as an associative array and return the count as an integer
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
+
+    public function getCompletedJobs(): int {
+        $query = "SELECT COUNT(*) AS count FROM jobs WHERE status = 'Completed'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
@@ -322,9 +373,140 @@ class Admin extends BaseModel
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':token', $token);
         $stmt->execute();
-
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
-
         return $admin ?: null;
     }
+
+    public function validateresume($user_id, $status_of_approval, $is_approve,$is_active) {
+        $query = "UPDATE tradesman_resume 
+              SET status_of_approval = :status_of_approval, is_approve = :status , is_active = :is_active
+              WHERE user_id = :user_id AND status_of_approval = 'Pending'";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':status_of_approval', $status_of_approval);
+        $stmt->bindParam(':status', $is_approve);
+        $stmt->bindParam(':is_active', $is_active);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0; // Check if any row was updated
+    }
+
+
+    public function viewUserDetail($user_id){
+        $query = "SELECT  * FROM tradesman_resume WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    }
+
+    public function getAllResumeCount(){
+        $query = "SELECT COUNT(*) AS totalResume FROM tradesman_resume WHERE status_of_approval IS NOT NULL";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total resume from resume and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalResume'];
+
+    }
+
+    public function getPendingResume(){
+        $query = "SELECT COUNT(*) AS totalPending FROM tradesman_resume WHERE status_of_approval = 'Pending'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from resune and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalPending'];
+    }
+
+    public function getApprovedResume(){
+        $query = "SELECT COUNT(*) AS totalApproved FROM tradesman_resume WHERE status_of_approval = 'Approved'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total approved from resume and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalApproved'];
+    }
+    public function getDeclined(){
+        $query = "SELECT COUNT(*) AS totalDeclined FROM tradesman_resume WHERE status_of_approval = 'Declined'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total declined from resume and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalDeclined'];
+
+    }
+
+    public function getResumeList(){
+        $query = "SELECT * FROM tradesman_resume WHERE status_of_approval IS NOT NULL";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function getReportList(){
+        $query = "SELECT * FROM reports";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllReportCount(){
+        $query = "SELECT COUNT(*) AS totalReports FROM reports";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total reports from reports and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalReports'];
+    }
+
+    public function getPendingReport(){
+        $query = "SELECT COUNT(*) AS totalPendingReports FROM reports WHERE report_status = 'Pending'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total pending from reports and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalPendingReports'];
+    }
+
+    public function getSuspendedReport(){
+        $query = "SELECT COUNT(*) AS totalSuspendedReports FROM reports WHERE report_status = 'Suspend'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total resolved from reports and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalSuspendedReports'];
+    }
+
+    public function getDissmissReport(){
+        $query = "SELECT COUNT(*) AS totalDismissedReports FROM reports WHERE report_status = 'Dismissed'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        // Fetch all the total resolved from reports and return them as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC)['totalDismissedReports'];
+    }
+
+    public function viewReportDetail($id){
+        $query = "SELECT  * FROM reports WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateReportStatus($reported_id,$report_status){
+     $query = "UPDATE reports SET report_status = :report_status WHERE reported_id = :reported_id";
+     $stmt = $this->db->prepare($query);
+     $stmt->bindParam(':report_status', $report_status);
+     $stmt->bindParam(':reported_id', $reported_id);
+     $stmt->execute();
+     return $stmt->rowCount() > 0; // Check if any row was updated
+    }
+
+    public function updateSuspendStatus($userId,$suspend){
+        $query = "UPDATE users SET suspend = :suspend WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':suspend', $suspend);
+        $stmt->bindParam(':id', $userId);
+        $stmt->execute();
+        return $stmt->rowCount() > 0; // Check if any row was updated
+
+    }
+
+
 }

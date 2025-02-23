@@ -11,7 +11,8 @@ trait Middleware
     {
         // Endpoints that are protected by the middleware that needs a token
         $protectedRoutes = [
-            '/user/tradesman/update/resume',
+            '/user/tradesman/update/profile',
+            '/user/tradesman/submit/resume',
             '/user/client/booktradesman',
             '/user/tradesman/getbooking',
             '/user/client/create-job',
@@ -29,9 +30,17 @@ trait Middleware
             '/client/jobs/delete/{jobId}',
             '/admin/logout',
             '/user/client/booktradesman/{tradesman_Id}',
-            '/user/client/ratetradesman/{tradesman_Id}',
-            'user/client/reporttradesman/{tradesman_Id}',
+            '/user/client/rate/tradesman/{booking_id}',
+            '/user/client/report/tradesman/{tradesman_Id}',
+            '/user/tradesman/report/client/{client_Id}',
             '/client/update/profile_address',
+            '/client/update/profile_picture',
+            '/user/tradesman/update/resume/details',
+            '/client/update/profile_picture',
+            '/user/message/{chatId}/{receiver_id}',
+            '/client/jobs/view/my_jobs',
+            '/user/chat/get',
+            '/client/profile',
             '/client/update/profile_picture',
             '/client/job/update/{jobId}'
         ];
