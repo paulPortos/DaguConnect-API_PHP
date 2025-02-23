@@ -38,12 +38,6 @@ class Resume extends BaseModel
             $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-            // Decode JSON fields for each resume
-            foreach ($resumes as &$resume) {
-                $resume['specialties'] = json_decode($resume['specialties'], true);
-                $resume['prefered_work_location'] = json_decode($resume['prefered_work_location'], true);
-            }
-
             $totalPages = max(1, ceil($totalResume / $limit));
             return [
                 'resumes' => $resumes,

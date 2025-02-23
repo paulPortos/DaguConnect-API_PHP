@@ -1000,3 +1000,123 @@ Stack trace:
 #6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php on line 505
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:22:28 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:23:59 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:36 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:53 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:55 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
