@@ -5,7 +5,10 @@ namespace Controller\App;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Chat;
+use DaguConnect\Services\Env;
 use DaguConnect\Services\IfDataExists;
+use DaguConnect\WebSocket\WebSocketServer;
+use Exception;
 
 class ChatController extends BaseController
 {
@@ -15,6 +18,7 @@ class ChatController extends BaseController
     public function __construct(Chat $chat_model) {
         $this->db = new config();
         $this->model = $chat_model;
+        new Env();
     }
 
     public function messageUser(int $user_id, int $receiver_id, string $message): void {
@@ -43,7 +47,7 @@ class ChatController extends BaseController
         $chat = $this->model->sendMessage($user_id, $receiver_id, $message, $chat_id);
 
         if ($chat) {
-            // Prepare the WebSocket data
+            // Prepare WebSocket message
             $messageData = [
                 'user_id' => $user_id,
                 'receiver_id' => $receiver_id,
@@ -52,8 +56,8 @@ class ChatController extends BaseController
                 'timestamp' => date('Y-m-d H:i:s')
             ];
 
-            // Send WebSocket message
-            $this->sendWebSocketMessage($messageData);
+            // Send message via Workerman WebSocket
+            WebSocketServer::broadcastMessage($messageData);
 
             $this->jsonResponse(['message' => "Message sent successfully."], 201);
         } else {
@@ -61,24 +65,6 @@ class ChatController extends BaseController
         }
     }
 
-    /**
-     * Sends a message to the WebSocket server.
-     */
-    private function sendWebSocketMessage(array $messageData): void {
-        $wsUrl = "ws://localhost:8080"; // WebSocket server URL
-
-        $messageJson = json_encode($messageData);
-
-        try {
-            $socket = stream_socket_client("tcp://localhost:8080", $errno, $errstr, 30);
-            if ($socket) {
-                fwrite($socket, $messageJson);
-                fclose($socket);
-            }
-        } catch (Exception $e) {
-            error_log("WebSocket error: " . $e->getMessage());
-        }
-    }
 
 
     public function getChats(int $user_id, int $page = 1, int $limit = 10): void {

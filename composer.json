@@ -8,7 +8,7 @@
       "ext-posix": "*",
       "ext-pcntl": "*",
       "ext-pthreads": "*",
-        "cboden/ratchet": "^0.4.4"
+        "workerman/workerman": "^5.1"
     },
   "autoload": {
     "psr-4": {

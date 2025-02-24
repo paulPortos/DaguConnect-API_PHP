@@ -1,28 +1,35 @@
 <?php
 
-use DaguConnect\Services\Env;
+use Workerman\Worker;
 use DaguConnect\WebSocket\WebSocketServer;
-use Ratchet\Server\IoServer;
-use Ratchet\Http\HttpServer;
-use Ratchet\WebSocket\WsServer;
 
 require 'vendor/autoload.php';
 require 'WebSocketServer.php';
 
-new Env();
-
-$host = $_ENV['IP_ADDRESS'] ?? '0.0.0.0'; // Default to 0.0.0.0 if not set
+// WebSocket server configuration
+$host = $_ENV['IP_ADDRESS'] ?? '0.0.0.0';
 $port = 8000;
 
-$server = IoServer::factory(
-    new HttpServer(
-        new WsServer(
-            new WebSocketServer()
-        )
-    ),
-    $port // Correctly passing the port instead of a SocketServer instance
-);
+$ws_server = new Worker("websocket://$host:$port");
+
+// Attach WebSocketServer as the handler for connections
+$ws_server->onConnect = function ($connection) {
+    WebSocketServer::onOpen($connection);
+};
+
+$ws_server->onMessage = function ($connection, $message) {
+    WebSocketServer::onMessage($connection, $message);
+};
+
+$ws_server->onClose = function ($connection) {
+    WebSocketServer::onClose($connection);
+};
+
+$ws_server->onError = function ($connection, $code, $message) {
+    WebSocketServer::onError($connection, $code, $message);
+};
 
 echo "WebSocket server started on ws://$host:$port\n";
 
-$server->run();
+// Run the server
+Worker::runAll();

@@ -2,43 +2,46 @@
 
 namespace DaguConnect\WebSocket;
 
-use Ratchet\MessageComponentInterface;
-use Ratchet\ConnectionInterface;
+use Workerman\Connection\TcpConnection;
+use Workerman\Worker;
 
-class WebSocketServer implements MessageComponentInterface {
-    protected \SplObjectStorage $clients;
+class WebSocketServer {
+    protected static array $clients = [];
 
-    public function __construct() {
-        $this->clients = new \SplObjectStorage;
+    public static function onOpen(TcpConnection $connection): void {
+        self::$clients[$connection->id] = $connection;
+        echo "New connection ({$connection->id})\n";
     }
 
-    public function onOpen(ConnectionInterface $conn): void
-    {
-        $this->clients->attach($conn);
-        echo "New connection ({$conn->resourceId})\n";
-    }
-
-    public function onMessage(ConnectionInterface $from, $msg): void
-    {
+    public static function onMessage(TcpConnection $connection, $msg): void {
         echo "Received message: $msg\n";
 
         // Broadcast the message to all connected clients
-        foreach ($this->clients as $client) {
-            if ($client !== $from) { // Don't send the message back to the sender
+        foreach (self::$clients as $client) {
+            if ($client !== $connection) {
                 $client->send($msg);
             }
         }
     }
 
-    public function onClose(ConnectionInterface $conn): void
-    {
-        $this->clients->detach($conn);
-        echo "Connection {$conn->resourceId} has disconnected\n";
+    public static function onClose(TcpConnection $connection): void {
+        unset(self::$clients[$connection->id]);
+        echo "Connection {$connection->id} has disconnected\n";
     }
 
-    public function onError(ConnectionInterface $conn, \Exception $e): void
-    {
-        echo "An error occurred: {$e->getMessage()}\n";
-        $conn->close();
+    public static function onError(TcpConnection $connection, int $code, string $message): void {
+        echo "Error [$code]: $message\n";
+        $connection->close();
+    }
+
+    /**
+     * Sends a WebSocket message to all connected clients.
+     */
+    public static function broadcastMessage(array $messageData): void {
+        $messageJson = json_encode($messageData);
+
+        foreach (self::$clients as $client) {
+            $client->send($messageJson);
+        }
     }
 }
