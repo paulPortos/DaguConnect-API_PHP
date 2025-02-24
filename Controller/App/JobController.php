@@ -65,6 +65,7 @@ class JobController extends BaseController
         $client_profile_id = $this->job_model->getProfileIdByUserId($user_id);
         $client_profile_picture = $this->job_model->getProfilePictureById($client_profile_id);
         $client_fullname = $this->job_model->getFullnameById($client_profile_id);
+
         $addJob = $this->job_model->addJob($user_id, $client_fullname, $client_profile_id, $client_profile_picture, $salary, $applicant_limit_count, $job_type, $job_description, $address, $status, $deadline);
         if ($addJob) {
             $this->jsonResponse(['message' => "Job added successfully."], 201);
@@ -123,13 +124,13 @@ class JobController extends BaseController
         }
     }
 
-    public function viewUserJobs($user_id): void{
+    public function viewUserJobs($user_id, int $page, int $limit): void{
         if (!$this->exists($user_id, "id", "users")) {
             $this->jsonResponse(['message' => "User does not exist."], 404);
             return;
         }
 
-        $user_job_post = $this->job_model->viewUserJob($user_id);
+        $user_job_post = $this->job_model->viewUserJob($user_id, $page, $limit);
 
         if (!$user_job_post) {
             $this->jsonResponse(['message' => "No job posts found."], 200);
@@ -138,13 +139,13 @@ class JobController extends BaseController
         }
     }
 
-    public function updateJob($id, $salary, $job_description, $location, $deadline): void{
-        if (empty($salary) || empty($job_description) || empty($location) || empty($deadline)) {
+    public function updateJob($id, $user_id, $salary, $job_description, $address, $deadline): void{
+        if (empty($salary) || empty($job_description) || empty($address) || empty($deadline)) {
             $this->jsonResponse(['message' => "Fields should not be empty."], 400);
             return;
         }
 
-        $update_job = $this->job_model->updateJob($id, $salary, $job_description, $location, $deadline);
+        $update_job = $this->job_model->updateJob($id, $user_id, $salary, $job_description, $address, $deadline);
         if ($update_job) {
             $this->jsonResponse(['message' => "Job updated successfully."], 200);
         } else {
@@ -154,10 +155,15 @@ class JobController extends BaseController
 
     public function deleteJob($id, $user_id): void{
         $delete_job = $this->job_model->deleteJob($id, $user_id);
+
+        if (!$this->exists($id, "id", "jobs")) {
+            $this->jsonResponse(['message' => "Job does not exist."], 404);
+            return;
+        }
         if ($delete_job) {
             $this->jsonResponse(['message' => "Job deleted successfully."], 200);
         } else {
-            $this->jsonResponse(['message' => "Failed to delete job."], 500);
+            $this->jsonResponse(['message' => "Job does not belong to this user."], 500);
         }
     }
 }

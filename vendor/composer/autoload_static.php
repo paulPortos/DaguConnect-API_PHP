@@ -13,6 +13,11 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Workerman\\Coroutine\\' => 20,
+            'Workerman\\' => 10,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -49,6 +54,15 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
     );
 
     public static $prefixDirsPsr4 = array (
+        'Workerman\\Coroutine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/coroutine/src',
+        ),
+        'Workerman\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/workerman/src',
+            1 => __DIR__ . '/..' . '/workerman/coroutine/src',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -63,7 +77,7 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
         ),
         'Routes\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/Api',
+            0 => __DIR__ . '/../..' . '/Routes',
         ),
         'PhpOption\\' => 
         array (

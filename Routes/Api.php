@@ -220,7 +220,7 @@ class Api extends BaseApi
             $profile_pic = $_FILES['profile_pic'];
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
-            $ResumeController->updateTradesmanProfile($userId,$profile_pic);
+            $ResumeController->updateTradesmanProfile($userId, $profile_pic);
         });
 
         $this->route('POST','/user/tradesman/submit/resume', function ($userId){
@@ -378,10 +378,10 @@ class Api extends BaseApi
             $jobApplicationController->viewMyJobApplication($jobId);
         });
 
-        $this->route('POST', '/user/client/job/apply', function ($userId){
-            ['job_id' => $jobId, 'job_name' => $jobName, 'job_type' => $jobType, 'qualification_summary' => $qualificationSummary, 'status' => $status] = $this->requestBody;
+        $this->route('POST', '/user/client/job/apply/{jobId}', function ($userId, $jobId){
+            ['qualification_summary' => $qualificationSummary] = $this->requestBody;
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
-            $jobApplicationController->apply_job($userId, $jobId, $jobName, $jobType, $qualificationSummary, $status);
+            $jobApplicationController->apply_job($userId, $jobId, $qualificationSummary);
         });
 
         $this->route('GET', '/user/getresumes', function () {
@@ -412,9 +412,12 @@ class Api extends BaseApi
             $messageController->getChats($userId, $page, $limit);
         });
 
-        $this->route('GET', '/client/jobs/view/{userId}', function ($userId){
+        $this->route('GET', '/client/jobs/view/my_jobs', function ($userId){
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
+
             $jobController = new JobController(new Job($this->db));
-            $jobController->viewUserJobs($userId);
+            $jobController->viewUserJobs($userId, $page, $limit);
         });
 
         $this->route('GET', '/user/message/{chatId}', function ($user_id, $chat_id) {
@@ -443,20 +446,34 @@ class Api extends BaseApi
             $jobController->getAllRecentJobs($page, $limit);
         });
 
-        $this->route('POST', '/client/update/profile_picture', function ($userId){
-            $this->responseBodyChecker();
+        $this->route('POST', '/client/update/profile_picture', function ($userId) {
+            if (empty($_FILES['profile_picture'])) {
+                echo json_encode(["message" => "No file uploaded"]);
+                return;
+            }
+            $profile_pic = $_FILES['profile_picture'];
 
-            ['profile_picture' => $profile_picture] = $this->requestBody;
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
-            $clientProfileController->updateProfilePicture($userId, $profile_picture);
+            $clientProfileController->updateProfilePicture($userId, $profile_pic);
         });
 
         $this->route('POST', '/client/update/profile_address', function ($userId){
             $this->responseBodyChecker();
-            var_dump($userId);
             ['address' => $profile_address] = $this->requestBody;
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
             $clientProfileController->updateProfileAddress($userId, $profile_address);
+        });
+
+        $this->route('GET', '/client/profile', function ($user_id) {
+            $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
+            $clientProfileController->getProfile($user_id);
+        });
+
+        $this->route('POST', '/client/jobs/update/{jobId}', function ($userId,$jobId){
+            $this->responseBodyChecker();
+            ['salary' => $salary, 'job_description' => $job_description, 'address' => $address, 'deadline' => $deadline] = $this->requestBody;
+            $jobController = new JobController(new Job($this->db));
+            $jobController->updateJob($jobId, $userId, $salary, $job_description, $address, $deadline);
         });
     }
 
@@ -468,5 +485,4 @@ class Api extends BaseApi
             exit();
         }
     }
-
 }

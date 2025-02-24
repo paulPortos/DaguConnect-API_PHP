@@ -38,7 +38,11 @@ trait Middleware
             '/user/tradesman/update/resume/details',
             '/client/update/profile_picture',
             '/user/message/{chatId}/{receiver_id}',
+            '/client/jobs/view/my_jobs',
             '/user/chat/get',
+            '/client/profile',
+            '/client/update/profile_picture',
+            '/client/job/update/{jobId}',
             '/user/tradesman/view/ratings'
         ];
 

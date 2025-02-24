@@ -23,9 +23,9 @@ class BaseApi
         // Check the Content-Type and parse accordingly
         $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
 
-        if (strpos($contentType, 'application/json') !== false) {
+        if (str_contains($contentType, 'application/json')) {
             $this->requestBody = json_decode(file_get_contents('php://input'), true);
-        } elseif (strpos($contentType, 'multipart/form-data') !== false) {
+        } elseif (str_contains($contentType, 'multipart/form-data')) {
             // For multipart/form-data, use PHP's $_POST and $_FILES
             $this->requestBody = $_POST;
             // You can also access files using $_FILES if needed

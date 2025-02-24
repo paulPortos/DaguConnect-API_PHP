@@ -29,16 +29,15 @@ class Job_Application extends BaseModel
      * @return bool Returns true if the job application was successfully inserted, false otherwise.
      */
     //Apply for a job
-    public function applyJob(int $user_id, int $resume_id, int $job_id, string $job_name, string $job_type, string $qualifications_summary, string $status):bool {
+    public function applyJob(int $user_id, int $resume_id, int $job_id, string $job_type, string $qualifications_summary, string $status):bool {
         try {
             $query = "INSERT INTO $this->table 
-        (user_id, resume_id, job_id, job_name, job_type, qualifications_summary, status, created_at) 
+        (user_id, resume_id, job_id, job_type, qualifications_summary, status, created_at) 
         VALUES (:user_id, :resume_id, :job_id, :job_name, :job_type, :qualifications_summary, :status, NOW())";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':resume_id', $resume_id);
             $stmt->bindParam(':job_id', $job_id);
-            $stmt->bindParam(':job_name', $job_name);
             $stmt->bindParam(':job_type', $job_type);
             $stmt->bindParam(':qualifications_summary', $qualifications_summary);
             $stmt->bindParam(':status', $status);
@@ -164,4 +163,18 @@ class Job_Application extends BaseModel
             return false;
         }
     }
+
+    public function getJobType($job_id): array
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT job_type FROM jobs WHERE id = :id LIMIT 1");
+            $stmt->bindParam(':id', $job_id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error getting job name and type: ". $e->getMessage());
+            return [];
+        }
+    }
+
 }

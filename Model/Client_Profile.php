@@ -43,16 +43,32 @@ class Client_Profile extends BaseModel
         }
     }
 
-    public function updateProfilePicture($user_id, $picture): bool{
+    public function updateProfilePicture($user_id, $picture){
         try {
-            $query = "UPDATE $this->table SET picture = :picture WHERE user_id = :user_id";
+            $query = "UPDATE $this->table SET profile_picture = :profile_picture WHERE user_id = :user_id";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam('user_id' , $user_id);
-            $stmt->bindParam('picture' , $picture);
+            $stmt->bindParam('profile_picture' , $picture);
             $stmt->execute();
+            $this->updateUserProfile($user_id, $picture);
+
             return true;
         } catch (PDOException $e) {
             error_log("error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function updateUserProfile($user_id, $profile): bool {
+        try {
+            $query = "UPDATE users SET profile = :profile WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':profile', $profile);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error updating profile picture: " . $e->getMessage());
             return false;
         }
     }
@@ -88,7 +104,8 @@ class Client_Profile extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function ExistingClient($client_id){
+    public function ExistingClient($client_id): bool
+    {
         $query = "SELECT COUNT(*) FROM $this->table WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $client_id);

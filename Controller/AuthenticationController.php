@@ -66,7 +66,6 @@ class AuthenticationController extends BaseController
         //check if the user enters a valid email
         $emailValidation = self::checkEmail($email);
 
-
         //check if the fields a re all filled up
         if(empty($first_name) || empty($last_name) || empty($username) ||empty($birthdate) || empty($email) || !isset($is_client)|| empty($password) || empty($confirm_password)){
             $this->jsonResponse(['message' => 'Fields are required to be filled up.'], 400);
@@ -98,7 +97,7 @@ class AuthenticationController extends BaseController
         //checks if the user
         //checks the first_name and lastname if it contains an invalid character
         if(!$firstNameandLastnameValidation){
-            $this->jsonResponse(['message' => 'First and Last name should not contain any numerical value.'], 400);
+            $this->jsonResponse(['message' => 'Names should not contain any numerical value.'], 400);
             return;
         }
         //check if the username already exist or not
