@@ -17,9 +17,9 @@ class ChatController extends BaseController
         $this->model = $chat_model;
     }
 
-    public function messageUser(int $user_id, int $receiver_id, String $message): void {
+    public function messageUser(int $user_id, int $receiver_id, string $message): void {
         if (empty($user_id) || empty($receiver_id)) {
-            $this->jsonResponse(['message' => "Invalid user ID, receiver ID or chat ID"]);
+            $this->jsonResponse(['message' => "Invalid user ID or receiver ID"]);
             return;
         }
 
@@ -33,17 +33,53 @@ class ChatController extends BaseController
             return;
         }
 
+        // Ensure chat exists
         $chat_id = $this->model->ensureChatExists($user_id, $receiver_id, $message);
 
+        // Update latest message
         $this->model->changeLatestMessage($chat_id, $message, $user_id);
 
+        // Send message
         $chat = $this->model->sendMessage($user_id, $receiver_id, $message, $chat_id);
+
         if ($chat) {
+            // Prepare the WebSocket data
+            $messageData = [
+                'user_id' => $user_id,
+                'receiver_id' => $receiver_id,
+                'chat_id' => $chat_id,
+                'message' => $message,
+                'timestamp' => date('Y-m-d H:i:s')
+            ];
+
+            // Send WebSocket message
+            $this->sendWebSocketMessage($messageData);
+
             $this->jsonResponse(['message' => "Message sent successfully."], 201);
         } else {
             $this->jsonResponse(['message' => "Failed to send message."], 500);
         }
     }
+
+    /**
+     * Sends a message to the WebSocket server.
+     */
+    private function sendWebSocketMessage(array $messageData): void {
+        $wsUrl = "ws://localhost:8080"; // WebSocket server URL
+
+        $messageJson = json_encode($messageData);
+
+        try {
+            $socket = stream_socket_client("tcp://localhost:8080", $errno, $errstr, 30);
+            if ($socket) {
+                fwrite($socket, $messageJson);
+                fclose($socket);
+            }
+        } catch (Exception $e) {
+            error_log("WebSocket error: " . $e->getMessage());
+        }
+    }
+
 
     public function getChats(int $user_id, int $page = 1, int $limit = 10): void {
         $result = $this->model->getChats($user_id, $page, $limit); // Fetch chats from model

@@ -22,5 +22,8 @@
   remove the semicolon in error_log = /var/log/php_errors.log to access the error_log
  */
 
+/*composer require cboden/ratchet --ignore-platform-req=ext-posix --ignore-platform-req=ext-pcntl --ignore-platform-req=ext-pthreads
+*/
+
 
 
