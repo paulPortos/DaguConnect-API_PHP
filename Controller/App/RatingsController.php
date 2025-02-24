@@ -77,4 +77,25 @@ class RatingsController extends BaseController
 
 
 
+    public function viewratings($tradesman_id){
+        $ratings = $this->rating->viewRatings($tradesman_id);
+        if(!$ratings){
+            $this->jsonResponse(['message' => "No ratings found"],400);
+            return;
+        }
+        $this->jsonResponse($ratings,200);
+    }
+
+    public function viewratingsById($tradesman_id){
+     $ratingsById = $this->rating->viewRatings($tradesman_id);
+     if(!$ratingsById){
+         $this->jsonResponse(['message' => "No Ratings"],400);
+         return;
+     }
+
+     $this->jsonResponse($ratingsById,200);
+    }
+
+
+
 }

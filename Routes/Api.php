@@ -149,6 +149,16 @@ class Api extends BaseApi
             $adminController->viewReportDetail($id);
         });
 
+        $this->route('GET', '/admin/rating/management',function (){
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->ratingManagement();
+        });
+
+        $this->route('GET', '/admin/view/rating/details/{id}', function ($id) {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->viewRatingDetail($id);
+        });
+
 
         $this->route('POST', '/user/register', function () {
             $this->responseBodyChecker();
@@ -248,7 +258,15 @@ class Api extends BaseApi
 
             $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
             $RatingController->rateTradesman($userId,$tradesman_id,$rating,$message);
+        });
+        $this->route('GET', '/user/client/view/tradesman/rating/{tradesman_id}', function ($user_id,$tradesman_Id) {
+            $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
+            $RatingController->viewratingsById($tradesman_Id);
+        });
 
+        $this->route('GET', '/user/tradesman/view/ratings', function ($tradesman_id) {
+            $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
+            $RatingController->viewratings($tradesman_id);
         });
 
         $this->route('POST', '/user/client/report/tradesman/{tradesman_Id}', function($client_Id,$tradesman_Id){

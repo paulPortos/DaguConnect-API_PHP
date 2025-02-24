@@ -1120,3 +1120,13 @@ Stack trace:
 [23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
 [23-Feb-2025 11:28:56 UTC] PHP Warning:  Undefined array key "specialties" in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
 [23-Feb-2025 11:28:56 UTC] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 43
+[24-Feb-2025 03:04:43 UTC] error: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away
+[24-Feb-2025 03:42:53 UTC] PHP Warning:  Undefined array key "rating" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php on line 282
+[24-Feb-2025 04:33:08 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DaguConnect\Routes\Api::DaguConnect\Routes\{closure}(), 1 passed and exactly 2 expected in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php:263
+Stack trace:
+#0 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(5)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#4 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 263

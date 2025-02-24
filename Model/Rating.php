@@ -37,4 +37,15 @@ class Rating extends BaseModel
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
+
+    public function viewratings($tradesman_id){
+        $query = "SELECT * FROM $this->table WHERE
+                        tradesman_id = :tradesman_id ORDER BY rated_at DESC";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':tradesman_id', $tradesman_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }
