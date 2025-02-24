@@ -5,7 +5,10 @@ namespace Controller\App;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Chat;
+use DaguConnect\Services\Env;
 use DaguConnect\Services\IfDataExists;
+use DaguConnect\WebSocket\WebSocketServer;
+use Exception;
 
 class ChatController extends BaseController
 {
@@ -15,11 +18,12 @@ class ChatController extends BaseController
     public function __construct(Chat $chat_model) {
         $this->db = new config();
         $this->model = $chat_model;
+        new Env();
     }
 
-    public function messageUser(int $user_id, int $receiver_id, String $message): void {
+    public function messageUser(int $user_id, int $receiver_id, string $message): void {
         if (empty($user_id) || empty($receiver_id)) {
-            $this->jsonResponse(['message' => "Invalid user ID, receiver ID or chat ID"]);
+            $this->jsonResponse(['message' => "Invalid user ID or receiver ID"]);
             return;
         }
 
@@ -33,17 +37,35 @@ class ChatController extends BaseController
             return;
         }
 
+        // Ensure chat exists
         $chat_id = $this->model->ensureChatExists($user_id, $receiver_id, $message);
 
+        // Update latest message
         $this->model->changeLatestMessage($chat_id, $message, $user_id);
 
+        // Send message
         $chat = $this->model->sendMessage($user_id, $receiver_id, $message, $chat_id);
+
         if ($chat) {
+            // Prepare WebSocket message
+            $messageData = [
+                'user_id' => $user_id,
+                'receiver_id' => $receiver_id,
+                'chat_id' => $chat_id,
+                'message' => $message,
+                'timestamp' => date('Y-m-d H:i:s')
+            ];
+
+            // Send message via Workerman WebSocket
+            WebSocketServer::broadcastMessage($messageData);
+
             $this->jsonResponse(['message' => "Message sent successfully."], 201);
         } else {
             $this->jsonResponse(['message' => "Failed to send message."], 500);
         }
     }
+
+
 
     public function getChats(int $user_id, int $page = 1, int $limit = 10): void {
         $result = $this->model->getChats($user_id, $page, $limit); // Fetch chats from model

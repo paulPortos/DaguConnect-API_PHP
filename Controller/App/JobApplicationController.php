@@ -6,14 +6,16 @@ use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Client;
 use DaguConnect\Model\Job_Application;
+use DaguConnect\Services\IfDataExists;
 use http\Message;
 
 class JobApplicationController extends BaseController
 {
+    use IfDataExists;
     private $job_type_enum;
     private $application_status;
     private Job_Application $job_application_model;
-    private config $db;
+    protected config $db;
     public function __construct(Job_Application $job_application)
     {
         $this->db = new config();
@@ -97,6 +99,17 @@ class JobApplicationController extends BaseController
         } else {
             $this->jsonResponse(['message' => 'Error getting job application'], 500);
         }
+    }
 
+    public function acceptOrDeclineApplication(int $job_applicationId, string $status):void {
+        if (!$this->exists($job_applicationId, "id", "jobs")) {
+            $this->jsonResponse(['message' => 'Invalid job application ID'], 400);
+            return;
+        }
+        if ($this->job_application_model->acceptOrDeclineJobApplication($job_applicationId, $status)) {
+            $this->jsonResponse(['message' => 'Application successful.'], 201);
+        } else {
+            $this->jsonResponse(['message' => "Internal Server Error"], 500);
+        }
     }
 }

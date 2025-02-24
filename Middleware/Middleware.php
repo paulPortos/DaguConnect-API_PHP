@@ -40,7 +40,9 @@ trait Middleware
             '/user/message/{chatId}/{receiver_id}',
             '/client/jobs/view/my_jobs',
             '/user/chat/get',
-            '/client/profile'
+            '/client/profile',
+            '/client/update/profile_picture',
+            '/client/job/update/{jobId}'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {

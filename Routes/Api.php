@@ -441,7 +441,6 @@ class Api extends BaseApi
 
         $this->route('POST', '/client/update/profile_address', function ($userId){
             $this->responseBodyChecker();
-            var_dump($userId);
             ['address' => $profile_address] = $this->requestBody;
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
             $clientProfileController->updateProfileAddress($userId, $profile_address);
@@ -450,6 +449,13 @@ class Api extends BaseApi
         $this->route('GET', '/client/profile', function ($user_id) {
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
             $clientProfileController->getProfile($user_id);
+        });
+
+        $this->route('POST', '/client/jobs/update/{jobId}', function ($userId,$jobId){
+            $this->responseBodyChecker();
+            ['salary' => $salary, 'job_description' => $job_description, 'address' => $address, 'deadline' => $deadline] = $this->requestBody;
+            $jobController = new JobController(new Job($this->db));
+            $jobController->updateJob($jobId, $userId, $salary, $job_description, $address, $deadline);
         });
     }
 
