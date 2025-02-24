@@ -21,22 +21,23 @@ class JobApplicationController extends BaseController
         $this->db = new config();
         $this->job_application_model = $job_application;
         $this->application_status = [
-            'pending','active','declined','complete','cancelled'
+            'Pending','Active','Declined','Complete','Cancelled'
         ];
         $this->job_type_enum = [
-            'carpentry','painting','welding','electrical_work','plumbing','masonry','roofing','ac_repair','mechanics','drywalling','glazing'
+            'Carpentry','Painting','Welding','Electrical_work','Plumbing','Masonry','Roofing','Ac_repair','Mechanics','Drywalling','Cleaning'
         ];
     }
 
-    public function apply_job(int $user_id, int $job_id, string $job_name, string $job_type, string $qualifications_summary, string $status):void {
+    public function apply_job(int $user_id, int $job_id, string $qualifications_summary, string $status = "Pending"):void {
         $resume_id = $this->job_application_model->getResumeId($user_id);
+        $job_type = $this->job_application_model->getJobType($job_id);
 
         if ($resume_id == 0) {
             $this->jsonResponse(['message' => 'No resume found for this user.'], 400);
             return;
         }
 
-        if (empty($job_name) || empty($job_type) || empty($status)) {
+        if (empty($job_type) || empty($status)) {
             $this->jsonResponse(['message' => 'Missing data'], 400);
             return;
         }
@@ -66,7 +67,7 @@ class JobApplicationController extends BaseController
             return;
         }
 
-        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $job_name, $job_type, $qualifications_summary, $status);
+        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $job_type, $qualifications_summary, $status);
 
         if ($applyJob) {
             $this->jsonResponse(['message' => 'Application successful.'], 201);

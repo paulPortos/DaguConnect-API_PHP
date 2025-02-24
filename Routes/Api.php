@@ -360,10 +360,10 @@ class Api extends BaseApi
             $jobApplicationController->viewMyJobApplication($jobId);
         });
 
-        $this->route('POST', '/user/client/job/apply', function ($userId){
-            ['job_id' => $jobId, 'job_name' => $jobName, 'job_type' => $jobType, 'qualification_summary' => $qualificationSummary, 'status' => $status] = $this->requestBody;
+        $this->route('POST', '/user/client/job/apply/{jobId}', function ($userId, $jobId){
+            ['qualification_summary' => $qualificationSummary] = $this->requestBody;
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
-            $jobApplicationController->apply_job($userId, $jobId, $jobName, $jobType, $qualificationSummary, $status);
+            $jobApplicationController->apply_job($userId, $jobId, $qualificationSummary);
         });
 
         $this->route('GET', '/user/getresumes', function () {
