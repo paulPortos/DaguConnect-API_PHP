@@ -8,7 +8,7 @@ trait FileUploader
 {
     private string $baseUrl;
 
-    public function initializeBaseUrl()
+    public function initializeBaseUrl(): void
     {
         $this->baseUrl = 'http://' . $_SERVER['HTTP_HOST']; // Auto-detect domain
     }

@@ -6,15 +6,20 @@ use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Chat;
 use DaguConnect\Model\Client_Profile;
+use DaguConnect\Services\FileUploader;
+use Exception;
 
 class ClientProfileController extends BaseController
 {
+    use FileUploader;
     private Client_Profile $model;
     private config $db;
+    protected $profileDir;
     private string $string;
     public function __construct(Client_Profile $client_profile) {
         $this->db = new config();
         $this->model = $client_profile;
+        $this->profileDir = "/uploads/profile_pictures/";
     }
 
     public function getProfile(int $user_id): void {
@@ -40,8 +45,13 @@ class ClientProfileController extends BaseController
         }
     }
 
-    public function updateProfilePicture(int $user_id, String $profile_picture): void {
-        $profile = $this->model->updateProfilePicture($user_id, $profile_picture);
+    /**
+     * @throws Exception
+     */
+    public function updateProfilePicture(int $user_id, $profile_picture): void {
+        $profilePicUrl = $this->uploadFile($profile_picture, $this->profileDir);
+
+        $profile = $this->model->updateProfilePicture($user_id, $profilePicUrl);
         if ($profile) {
             $this->jsonResponse(['message' => "Updated successfully!"], 200);
         } else {

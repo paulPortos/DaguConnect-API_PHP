@@ -210,7 +210,7 @@ class Api extends BaseApi
             $profile_pic = $_FILES['profile_pic'];
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
-            $ResumeController->updateTradesmanProfile($userId,$profile_pic);
+            $ResumeController->updateTradesmanProfile($userId, $profile_pic);
         });
 
         $this->route('POST','/user/tradesman/submit/resume', function ($userId){
@@ -428,12 +428,15 @@ class Api extends BaseApi
             $jobController->getAllRecentJobs($page, $limit);
         });
 
-        $this->route('POST', '/client/update/profile_picture', function ($userId){
-            $this->responseBodyChecker();
+        $this->route('POST', '/client/update/profile_picture', function ($userId) {
+            if (empty($_FILES['profile_picture'])) {
+                echo json_encode(["message" => "No file uploaded"]);
+                return;
+            }
+            $profile_pic = $_FILES['profile_picture'];
 
-            ['profile_picture' => $profile_picture] = $this->requestBody;
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
-            $clientProfileController->updateProfilePicture($userId, $profile_picture);
+            $clientProfileController->updateProfilePicture($userId, $profile_pic);
         });
 
         $this->route('POST', '/client/update/profile_address', function ($userId){
@@ -458,5 +461,4 @@ class Api extends BaseApi
             exit();
         }
     }
-
 }
