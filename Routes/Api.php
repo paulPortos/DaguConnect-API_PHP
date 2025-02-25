@@ -216,7 +216,7 @@ class Api extends BaseApi
         });*/
 
         $this->route('POST','/user/tradesman/update/profile', function ($userId){
-            $this->responseBodyChecker();
+
             $profile_pic = $_FILES['profile_pic'];
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));

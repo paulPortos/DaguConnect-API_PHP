@@ -12,6 +12,7 @@ class Seed {
     use Resume_Seed;
     use clientbooking_Seed;
     use Client_Profile_Seed;
+    use Ratings_Seed;
     private PDO $db;
     const RED = "\033[31m";
     const GREEN = "\033[32m";
@@ -33,7 +34,7 @@ class Seed {
             'seed_chat_message' => 'Chat Messages',
             'seed_admin' => 'Admin',
             'seedResume' => 'Resumes',
-            'seedClientBooking' => 'Client Bookings',
+            'seedClientBooking' => 'Client Bookings'
 
         ];
         $maxLength = max(array_map('strlen', $seeders)); // Find the longest name

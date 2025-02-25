@@ -61,6 +61,7 @@ class RatingsController extends BaseController
         }
 
 
+
         $ratingtradesman = $this->rating->RateTradesman($client_id,$tradesman_id,$rating,$message,$client_name,$client_profile,$tradesman_fullname);
 
         if(!$ratingtradesman){

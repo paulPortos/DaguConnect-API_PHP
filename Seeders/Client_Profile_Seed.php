@@ -38,6 +38,6 @@ trait Client_Profile_Seed
     public function seedClientProfile3($url): void
     {
         $stmt = $this->db->prepare("INSERT INTO client_profile (user_id, full_name, email, address, profile_picture) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([8, 'Test 8 Client', 'test8Client@gmail.com', 'San Carlos City, Pangasinan', $url]);
+        $stmt->execute([8, 'test8 test8', 'test8@gmail.com', 'San Carlos City, Pangasinan', $url]);
     }
 }

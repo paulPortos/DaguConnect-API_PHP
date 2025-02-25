@@ -1130,3 +1130,83 @@ Stack trace:
 #3 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #4 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 263
+[25-Feb-2025 05:22:41 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 233
+[25-Feb-2025 05:22:41 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 234
+[25-Feb-2025 05:22:41 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 235
+[25-Feb-2025 05:22:41 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[25-Feb-2025 05:22:41 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[25-Feb-2025 05:26:58 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'reporter_profile' in 'field list' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:70
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(70): PDO->prepare('UPDATE reports ...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(123): DaguConnect\Model\Report->updateTradesmanProfileInReport(4, 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(223): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 70
+[25-Feb-2025 05:31:03 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(113): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(222): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[25-Feb-2025 05:31:29 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(113): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(223): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[25-Feb-2025 05:31:31 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(113): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(223): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[25-Feb-2025 05:31:46 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(40): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(113): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(223): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 40
+[25-Feb-2025 07:33:32 UTC] PHP Fatal error:  Uncaught Error: Method name must be a string in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php:65
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(260): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php on line 65
+[25-Feb-2025 07:34:03 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php:41
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php(41): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(65): DaguConnect\Model\Rating->RateTradesman('8', '5', '4', 'tester', 'test8 test8', 'http://192.168....', 'karlos son')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(260): Controller\App\RatingsController->rateTradesman(8, 5, 4, 'tester')
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(8, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 41
