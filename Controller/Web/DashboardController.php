@@ -4,6 +4,7 @@ namespace Controller\Web;
 
 use DaguConnect\Core\BaseController;
 use DaguConnect\Model\Admin;
+use DaguConnect\Services\Env;
 
 class DashboardController extends BaseController
 {
@@ -11,6 +12,7 @@ class DashboardController extends BaseController
 
     public function __construct(Admin $admin_model){
         $this->admin_model = $admin_model;
+        new Env();
     }
 
     public function userStatistics(): void
@@ -28,12 +30,10 @@ class DashboardController extends BaseController
         $totalJobsCancelled = $this->admin_model->getCancelledJobs();
         $totalJobs = $this->admin_model->getAllJobs();
         $userCountsByDate = $this->admin_model->getUsersCountByDate(); // NEW FUNCTION
-
+        $dataReport =$this->generateReport($totalActiveUsers, $totalUserCount, $totalJobsAvailable, $totalJobsCompleted);
         if ($totalUserCount <= 0 ) {
             $this->jsonResponse(["Message" => "No users detected"], 200);
         }
-
-
 
         $this->jsonResponse([
             "users" => [
@@ -53,9 +53,48 @@ class DashboardController extends BaseController
                 "ongoing" => $totalJobsOngoing,
                 "cancelled" => $totalJobsCancelled,
                 "completed" => $totalJobsCompleted,
-                "totalJobs" => $totalJobs
-                ]
+                "totalJobs" => $totalJobs,
+                ],
+            "data_report" => $dataReport
             ]);
+    }
+
+    function generateReport($activeUsers, $totalUsers, $totalJobsAvailable, $totalJobsCompleted) {
+        $apiKey = $_ENV['AI_API_KEY'];
+        $url = "https://api.together.ai/v1/completions";
+
+        $data = [
+            "model" => "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+            "prompt" => "Generate a concise business report with insights based on the following statistics:  
+                 - Active Users: $activeUsers  
+                 - Total Users: $totalUsers  
+                 - Total Jobs Available: $totalJobsAvailable  
+                 - Total Jobs Completed: $totalJobsCompleted  
+
+                 Format the response as follows:  
+                 **Business Report:**  
+                 **1. Summary** (Provide a short business overview)  
+                 **2. Key Insights** (Explain what these numbers indicate)  
+                 **3. Recommendations** (Suggest ways to improve engagement and job completion)  
+
+                 Keep the response **concise, professional, and structured**.",
+            "max_tokens" => 250
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Authorization: Bearer $apiKey",
+            "Content-Type: application/json"
+        ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $decodedResponse = json_decode($response, true);
+        return $decodedResponse["choices"][0]["text"] ?? "Error generating report.";
     }
 
     public function bookingStatistics(): void
@@ -97,7 +136,6 @@ class DashboardController extends BaseController
         $totalJobsCancelled = $this->admin_model->getCancelledJobs();
         $totalJobs = $this->admin_model->getAllJobs();
         $jobs = $this->admin_model->getJobsList();
-
 
         $filteredJobs = array_map(function($jobs){
 
@@ -146,7 +184,6 @@ class DashboardController extends BaseController
             ];
         }, $users);
 
-
         $this->jsonResponse(
             [
                 "total_user" => $totalUserCount,
@@ -159,16 +196,14 @@ class DashboardController extends BaseController
     }
 
 
-    public function validateResume($user_id,$status_of_approval){
-
+    public function validateResume($user_id,$status_of_approval): void
+    {
         $is_approve = 0 ;
         $is_active = 0 ;
         if($status_of_approval == 'Approved'){
             $is_approve = 1;
             $is_active = 1;
         }
-
-
 
         $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve,$is_active);
 
@@ -180,7 +215,8 @@ class DashboardController extends BaseController
         }
     }
 
-    public function viewUserDetail($user_id){
+    public function viewUserDetail($user_id): void
+    {
 
         $userData = $this->admin_model->viewUserDetail($user_id);
         if($userData){
@@ -218,7 +254,8 @@ class DashboardController extends BaseController
         ],200);
     }
 
-    public function reportManagement(){
+    public function reportManagement(): void
+    {
 
         $totalReports = $this->admin_model->getAllReportCount();
         $pendingReports = $this->admin_model->getPendingReport();
@@ -244,7 +281,8 @@ class DashboardController extends BaseController
         ]);
     }
 
-    public function viewReportDetail($id){
+    public function viewReportDetail($id): void
+    {
         $reportData = $this->admin_model->viewReportDetail($id);
         if($reportData){
             $this->jsonResponse($reportData,200);
@@ -253,7 +291,8 @@ class DashboardController extends BaseController
         }
     }
     
-    public function suspendedReported ($reported_id,$report_status){
+    public function suspendedReported ($reported_id,$report_status): void
+    {
 
         $suspend = 0;
         if($report_status == 'Suspend'){

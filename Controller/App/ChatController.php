@@ -65,8 +65,6 @@ class ChatController extends BaseController
         }
     }
 
-
-
     public function getChats(int $user_id, int $page = 1, int $limit = 10): void {
         $result = $this->model->getChats($user_id, $page, $limit); // Fetch chats from model
         $chat_return = ['chats' => []];
