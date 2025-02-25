@@ -272,5 +272,31 @@ class DashboardController extends BaseController
 
     }
 
+    public function ratingManagement(){
+        $RatingList = $this->admin_model->ratinglist();
+
+        $filteredResumes = array_map(function($ratings) {
+            return [
+                'id' => $ratings['id'],
+                'tradesman' => $ratings['tradesman_fullname'],
+                'rating' => $ratings['ratings'],
+                'date' => $ratings['rated_at'],
+            ];
+        }, $RatingList);
+        $this->jsonResponse([
+            'ratings' => $filteredResumes
+        ]);
+    }
+
+    public function viewRatingDetail($id){
+        $ratingData = $this->admin_model->viewRatingDetails($id);
+        if($ratingData){
+            $this->jsonResponse($ratingData,200);
+        } else {
+            $this->jsonResponse(['message' => 'Rating Not Found'], 400);
+        }
+    }
+
+
 
 }

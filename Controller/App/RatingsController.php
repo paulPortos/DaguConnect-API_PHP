@@ -61,6 +61,7 @@ class RatingsController extends BaseController
         }
 
 
+
         $ratingtradesman = $this->rating->RateTradesman($client_id,$tradesman_id,$rating,$message,$client_name,$client_profile,$tradesman_fullname);
 
         if(!$ratingtradesman){
@@ -73,6 +74,27 @@ class RatingsController extends BaseController
                 'message' => "Rating Successful",
             ]);
         }
+    }
+
+
+
+    public function viewratings($tradesman_id){
+        $ratings = $this->rating->viewRatings($tradesman_id);
+        if(!$ratings){
+            $this->jsonResponse(['message' => "No ratings found"],400);
+            return;
+        }
+        $this->jsonResponse($ratings,200);
+    }
+
+    public function viewratingsById($tradesman_id){
+     $ratingsById = $this->rating->viewRatings($tradesman_id);
+     if(!$ratingsById){
+         $this->jsonResponse(['message' => "No Ratings"],400);
+         return;
+     }
+
+     $this->jsonResponse($ratingsById,200);
     }
 
 

@@ -65,7 +65,7 @@ class Report extends BaseModel
     {
         try {
             $query = "UPDATE $this->table 
-                  SET reporter_profile = :profile_pic_url 
+                  SET reporters_profile = :profile_pic_url 
                   WHERE reported_by_id = :user_id";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':profile_pic_url', $profile_pic_url);

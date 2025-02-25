@@ -149,6 +149,16 @@ class Api extends BaseApi
             $adminController->viewReportDetail($id);
         });
 
+        $this->route('GET', '/admin/rating/management',function (){
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->ratingManagement();
+        });
+
+        $this->route('GET', '/admin/view/rating/details/{id}', function ($id) {
+            $adminController = new DashboardController(new Admin($this->db));
+            $adminController->viewRatingDetail($id);
+        });
+
 
         $this->route('POST', '/user/register', function () {
             $this->responseBodyChecker();
@@ -191,7 +201,7 @@ class Api extends BaseApi
         });
 
         $this->route('POST','/user/tradesman/update/profile', function ($userId){
-            $this->responseBodyChecker();
+
             $profile_pic = $_FILES['profile_pic'];
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
@@ -226,14 +236,22 @@ class Api extends BaseApi
         });
 
 
-        $this->route('POST', '/user/client/rate/tradesman/{booking_id}', function ($userId,$tradesman_id) {
+        $this->route('POST', '/user/client/rate/tradesman/{tradesman_id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
             $message = $this->requestBody['message'];
             $rating = $this->requestBody['rating'];
 
             $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
             $RatingController->rateTradesman($userId,$tradesman_id,$rating,$message);
+        });
+        $this->route('GET', '/user/client/view/tradesman/rating/{tradesman_id}', function ($user_id,$tradesman_Id) {
+            $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
+            $RatingController->viewratingsById($tradesman_Id);
+        });
 
+        $this->route('GET', '/user/tradesman/view/ratings', function ($tradesman_id) {
+            $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
+            $RatingController->viewratings($tradesman_id);
         });
 
         $this->route('POST', '/user/client/report/tradesman/{tradesman_Id}', function($client_Id,$tradesman_Id){
@@ -301,9 +319,10 @@ class Api extends BaseApi
             $this->responseBodyChecker();
 
             $booking_status = $this->requestBody['work_status'];
+            $cancel_reason =$this->requestBody['cancel_reason'] ?? NULL;
 
             $ClientWorkController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
-            $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$booking_status);
+            $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$booking_status,$cancel_reason);
         });
 
         $this->route('POST', '/user/client/create-job', function ($userId) {

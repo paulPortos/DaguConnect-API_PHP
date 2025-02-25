@@ -85,3 +85,61 @@ Stack trace:
 #4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
 #5 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 37
+[25-Feb-2025 06:10:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method DaguConnect\Seeders\Seed::seedRatings() in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php:52
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(25): DaguConnect\Seeders\Seed->seed_data()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php on line 52
+[25-Feb-2025 06:14:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method DaguConnect\Seeders\Seed::seed_Ratings() in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php:52
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(25): DaguConnect\Seeders\Seed->seed_data()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php on line 52
+[25-Feb-2025 06:18:01 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`daguconnect-db`.`ratings`, CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client_booking` (`user_id`) ON DELETE CASCADE) in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Ratings_Seed.php:69
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Ratings_Seed.php(69): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Ratings_Seed.php(42): DaguConnect\Seeders\Seed->insertRating(6, 7, 'Test7 Test7', 'http://192.168....', 3, 'Average work.', 'Mike Johnson')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Ratings_Seed.php(25): DaguConnect\Seeders\Seed->seedRating3('http://192.168....')
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(52): DaguConnect\Seeders\Seed->seedRatings()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(25): DaguConnect\Seeders\Seed->seed_data()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Ratings_Seed.php on line 69
+[25-Feb-2025 06:45:29 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(40): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(23): DaguConnect\Seeders\Seed->seedResume1('http://192.168....', 'http://192.168....', 'http://192.168....', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(52): DaguConnect\Seeders\Seed->seedResume()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(25): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 40
+[25-Feb-2025 06:51:25 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php:40
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(40): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(23): DaguConnect\Seeders\Seed->seedResume1('http://192.168....', 'http://192.168....', 'http://192.168....', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(52): DaguConnect\Seeders\Seed->seedResume()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(25): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 40
+[25-Feb-2025 06:52:01 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php:176
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(176): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php(29): DaguConnect\Seeders\Seed->seedResume7('http://192.168....', 'http://192.168....', 'http://192.168....', 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(52): DaguConnect\Seeders\Seed->seedResume()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(25): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Resume_Seed.php on line 176
+[25-Feb-2025 08:08:29 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.client_booking' doesn't exist in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\clientbooking_Seed.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\clientbooking_Seed.php(28): PDO->prepare('INSERT INTO cli...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\clientbooking_Seed.php(20): DaguConnect\Seeders\Seed->seedClientBooking1('http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(52): DaguConnect\Seeders\Seed->seedClientBooking()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(25): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\clientbooking_Seed.php on line 28

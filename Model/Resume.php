@@ -188,4 +188,6 @@ class Resume extends BaseModel
 
         return $result ? $result['status_of_approval'] : null;
     }
+
+
 }
