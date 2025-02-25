@@ -29,21 +29,23 @@ class Job_Application extends BaseModel
      * @return bool Returns true if the job application was successfully inserted, false otherwise.
      */
     //Apply for a job
-    public function applyJob(int $user_id, int $resume_id, int $job_id, string $job_type, string $qualifications_summary, string $status):bool {
+    public function applyJob(int $user_id, int $resume_id, int $job_id, string $profile_pic, string $job_type, string $qualifications_summary, string $status):bool {
         try {
             $query = "INSERT INTO $this->table 
-        (user_id, resume_id, job_id, job_type, qualifications_summary, status, created_at) 
-        VALUES (:user_id, :resume_id, :job_id, :job_name, :job_type, :qualifications_summary, :status, NOW())";
+        (user_id, resume_id, job_id, tradesman_profile_picture, job_type, qualification_summary, status, created_at) 
+        VALUES (:user_id, :resume_id, :job_id, :tradesman_profile_picture,  :job_type, :qualification_summary, :status, NOW())";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':resume_id', $resume_id);
             $stmt->bindParam(':job_id', $job_id);
+            $stmt->bindParam(':tradesman_profile_picture', $profile_pic);
             $stmt->bindParam(':job_type', $job_type);
-            $stmt->bindParam(':qualifications_summary', $qualifications_summary);
+            $stmt->bindParam(':qualification_summary', $qualifications_summary);
             $stmt->bindParam(':status', $status);
             return  $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error applying for job: ". $e->getMessage());
+            var_dump($e->getMessage());
             return false;
         }
     }
@@ -58,7 +60,7 @@ class Job_Application extends BaseModel
      * @return array An array of job applications. Each element is an associative array representing a job application.
      *               Returns an empty array if an error occurs or no results are found.
      */
-    public function getJobApplications(int $limit = 10, int $offset = 0): array
+    public function getJobApplications(int $userId, int $limit = 10, int $offset = 0): array
     {
         try {
             $stmt = $this->db->prepare("SELECT * FROM $this->table LIMIT :limit OFFSET :offset");
@@ -135,7 +137,7 @@ class Job_Application extends BaseModel
     //To get resume id from the user_resume table using the $user_id that was get from job_application post.
     public function getResumeId($user_id): Int {
         try {
-            $query = "SELECT id FROM user_resume WHERE user_id = :user_id LIMIT 1";
+            $query = "SELECT id FROM tradesman_resume WHERE user_id = :user_id LIMIT 1";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->execute();
@@ -161,6 +163,18 @@ class Job_Application extends BaseModel
         } catch (PDOException $e) {
             error_log("Error tracing table: " . $e->getMessage());
             return false;
+        }
+    }
+
+    public function getProfilePictureById($id):string {
+        try {
+            $stmt = $this->db->prepare("SELECT profile_pic FROM tradesman_resume WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting profile picture: " . $e->getMessage());
+            return "";
         }
     }
 

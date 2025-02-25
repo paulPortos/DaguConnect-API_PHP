@@ -14,6 +14,7 @@ class JobApplicationController extends BaseController
     use IfDataExists;
     private $job_type_enum;
     private $application_status;
+    private $job_application_type;
     private Job_Application $job_application_model;
     protected config $db;
     public function __construct(Job_Application $job_application)
@@ -24,21 +25,45 @@ class JobApplicationController extends BaseController
             'Pending','Active','Declined','Complete','Cancelled'
         ];
         $this->job_type_enum = [
-            'Carpentry','Painting','Welding','Electrical_work','Plumbing','Masonry','Roofing','Ac_repair','Mechanics','Drywalling','Cleaning'
+            'Carpentry',
+            'Painting',
+            'Welding',
+            'Electrical_work',
+            'Plumbing',
+            'Masonry',
+            'Roofing',
+            'Ac_repair',
+            'Mechanics',
+            'Cleaning'
+        ];
+
+        $this->job_application_type = [
+            'Carpenter',
+            'Painter',
+            'Welder',
+            'Electrician',
+            'Plumber',
+            'Mason',
+            'Roofer',
+            'Ac_technician',
+            'Mechanic',
+            'Cleaner'
         ];
     }
 
     public function apply_job(int $user_id, int $job_id, string $qualifications_summary, string $status = "Pending"):void {
         $resume_id = $this->job_application_model->getResumeId($user_id);
-        $job_type = $this->job_application_model->getJobType($job_id);
-
+        $get_job_type = $this->job_application_model->getJobType($job_id);
+        $job_type = $get_job_type['job_type'];
+        $profilePicture = $this->job_application_model->getProfilePictureById($user_id);
         if ($resume_id == 0) {
             $this->jsonResponse(['message' => 'No resume found for this user.'], 400);
             return;
         }
 
-        if (empty($job_type) || empty($status)) {
-            $this->jsonResponse(['message' => 'Missing data'], 400);
+        // Ensure job type exists
+        if (!$get_job_type || empty($get_job_type['job_type'])) {
+            $this->jsonResponse(['message' => 'Invalid job type.'], 400);
             return;
         }
 
@@ -52,22 +77,30 @@ class JobApplicationController extends BaseController
             return;
         }
 
-        if (trim(strlen($qualifications_summary)) < 150) {
-            $this->jsonResponse(['message' => 'Summary field must be at least 150 characters'], 400);
+        if (trim(strlen($qualifications_summary)) <= 50) {
+            $this->jsonResponse(['message' => 'Summary field must be at least 50 characters'], 400);
             return;
         }
 
-        if (!in_array($job_type, $this->job_type_enum, true)) {
+        if (trim(strlen($qualifications_summary)) > 300) {
+            $this->jsonResponse(['message' => 'Summary field should not more than 300 characters'], 400);
+            return;
+        }
+
+        $index = array_search($job_type, $this->job_application_type, true);
+        if ($index === false) {
             $this->jsonResponse(['message' => 'Invalid job type.'], 400);
             return;
         }
+
+        $job_type_application_post = $this->job_type_enum[$index];
 
         if (!in_array($status, $this->application_status, true)) {
             $this->jsonResponse(['message' => 'Invalid status.'], 400);
             return;
         }
 
-        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $job_type, $qualifications_summary, $status);
+        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $profilePicture, $job_type_application_post, $qualifications_summary, $status);
 
         if ($applyJob) {
             $this->jsonResponse(['message' => 'Application successful.'], 201);

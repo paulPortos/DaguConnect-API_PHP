@@ -13,26 +13,62 @@ class Job extends BaseModel
         parent::__construct($db);
     }
 
-    public function getJobs(int $page, int $limit): array
+    public function getJobs(int $userId, int $page, int $limit): array
     {
         $offset = ($page - 1) * $limit;
 
         try {
-            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE status = 'available'");
-            $countStmt->execute();
-            $totalJobs = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int to avoid errors
+            // Fetch user details
+            $userStmt = $this->db->prepare(
+                "SELECT specialty, prefered_work_location FROM tradesman_resume WHERE id = :userId"
+            );
+            $userStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $userStmt->execute();
+            $user = $userStmt->fetch(PDO::FETCH_ASSOC);
 
-            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE status = 'available' LIMIT :limit OFFSET :offset");
+            if (!$user) {
+                return [];
+            }
+
+            $speciality = $user['specialty'];
+            $address = $user['prefered_work_location'];
+
+            // Get total available jobs count (no filtering)
+            $countStmt = $this->db->prepare(
+                "SELECT COUNT(*) as total FROM $this->table WHERE LOWER(status) = 'Available'"
+            );
+            $countStmt->execute();
+            $totalJobs = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+            // Fetch and prioritize jobs
+            $stmt = $this->db->prepare(
+                "SELECT * FROM $this->table 
+             WHERE LOWER(status) = 'Available' 
+             ORDER BY 
+                 CASE 
+                     WHEN LOWER(job_type) = LOWER(:speciality) THEN 1  -- Specialty match first
+                     WHEN LOWER(address) = LOWER(:address) THEN 2       -- Address match second
+                     ELSE 3 
+                 END, 
+                 created_at DESC
+             LIMIT :limit OFFSET :offset"
+            );
+
+            $stmt->bindParam(':speciality', $speciality, PDO::PARAM_STR);
+            $stmt->bindParam(':address', $address, PDO::PARAM_STR);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
+
             $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            // Count total applicants for each job
             foreach ($jobs as &$job) {
                 $job['total_applicants'] = $this->getApplicantsCount($job['id']);
             }
 
             $totalPages = max(1, ceil($totalJobs / $limit));
+
             return [
                 'jobs' => $jobs,
                 'current_page' => $page,
@@ -71,6 +107,10 @@ class Job extends BaseModel
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
             $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($jobs as &$job) {
+                $job['total_applicants'] = $this->getApplicantsCount($job['id']);
+            }
 
             $totalPages = max(1, ceil($totalJobs / $limit));
             return [

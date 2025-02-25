@@ -190,21 +190,6 @@ class Api extends BaseApi
             $AuthController->verifyEmail($email);
         });
 
-        /*$this->route('POST','/user/tradesman/update/resume', function ($userId) {
-            $this->responseBodyChecker();
-
-            // Extract title and description from request body
-            $specialties = $this->requestBody['specialties'] ;
-            $profile_pic = $_FILES['profile_pic'];
-            $about_me = $this->requestBody['about_me'] ;
-            $prefered_work_location = $this->requestBody['prefered_work_location'] ;
-            $work_fee = $this->requestBody['work_fee'];
-
-            // Create ResumeController and store resume
-            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
-            $ResumeController->UpdateResume($userId,$specialties,$profile_pic,$about_me,$prefered_work_location,$work_fee);
-        });*/
-
         $this->route('POST','/user/tradesman/update/profile', function ($userId){
             $this->responseBodyChecker();
             $profile_pic = $_FILES['profile_pic'];
@@ -336,12 +321,12 @@ class Api extends BaseApi
             $jobController->addJob($userId, $salary, $applicant_limit_count, $job_type, $job_description, $location, $status, $deadline);
         });
 
-        $this->route('GET', '/user/jobs', function () {
+        $this->route('GET', '/user/jobs', function ($userId) {
             $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
             $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
 
             $jobController = new JobController(new Job($this->db));
-            $jobController->getAllJobs($page, $limit);
+            $jobController->getAllJobs($userId, $page, $limit);
         });
 
         $this->route('GET', '/user/job/view/{id}', function ($userId,$id) {

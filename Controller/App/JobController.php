@@ -90,9 +90,9 @@ class JobController extends BaseController
         ], 200);
     }
 
-    public function getAllJobs(int $page = 1, int $limit = 10): void
+    public function getAllJobs($userId, int $page = 1, int $limit = 10): void
     {
-        $result = $this->job_model->getJobs($page, $limit);
+        $result = $this->job_model->getJobs($userId, $page, $limit);
 
         if (empty($result['jobs'])) {
             $this->jsonResponse(['message' => "No jobs available"], 200);

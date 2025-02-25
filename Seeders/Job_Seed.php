@@ -35,17 +35,17 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1,
-            'John Doe',
+            'John Smith',
             1,
             $url,
             1500.00,
             5,
-            'electrician',
+            'Electrician',
             'Need an electrician to fix the wiring in my house.',
             '123 Main St, Anytown, USA',
             null,
             null,
-            'available',
+            'Available',
             '2023-12-31'
         ]);
     }
@@ -59,12 +59,12 @@ trait Job_Seed
             $url,
             2000.00,
             5,
-            'plumber',
+            'Electrician',
             'Looking for a plumber to fix a leaking pipe.',
             '456 Elm St, Othertown, USA',
             null,
             null,
-            'available',
+            'Available',
             '2025-11-30'
         ]);
     }
@@ -78,12 +78,12 @@ trait Job_Seed
             $url,
             1800.00,
             5,
-            'carpenter',
+            'Carpenter',
             'Need a carpenter to build a custom bookshelf.',
             '789 Oak St, Sometown, USA',
             null,
             null,
-            'available',
+            'Available',
             '2025-10-14'
         ]);
     }
@@ -97,12 +97,12 @@ trait Job_Seed
             $url,
             1800.00,
             5,
-            'electrician',
+            'Electrician',
             'Need a electrician to fix my wire on my 1st and 2nd floor.',
             '789 Oak St, Sometown, USA',
             null,
             null,
-            'available',
+            'Available',
             '2025-10-15'
         ]);
     }
@@ -116,12 +116,12 @@ trait Job_Seed
             $url,
             2200.00,
             5,
-            'mason',
+            'Mason',
             'Looking for a mason to build a brick wall.',
             '321 Pine St, New City, USA',
             null,
             null,
-            'available',
+            'Available',
             '2024-01-15'
         ]);
     }
@@ -135,12 +135,12 @@ trait Job_Seed
             $url,
             2200.00,
             5,
-            'painter',
+            'Electrician',
             'Looking for a painter to paint my dry wall into pink.',
-            '321 Pine St, New City, USA',
+            'Lingayen',
             null,
             null,
-            'available',
+            'Available',
             '2024-01-15'
         ]);
     }
@@ -154,12 +154,12 @@ trait Job_Seed
             $url,
             2200.00,
             5,
-            'mason',
+            'Mason',
             'Looking for a mason to build a brick wall.',
-            '321 Pine St, New City, USA',
+            'Lingayen',
             null,
             null,
-            'available',
+            'Available',
             '2024-01-15'
         ]);
     }
@@ -173,12 +173,12 @@ trait Job_Seed
             $url,
             1800.00,
             5,
-            'carpenter',
+            'Carpenter',
             'Need a mechanic to build a custom car with turbo engine.',
-            '789 Oak St, Sometown, USA',
+            'Agno',
             null,
             null,
-            'available',
+            'Available',
             '2025-10-14'
         ]);
     }
@@ -192,12 +192,12 @@ trait Job_Seed
             $url,
             1800.00,
             5,
-            'cleaner',
+            'Cleaner',
             'Need a cleaner to clean my whole house using mr clean.',
-            '789 Oak St, DagTown, Japan',
+            'Aguilar',
             null,
             null,
-            'available',
+            'Available',
             '2025-10-14'
         ]);
     }
@@ -211,12 +211,12 @@ trait Job_Seed
             $url,
             1800.00,
             5,
-            'cleaner',
+            'Cleaner',
             'Need a good cleaner to clean my whole house underwater',
             '789 Oak St, DagTown, Japan',
             null,
             null,
-            'available',
+            'Available',
             '2025-10-14'
         ]);
     }
@@ -230,12 +230,12 @@ trait Job_Seed
             $url,
             1800.00,
             5,
-            'carpenter',
+            'Carpenter',
             'Need a carpenter to fix my 1B mansion located at runeterra.',
-            '789 Teemo St, Bandle City, Runeterra',
+            'Mangatarem',
             null,
             null,
-            'available',
+            'Available',
             '2025-10-14'
         ]);
     }
@@ -249,12 +249,12 @@ trait Job_Seed
             $url,
             1800.00,
             5,
-            'roofer',
+            'Electrician',
             'Need a roofer to make my wood roof into a silicon m2 chip with 16 gb ram.',
-            '789 Oak St, DagTown, Japan',
+            'Lingayen',
             null,
             null,
-            'available',
+            'Available',
             '2025-10-14'
         ]);
     }
