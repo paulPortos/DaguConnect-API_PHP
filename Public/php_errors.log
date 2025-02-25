@@ -1210,3 +1210,8 @@ Stack trace:
 #6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Rating.php on line 41
+[25-Feb-2025 12:20:48 UTC] Error: SQLSTATE[HY000]: General error: 4078 Illegal parameter data types char and row for operation '='
+[25-Feb-2025 12:20:56 UTC] Error: SQLSTATE[HY000]: General error: 4078 Illegal parameter data types char and row for operation '='
+[25-Feb-2025 12:21:29 UTC] Error: SQLSTATE[HY000]: General error: 4078 Illegal parameter data types char and row for operation '='
+[25-Feb-2025 12:21:38 UTC] Error: SQLSTATE[HY000]: General error: 4078 Illegal parameter data types char and row for operation '='
+[25-Feb-2025 12:22:39 UTC] Error: SQLSTATE[HY000]: General error: 4078 Illegal parameter data types char and row for operation '='

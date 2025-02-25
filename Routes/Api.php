@@ -251,7 +251,7 @@ class Api extends BaseApi
         });
 
 
-        $this->route('POST', '/user/client/rate/tradesman/{booking_id}', function ($userId,$tradesman_id) {
+        $this->route('POST', '/user/client/rate/tradesman/{tradesman_id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
             $message = $this->requestBody['message'];
             $rating = $this->requestBody['rating'];
@@ -334,9 +334,10 @@ class Api extends BaseApi
             $this->responseBodyChecker();
 
             $booking_status = $this->requestBody['work_status'];
+            $cancel_reason =$this->requestBody['cancel_reason'] ?? NULL;
 
             $ClientWorkController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
-            $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$booking_status);
+            $ClientWorkController->UpdateWorkFromTradesman($userId, $booking_id,$booking_status,$cancel_reason);
         });
 
         $this->route('POST', '/user/client/create-job', function ($userId) {

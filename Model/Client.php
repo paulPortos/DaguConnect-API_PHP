@@ -67,19 +67,20 @@ class Client extends BaseModel
     }
 
     //update the work_status of the client_booking
-    public function UpdateWorkStatus($user_id, $booking_id,$booking_status): bool
+    public function UpdateWorkStatus($user_id, $booking_id,$booking_status,$cancel_reason): bool
     {
         try {
             $query = "UPDATE $this->table 
-            SET booking_status = :booking_status 
+            SET booking_status = :booking_status,
+                cancel_reason = :cancel_reason
             WHERE user_id = :user_id 
-            AND id = :booking_id
-            AND booking_status = 'Active'";
+            AND id = :booking_id";
 
 
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':booking_id', $booking_id);
+            $stmt->bindParam(':cancel_reason', $cancel_reason);
             $stmt->bindParam(':booking_status', $booking_status);
             $stmt->execute();
 

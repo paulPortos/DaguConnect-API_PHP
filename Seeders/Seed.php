@@ -12,7 +12,6 @@ class Seed {
     use Resume_Seed;
     use clientbooking_Seed;
     use Client_Profile_Seed;
-    use Ratings_Seed;
     private PDO $db;
     const RED = "\033[31m";
     const GREEN = "\033[32m";
