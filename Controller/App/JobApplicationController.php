@@ -54,6 +54,7 @@ class JobApplicationController extends BaseController
     public function apply_job(int $user_id, int $job_id, string $qualifications_summary, string $status = "Pending"):void {
         $resume_id = $this->job_application_model->getResumeId($user_id);
         $get_job_type = $this->job_application_model->getJobType($job_id);
+        $client_id = $this->job_application_model->getClientId($job_id);
         $job_type = $get_job_type['job_type'];
         $profilePicture = $this->job_application_model->getProfilePictureById($user_id);
         if ($resume_id == 0) {
@@ -100,7 +101,7 @@ class JobApplicationController extends BaseController
             return;
         }
 
-        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $profilePicture, $job_type_application_post, $qualifications_summary, $status);
+        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $client_id, $profilePicture, $job_type_application_post, $qualifications_summary, $status);
 
         if ($applyJob) {
             $this->jsonResponse(['message' => 'Application successful.'], 201);

@@ -29,15 +29,16 @@ class Job_Application extends BaseModel
      * @return bool Returns true if the job application was successfully inserted, false otherwise.
      */
     //Apply for a job
-    public function applyJob(int $user_id, int $resume_id, int $job_id, string $profile_pic, string $job_type, string $qualifications_summary, string $status):bool {
+    public function applyJob(int $user_id, int $resume_id, int $job_id, int $client_id, string $profile_pic, string $job_type, string $qualifications_summary, string $status):bool {
         try {
             $query = "INSERT INTO $this->table 
-        (user_id, resume_id, job_id, tradesman_profile_picture, job_type, qualification_summary, status, created_at) 
-        VALUES (:user_id, :resume_id, :job_id, :tradesman_profile_picture,  :job_type, :qualification_summary, :status, NOW())";
+        (user_id, resume_id, job_id, client_id, tradesman_profile_picture, job_type, qualification_summary, status, created_at) 
+        VALUES (:user_id, :resume_id, :job_id, :client_id, :tradesman_profile_picture,  :job_type, :qualification_summary, :status, NOW())";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':resume_id', $resume_id);
             $stmt->bindParam(':job_id', $job_id);
+            $stmt->bindParam(':client_id', $client_id);
             $stmt->bindParam(':tradesman_profile_picture', $profile_pic);
             $stmt->bindParam(':job_type', $job_type);
             $stmt->bindParam(':qualification_summary', $qualifications_summary);
@@ -148,6 +149,20 @@ class Job_Application extends BaseModel
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return 0;
+        }
+    }
+
+    public function getClientId($job_id){
+        try {
+            $query = "SELECT user_id FROM jobs where id = :job_id LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':job_id', $job_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_COLUMN);
+        } catch (PDOException $e) {
+            error_log("Error tracing table: " . $e->getMessage());
+            return false;
         }
     }
 

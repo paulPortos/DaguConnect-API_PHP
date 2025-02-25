@@ -44,7 +44,7 @@ class Seed {
             echo "\033[34m$paddedName\033[0m"; // Blue seeding name
             for ($i = 0; $i < 3; $i++) {
                 echo ".";
-                usleep(500000); // 0.5-second delay for effect
+                usleep(10000); // 0.5-second delay for effect
             }
             echo "\033[32m Done!\033[0m" . PHP_EOL;
             self::$method(); // Call the seeding method dynamically
