@@ -108,7 +108,7 @@ trait Resume_Seed
         $stmt->execute([
             "test6@gmail.com",
             6,
-           "Carpentry",
+            "Carpentry",
             $url,
             '1999-03-21',
             "hello this is a tester",
@@ -131,7 +131,7 @@ trait Resume_Seed
         $stmt->execute([
             "test7@gmail.com",
             7,
-           "Painting",
+            "Painting",
             $url,
             '1999-03-21',
             "hello this is a tester",
@@ -154,7 +154,7 @@ trait Resume_Seed
         $stmt->execute([
             "test9@gmail.com",
             9,
-          "Electrician",
+            "Electrician",
             $url,
             '1999-03-21',
             "hello this is a tester",
@@ -221,7 +221,7 @@ trait Resume_Seed
         $stmt->execute([
             "test12@gmail.com",
             12,
-           "Painting",
+            "Painting",
             $url,
             '1999-03-21',
             "hello this is a tester",

@@ -61,19 +61,39 @@ class Job_Application extends BaseModel
      * @return array An array of job applications. Each element is an associative array representing a job application.
      *               Returns an empty array if an error occurs or no results are found.
      */
-    public function getJobApplications(int $userId, int $limit = 10, int $offset = 0): array
+    public function getMyJobApplications(int $userId, int $page, int $limit): array
     {
+        $offset = ($page - 1) * $limit;
+
         try {
-            $stmt = $this->db->prepare("SELECT * FROM $this->table LIMIT :limit OFFSET :offset");
+            // Get total count of job applications for the user
+            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE user_id = :user_id");
+            $countStmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $countStmt->execute();
+            $totalApplications = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int
+
+            // Get paginated job applications
+            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE user_id = :user_id LIMIT :limit OFFSET :offset");
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Calculate total pages
+            $totalPages = max(1, ceil($totalApplications / $limit));
+
+            return [
+                'applications' => $applications,
+                'current_page' => $page,
+                'total_pages' => $totalPages
+            ];
         } catch (PDOException $e) {
-            error_log("Error getting job applications: ". $e->getMessage());
+            error_log("Error getting job applications: " . $e->getMessage());
             return [];
         }
     }
+
 
     /**
      * Retrieves a specific job application record from the database by its ID.
@@ -91,7 +111,7 @@ class Job_Application extends BaseModel
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Error viewing job application: ". $e->getMessage());
-            return "Job application does not exist";
+            return [];
         }
     }
 
@@ -118,6 +138,39 @@ class Job_Application extends BaseModel
         } catch (PDOException $e) {
             error_log("Error accepting or declining job application: ". $e->getMessage());
             return false;
+        }
+    }
+
+    public function getMyJobsApplicants(int $client_id, int $page, int $limit): array
+    {
+        $offset = ($page - 1) * $limit;
+
+        try {
+            // Get total count of job applicants for the client
+            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE client_id = :client_id");
+            $countStmt->bindParam(':client_id', $client_id, PDO::PARAM_INT);
+            $countStmt->execute();
+            $totalApplicants = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int
+
+            // Get paginated job applicants
+            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE client_id = :client_id LIMIT :limit OFFSET :offset");
+            $stmt->bindParam(':client_id', $client_id, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $applicants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Calculate total pages
+            $totalPages = max(1, ceil($totalApplicants / $limit));
+
+            return [
+                'applicants' => $applicants,
+                'current_page' => $page,
+                'total_pages' => $totalPages
+            ];
+        } catch (PDOException $e) {
+            error_log("Error getting job applicants: " . $e->getMessage());
+            return [];
         }
     }
 

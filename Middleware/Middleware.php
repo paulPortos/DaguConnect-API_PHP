@@ -16,7 +16,6 @@ trait Middleware
             '/user/client/booktradesman',
             '/user/tradesman/getbooking',
             '/user/client/create-job',
-            '/user/tradesman/bookings/status/{booking_id}',
             '/user/job/view/{id}',
             '/user/tradesman/job-applications',
             '/user/tradesman/job-applications/{jobId}',
@@ -26,7 +25,6 @@ trait Middleware
             '/user/client/getbooking',
             '/user/logout',
             '/user/message/send',
-            '/user/chat/get',
             '/client/jobs/delete/{jobId}',
             '/admin/logout',
             '/user/client/booktradesman/{tradesman_Id}',
@@ -34,19 +32,17 @@ trait Middleware
             '/user/client/report/tradesman/{tradesman_Id}',
             '/user/tradesman/report/client/{client_Id}',
             '/client/update/profile_address',
-            '/client/update/profile_picture',
             '/user/tradesman/update/resume/details',
-            '/client/update/profile_picture',
             '/user/message/{chatId}/{receiver_id}',
             '/client/jobs/view/my_jobs',
             '/user/chat/get',
             '/client/profile',
             '/client/update/profile_picture',
-            '/client/job/update/{jobId}',
             '/user/client/job/apply/{jobId}',
-            '/user/jobs'
+            '/user/jobs',
             '/client/job/update/{jobId}',
-            '/user/tradesman/view/ratings'
+            '/user/tradesman/view/ratings',
+            'user/client/job-applications'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {
@@ -80,7 +76,6 @@ trait Middleware
                 }
             }
         }
-
         return true;
     }
 }

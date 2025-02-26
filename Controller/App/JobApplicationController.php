@@ -111,20 +111,31 @@ class JobApplicationController extends BaseController
         }
     }
 
-    public function getMyJobApplications($user_id):void {
-        $isClient = $this->job_application_model->checkIsClient($user_id);
-
-        if ($isClient) {
+    public function getMyJobApplications($userId, int $page, int $limit): void
+    {
+        // Check if the user is a client (clients cannot access tradesman-specific features)
+        if ($this->job_application_model->checkIsClient($userId)) {
             $this->jsonResponse(['message' => 'Access denied, accessing tradesman specific feature'], 403);
+            return;
         }
 
-        $myApplications = $this->job_application_model->getJobApplications($user_id);
-        if (!empty($myApplications)){
-            $this->jsonResponse(['my_applications' => $myApplications], 200);
-        } else {
-            $this->jsonResponse(['message' => 'You have not applied for any jobs yet.'], 200);
+        // Fetch paginated job applications
+        $result = $this->job_application_model->getMyJobApplications($userId, $page, $limit);
+
+        // Handle empty results
+        if (empty($result['applications'])) {
+            $this->jsonResponse(['message' => "You have not applied for any jobs yet."], 200);
+            return;
         }
+
+        // Return paginated job applications
+        $this->jsonResponse([
+            'applications' => $result['applications'],
+            'current_page' => $result['current_page'],
+            'total_pages' => $result['total_pages']
+        ], 200);
     }
+
 
     public function viewMyJobApplication($jobApplicationId): void
     {
@@ -135,6 +146,26 @@ class JobApplicationController extends BaseController
             $this->jsonResponse(['message' => 'Error getting job application'], 500);
         }
     }
+
+    public function getMyJobsApplicants($client_id, int $page = 1, int $limit = 10): void
+    {
+        // Fetch paginated job applicants
+        $result = $this->job_application_model->getMyJobsApplicants($client_id, $page, $limit);
+
+        // Handle empty results
+        if (empty($result['applicants'])) {
+            $this->jsonResponse(['message' => "No applicants found for your jobs."], 200);
+            return;
+        }
+
+        // Return paginated job applicants
+        $this->jsonResponse([
+            'applicants' => $result['applicants'],
+            'current_page' => $result['current_page'],
+            'total_pages' => $result['total_pages']
+        ], 200);
+    }
+
 
     public function acceptOrDeclineApplication(int $job_applicationId, string $status):void {
         if (!$this->exists($job_applicationId, "id", "jobs")) {

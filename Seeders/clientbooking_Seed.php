@@ -30,7 +30,7 @@ trait clientbooking_Seed
             1,
             1,
             2,
-           "099535834236",
+            "099535834236",
             "Ahron Paul Ahron Paul",
             $url,
             200,
@@ -121,4 +121,4 @@ trait clientbooking_Seed
         ]);
     }
 
-    }
+}

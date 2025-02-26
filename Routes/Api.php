@@ -355,8 +355,19 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/tradesman/job-applications', function ($userId){
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
-            $jobApplicationController->getMyJobApplications($userId);
+            $jobApplicationController->getMyJobApplications($userId, $page, $limit);
+        });
+
+        $this->route('GET', 'user/client/job-applications', function (user $userId){
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+
+            $jobApplicationController =new JobApplicationController(new Job_Application($this->db));
+            $jobApplicationController->getMyJobsApplicants($userId, $page, $limit);
         });
 
         $this->route('GET', '/user/tradesman/job-applications/{jobId}', function ($userId, $jobId){
