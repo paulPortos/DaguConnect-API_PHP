@@ -63,7 +63,7 @@ trait Resume_Seed
         $stmt->execute([
             "test4@gmail.com",
             4,
-            "Painting",
+            "Painter",
             $url,
             '1999-03-21',
             "hello this is a tester",
@@ -89,7 +89,7 @@ trait Resume_Seed
             $url,
             '1999-03-21',
             "hello this is a tester",
-            "Lingayen",
+            "Dagupan",
             200,
             $documents,
             $valid_id_front,
@@ -108,7 +108,7 @@ trait Resume_Seed
         $stmt->execute([
             "test6@gmail.com",
             6,
-            "Carpentry",
+            "Mason",
             $url,
             '1999-03-21',
             "hello this is a tester",
@@ -221,11 +221,11 @@ trait Resume_Seed
         $stmt->execute([
             "test12@gmail.com",
             12,
-            "Painting",
+            "Painter",
             $url,
             '1999-03-21',
             "hello this is a tester",
-            "Lingayen",
+            "Agno",
             200,
             $documents,
             $valid_id_front,
@@ -239,12 +239,11 @@ trait Resume_Seed
 
     public function seedResume10($url,$documents,$valid_id_front,$valid_id_back): void
     {
-
         $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic,birthdate, about_me, prefered_work_location, work_fee,documents,valid_id_front,valid_id_back ,tradesman_full_name,status_of_approval ,updated_at, created_at, is_active,is_approve) VALUES (?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?,?)");
         $stmt->execute([
             "test13@gmail.com",
             13,
-            "Carpentry",
+            "Carpenter",
             $url,
             '1999-03-21',
             "hello this is a tester",
@@ -266,11 +265,11 @@ trait Resume_Seed
         $stmt->execute([
             "test14@gmail.com",
             14,
-            "Carpentry",
+            "Roofer",
             $url,
             '1999-03-21',
             "hello this is a tester",
-            "Lingayen",
+            "Agno",
             200,
             $documents,
             $valid_id_front,
@@ -288,7 +287,7 @@ trait Resume_Seed
         $stmt->execute([
             "test15@gmail.com",
             15,
-            "Carpentry",
+            "Mechanic",
             $url,
             '1999-03-21',
             "hello this is a tester",

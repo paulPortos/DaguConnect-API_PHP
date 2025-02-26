@@ -55,8 +55,14 @@ class JobApplicationController extends BaseController
         $resume_id = $this->job_application_model->getResumeId($user_id);
         $get_job_type = $this->job_application_model->getJobType($job_id);
         $client_id = $this->job_application_model->getClientId($job_id);
+        $jobsData = $this->job_application_model->getNameAddressDeadlineByJobId($job_id);
         $job_type = $get_job_type['job_type'];
-        $profilePicture = $this->job_application_model->getProfilePictureById($user_id);
+        $tradesmanProfilePicture = $this->job_application_model->getProfilePictureById($user_id);
+        $tradesman_fullname = $this->job_application_model->getTradesmanFullName($user_id);
+        $client_fullname = $jobsData['client_fullname'];
+        $job_address = $jobsData['address'];
+        $job_deadline = $jobsData['deadline'];
+
         if ($resume_id == 0) {
             $this->jsonResponse(['message' => 'No resume found for this user.'], 400);
             return;
@@ -101,7 +107,7 @@ class JobApplicationController extends BaseController
             return;
         }
 
-        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $client_id, $profilePicture, $job_type_application_post, $qualifications_summary, $status);
+        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $client_id, $client_fullname, $tradesman_fullname, $tradesmanProfilePicture, $job_address, $job_type_application_post,$job_deadline,  $qualifications_summary, $status);
 
         if ($applyJob) {
             $this->jsonResponse(['message' => 'Application successful.'], 201);

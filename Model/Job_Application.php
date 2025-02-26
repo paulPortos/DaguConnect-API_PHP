@@ -29,18 +29,22 @@ class Job_Application extends BaseModel
      * @return bool Returns true if the job application was successfully inserted, false otherwise.
      */
     //Apply for a job
-    public function applyJob(int $user_id, int $resume_id, int $job_id, int $client_id, string $profile_pic, string $job_type, string $qualifications_summary, string $status):bool {
+    public function applyJob(int $user_id, int $resume_id, int $job_id, int $client_id, string $client_full_name, string $tradesman_full_name, string $tradesman_profile_picture, string $job_address, string $job_type, string $job_deadline, string $qualifications_summary, string $status):bool {
         try {
             $query = "INSERT INTO $this->table 
-        (user_id, resume_id, job_id, client_id, tradesman_profile_picture, job_type, qualification_summary, status, created_at) 
-        VALUES (:user_id, :resume_id, :job_id, :client_id, :tradesman_profile_picture,  :job_type, :qualification_summary, :status, NOW())";
+        (user_id, resume_id, job_id, client_id, client_fullname, tradesman_fullname, tradesman_profile_picture, job_address, job_type, job_deadline, qualification_summary, status, created_at) 
+        VALUES (:user_id, :resume_id, :job_id, :client_id, :client_fullname, :tradesman_fullname, :tradesman_profile_picture, :job_address, :job_type, :job_deadline, :qualification_summary, :status, NOW())";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':resume_id', $resume_id);
             $stmt->bindParam(':job_id', $job_id);
             $stmt->bindParam(':client_id', $client_id);
-            $stmt->bindParam(':tradesman_profile_picture', $profile_pic);
+            $stmt->bindParam(':client_fullname', $client_full_name); // J
+            $stmt->bindParam(':tradesman_fullname', $tradesman_full_name); //
+            $stmt->bindParam(':tradesman_profile_picture', $tradesman_profile_picture);
+            $stmt->bindParam(':job_address', $job_address); // J
             $stmt->bindParam(':job_type', $job_type);
+            $stmt->bindParam(':job_deadline', $job_deadline); // J
             $stmt->bindParam(':qualification_summary', $qualifications_summary);
             $stmt->bindParam(':status', $status);
             return  $stmt->execute();
@@ -219,6 +223,19 @@ class Job_Application extends BaseModel
         }
     }
 
+    public function getNameAddressDeadlineByJobId($job_id): array
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT client_fullname, address, deadline FROM jobs WHERE id = :id LIMIT 1");
+            $stmt->bindParam(':id', $job_id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error getting job name and type: ". $e->getMessage());
+            return [];
+        }
+    }
+
     //Check if user is client or tradesman
     public function checkIsClient($user_id):bool {
         try {
@@ -242,6 +259,20 @@ class Job_Application extends BaseModel
             return $stmt->fetchColumn();
         } catch (PDOException $e) {
             error_log("Error getting profile picture: " . $e->getMessage());
+            return "";
+        }
+    }
+
+    public function getTradesmanFullName($user_id) {
+        try {
+            $query = "SELECT tradesman_full_name FROM tradesman_resume WHERE user_id = :user_id LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting tradesman full name: " . $e->getMessage());
             return "";
         }
     }
