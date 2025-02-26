@@ -75,4 +75,5 @@ class TradesmanController extends BaseController
         }
 
     }
+
 }

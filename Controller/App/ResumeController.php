@@ -186,4 +186,15 @@ class ResumeController extends BaseController
             $this->jsonResponse(['message' => 'Resume Submitted Successfully.'], 201);
         }
     }
+
+
+    public function getResume($tradesman_id){
+        $tradesmanDetail = $this->resumeModel->getResumeDetails($tradesman_id);
+
+        if($tradesmanDetail){
+            $this->jsonResponse($tradesmanDetail);
+        } else {
+            $this->jsonResponse(['message' => 'Failed to retrieve resume.'], 500);
+        }
+    }
 }

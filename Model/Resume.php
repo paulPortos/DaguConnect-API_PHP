@@ -189,5 +189,13 @@ class Resume extends BaseModel
         return $result ? $result['status_of_approval'] : null;
     }
 
+    public function getResumeDetails($tradesman_Id){
+        $query = "SELECT * FROM $this->table WHERE user_id = :tradesman_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':tradesman_id', $tradesman_Id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }
