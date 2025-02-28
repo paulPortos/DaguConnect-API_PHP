@@ -20,7 +20,7 @@ class Job extends BaseModel
         try {
             // Fetch user details
             $userStmt = $this->db->prepare(
-                "SELECT specialty, prefered_work_location FROM tradesman_resume WHERE id = :userId"
+                "SELECT specialty, prefered_work_location FROM tradesman_resume WHERE user_id = :userId"
             );
             $userStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
             $userStmt->execute();
@@ -77,6 +77,34 @@ class Job extends BaseModel
         } catch (PDOException $e) {
             error_log("Database Error: " . $e->getMessage());
             return [];
+        }
+    }
+
+    public function ifClient($user_id): bool {
+        try {
+            $stmt = $this->db->prepare("SELECT is_client FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $isClient = $stmt->fetchColumn();
+
+            return $isClient == 1;
+        } catch (PDOException $e) {
+            error_log("Error getting client: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function isVerified($user_id): bool {
+        try {
+            $stmt = $this->db->prepare("SELECT is_approve FROM tradesman_resume WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $isVerified = $stmt->fetchColumn();
+
+            return $isVerified == 1;
+        } catch (PDOException $e) {
+            error_log("Error getting verification status: " . $e->getMessage());
+            return false;
         }
     }
 

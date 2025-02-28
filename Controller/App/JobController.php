@@ -38,6 +38,8 @@ class JobController extends BaseController
 
     public function addJob($user_id, $salary, $applicant_limit_count, $job_type, $job_description, $address, $status, $deadline): void
     {
+
+
         $exist = $this->exists($user_id, "id", "users");
         //Check if user exists
         if (!$exist) {
@@ -74,8 +76,18 @@ class JobController extends BaseController
         }
     }
 
-    function getAllRecentJobs(int $page = 1, int $limit = 10): void
+    function getAllRecentJobs(int $userId, int $page = 1, int $limit = 10): void
     {
+        $ifClient = $this->job_model->ifClient($userId);
+
+        if (!$ifClient) {
+            $isVerified = $this->job_model->isVerified($userId);
+            if (!$isVerified) {
+                $this->jsonResponse(['message' => "User is not verified"], 400);
+                return;
+            }
+        }
+
         $result = $this->job_model->getAllRecentJobs($page, $limit);
 
         if (empty($result['jobs'])) {
@@ -92,6 +104,16 @@ class JobController extends BaseController
 
     public function getAllJobs($userId, int $page = 1, int $limit = 10): void
     {
+        $ifClient = $this->job_model->ifClient($userId);
+
+        if (!$ifClient) {
+            $isVerified = $this->job_model->isVerified($userId);
+            if (!$isVerified) {
+                $this->jsonResponse(['message' => "User is not verified"], 400);
+                return;
+            }
+        }
+
         $result = $this->job_model->getJobs($userId, $page, $limit);
 
         if (empty($result['jobs'])) {

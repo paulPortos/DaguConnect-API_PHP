@@ -367,7 +367,7 @@ class Api extends BaseApi
             $jobApplicationController->getMyJobApplications($userId, $page, $limit);
         });
 
-        $this->route('GET', 'user/client/job-applications', function (user $userId){
+        $this->route('GET', '/user/client/job-applications', function ($userId){
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
 
@@ -381,6 +381,7 @@ class Api extends BaseApi
         });
 
         $this->route('POST', '/user/client/job/apply/{jobId}', function ($userId, $jobId){
+            $this->responseBodyChecker();
             ['qualification_summary' => $qualificationSummary] = $this->requestBody;
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
             $jobApplicationController->apply_job($userId, $jobId, $qualificationSummary);
@@ -429,7 +430,6 @@ class Api extends BaseApi
             $messageController->getMessages($user_id, $chat_id, $page, $limit);
         });
 
-
         $this->route('DELETE', '/client/jobs/delete/{jobId}', function ($jobId, $userId){
             $jobController = new JobController(new Job($this->db));
             $jobController->deleteJob($jobId, $userId);
@@ -440,12 +440,12 @@ class Api extends BaseApi
             $messageController->deleteMessage($message_id, $userId);
         });
 
-        $this->route('GET', '/user/jobs/recent', function () {
+        $this->route('GET', '/user/jobs/recent', function ($userId) {
             $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
             $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
 
             $jobController = new JobController(new Job($this->db));
-            $jobController->getAllRecentJobs($page, $limit);
+            $jobController->getAllRecentJobs($userId, $page, $limit);
         });
 
         $this->route('POST', '/client/update/profile_picture', function ($userId) {

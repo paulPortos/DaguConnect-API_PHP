@@ -62,7 +62,8 @@ class JobApplicationController extends BaseController
         $client_fullname = $jobsData['client_fullname'];
         $job_address = $jobsData['address'];
         $job_deadline = $jobsData['deadline'];
-
+        $client_profile_picture = $this->job_application_model->getClientProfilePictureByJobId($job_id);
+        var_dump($job_deadline);
         if ($resume_id == 0) {
             $this->jsonResponse(['message' => 'No resume found for this user.'], 400);
             return;
@@ -107,7 +108,7 @@ class JobApplicationController extends BaseController
             return;
         }
 
-        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $client_id, $client_fullname, $tradesman_fullname, $tradesmanProfilePicture, $job_address, $job_type_application_post,$job_deadline,  $qualifications_summary, $status);
+        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $client_id, $client_fullname, $tradesman_fullname, $tradesmanProfilePicture, $client_profile_picture, $job_address, $job_type_application_post,$job_deadline,  $qualifications_summary, $status);
 
         if ($applyJob) {
             $this->jsonResponse(['message' => 'Application successful.'], 201);
@@ -127,7 +128,6 @@ class JobApplicationController extends BaseController
 
         // Fetch paginated job applications
         $result = $this->job_application_model->getMyJobApplications($userId, $page, $limit);
-
         // Handle empty results
         if (empty($result['applications'])) {
             $this->jsonResponse(['message' => "You have not applied for any jobs yet."], 200);
@@ -183,5 +183,9 @@ class JobApplicationController extends BaseController
         } else {
             $this->jsonResponse(['message' => "Internal Server Error"], 500);
         }
+    }
+
+    public function getJobTradesmanApplicationByJobId($jobId): void {
+
     }
 }

@@ -14,12 +14,12 @@ class config {
 
     public function __construct()
     {
-        new Env();
-
+        Env::load();
         $db_host = $_ENV['DB_HOST'];
         $db_name = $_ENV['DB_NAME'];
         $db_username = $_ENV['DB_USERNAME'];
         $db_password = $_ENV['DB_PASSWORD'];
+
         try {
             $pdo = new PDO("mysql:host=$db_host;charset=utf8", $db_username, $db_password);
             $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);

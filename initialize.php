@@ -7,20 +7,24 @@ use DaguConnect\Services\Env;
 
 class initialize
 {
-
     public function __construct()
     {
-        new Env();
+        $this->defineConstants();
+        $this->loadDependencies();
+    }
 
-        defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
-        defined('SITE_ROOT') ? null : define('SITE_ROOT', __DIR__ );
+    private function defineConstants(): void
+    {
+        defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+        defined('SITE_ROOT') or define('SITE_ROOT', __DIR__);
+        defined('INC_PATH') or define('INC_PATH', SITE_ROOT . DS . 'Includes');
+        defined('CORE_PATH') or define('CORE_PATH', SITE_ROOT . DS . 'Core');
+    }
 
-        defined('INC_PATH') ? null : define('INC_PATH', SITE_ROOT . DS . 'Includes');
-        defined('CORE_PATH') ? null : define('CORE_PATH', SITE_ROOT . DS . 'Core');
+    private function loadDependencies(): void
+    {
         require_once __DIR__ . '/vendor/autoload.php';
-        require_once __DIR__ . '/Includes/config.php';
-        require_once(INC_PATH . DS . "/config.php");
+        Env::load();
+        require_once INC_PATH . DS . 'config.php';
     }
 }
-
-

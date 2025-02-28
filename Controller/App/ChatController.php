@@ -56,7 +56,6 @@ class ChatController extends BaseController
                 'timestamp' => date('Y-m-d H:i:s')
             ];
 
-            // Send message via Workerman WebSocket
             WebSocketServer::broadcastMessage($messageData);
 
             $this->jsonResponse(['message' => "Message sent successfully."], 201);
@@ -64,8 +63,6 @@ class ChatController extends BaseController
             $this->jsonResponse(['message' => "Failed to send message."], 500);
         }
     }
-
-
 
     public function getChats(int $user_id, int $page = 1, int $limit = 10): void {
         $result = $this->model->getChats($user_id, $page, $limit); // Fetch chats from model
@@ -145,6 +142,8 @@ class ChatController extends BaseController
             $this->jsonResponse(['message' => 'No messages found'], 200);
         }
     }
+
+
 
     public function hasFoulWords($message): bool {
         $foulWords = [
