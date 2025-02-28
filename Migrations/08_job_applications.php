@@ -12,6 +12,8 @@ job_type ENUM('Carpentry','Painting','Welding','Electrical_work','Plumbing','Mas
 job_deadline DATE NOT NULL,
 qualification_summary TEXT NOT NULL,
 status ENUM('Pending','Active','Declined','Completed','Failed','Cancelled'),
+cancelled_reason TEXT NULL,
+cancelled_by ENUM('Client','Tradesman') NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 INDEX (`user_id`),
 INDEX (`resume_id`),

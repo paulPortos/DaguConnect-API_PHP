@@ -369,7 +369,7 @@ class Api extends BaseApi
             $jobApplicationController->getMyJobApplications($userId, $page, $limit);
         });
 
-        $this->route('GET', 'user/client/job-applications', function (user $userId){
+        $this->route('GET', '/user/client/job-applications', function ($userId){
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
 
@@ -383,9 +383,14 @@ class Api extends BaseApi
         });
 
         $this->route('PUT', '/user/tradesman/job-applications/change_status/{jobId}', function ($userId, $jobId){
-            ['status' => $status] = $this->requestBody;
+            $requestBody = $this->requestBody;
+            $status = $requestBody['status'] ?? null; // Required field
+            $cancellationReason = $requestBody['cancellation_reason'] ?? null;
+            if ($status === 'Cancelled' && empty($cancellationReason)) {
+                throw new Exception('Cancellation reason is required when status is Cancelled');
+            }
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
-            $jobApplicationController->changeJobApplicationStatus($userId, $jobId, $status);
+            $jobApplicationController->changeJobApplicationStatus($userId, $jobId, $status, $cancellationReason);
         });
 
 

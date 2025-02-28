@@ -131,7 +131,7 @@ class Job_Application extends BaseModel
      * @return bool Returns true if the update was successful and affected at least one row,
      *              false if the update failed or no rows were affected.
      */
-    public function changeJobApplicationStatus(int $user_id, int $job_application_id, string $status): bool
+    public function changeJobApplicationStatusTradesman(int $user_id, int $job_application_id, string $status): bool
     {
         try{
             $stmt = $this->db->prepare("UPDATE $this->table SET status = :status WHERE id = :id AND user_id = :user_id");
@@ -146,7 +146,47 @@ class Job_Application extends BaseModel
         }
     }
 
+    public function changeJobApplicationStatusClient(int $client_id, int $job_application_id, string $status): bool
+    {
+        try{
+            $stmt = $this->db->prepare("UPDATE $this->table SET status = :status WHERE id = :id AND client_id = :client_id");
+            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':client_id', $client_id);
+            $stmt->bindParam(':id', $job_application_id);
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Error accepting or declining job application: ". $e->getMessage());
+            return false;
+        }
+    }
 
+    public function addCancellationReason(int $job_application_id, string $cancel_reason, string $cancelled_by): bool
+    {
+        try {
+            $stmt = $this->db->prepare("UPDATE $this->table SET cancelled_reason = :reason, cancelled_by = :cancelled_by WHERE id = :id");
+            $stmt->bindParam(':reason', $cancel_reason);
+            $stmt->bindParam(':cancelled_by', $cancelled_by);
+            $stmt->bindParam(':id', $job_application_id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error adding cancellation reason: ". $e->getMessage());
+            return false;
+        }
+    }
+
+    public function isClient($user_id): bool
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT is_client FROM users WHERE id = :id LIMIT 1");
+            $stmt->bindParam(':id', $user_id);
+            $stmt->execute();
+            return (bool) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error checking if user is a client: ". $e->getMessage());
+            return false;
+        }
+    }
 
     public function getMyJobsApplicants(int $client_id, int $page, int $limit): array
     {

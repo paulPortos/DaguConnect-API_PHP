@@ -186,16 +186,33 @@ class JobApplicationController extends BaseController
         ], 200);
     }
 
-
-    public function changeJobApplicationStatus(int $user_id, int $job_applicationId, string $status):void {
+    public function changeJobApplicationStatus(int $user_id, int $job_applicationId, string $status, $cancel_reason):void {
         if (!$this->exists($job_applicationId, "id", "jobs")) {
             $this->jsonResponse(['message' => 'Invalid job application ID'], 400);
             return;
         }
-        if ($this->job_application_model->changeJobApplicationStatus($user_id, $job_applicationId, $status)) {
-            $this->jsonResponse(['message' => 'Application successful.'], 201);
+
+        if ($this->job_application_model->isClient($user_id)) {
+            if ($this->job_application_model->changeJobApplicationStatusClient($user_id, $job_applicationId, $status)) {
+                $this->jsonResponse(['message' => 'Application successful.'], 201);
+                if ($status === 'Cancelled') {
+                    $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Client');
+                }
+            } else {
+                $this->jsonResponse(['message' => "Internal Server Error"], 500);
+            }
         } else {
-            $this->jsonResponse(['message' => "Internal Server Error"], 500);
+            if ($this->job_application_model->changeJobApplicationStatusTradesman($user_id, $job_applicationId, $status)) {
+
+                if ($status === 'Cancelled') {
+                    $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Tradesman');
+                }
+                $this->jsonResponse(['message' => 'Application successful.'], 201);
+            } else {
+                $this->jsonResponse(['message' => "Internal Server Error"], 500);
+            }
         }
+
+
     }
 }
