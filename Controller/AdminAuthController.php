@@ -137,6 +137,16 @@ class AdminAuthController extends BaseController
         $this->jsonResponse(['message' => 'Incorrect password.'], 200);
     }
 
+    public function changeProfile($user_id, $profile_picture) {
+        $profile_picture = $this->adminModel->changeProfilePicture($user_id, $profile_picture);
+
+        if ($profile_picture) {
+            $this->jsonResponse(['message' => 'Profile picture changed successfully.'], 200);
+        } else {
+            $this->jsonResponse(['message' => 'Profile picture change failed.'], 400);
+        }
+    }
+
     public function logout($token): void {
         if ($this->adminModel->logoutUser($token)) {
             $this->jsonResponse(['message' => 'Logged out successfully.'], 200);

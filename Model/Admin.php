@@ -80,6 +80,18 @@ class Admin extends BaseModel
         }
     }
 
+    public function changeProfilePicture($user_id, $profile_picture) {
+        try {
+            $query = "UPDATE $this->table SET profile_picture = :profile_picture WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':profile_picture', $profile_picture);
+            $stmt->bindParam(':id', $user_id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error changing profile picture: " . $e->getMessage());
+            return false;
+        }
+    }
 
     public function usernameValidation($username): bool {
         try {
