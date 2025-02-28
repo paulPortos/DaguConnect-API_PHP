@@ -122,4 +122,49 @@ class User extends BaseModel
             error_log("Error updating tradesman profile in bookings: " . $e->getMessage());
         }
     }
+
+    public function changePass($userId,$current_password, $password)
+    {
+        try {
+
+            // Retrieve the current hashed password from the database
+            $query = "SELECT password FROM $this->table WHERE id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$user) {
+                return false; // User not found
+            }
+
+            // Verify if the current password matches the stored hash
+            if (!password_verify($current_password, $user['password'])) {
+                return false; // Password does not match
+            }
+            $hash_password = password_hash($password, PASSWORD_ARGON2ID);
+
+            // Update the password
+            $query = "UPDATE $this->table SET password = :password WHERE id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':password', $hash_password);
+            $stmt->bindParam(':user_id', $userId);
+
+
+            return $stmt->execute();
+        }catch (PDOException $e){
+            error_log("Error updating password: " . $e->getMessage());
+            return false;
+        }
+
+
+    }
+    public function EmailExists($email){
+        $query = "SELECT COUNT(*) FROM $this->table WHERE email = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute(); // Execute the query
+        return $stmt->fetchColumn() > 0;
+    }
+
 }

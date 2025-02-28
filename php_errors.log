@@ -143,3 +143,4 @@ Stack trace:
 #4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
 #5 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\clientbooking_Seed.php on line 28
+[28-Feb-2025 05:45:20 UTC] PHP Warning:  Unknown: php_network_getaddresses: getaddrinfo for 0.0.0.0.0 failed: No such host is known.  in Unknown on line 0

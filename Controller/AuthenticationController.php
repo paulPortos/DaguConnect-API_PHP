@@ -25,6 +25,8 @@ class AuthenticationController extends BaseController
     private User $userModel;
     private Resume $resumeModel;
 
+
+
     private Client_Profile $clientProfileModel;
 
     use Confirm_Password;
@@ -118,7 +120,7 @@ class AuthenticationController extends BaseController
         }
         $default_pic = 'http://' . $_SERVER['HTTP_HOST'] .'/uploads/profile_pictures/Default.png';
         //stored the data in the database
-        if($this->userModel->registerUser($first_name, $last_name, $username, $birthdate, $email, $default_pic,$is_client, $password,)){
+        if($this->userModel->registerUser($first_name, $last_name, $username, $birthdate, $email, $default_pic,$is_client, $password)){
             //send_email verification
             Email_Sender::sendVerificationEmail($email);
 
@@ -246,6 +248,50 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Logout Error'], 500);
         }
     }
+
+
+    public function changepass($userId,$Current_Password,$New_Password): void
+    {
+        $New_Password = $this->userModel->changePass($userId,$Current_Password,$New_Password);
+
+        if ($New_Password) {
+            $this->jsonResponse(['message' => 'Password successfully changed.'], 200);
+        }else{
+            $this->jsonResponse(['message' => 'Current Password not match the Current Password'], 500);
+        }
+    }
+
+    public function forgotpassword($email){
+
+        $email_checker = $this->userModel->EmailExists($email);
+        if (!$email_checker) {
+            $this->jsonResponse(['message' => "Email doesn't exists."], 400);
+            return;
+        }
+        $token = random_int(00000, 99999); // Generates a 5-digit random number
+        $store_Token = $this->createTokenForgetPassword($email,$token,$this->db->getDB());
+        if ($store_Token) {
+            $this->jsonResponse(["message" => "Token Successfully Sent To your email."], 200);
+            Email_Sender::sendResetPasswordToken($email,$token);
+        }else{
+            $this->jsonResponse(["message" => "Token generation failed"], 500);
+        }
+
+    }
+
+
+    public function resetpassword($token, $new_password) {
+        // Call the model function to reset the password
+        $resetSuccess = $this->ResetPasswordByToken($token, $new_password, $this->db->getDB());
+
+        if (!$resetSuccess) {
+            $this->jsonResponse(["message" => "Incorrect OTP or Password reset failed."], 400);
+        } else {
+            $this->jsonResponse(["message" => "Password successfully reset."], 200);
+        }
+    }
+
+
 
 
 }

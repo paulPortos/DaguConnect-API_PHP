@@ -52,4 +52,43 @@ class Email_Sender
             error_log("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
         }
     }
+
+    public static function sendResetPasswordToken($email, $token): void
+    {
+        // Path to the HTML template
+        $templatePath = __DIR__ . '/../Views/ResetPassword_email.html';
+
+        // Read the HTML template
+        $emailTemplate = file_get_contents($templatePath);
+
+        // Replace the placeholder with the token
+        $emailBody = str_replace('{{reset_token}}', $token, $emailTemplate);
+
+        $mail = new PHPMailer(true);
+
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host = $_ENV['MAIL_HOST'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $_ENV['MAIL_USERNAME'];
+            $mail->Password = $_ENV['MAIL_PASSWORD'];
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = $_ENV['MAIL_PORT'];
+
+            // Recipients
+            $mail->setFrom($_ENV['MAIL_USERNAME'], $_ENV['APP_NAME']);
+            $mail->addAddress($email);
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Password Reset Token';
+            $mail->Body = $emailBody;
+
+            $mail->send();
+        } catch (\Exception $e) {
+            error_log("Reset password email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        }
+    }
+
 }

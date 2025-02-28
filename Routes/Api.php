@@ -477,6 +477,31 @@ class Api extends BaseApi
             $jobController = new JobController(new Job($this->db));
             $jobController->updateJob($jobId, $userId, $salary, $job_description, $address, $deadline);
         });
+
+        $this->route('PUT', '/user/change/password', function ($userId){
+            $this->responseBodyChecker();
+            ['current_password' => $current_password, 'new_password' => $new_password] = $this->requestBody;
+            $authenticationController = new AuthenticationController(new User($this->db),new Resume($this->db),new Client_Profile($this->db));
+            $authenticationController->changepass($userId,$current_password ,$new_password);
+        });
+
+        $this->route('POST','/user/forgot/otpsend', function (){
+            $this->responseBodyChecker();
+            $email = $this->requestBody['email'];
+            $authenticationController = new AuthenticationController(new User($this->db),new Resume($this->db),new Client_Profile($this->db));
+            $authenticationController->forgotpassword($email);
+        });
+
+        $this->route('PUT', '/user/forgot/resetpassword', function (){
+            $this->responseBodyChecker();
+            $token = $this->requestBody['token'];
+            $new_password = $this->requestBody['new_password'];
+            $this->responseBodyChecker();
+            $authenticationController = new AuthenticationController(new User($this->db),new Resume($this->db),new Client_Profile($this->db));
+            $authenticationController->resetpassword($token,$new_password);
+
+
+        });
     }
 
     //Check if the response body for POST is empty
