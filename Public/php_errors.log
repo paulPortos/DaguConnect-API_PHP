@@ -1287,3 +1287,35 @@ Stack trace:
 #6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\TokenHandler.php on line 51
+[28-Feb-2025 13:10:17 UTC] PHP Warning:  Undefined array key "prefered_location" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 217
+[28-Feb-2025 13:10:17 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 218
+[28-Feb-2025 13:10:17 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 219
+[28-Feb-2025 13:10:17 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 220
+[28-Feb-2025 13:10:17 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[28-Feb-2025 13:10:17 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[28-Feb-2025 13:13:36 UTC] PHP Warning:  Undefined array key "prefered_location" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 217
+[28-Feb-2025 13:13:36 UTC] PHP Warning:  Undefined array key "document" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 218
+[28-Feb-2025 13:13:36 UTC] PHP Warning:  Undefined array key "valid_id_front" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 219
+[28-Feb-2025 13:13:36 UTC] PHP Warning:  Undefined array key "valid_id_back" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 220
+[28-Feb-2025 13:13:36 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[28-Feb-2025 13:13:36 UTC] PHP Deprecated:  pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 146
+[28-Feb-2025 13:45:13 UTC] PHP Warning:  move_uploaded_file(C:\xampp\htdocs\DaguConnect-API_PHP\Public/uploads/document/upload_67c1bde9df0647.21133707.): Failed to open stream: Permission denied in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 66
+[28-Feb-2025 13:45:13 UTC] PHP Warning:  move_uploaded_file(): Unable to move &quot;C:\Users\lNooisYl\AppData\Local\Temp\phpD194.tmp&quot; to &quot;C:\xampp\htdocs\DaguConnect-API_PHP\Public/uploads/document/upload_67c1bde9df0647.21133707.&quot; in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 66
+[28-Feb-2025 13:45:13 UTC] PHP Fatal error:  Uncaught Exception: Error uploading file. in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:67
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(160): Controller\App\ResumeController->uploadFile(Array, '/uploads/docume...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(223): Controller\App\ResumeController->submitResume(16, 'Plumber', 'tester', 'Bautista, Panga...', '222', Array, Array, Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(16)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(52): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 67
+[28-Feb-2025 14:48:51 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[28-Feb-2025 14:48:52 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[28-Feb-2025 14:53:43 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[28-Feb-2025 14:54:24 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[28-Feb-2025 14:55:29 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[28-Feb-2025 14:55:30 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[28-Feb-2025 14:55:30 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[28-Feb-2025 14:55:31 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
