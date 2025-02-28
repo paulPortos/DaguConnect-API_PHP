@@ -131,11 +131,12 @@ class Job_Application extends BaseModel
      * @return bool Returns true if the update was successful and affected at least one row,
      *              false if the update failed or no rows were affected.
      */
-    public function acceptOrDeclineJobApplication(int $job_application_id, string $status): bool
+    public function changeJobApplicationStatus(int $user_id, int $job_application_id, string $status): bool
     {
         try{
-            $stmt = $this->db->prepare("UPDATE $this->table SET status = :status WHERE id = :id");
+            $stmt = $this->db->prepare("UPDATE $this->table SET status = :status WHERE id = :id AND user_id = :user_id");
             $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':id', $job_application_id);
             $stmt->execute();
             return $stmt->rowCount() > 0;
@@ -144,6 +145,8 @@ class Job_Application extends BaseModel
             return false;
         }
     }
+
+
 
     public function getMyJobsApplicants(int $client_id, int $page, int $limit): array
     {
@@ -178,6 +181,19 @@ class Job_Application extends BaseModel
         }
     }
 
+    public function checkIfAlreadyApplied(int $user_id, int $job_id): bool
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM $this->table WHERE user_id = :user_id AND job_id = :job_id");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':job_id', $job_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error checking if user already applied: " . $e->getMessage());
+            return false;
+        }
+    }
 
     public function viewTradesmanResume($user_id) {
         try {

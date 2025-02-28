@@ -382,12 +382,18 @@ class Api extends BaseApi
             $jobApplicationController->viewMyJobApplication($jobId);
         });
 
+        $this->route('PUT', '/user/tradesman/job-applications/change_status/{jobId}', function ($userId, $jobId){
+            ['status' => $status] = $this->requestBody;
+            $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
+            $jobApplicationController->changeJobApplicationStatus($userId, $jobId, $status);
+        });
+
+
         $this->route('POST', '/user/client/job/apply/{jobId}', function ($userId, $jobId){
             ['qualification_summary' => $qualificationSummary] = $this->requestBody;
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
             $jobApplicationController->apply_job($userId, $jobId, $qualificationSummary);
         });
-
         $this->route('GET', '/user/getresumes', function () {
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
@@ -472,6 +478,8 @@ class Api extends BaseApi
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
             $clientProfileController->getProfile($user_id);
         });
+
+
 
         $this->route('POST', '/client/jobs/update/{jobId}', function ($userId,$jobId){
             $this->responseBodyChecker();

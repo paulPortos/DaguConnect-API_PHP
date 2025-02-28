@@ -59,9 +59,10 @@ class JobApplicationController extends BaseController
         $job_type = $get_job_type['job_type'];
         $tradesmanProfilePicture = $this->job_application_model->getProfilePictureById($user_id);
         $tradesman_fullname = $this->job_application_model->getTradesmanFullName($user_id);
-        $client_fullname = $jobsData['client_fullname'];
-        $job_address = $jobsData['address'];
-        $job_deadline = $jobsData['deadline'];
+        if ($this->job_application_model->checkIfAlreadyApplied($user_id, $job_id)) {
+            $this->jsonResponse(['message' => 'You have already applied for this job.'], 400);
+            return;
+        }
 
         if ($resume_id == 0) {
             $this->jsonResponse(['message' => 'No resume found for this user.'], 400);
@@ -107,7 +108,20 @@ class JobApplicationController extends BaseController
             return;
         }
 
-        $applyJob = $this->job_application_model->applyJob($user_id, $resume_id, $job_id, $client_id, $client_fullname, $tradesman_fullname, $tradesmanProfilePicture, $job_address, $job_type_application_post,$job_deadline,  $qualifications_summary, $status);
+        $applyJob = $this->job_application_model->applyJob(
+            $user_id,
+            $resume_id,
+            $job_id,
+            $client_id,
+            $jobsData['client_fullname'],
+            $tradesman_fullname,
+            $tradesmanProfilePicture,
+            $jobsData['address'],
+            $job_type_application_post,
+            $jobsData['deadline'],
+            $qualifications_summary,
+            $status
+        );
 
         if ($applyJob) {
             $this->jsonResponse(['message' => 'Application successful.'], 201);
@@ -173,12 +187,12 @@ class JobApplicationController extends BaseController
     }
 
 
-    public function acceptOrDeclineApplication(int $job_applicationId, string $status):void {
+    public function changeJobApplicationStatus(int $user_id, int $job_applicationId, string $status):void {
         if (!$this->exists($job_applicationId, "id", "jobs")) {
             $this->jsonResponse(['message' => 'Invalid job application ID'], 400);
             return;
         }
-        if ($this->job_application_model->acceptOrDeclineJobApplication($job_applicationId, $status)) {
+        if ($this->job_application_model->changeJobApplicationStatus($user_id, $job_applicationId, $status)) {
             $this->jsonResponse(['message' => 'Application successful.'], 201);
         } else {
             $this->jsonResponse(['message' => "Internal Server Error"], 500);
