@@ -377,6 +377,11 @@ class Api extends BaseApi
             $jobApplicationController->getMyJobsApplicants($userId, $page, $limit);
         });
 
+        $this->route('GET', '/user/job-applications/view/{jobId}', function ($userId, $jobId){
+            $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
+            $jobApplicationController->viewMyJobApplication($jobId);
+        });
+
         $this->route('GET', '/user/tradesman/job-applications/{jobId}', function ($userId, $jobId){
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
             $jobApplicationController->viewMyJobApplication($jobId);

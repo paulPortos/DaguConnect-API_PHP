@@ -224,7 +224,15 @@ class JobApplicationController extends BaseController
                 $this->jsonResponse(['message' => "Internal Server Error"], 500);
             }
         }
+    }
 
-
+    public function viewJobApplication($jobApplicationId): void
+    {
+        $jobApplication = $this->job_application_model->viewJobApplication($jobApplicationId);
+        if (!empty($jobApplication)){
+            $this->jsonResponse(['job_application' => $jobApplication], 200);
+        } else {
+            $this->jsonResponse(['message' => 'Error getting job application'], 500);
+        }
     }
 }
