@@ -297,8 +297,10 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/client/getbooking', function ($userId) {
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
             $ClientBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
-            $ClientBookingController->GetBookingClient($userId);
+            $ClientBookingController->GetBookingClient($userId,$page,$limit);
         });
         $this ->route('GET','/user/client/viewbooking/{resumeId}' , function ($userID,$resumeId) {
             $ViewBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));

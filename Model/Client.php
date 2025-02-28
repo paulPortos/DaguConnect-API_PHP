@@ -42,15 +42,31 @@ class Client extends BaseModel
     }
 
     //get the all the client booking that is accepted and work_status is active
-    public  function GetBooking($user_id): array
+    public  function GetBooking($user_id,int $page, int $limit): array
     {
+        $offset = ($page - 1) * $limit;
         try {
-            $query = "SELECT * FROM $this->table WHERE user_id = :user_id";
+            // Get total count of job applicants for the client
+            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE user_id = :user_id");
+            $countStmt->bindParam(':user_id', $user_id ,PDO::PARAM_INT);
+            $countStmt->execute();
+            $totalApplicants = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int
+
+            $query = "SELECT * FROM $this->table WHERE user_id = :user_id LIMIT :limit OFFSET :offset";
             $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
+            $bookings = $stmt->fetchall(PDO::FETCH_ASSOC);
 
-            return $stmt->fetchall(PDO::FETCH_ASSOC);
+            $totalPages = max(1, ceil($totalApplicants / $limit));
+
+            return [
+                'bookings' => $bookings,
+                'current_page' => $page,
+                'total_pages' => $totalPages
+            ];
         }catch (PDOException $e){
             error_log("error: " . $e->getMessage());
             return [];
