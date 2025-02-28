@@ -192,9 +192,21 @@ class JobApplicationController extends BaseController
             return;
         }
 
+        if($status === 'Cancelled') {
+            $message = 'Job application cancelled successfully.';
+        } else if ($status === 'Declined') {
+            $message = 'Job application declined successfully.';
+        } else if ($status === 'Active') {
+            $message = 'Job application accepted successfully.';
+        } else if ($status === 'Completed') {
+            $message = 'Job application completed successfully.';
+        } else {
+            $this->jsonResponse(['message' => 'Invalid status.'], 400);
+            return;
+        }
         if ($this->job_application_model->isClient($user_id)) {
             if ($this->job_application_model->changeJobApplicationStatusClient($user_id, $job_applicationId, $status)) {
-                $this->jsonResponse(['message' => 'Application successful.'], 201);
+                $this->jsonResponse(['message' => '$message'], 201);
                 if ($status === 'Cancelled') {
                     $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Client');
                 }
@@ -207,7 +219,7 @@ class JobApplicationController extends BaseController
                 if ($status === 'Cancelled') {
                     $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Tradesman');
                 }
-                $this->jsonResponse(['message' => 'Application successful.'], 201);
+                $this->jsonResponse(['message' => $message], 201);
             } else {
                 $this->jsonResponse(['message' => "Internal Server Error"], 500);
             }
