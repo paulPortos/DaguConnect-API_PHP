@@ -103,9 +103,9 @@ class ClientController extends BaseController
     }
 
     //get booking of the clients
-    public function GetBookingClient($user_id){
+    public function GetBookingClient($user_id,$page,$limit){
         try{
-            $ClientBooking = $this->client->GetBooking($user_id);
+            $ClientBooking = $this->client->GetBooking($user_id,$page,$limit);
             if(!$ClientBooking){
                 $this->jsonResponse(['message' => "No bookings found"], 400);
             }
