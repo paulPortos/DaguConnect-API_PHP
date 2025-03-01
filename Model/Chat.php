@@ -78,7 +78,6 @@ class Chat extends BaseModel
 
     public function getMessages(int $user_id, int $chat_id, int $page, int $limit): array {
         $offset = ($page - 1) * $limit;
-        var_dump($user_id);
         try {
             // Get total number of messages in the chat
             $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->message 
@@ -205,29 +204,44 @@ class Chat extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getProfilePicture($user_id){
+    public function getProfilePicture($user_id) {
         try {
+            // Check if the user is a client
             $query = "SELECT is_client FROM users WHERE id = :user_id";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
             $isClient = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            // If no user is found, return null
+            if ($isClient === false) {
+                error_log("No user found with user_id: " . $user_id);
+                return null;
+            }
+
             if ($isClient['is_client'] == 0) {
+                // Fetch profile picture from tradesman_resume for non-clients
                 $query = "SELECT profile_pic FROM tradesman_resume WHERE user_id = :user_id";
                 $stmt = $this->db->prepare($query);
                 $stmt->bindParam(':user_id', $user_id);
                 $stmt->execute();
-                return $stmt->fetch(PDO::FETCH_ASSOC)['profile_pic'];
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Check if result exists before accessing it
+                return $result !== false ? $result['profile_pic'] : null;
             } else {
-                $query = "SELECT profile_pic FROM users WHERE user_id = :user_id";
+                // Fetch profile picture from users for clients
+                $query = "SELECT profile_pic FROM users WHERE id = :user_id"; // Fixed column name to 'id'
                 $stmt = $this->db->prepare($query);
                 $stmt->bindParam(':user_id', $user_id);
                 $stmt->execute();
-                return $stmt->fetch(PDO::FETCH_ASSOC)['profile_pic'];
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Check if result exists before accessing it
+                return $result !== false ? $result['profile_pic'] : null;
             }
-        } catch (PDOException $e){
-            error_log("Error getting profile picture: ". $e->getMessage());
+        } catch (PDOException $e) {
+            error_log("Error getting profile picture: " . $e->getMessage());
             return null;
         }
     }
@@ -274,7 +288,6 @@ class Chat extends BaseModel
             }
             return (int)$chatId;
         } catch (PDOException $e) {
-            var_dump($e->getMessage());
             return null;
         }
     }
