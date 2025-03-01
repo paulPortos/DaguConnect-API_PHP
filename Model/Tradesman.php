@@ -15,15 +15,38 @@ class Tradesman extends BaseModel
     }
 
     //get all the booking from the tradesman
-    public function getClientsBooking($tradesman_id):array{
+    public function getClientsBooking($tradesman_id,int $pages, int $limit):array{
+        $offset = ($pages - 1) * $limit;
+        try{
 
-        $query = "SELECT * FROM $this->table WHERE tradesman_id = :tradesman_id";
+            $count_stmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE tradesman_id = :tradesman_id ");
+            $count_stmt ->bindParam(':tradesman_id', $tradesman_id,PDO::PARAM_INT);
+            $count_stmt ->execute();
+            $totalApplicants = (int) $count_stmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int
 
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':tradesman_id', $tradesman_id);
-        $stmt->execute();
 
-        return $stmt->fetchall(PDO::FETCH_ASSOC);
+            $query = "SELECT * FROM $this->table WHERE tradesman_id = :tradesman_id LIMIT :limit OFFSET :offset";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':tradesman_id', $tradesman_id);
+            $stmt->bindParam(':limit', $limit,PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset,PDO::PARAM_INT);
+            $stmt->execute();
+
+            $bookings = $stmt->fetchall(PDO::FETCH_ASSOC);
+
+            $totalPages = max(1, ceil($totalApplicants / $limit));
+
+            return [
+                'bookings' => $bookings,
+                'current_page' => $pages,
+                'total_pages' => $totalPages
+            ];
+        }catch (PDOException $e){
+            error_log("error: " . $e->getMessage());
+            return [];
+
+        }
+
     }
 
     //update the booking_status if it is rejected or accepted

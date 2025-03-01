@@ -317,9 +317,10 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
-
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
             $TradesmanBookingController = new TradesmanController(new Tradesman($this->db));
-            $TradesmanBookingController->GetBookingFromClient($userId);
+            $TradesmanBookingController->GetBookingFromClient($userId,$page,$limit);
         });
 
         $this->route('PUT', '/user/client/work/status/{booking_id}', function ($userId,$booking_id) {

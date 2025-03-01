@@ -18,10 +18,10 @@ class TradesmanController extends BaseController
     }
 
     //get booking from the clients of the tradesman
-    public function GetBookingFromClient($userId):void{
+    public function GetBookingFromClient($userId,$pages,$limit):void{
         try {
             //fetch the booking base from the tradesman_id
-            $booking = $this->tradesman->getClientsBooking($userId);
+            $booking = $this->tradesman->getClientsBooking($userId,$pages,$limit);
 
             //check if there's any booking
             if(!$booking){
@@ -30,7 +30,7 @@ class TradesmanController extends BaseController
             }
 
             // Return the booking details
-            $this->jsonResponse(['message' => 'Booking retrieved successfully.', 'data' => $booking], 200);
+            $this->jsonResponse( $booking);
 
         }catch (\Exception $e){
             echo $e->getMessage();
