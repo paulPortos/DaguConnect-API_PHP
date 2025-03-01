@@ -46,7 +46,8 @@ trait Middleware
             '/user/tradesman/getResume/Details',
             '/user/change/password',
             '/user/tradesman/job-applications/change_status/{jobId}',
-            '/user/job-applications/view/{jobId}'
+            '/user/job-applications/view/{jobId}',
+            '/user/client/job-applications'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {

@@ -50,7 +50,6 @@ class Job_Application extends BaseModel
             return  $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error applying for job: ". $e->getMessage());
-            var_dump($e->getMessage());
             return false;
         }
     }
