@@ -13,6 +13,7 @@ use Controller\APP\ResumeController;
 use Controller\App\ClientController;
 use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
+use Controller\NotificationController;
 use Controller\Web\DashboardController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
@@ -20,6 +21,7 @@ use DaguConnect\Model\Chat;
 use DaguConnect\Model\Client_Profile;
 use DaguConnect\Model\Job;
 use DaguConnect\Model\Job_Application;
+use DaguConnect\Model\Notification;
 use DaguConnect\Model\Rating;
 use DaguConnect\Model\Report;
 use DaguConnect\Model\Resume;
@@ -281,8 +283,6 @@ class Api extends BaseApi
             $ReportController->reportClient($tradesman_Id,$client_Id,$report_reason,$report_details,$report_attachment);
         });
 
-
-
         $this->route('POST', '/user/client/booktradesman/{tradesman_Id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
 
@@ -399,7 +399,6 @@ class Api extends BaseApi
             $jobApplicationController->changeJobApplicationStatus($userId, $jobId, $status, $cancellationReason);
         });
 
-
         $this->route('POST', '/user/client/job/apply/{jobId}', function ($userId, $jobId){
             ['qualification_summary' => $qualificationSummary] = $this->requestBody;
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
@@ -448,7 +447,6 @@ class Api extends BaseApi
             $messageController->getMessages($user_id, $chat_id, $page, $limit);
         });
 
-
         $this->route('DELETE', '/client/jobs/delete/{jobId}', function ($jobId, $userId){
             $jobController = new JobController(new Job($this->db));
             $jobController->deleteJob($jobId, $userId);
@@ -490,9 +488,7 @@ class Api extends BaseApi
             $clientProfileController->getProfile($user_id);
         });
 
-
-
-        $this->route('POST', '/client/jobs/update/{jobId}', function ($userId,$jobId){
+        $this->route('PUT', '/client/jobs/update/{jobId}', function ($userId,$jobId){
             $this->responseBodyChecker();
             ['salary' => $salary, 'job_description' => $job_description, 'address' => $address, 'deadline' => $deadline] = $this->requestBody;
             $jobController = new JobController(new Job($this->db));
@@ -513,15 +509,20 @@ class Api extends BaseApi
             $authenticationController->forgotpassword($email);
         });
 
-        $this->route('PUT', '/user/forgot/resetpassword', function (){
+        $this->route('PUT', '/user/forgot/resetpassword', function () {
             $this->responseBodyChecker();
             $token = $this->requestBody['token'];
             $new_password = $this->requestBody['new_password'];
             $this->responseBodyChecker();
-            $authenticationController = new AuthenticationController(new User($this->db),new Resume($this->db),new Client_Profile($this->db));
-            $authenticationController->resetpassword($token,$new_password);
+            $authenticationController = new AuthenticationController(new User($this->db), new Resume($this->db), new Client_Profile($this->db));
+            $authenticationController->resetpassword($token, $new_password);
+        });
 
-
+        $this->route('GET', '/user/notification', function ($userId) {
+            $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+            $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
+            $notificationController = new NotificationController(new Notification($this->db));
+            $notificationController->getNotification($userId, $page, $limit);
         });
     }
 

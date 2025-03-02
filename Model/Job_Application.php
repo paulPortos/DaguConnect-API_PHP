@@ -345,4 +345,16 @@ class Job_Application extends BaseModel
         }
     }
 
+    public function isApproved($user_id): bool
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT is_approve FROM tradesman_resume WHERE user_id = :user_id LIMIT 1");
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+            return (bool) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error checking if user is verified: ". $e->getMessage());
+            return false;
+        }
+    }
 }

@@ -64,6 +64,11 @@ class JobApplicationController extends BaseController
             return;
         }
 
+        if (!$this->job_application_model->isApproved($user_id)) {
+            $this->jsonResponse(['message' => 'Your resume must be approved to apply for jobs.'], 400);
+            return;
+        }
+
         if ($resume_id == 0) {
             $this->jsonResponse(['message' => 'No resume found for this user.'], 400);
             return;
@@ -226,13 +231,4 @@ class JobApplicationController extends BaseController
         }
     }
 
-    public function viewJobApplication($jobApplicationId): void
-    {
-        $jobApplication = $this->job_application_model->viewJobApplication($jobApplicationId);
-        if (!empty($jobApplication)){
-            $this->jsonResponse(['job_application' => $jobApplication], 200);
-        } else {
-            $this->jsonResponse(['message' => 'Error getting job application'], 500);
-        }
-    }
 }

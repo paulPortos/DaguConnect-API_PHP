@@ -8,7 +8,8 @@ use PDOException;
 
 require_once __DIR__ . '/../Services/Env.php';
 
-class config {
+class config extends \PDO
+{
 
     public PDO $db;
 
