@@ -27,9 +27,9 @@ trait clientbooking_Seed
     public function seedClientBooking1($url):void{
         $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
         $stmt->execute([
-            2,
             1,
-            3,
+            1,
+            2,
             "099535834236",
             "Ezekiel Vidal",
             $url,

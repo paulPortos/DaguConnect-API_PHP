@@ -38,8 +38,8 @@ trait Resume_Seed
     {
         $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic,birthdate, about_me, prefered_work_location, work_fee,documents,valid_id_front,valid_id_back ,tradesman_full_name,status_of_approval ,updated_at, created_at, is_active,is_approve) VALUES (?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?,?)");
         $stmt->execute([
-            "test@gmail.com",
-            3,
+            "vahron24@gmail.com",
+            2,
             "Electrician",
             $url,
             '1999-03-21',
@@ -49,7 +49,7 @@ trait Resume_Seed
             $documents,
             $valid_id_front,
             $valid_id_back,
-            "Karlos Rivo",
+            "Ahron Paul Villacote",
             "Approved",
             1,
             1

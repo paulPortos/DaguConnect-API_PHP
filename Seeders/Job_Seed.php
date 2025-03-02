@@ -54,7 +54,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3,
-            'Jane Smith',
+            'Karlos Rivo', //2
             2,
             $url,
             2000.00,
