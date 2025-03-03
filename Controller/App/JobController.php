@@ -135,7 +135,7 @@ class JobController extends BaseController
         if (!$user_job_post) {
             $this->jsonResponse(['message' => "No job posts found."], 200);
         } else {
-            $this->jsonResponse(['job_posts' => $user_job_post], 200);
+            $this->jsonResponse($user_job_post, 200);
         }
     }
 
