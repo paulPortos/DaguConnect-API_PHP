@@ -17,11 +17,11 @@ class Client extends BaseModel
     }
 
     //client booking tradesman
-    public function BookTradesman($user_id, $resume_id, $tradesman_id, $phone_number, $tradesman_fullname, $tradesman_profile, $work_fee, $client_fullname, $address, $task_type, $task_description, $booking_date): bool
+    public function BookTradesman($user_id, $resume_id, $tradesman_id, $phone_number, $tradesman_fullname, $tradesman_profile, $work_fee, $client_fullname, $address, $task_type, $task_description, $booking_date,$client_profile): bool
     {
         $query = "INSERT INTO $this->table 
-                (user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname, address, task_type, task_description, booking_date, booking_status, created_at)
-                VALUES (:user_id, :resume_id, :tradesman_id, :phone_number, :tradesman_fullname, :tradesman_profile, :work_fee, :client_fullname, :address, :task_type, :task_description, :booking_date, 'Pending', NOW())";
+                (user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname,client_profile, address, task_type, task_description, booking_date, booking_status, created_at)
+                VALUES (:user_id, :resume_id, :tradesman_id, :phone_number, :tradesman_fullname, :tradesman_profile, :work_fee, :client_fullname,:client_profile, :address, :task_type, :task_description, :booking_date, 'Pending', NOW())";
 
         $stmt = $this->db->prepare($query);
 
@@ -33,6 +33,7 @@ class Client extends BaseModel
         $stmt->bindParam(':tradesman_profile', $tradesman_profile);
         $stmt->bindParam(':work_fee', $work_fee);
         $stmt->bindParam(':client_fullname', $client_fullname);
+        $stmt->bindParam(':client_profile', $client_profile);
         $stmt->bindParam(':address', $address);
         $stmt->bindParam(':task_type', $task_type);
         $stmt->bindParam(':task_description', $task_description);

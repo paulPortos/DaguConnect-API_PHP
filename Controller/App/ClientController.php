@@ -24,7 +24,7 @@ class ClientController extends BaseController
 
     public function __construct(Client $client,Resume $resume_model, User $user_model)
     {
-        $this->Book_type = ['Carpentry','Painting','Welding','Electrician','Plumbing','Masonry','Roofing','ACRepair','Mechanics','Cleaning'];
+        $this->Book_type = ['Carpentry','Painter','Welding','Electrical_work','Plumbing','Masonry','Roofing','Ac_Repair','Mechanic','Cleaning'];
         $this->db = new config();
         $this->client = $client;
         $this->resume = $resume_model;
@@ -75,7 +75,10 @@ class ClientController extends BaseController
 
 
             //gets the clients_fullname
-            $clients_fullname = $clientDetails['fullname'];
+            $clients_fullname = $clientDetails['first_name'] . ' ' . $clientDetails['last_name'];
+
+            //gets the client_profile
+            $client_profile = $clientDetails['profile'];
 
 
 
@@ -87,7 +90,7 @@ class ClientController extends BaseController
                 return;
             }
 
-            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$tradesman_fullname,$tradesman_profile,$work_fee,$clients_fullname,$address,$task_type,$task_description,$booking_date );
+            $result = $this->client->BookTradesman($user_id,$resume_id['id'],$tradesman_id,$phone_number,$tradesman_fullname,$tradesman_profile,$work_fee,$clients_fullname,$address,$task_type,$task_description,$booking_date,$client_profile );
 
 
             if($result){

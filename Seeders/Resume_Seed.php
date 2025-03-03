@@ -63,7 +63,7 @@ trait Resume_Seed
         $stmt->execute([
             "test4@gmail.com",
             4,
-            "Painting",
+            "Painter",
             $url,
             '1999-03-21',
             "I’m a painter who transforms spaces with vibrant colors and precision.",
@@ -131,7 +131,7 @@ trait Resume_Seed
         $stmt->execute([
             "test7@gmail.com",
             7,
-            "Painting",
+            "Painter",
             $url,
             '1999-03-21',
             "Skilled painter dedicated to creating beautiful, lasting finishes for homes.",
@@ -176,7 +176,7 @@ trait Resume_Seed
         $stmt->execute([
             "test10@gmail.com",
             10,
-            "Painting",
+            "Painter",
             $url,
             '1999-03-21',
             "I specialize in detailed painting and restoration as a professional painter.",
@@ -221,7 +221,7 @@ trait Resume_Seed
         $stmt->execute([
             "test12@gmail.com",
             12,
-            "Painting",
+            "Painter",
             $url,
             '1999-03-21',
             "Experienced painter bringing creativity and expertise to every wall I touch.",
