@@ -25,7 +25,7 @@ trait clientbooking_Seed
     }
 
     public function seedClientBooking1($url):void{
-        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
+        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname,client_profile, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
         $stmt->execute([
             1,
             1,
@@ -35,6 +35,7 @@ trait clientbooking_Seed
             $url,
             200,
             "Xmen Wolverine",
+            $url,
             "123 Main Street, New York",
             "Carpentry",
             "I need help with a software bug",
@@ -45,7 +46,7 @@ trait clientbooking_Seed
     }
 
     public function seedClientBooking2($url):void{
-        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
+        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname,client_profile, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
         $stmt->execute([
             3,
             2,
@@ -55,6 +56,7 @@ trait clientbooking_Seed
             $url,
             200,
             "Alice Johnson",
+            $url,
             "123 Main Street, New York",
             "Welding",
             "Join metal parts using heat and pressure to create strong, durable structures or repairs.",
@@ -64,7 +66,7 @@ trait clientbooking_Seed
         ]);
     }
     public function seedClientBooking3($url):void{
-        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
+        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname,client_profile, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
         $stmt->execute([
             8,
             3,
@@ -74,6 +76,7 @@ trait clientbooking_Seed
             $url,
             200,
             "test8 test8",
+            $url,
             "123 Main Street, New York",
             "Plumbing",
             "Install and repair pipes, fixtures, and drainage systems to ensure efficient water flow and waste removal.",
@@ -83,7 +86,7 @@ trait clientbooking_Seed
         ]);
     }
     public function seedClientBooking4($url):void{
-        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
+        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname,client_profile, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
         $stmt->execute([
             9,
             4,
@@ -93,6 +96,7 @@ trait clientbooking_Seed
             $url,
             200,
             "test9 test9",
+            $url,
             "123 Main Street, New York",
             "Electrician",
             "Install, maintain, and repair electrical wiring, systems, and equipment to ensure safe and reliable power distribution.",
@@ -102,7 +106,7 @@ trait clientbooking_Seed
         ]);
     }
     public function seedClientBooking5($url):void{
-        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
+        $stmt = $this->db->prepare("INSERT INTO client_booking(user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname,client_profile, address, task_type, task_description, booking_date, booking_status, cancel_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())");
         $stmt->execute([
             10,
             5,
@@ -112,6 +116,7 @@ trait clientbooking_Seed
             $url,
             200,
             "test10 test10",
+            $url,
             "123 Main Street, New York",
             "Roofing",
             "Install, repair, and maintain roofs using materials like shingles, tiles, or metal to protect structures from weather damage.",
