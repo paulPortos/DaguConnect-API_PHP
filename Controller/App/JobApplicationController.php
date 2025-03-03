@@ -51,14 +51,11 @@ class JobApplicationController extends BaseController
         ];
     }
 
-    public function apply_job(int $user_id, int $job_id, string $qualifications_summary, string $status = "Pending"):void {
+    public function apply_job(int $user_id, int $job_id, string $qualifications_summary):void {
         $resume_id = $this->job_application_model->getResumeId($user_id);
-        $get_job_type = $this->job_application_model->getJobType($job_id);
-        $client_id = $this->job_application_model->getClientId($job_id);
-        $jobsData = $this->job_application_model->getNameAddressDeadlineByJobId($job_id);
-        $job_type = $get_job_type['job_type'];
-        $tradesmanProfilePicture = $this->job_application_model->getProfilePictureById($user_id);
-        $tradesman_fullname = $this->job_application_model->getTradesmanFullName($user_id);
+        $jobDetails = $this->job_application_model->getJobType($job_id);
+        $tradesmanProfilePicture = $this->job_application_model->getTradesmanProfilePictureById($user_id);
+        $tradesmanFullname = $this->job_application_model->getTradesmanFullName($user_id);
         if ($this->job_application_model->checkIfAlreadyApplied($user_id, $job_id)) {
             $this->jsonResponse(['message' => 'You have already applied for this job.'], 400);
             return;
@@ -75,7 +72,7 @@ class JobApplicationController extends BaseController
         }
 
         // Ensure job type exists
-        if (!$get_job_type || empty($get_job_type['job_type'])) {
+        if (empty($jobDetails['job_type'])) {
             $this->jsonResponse(['message' => 'Invalid job type.'], 400);
             return;
         }
@@ -85,22 +82,17 @@ class JobApplicationController extends BaseController
             return;
         }
 
-        if(!in_array($status, $this->application_status, true)) {
-            $this->jsonResponse(['message' => "Invalid status"], 400);
+        if (trim(strlen($qualifications_summary)) <= 30) {
+            $this->jsonResponse(['message' => 'Summary field must be at least 30 characters'], 400);
             return;
         }
 
-        if (trim(strlen($qualifications_summary)) <= 50) {
-            $this->jsonResponse(['message' => 'Summary field must be at least 50 characters'], 400);
+        if (trim(strlen($qualifications_summary)) > 150) {
+            $this->jsonResponse(['message' => 'Summary field should not more than 150 characters'], 400);
             return;
         }
 
-        if (trim(strlen($qualifications_summary)) > 300) {
-            $this->jsonResponse(['message' => 'Summary field should not more than 300 characters'], 400);
-            return;
-        }
-
-        $index = array_search($job_type, $this->job_application_type, true);
+        $index = array_search($jobDetails['job_type'], $this->job_application_type, true);
         if ($index === false) {
             $this->jsonResponse(['message' => 'Invalid job type.'], 400);
             return;
@@ -108,29 +100,24 @@ class JobApplicationController extends BaseController
 
         $job_type_application_post = $this->job_type_enum[$index];
 
-        if (!in_array($status, $this->application_status, true)) {
-            $this->jsonResponse(['message' => 'Invalid status.'], 400);
-            return;
-        }
-
         $applyJob = $this->job_application_model->applyJob(
             $user_id,
             $resume_id,
             $job_id,
-            $client_id,
-            $jobsData['client_fullname'],
-            $tradesman_fullname,
+            $jobDetails['user_id'],
+            $jobDetails['client_fullname'],
+            $tradesmanFullname,
             $tradesmanProfilePicture,
-            $jobsData['address'],
+            $jobDetails['client_profile_picture'],
+            $jobDetails['address'],
             $job_type_application_post,
-            $jobsData['deadline'],
+            $jobDetails['deadline'],
             $qualifications_summary,
-            $status
+            "Pending"
         );
 
         if ($applyJob) {
             $this->jsonResponse(['message' => 'Application successful.'], 201);
-
         } else {
             $this->jsonResponse(['message' => 'Application failed.'], 500);
         }
@@ -191,7 +178,7 @@ class JobApplicationController extends BaseController
         ], 200);
     }
 
-    public function changeJobApplicationStatus(int $user_id, int $job_applicationId, string $status, string $cancel_reason = "None"):void {
+    public function changeJobApplicationStatus(int $user_id, int $job_applicationId, string $status, string $cancel_reason = ""):void {
         if (!$this->exists($job_applicationId, "id", "jobs")) {
             $this->jsonResponse(['message' => 'Invalid job application ID'], 400);
             return;

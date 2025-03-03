@@ -476,7 +476,7 @@ class Api extends BaseApi
             $clientProfileController->updateProfilePicture($userId, $profile_pic);
         });
 
-        $this->route('POST', '/client/update/profile_address', function ($userId){
+        $this->route('PUT', '/client/update/profile_address', function ($userId){
             $this->responseBodyChecker();
             ['address' => $profile_address] = $this->requestBody;
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));

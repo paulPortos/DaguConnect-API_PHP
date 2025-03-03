@@ -29,22 +29,23 @@ class Job_Application extends BaseModel
      * @return bool Returns true if the job application was successfully inserted, false otherwise.
      */
     //Apply for a job
-    public function applyJob(int $user_id, int $resume_id, int $job_id, int $client_id, string $client_full_name, string $tradesman_full_name, string $tradesman_profile_picture, string $job_address, string $job_type, string $job_deadline, string $qualifications_summary, string $status):bool {
+    public function applyJob(int $user_id, int $resume_id, int $job_id, int $client_id, string $client_full_name, string $tradesman_full_name, string $client_profile_picture, string $tradesman_profile_picture, string $job_address, string $job_type, string $job_deadline, string $qualifications_summary, string $status):bool {
         try {
             $query = "INSERT INTO $this->table 
-        (user_id, resume_id, job_id, client_id, client_fullname, tradesman_fullname, tradesman_profile_picture, job_address, job_type, job_deadline, qualification_summary, status, created_at) 
-        VALUES (:user_id, :resume_id, :job_id, :client_id, :client_fullname, :tradesman_fullname, :tradesman_profile_picture, :job_address, :job_type, :job_deadline, :qualification_summary, :status, NOW())";
+        (user_id, resume_id, job_id, client_id, client_fullname, tradesman_fullname, tradesman_profile_picture, client_profile_picture, job_address, job_type, job_deadline, qualification_summary, status, created_at) 
+        VALUES (:user_id, :resume_id, :job_id, :client_id, :client_fullname, :tradesman_fullname, :tradesman_profile_picture, :client_profile_picture, :job_address, :job_type, :job_deadline, :qualification_summary, :status, NOW())";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':resume_id', $resume_id);
             $stmt->bindParam(':job_id', $job_id);
             $stmt->bindParam(':client_id', $client_id);
-            $stmt->bindParam(':client_fullname', $client_full_name); // J
-            $stmt->bindParam(':tradesman_fullname', $tradesman_full_name); //
+            $stmt->bindParam(':client_fullname', $client_full_name);
+            $stmt->bindParam(':tradesman_fullname', $tradesman_full_name);
             $stmt->bindParam(':tradesman_profile_picture', $tradesman_profile_picture);
-            $stmt->bindParam(':job_address', $job_address); // J
+            $stmt->bindParam(':client_profile_picture', $client_profile_picture);
+            $stmt->bindParam(':job_address', $job_address);
             $stmt->bindParam(':job_type', $job_type);
-            $stmt->bindParam(':job_deadline', $job_deadline); // J
+            $stmt->bindParam(':job_deadline', $job_deadline);
             $stmt->bindParam(':qualification_summary', $qualifications_summary);
             $stmt->bindParam(':status', $status);
             return  $stmt->execute();
@@ -306,7 +307,7 @@ class Job_Application extends BaseModel
         }
     }
 
-    public function getProfilePictureById($id):string {
+    public function getTradesmanProfilePictureById($id):string {
         try {
             $stmt = $this->db->prepare("SELECT profile_pic FROM tradesman_resume WHERE id = :id");
             $stmt->bindParam(':id', $id);
@@ -335,7 +336,7 @@ class Job_Application extends BaseModel
     public function getJobType($job_id): array
     {
         try {
-            $stmt = $this->db->prepare("SELECT job_type FROM jobs WHERE id = :id LIMIT 1");
+            $stmt = $this->db->prepare("SELECT * FROM jobs WHERE id = :id LIMIT 1");
             $stmt->bindParam(':id', $job_id);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -355,6 +356,19 @@ class Job_Application extends BaseModel
         } catch (PDOException $e) {
             error_log("Error checking if user is verified: ". $e->getMessage());
             return false;
+        }
+    }
+
+    public function updateTradesmanProfileInJobApplication($userId, $profile_picture): void
+    {
+        try {
+            $query = "UPDATE $this->table SET tradesman_profile_picture = :tradesman_profile_picture WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':tradesman_profile_picture', $profile_picture);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error updating tradesman profile in job application: " . $e->getMessage());
         }
     }
 }

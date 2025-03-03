@@ -3,5 +3,7 @@ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 user_id INT UNSIGNED NOT NULL,
 token VARCHAR(255) NOT NULL,
 created_at DATETIME NOT NULL,
-FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+UNIQUE INDEX idx_token (token),
+INDEX idx_created_at (created_at)
 ) ENGINE = InnoDB;

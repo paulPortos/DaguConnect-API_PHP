@@ -53,6 +53,23 @@ class ClientProfileController extends BaseController
 
         $profile = $this->model->updateProfilePicture($user_id, $profilePicUrl);
         if ($profile) {
+            $userProfile = $this->model->updateUserProfilePicture($user_id, $profilePicUrl);
+            $jobProfile = $this->model->updateJobClientProfilePicture($user_id, $profilePicUrl);
+            $jobApplicationProfile = $this->model->updateJobApplicationClientProfilePicture($user_id, $profilePicUrl);
+
+            if (!$userProfile ) {
+                $this->jsonResponse(['message' => "Update client profile failed!"], 400);
+                return;
+            }
+            if (!$jobProfile){
+                $this->jsonResponse(['message' => "Update job profile failed!"], 400);
+                return;
+            }
+            if (!$jobApplicationProfile) {
+                $this->jsonResponse(['message' => "Update job application profile failed!"], 400);
+                return;
+            }
+
             $this->jsonResponse(['message' => "Updated successfully!"], 200);
         } else {
             $this->jsonResponse(['message' => "Update failed."], 400);

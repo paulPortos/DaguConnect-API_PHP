@@ -10,6 +10,9 @@ email VARCHAR(255) NOT NULL,
 profile VARCHAR(255) NULL,
 is_client TINYINT(1) NULL,
 password VARCHAR(255) NOT NULL,
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+UNIQUE INDEX idx_username (username),
+UNIQUE INDEX idx_email (email),
+INDEX idx_created_at (created_at)
 ) ENGINE = InnoDB;
 

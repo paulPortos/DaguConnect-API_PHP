@@ -160,6 +160,7 @@ class JobController extends BaseController
             $this->jsonResponse(['message' => "Job does not exist."], 404);
             return;
         }
+
         if ($delete_job) {
             $this->jsonResponse(['message' => "Job deleted successfully."], 200);
         } else {

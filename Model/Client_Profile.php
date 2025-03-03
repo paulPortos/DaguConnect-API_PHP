@@ -123,4 +123,48 @@ class Client_Profile extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function updateUserProfilePicture($user_id, $profile_picture): bool
+    {
+        try {
+            $query = "UPDATE users SET profile = :profile WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':id', $user_id);
+            $stmt->bindParam(':profile', $profile_picture);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error updating user profile picture: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function updateJobClientProfilePicture($user_id, $profile_picture): bool
+    {
+        try {
+            $query = "UPDATE jobs SET client_profile_picture = :client_profile_picture WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':client_profile_picture', $profile_picture);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error updating job client profile picture: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function updateJobApplicationClientProfilePicture($user_id, $profile_picture): bool
+    {
+        try {
+            $query = "UPDATE job_applications SET client_profile_picture = :client_profile_picture WHERE client_id = :client_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':client_id', $user_id);
+            $stmt->bindParam(':client_profile_picture', $profile_picture);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error updating job application client profile picture: " . $e->getMessage());
+            return false;
+        }
+    }
 }

@@ -22,12 +22,14 @@ job_description TEXT NOT NULL,
 address TEXT NOT NULL,
 latitude DECIMAL(9,6) NULL,
 longitude DECIMAL(9,6) NULL,
-status ENUM('Cancelled','Available','On_going','Completed','Failed','Deadline_end') NOT NULL,
+status ENUM('Available','Active','Completed','Deadline_End') NOT NULL,
 deadline DATE NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 FOREIGN KEY (client_profile_id) REFERENCES client_profile(id) ON DELETE CASCADE,
 INDEX idx_job_type (job_type),
-INDEX idx_location_coords (latitude, longitude)
+INDEX idx_location_coords (latitude, longitude),
+INDEX idx_deadline_status (deadline, status),
+INDEX idx_created_at (created_at)
 ) ENGINE = InnoDB;

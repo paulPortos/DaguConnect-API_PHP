@@ -4,6 +4,7 @@ namespace Controller\App;
 
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
+use DaguConnect\Model\Job_Application;
 use DaguConnect\Model\Report;
 use DaguConnect\Model\Resume;
 use DaguConnect\Model\Client;
@@ -18,6 +19,8 @@ class ResumeController extends BaseController
     private Report $reportModel;
     private User $userModel;
     private Client $clientBookingModel;
+
+    private Job_Application $jobApplicationModel;
     use FileUploader;
     protected $profileDir;
     protected $documentDir;
@@ -107,7 +110,8 @@ class ResumeController extends BaseController
         }
     }*/
 
-    public function updateTradesmanProfile($user_Id,$tradesman_profile){
+    public function updateTradesmanProfile($user_Id,$tradesman_profile): void
+    {
 
         // Upload the profile picture and get the full URL
         $fullProfilePicUrl = $this->uploadFile($tradesman_profile, $this->profileDir);
@@ -122,6 +126,7 @@ class ResumeController extends BaseController
                 //update the Report_profile in the client_booking table
                 $this->reportModel->updateTradesmanProfileInReport($user_Id, $fullProfilePicUrl);
 
+                $this->jobApplicationModel->updateTradesmanProfileInJobApplication($user_Id, $fullProfilePicUrl);
                 $this->jsonResponse(['message' => 'Profile Updated successfully.'], 201);
             } else {
                 $this->jsonResponse(['message' => 'Failed to update profile.'], 500);
