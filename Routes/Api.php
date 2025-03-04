@@ -115,11 +115,30 @@ class Api extends BaseApi
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->resumeManagement();
         });
+
         $this->route('GET', '/admin/report/management', function () {
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->reportManagement();
         });
 
+        $this->route('POST', '/admin/profile_picture/update', function ($userId) {
+            if (empty($_FILES['profile_picture'])) {
+                echo json_encode(["message" => "No file uploaded"]);
+                return;
+            }
+            $profile_pic = $_FILES['profile_picture'];
+
+            $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->changeProfilePicture($userId, $profile_pic);
+        });
+
+        $this->route('PUT', '/admin/username/update', function ($userId) {
+            $this->responseBodyChecker();
+
+            ['username' => $username] = $this->requestBody;
+            $adminController = new AdminAuthController(new Admin($this->db));
+            $adminController->changeUsername($userId, $username);
+        });
 
         $this->route('PUT', '/admin/validate/Resume/{tradesman_id}', function ($user_id, $tradesman_id) {
             $this->responseBodyChecker();

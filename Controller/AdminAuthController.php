@@ -2,26 +2,32 @@
 
 namespace Controller;
 
+use AllowDynamicProperties;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Admin;
 use DaguConnect\Services\Confirm_Password;
+use DaguConnect\Services\FileUploader;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\CheckIfLoggedIn;
+use DaguConnect\Services\ValidateEmailAddress;
 use DaguConnect\Services\ValidateFirstandLastName;
 
-class AdminAuthController extends BaseController
+#[AllowDynamicProperties] class AdminAuthController extends BaseController
 {
     use Confirm_Password;
     use IfDataExists;
     use CheckIfLoggedIn;
     use ValidateFirstandLastName;
+    use ValidateEmailAddress;
+    use FileUploader;
     private Admin $adminModel;
 
     public function __construct(Admin $admin_model)
     {
         $this->db = new config();
         $this->adminModel = $admin_model;
+        $this->profileDir = "/uploads/profile_pictures/";
     }
 
     public function register($first_name, $last_name, $username, $email, $password, $confirm_password): void
@@ -143,5 +149,57 @@ class AdminAuthController extends BaseController
         } else {
             $this->jsonResponse(['message' => 'Logout failed.'], 400);
         }
+    }
+
+    public function changeProfilePicture($userId, $profile_picture): void{
+        $profilePicUrl = $this->uploadFile($profile_picture, $this->profileDir);
+
+        $profile = $this->adminModel->updateProfilePicture($userId, $profilePicUrl);
+        if ($profile) {
+            $this->jsonResponse(['message' => 'Profile picture updated successfully.'], 200);
+        } else {
+            $this->jsonResponse(['message' => 'Profile picture update failed.'], 400);
+        }
+    }
+
+    public function changeUsername($userId, $username): void {
+
+        $name = $this->adminModel->updateUsername($userId, $username);
+        if ($name) {
+            $this->jsonResponse(['message' => 'Username updated successfully.'], 200);
+        } else {
+            $this->jsonResponse(['message' => 'Name update failed.'], 400);
+        }
+    }
+
+    public function forgotPassword($email): void {
+        if (empty($email)) {
+            $this->jsonResponse(['message' => 'Email field is required.'], 400);
+            return;
+        }
+
+        if ($this->validateEmailAddress($email)) {
+            $this->jsonResponse(['message' => 'Invalid email.'], 400);
+            return;
+        }
+
+        if (!$this->exists($email, 'email', 'admin')) {
+            $this->jsonResponse(['message' => 'Email does not exists.'], 400);
+            return;
+        }
+
+        $otp = $this->generateOTP();
+
+        $token = $this->adminModel->forgotPassword($email);
+        if ($token) {
+            $this->jsonResponse(['message' => 'Token sent to your email.'], 200);
+        } else {
+            $this->jsonResponse(['message' => 'Internal Server Error.'], 500);
+        }
+    }
+
+    private function generateOTP(): string
+    {
+        return str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
     }
 }

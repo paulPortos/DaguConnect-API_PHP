@@ -523,5 +523,33 @@ class Admin extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function updateProfilePicture($userId, $profile_picture): bool {
+        try {
+            $query = "UPDATE $this->table SET profile_picture = :profile_picture WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':profile_picture', $profile_picture);
+            $stmt->bindParam(':id', $userId);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            error_log("Error updating name: " . $e->getMessage());
+            return false;
+        }
+    }
 
+    public function updateUsername($userId, $userName): bool {
+        try {
+            $query = "UPDATE $this->table SET username = :username WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $userName);
+            $stmt->bindParam(':id', $userId);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            error_log("Error updating name: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function forgotPassword($email): bool {
+        return false;
+    }
 }
