@@ -1323,3 +1323,6 @@ Stack trace:
 [03-Mar-2025 03:39:12 UTC] PHP Warning:  Undefined array key "first_namelast_name" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ClientController.php on line 78
 [03-Mar-2025 03:39:18 UTC] PHP Warning:  Undefined array key "first_namelast_name" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ClientController.php on line 78
 [03-Mar-2025 03:41:19 UTC] PHP Warning:  Undefined array key "first_namelast_name" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ClientController.php on line 78
+[03-Mar-2025 05:08:47 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[03-Mar-2025 13:52:53 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[03-Mar-2025 13:52:55 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'

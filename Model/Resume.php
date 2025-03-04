@@ -23,21 +23,23 @@ class Resume extends BaseModel
 
 
 
-    public function GetResume(int $page, int $limit):array{
+    public function GetResume(int $page, int $limit): array {
         $offset = ($page - 1) * $limit; // Calculate the starting point
         try {
+            // Count total active resumes
             $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE is_active = 1");
             $countStmt->execute();
             $totalResume = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int to avoid errors
 
-            $query = "SELECT * FROM $this->table WHERE is_active = 1 LIMIT :limit OFFSET :offset";
+            // Fetch resumes with pagination, ordered by `created_at` in descending order (newest first)
+            $query = "SELECT * FROM $this->table WHERE is_active = 1 ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
             $stmt = $this->db->prepare($query);
-            $stmt ->bindParam(':limit', $limit, PDO::PARAM_INT);
-            $stmt ->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
             $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
+            // Calculate total pages
             $totalPages = max(1, ceil($totalResume / $limit));
             return [
                 'resumes' => $resumes,
