@@ -271,7 +271,10 @@ class AuthenticationController extends BaseController
         $token = random_int(00000, 99999); // Generates a 5-digit random number
         $store_Token = $this->createTokenForgetPassword($email,$token,$this->db->getDB());
         if ($store_Token) {
-            $this->jsonResponse(["message" => "Token Successfully Sent To your email."], 200);
+            $this->jsonResponse(["message" => "Token Successfully Sent To your email",
+                                "email" => $email,
+                                "token"=>$token], 200);
+
             Email_Sender::sendResetPasswordToken($email,$token);
         }else{
             $this->jsonResponse(["message" => "Token generation failed"], 500);
