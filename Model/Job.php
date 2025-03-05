@@ -20,7 +20,7 @@ class Job extends BaseModel
         try {
             // Fetch user details
             $userStmt = $this->db->prepare(
-                "SELECT specialty, prefered_work_location FROM tradesman_resume WHERE id = :userId"
+                "SELECT specialty, prefered_work_location FROM tradesman_resume WHERE user_id = :userId"
             );
             $userStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
             $userStmt->execute();
@@ -46,7 +46,7 @@ class Job extends BaseModel
              WHERE LOWER(status) = 'Available' 
              ORDER BY 
                  CASE 
-                     WHEN LOWER(job_type) = LOWER(:speciality) THEN 1  -- Specialty match first
+                     WHEN LOWER(job_type) = LOWER(:specialty) THEN 1  -- Specialty match first
                      WHEN LOWER(address) = LOWER(:address) THEN 2       -- Address match second
                      ELSE 3 
                  END, 
@@ -54,7 +54,7 @@ class Job extends BaseModel
              LIMIT :limit OFFSET :offset"
             );
 
-            $stmt->bindParam(':speciality', $speciality, PDO::PARAM_STR);
+            $stmt->bindParam(':specialty', $speciality, PDO::PARAM_STR);
             $stmt->bindParam(':address', $address, PDO::PARAM_STR);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
