@@ -553,6 +553,23 @@ class Api extends BaseApi
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
             $clientProfileController->updatePhoneNumber($userId, $phone_number);
         });
+
+        $this ->route('POST', '/admin/forgot/otpsend',function(){
+            $this->responseBodyChecker();
+            $email = $this->requestBody['email'];
+
+            $adminAuthController = new AdminAuthController(new Admin($this->db));
+            $adminAuthController->forgotPassword($email);
+        });
+
+        $this->route('PUT', '/admin/forgot/resetpassword', function () {
+            $this->responseBodyChecker();
+            $otp = $this->requestBody['otp'];
+            $new_password = $this->requestBody['new_password'];
+            $this->responseBodyChecker();
+            $adminAuthController = new AdminAuthController(new Admin($this->db));
+            $adminAuthController->resetPassword($otp, $new_password);
+        });
     }
 
     //Check if the response body for POST is empty

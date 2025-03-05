@@ -6,10 +6,13 @@ use AllowDynamicProperties;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Admin;
+use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Services\FileUploader;
+use DaguConnect\Services\ForgetPassHandler;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\CheckIfLoggedIn;
+use DaguConnect\Services\TokenHandler;
 use DaguConnect\Services\ValidateEmailAddress;
 use DaguConnect\Services\ValidateFirstandLastName;
 
@@ -18,9 +21,11 @@ use DaguConnect\Services\ValidateFirstandLastName;
     use Confirm_Password;
     use IfDataExists;
     use CheckIfLoggedIn;
+    use TokenHandler;
     use ValidateFirstandLastName;
     use ValidateEmailAddress;
     use FileUploader;
+    use ForgetPassHandler;
     private Admin $adminModel;
 
     public function __construct(Admin $admin_model)
@@ -178,11 +183,6 @@ use DaguConnect\Services\ValidateFirstandLastName;
             return;
         }
 
-        if ($this->validateEmailAddress($email)) {
-            $this->jsonResponse(['message' => 'Invalid email.'], 400);
-            return;
-        }
-
         if (!$this->exists($email, 'email', 'admin')) {
             $this->jsonResponse(['message' => 'Email does not exists.'], 400);
             return;
@@ -190,11 +190,28 @@ use DaguConnect\Services\ValidateFirstandLastName;
 
         $otp = $this->generateOTP();
 
-        $token = $this->adminModel->forgotPassword($email);
-        if ($token) {
-            $this->jsonResponse(['message' => 'Token sent to your email.'], 200);
+        $store_token = $this->createOtpForgetPassword($email, $otp,$this->db->getDB());
+
+        if ($store_token) {
+            $this->jsonResponse(["message" => "Token Successfully Sent To your email",
+                "email" => $email,
+                "token"=>$otp], 200);
+
+            Email_Sender::sendResetPasswordToken($email,$otp);
+        }else{
+            $this->jsonResponse(["message" => "Token generation failed"], 500);
+        }
+
+    }
+
+    public function resetPassword($otp, $new_password): void {
+        // Call the model function to reset the password
+        $resetSuccess = $this->ResetPasswordByTokenAdmin($otp, $new_password, $this->db->getDB());
+
+        if (!$resetSuccess) {
+            $this->jsonResponse(["message" => "Incorrect OTP or Password reset failed."], 400);
         } else {
-            $this->jsonResponse(['message' => 'Internal Server Error.'], 500);
+            $this->jsonResponse(["message" => "Password successfully reset."], 200);
         }
     }
 

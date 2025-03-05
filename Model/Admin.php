@@ -5,6 +5,7 @@ namespace DaguConnect\Model;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Core\BaseModel;
 use DaguConnect\Services\Confirm_Password;
+use Exception;
 use PDO;
 use PDOException;
 
@@ -549,7 +550,4 @@ class Admin extends BaseModel
         }
     }
 
-    public function forgotPassword($email): bool {
-        return false;
-    }
 }

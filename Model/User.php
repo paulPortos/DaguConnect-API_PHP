@@ -140,6 +140,7 @@ class User extends BaseModel
 
             // Verify if the current password matches the stored hash
             if (!password_verify($current_password, $user['password'])) {
+                echo json_encode(['message'=>"Password Doesn't match the old password"]);
                 return false; // Password does not match
             }
             $hash_password = password_hash($password, PASSWORD_ARGON2ID);
@@ -158,13 +159,6 @@ class User extends BaseModel
         }
 
 
-    }
-    public function EmailExists($email){
-        $query = "SELECT COUNT(*) FROM $this->table WHERE email = :email";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute(); // Execute the query
-        return $stmt->fetchColumn() > 0;
     }
 
 }
