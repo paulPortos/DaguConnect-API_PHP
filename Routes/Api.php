@@ -140,6 +140,8 @@ class Api extends BaseApi
             $adminController->changeUsername($userId, $username);
         });
 
+
+
         $this->route('PUT', '/admin/validate/Resume/{tradesman_id}', function ($user_id, $tradesman_id) {
             $this->responseBodyChecker();
 
@@ -542,6 +544,13 @@ class Api extends BaseApi
             $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
             $notificationController = new NotificationController(new Notification($this->db));
             $notificationController->getNotification($userId, $page, $limit);
+        });
+
+        $this->route('PUT', '/client/update/phone_number', function ($userId){
+            $this->responseBodyChecker();
+            ['phone_number' => $phone_number] = $this->requestBody;
+            $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
+            $clientProfileController->updatePhoneNumber($userId, $phone_number);
         });
     }
 

@@ -129,12 +129,15 @@ class ChatController extends BaseController
 
     public function getMessages($user_id, $chat_id, $page, $limit): void{
         $messagesData = $this->model->getMessages($user_id, $chat_id, $page, $limit);
+
         $this->model->markAsReadChat($chat_id, $user_id);
+
         $this->model->markAsReadMessage($chat_id, $user_id);
 
         if ($messagesData) {
             $this->jsonResponse(
                 [
+                    'user_id' => $user_id,
                     'messages' => $messagesData['messages'],
                     'current_page' => $messagesData['current_page'],
                     'total_pages' => $messagesData['total_pages']

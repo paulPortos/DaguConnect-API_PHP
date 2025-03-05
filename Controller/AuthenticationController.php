@@ -279,7 +279,6 @@ class AuthenticationController extends BaseController
 
     }
 
-
     public function resetpassword($token, $new_password) {
         // Call the model function to reset the password
         $resetSuccess = $this->ResetPasswordByToken($token, $new_password, $this->db->getDB());

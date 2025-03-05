@@ -75,4 +75,17 @@ class ClientProfileController extends BaseController
             $this->jsonResponse(['message' => "Update failed."], 400);
         }
     }
+
+    public function updatePhoneNumber(int $user_id, String $phone_number): void {
+        if (empty($phone_number)) {
+            $this->jsonResponse(['message' => "Phone number cannot be empty."], 400);
+        }
+
+        $profile = $this->model->updatePhoneNumber($user_id, $phone_number);
+        if ($profile) {
+            $this->jsonResponse(['message' => "Updated successfully!"], 200);
+        } else {
+            $this->jsonResponse(['message' => "Update failed."], 400);
+        }
+    }
 }

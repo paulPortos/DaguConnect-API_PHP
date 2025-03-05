@@ -167,4 +167,19 @@ class Client_Profile extends BaseModel
             return false;
         }
     }
+
+    public function updatePhoneNumber($user_id, $phone_number): bool
+    {
+        try {
+            $query = "UPDATE users SET phone_number = :phone_number WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':id', $user_id);
+            $stmt->bindParam(':phone_number', $phone_number);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error updating user phone number: " . $e->getMessage());
+            return false;
+        }
+    }
 }
