@@ -8,12 +8,12 @@ use PDO;
 
 class Notification extends BaseModel
 {
-    protected string $table = 'notifications';
+    protected string $table = 'notification';
     public function __construct(PDO $db){
         parent::__construct($db);
     }
 
-    public function getNotification(int $page, int $limit, int$userId): array
+    public function getNotification(int$userId, int $page, int $limit): array
     {
         $offset = ($page - 1) * $limit;
         try {

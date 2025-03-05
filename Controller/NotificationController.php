@@ -2,11 +2,12 @@
 
 namespace Controller;
 
+use AllowDynamicProperties;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Notification;
 
-class NotificationController extends BaseController
+#[AllowDynamicProperties] class NotificationController extends BaseController
 {
     private Notification $notificationModel;
     public function __construct(Notification $notification_Model)
