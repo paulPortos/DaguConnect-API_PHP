@@ -49,18 +49,19 @@ class Tradesman extends BaseModel
 
     }
 
-    //update the booking_status if it is rejected or accepted
-    public function UpdateBookStatus($booking_status,$booking_id,$tradesman_id):bool
+    //update the booking_status if it is declined or accepted
+    public function UpdateBookStatus($booking_status,$booking_id,$tradesman_id,$cancel_reason):bool
     {
         try {
             $query = "UPDATE $this->table SET
-                  booking_status = :booking_status
+                  booking_status = :booking_status, cancel_reason = :cancel_reason
                   WHERE id = :booking_id AND tradesman_id = :tradesman_id";
 
             $stmt = $this->db->prepare($query);
             $stmt ->bindParam(':booking_status', $booking_status);
             $stmt ->bindParam(':booking_id', $booking_id);
             $stmt ->bindParam(':tradesman_id', $tradesman_id);
+            $stmt ->bindParam(':cancel_reason', $cancel_reason);
 
             return $stmt->execute();
         }catch (PDOException $e){

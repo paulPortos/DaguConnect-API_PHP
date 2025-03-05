@@ -38,19 +38,19 @@ class TradesmanController extends BaseController
     }
 
     //update the booking if is accepted or rejected by the tradesman
-    public function UpdateBookingFromClient($tradesman_id,$booking_id,$booking_status):void{
+    public function UpdateBookingFromClient($tradesman_id,$booking_id,$booking_status,$cancel_reason):void{
 
         //ensure that all the required fields are filled up
         if(empty($booking_status)){
             $this->jsonResponse(['message' => 'Booking status are required.'],400);
             return;
         }
-        // Ensure status is either 'Accepted' or 'Rejected'
-        if (!in_array($booking_status, ['Accepted', 'Rejected'])) {
+        // Ensure status is either 'Accepted' or 'Declined'
+        if (!in_array($booking_status, ['Accepted', 'Declined'])) {
             $this->jsonResponse(['message' => 'Invalid status provided.'], 400);
             return;
         }
-        $booking_update = $booking_status == 'Accepted' ? 'Active' : null;
+        $booking_update = $booking_status == 'Accepted' ? 'Active' : 'Declined';
 
         //check if the booking exist or the booking belongs to the tradesman
         if(!$this->tradesman->ValidateBookingUpdate($tradesman_id,$booking_id)){
@@ -62,7 +62,7 @@ class TradesmanController extends BaseController
             return;
         }
         //update the booking_status
-        $updatebooking = $this->tradesman->UpdateBookStatus($booking_update, $booking_id, $tradesman_id);
+        $updatebooking = $this->tradesman->UpdateBookStatus($booking_update, $booking_id, $tradesman_id,$cancel_reason);
 
         //check if the booking is accepted or declined
         if($updatebooking){

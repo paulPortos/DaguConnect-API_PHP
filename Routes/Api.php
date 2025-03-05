@@ -332,9 +332,10 @@ class Api extends BaseApi
             $this->responseBodyChecker();
 
             $book_status = $this->requestBody['book_status'] ?? null;
+            $cancel_reason =$this->requestBody['cancel_reason'] ?? null;
 
             $TradesmanBookingStatus = new TradesmanController(new Tradesman($this->db));
-            $TradesmanBookingStatus ->UpdateBookingFromClient($userId,$booking_id,$book_status);
+            $TradesmanBookingStatus ->UpdateBookingFromClient($userId,$booking_id,$book_status,$cancel_reason);
         });
 
         $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
