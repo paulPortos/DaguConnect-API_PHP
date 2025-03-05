@@ -224,7 +224,8 @@ class Job_Application extends BaseModel
     public function checkIfAlreadyApplied(int $user_id, int $job_id): bool
     {
         try {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM $this->table WHERE user_id = :user_id AND job_id = :job_id");
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM $this->table 
+                WHERE user_id = :user_id AND job_id = :job_id AND cancelled_by NOT IN ('Client', 'Tradesman')");
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->bindParam(':job_id', $job_id, PDO::PARAM_INT);
             $stmt->execute();
@@ -369,6 +370,37 @@ class Job_Application extends BaseModel
             $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error updating tradesman profile in job application: " . $e->getMessage());
+        }
+    }
+
+    public function checkIfJobApplicationExists($userId, $jobId): bool
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM $this->table 
+                WHERE user_id = :user_id 
+                AND job_id = :job_id 
+                AND cancelled_by IN ('Client', 'Tradesman')");
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->bindParam(':job_id', $jobId);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error checking if job application exists: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function reApplyJob($userId, $job_id): bool
+    {
+        try {
+            $stmt = $this->db->prepare("UPDATE $this->table SET status = 'Pending', cancelled_by = null, cancelled_reason = null WHERE user_id = :user_id AND job_id = :job_id");
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->bindParam(':job_id', $job_id);
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Error updating job application status: " . $e->getMessage());
+            return false;
         }
     }
 }

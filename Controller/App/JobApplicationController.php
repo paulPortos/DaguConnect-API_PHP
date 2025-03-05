@@ -56,6 +56,7 @@ class JobApplicationController extends BaseController
         $jobDetails = $this->job_application_model->getJobType($job_id);
         $tradesmanProfilePicture = $this->job_application_model->getTradesmanProfilePictureById($user_id);
         $tradesmanFullname = $this->job_application_model->getTradesmanFullName($user_id);
+
         if ($this->job_application_model->checkIfAlreadyApplied($user_id, $job_id)) {
             $this->jsonResponse(['message' => 'You have already applied for this job.'], 400);
             return;
@@ -63,6 +64,19 @@ class JobApplicationController extends BaseController
 
         if (!$this->job_application_model->isApproved($user_id)) {
             $this->jsonResponse(['message' => 'Your resume must be approved to apply for jobs.'], 400);
+            return;
+        }
+
+        $exist = $this->job_application_model->checkIfJobApplicationExists($user_id, $job_id);
+        var_dump($exist);
+
+        if($exist){
+            $reApplyJob = $this->job_application_model->reApplyJob($user_id, $job_id);
+            if ($reApplyJob) {
+                $this->jsonResponse(['message' => 'Job reapplication successfully.'], 201);
+            } else {
+                $this->jsonResponse(['message' => 'Job reapplication failed.'], 500);
+            }
             return;
         }
 
