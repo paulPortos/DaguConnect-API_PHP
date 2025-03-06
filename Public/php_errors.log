@@ -1510,3 +1510,15 @@ Stack trace:
 [06-Mar-2025 13:33:57 UTC] PHP Warning:  Undefined array key "id" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 131
 [06-Mar-2025 13:33:57 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 135
 [06-Mar-2025 13:33:57 UTC] PHP Warning:  Undefined array key "token" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 136
+[06-Mar-2025 13:45:33 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:45:33 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:45:43 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:45:49 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:46:01 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:47:26 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:47:37 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:51:14 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:51:22 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 13:51:31 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[06-Mar-2025 14:44:14 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[06-Mar-2025 15:07:07 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'

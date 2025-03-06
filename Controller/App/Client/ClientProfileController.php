@@ -49,10 +49,25 @@ class ClientProfileController extends BaseController
      * @throws Exception
      */
     public function updateProfilePicture(int $user_id, $profile_picture): void {
+        $existingProfile = $this->model->getClientProfilePicture($user_id);
         $profilePicUrl = $this->uploadFile($profile_picture, $this->profileDir);
+        // Get the existing profile picture URL from the database
+
 
         $profile = $this->model->updateProfilePicture($user_id, $profilePicUrl);
         if ($profile) {
+
+            // Delete the old profile picture if it exists, is different from the new one,
+            // and is not the default.png
+            if ($existingProfile &&
+                $existingProfile !== $profilePicUrl &&
+                !str_contains($existingProfile, 'Default.png') && // Check if it's not default.png
+                file_exists($_SERVER['DOCUMENT_ROOT'] . parse_url($existingProfile, PHP_URL_PATH))) {
+                if (!unlink($_SERVER['DOCUMENT_ROOT'] . parse_url($existingProfile, PHP_URL_PATH))) {
+                    error_log("Failed to delete old profile picture: " . $existingProfile);
+                }
+            }
+
             $userProfile = $this->model->updateUserProfilePicture($user_id, $profilePicUrl);
             $jobProfile = $this->model->updateJobClientProfilePicture($user_id, $profilePicUrl);
             $jobApplicationProfile = $this->model->updateJobApplicationClientProfilePicture($user_id, $profilePicUrl);
@@ -70,7 +85,7 @@ class ClientProfileController extends BaseController
                 return;
             }
 
-            $this->jsonResponse(['message' => "Updated successfully!"], 200);
+            $this->jsonResponse(['message' => "Profile Updated successfully!"], 200);
         } else {
             $this->jsonResponse(['message' => "Update failed."], 400);
         }
