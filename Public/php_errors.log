@@ -1451,3 +1451,62 @@ Stack trace:
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\ForgetPassHandler.php on line 30
 [05-Mar-2025 15:38:08 UTC] PHP Warning:  Undefined array key "username" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 74
+[06-Mar-2025 13:09:24 UTC] PHP Fatal error:  Uncaught Error: Typed property Controller\App\ResumeController::$jobApplicationModel must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php:144
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(231): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php on line 144
+[06-Mar-2025 13:09:53 UTC] PHP Fatal error:  Uncaught Error: Typed property Controller\App\ResumeController::$jobApplicationModel must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php:144
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(231): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php on line 144
+[06-Mar-2025 13:11:16 UTC] PHP Fatal error:  Uncaught Error: Typed property Controller\App\ResumeController::$jobApplicationModel must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php:144
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(231): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php on line 144
+[06-Mar-2025 13:13:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Controller\App\ResumeController::__construct(), 4 passed in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 230 and exactly 5 expected in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php:36
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(230): Controller\App\ResumeController->__construct(Object(DaguConnect\Model\Resume), Object(DaguConnect\Model\Client), Object(DaguConnect\Model\User), Object(DaguConnect\Model\Report))
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php on line 36
+[06-Mar-2025 13:14:30 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[06-Mar-2025 13:14:45 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[06-Mar-2025 13:15:02 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[06-Mar-2025 13:15:19 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[06-Mar-2025 13:19:40 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[06-Mar-2025 13:25:28 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php:133
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(77): Controller\AdminAuthController->login('EzeBoy', 'password123')
+#1 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 133
+[06-Mar-2025 13:31:18 UTC] PHP Warning:  Undefined array key "id" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 130
+[06-Mar-2025 13:31:18 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 134
+[06-Mar-2025 13:31:18 UTC] PHP Warning:  Undefined array key "token" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 135
+[06-Mar-2025 13:33:47 UTC] PHP Warning:  Undefined array key "id" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 131
+[06-Mar-2025 13:33:47 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 135
+[06-Mar-2025 13:33:47 UTC] PHP Warning:  Undefined array key "token" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 136
+[06-Mar-2025 13:33:57 UTC] PHP Warning:  Undefined array key "id" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 131
+[06-Mar-2025 13:33:57 UTC] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 135
+[06-Mar-2025 13:33:57 UTC] PHP Warning:  Undefined array key "token" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\AdminAuthController.php on line 136

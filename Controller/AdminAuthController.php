@@ -123,16 +123,28 @@ use DaguConnect\Services\ValidateFirstandLastName;
         }
     
         $token = $this->adminModel->createToken($username);
-        $email = $this->adminModel->getEmail($username);
-        $name = $this->adminModel->getName($username);
+
+        $admin = $this->adminModel->adminList($username);
+
+        // Check if the admin data was found
+        if (empty($admin)) {
+            $this->jsonResponse(['message' => 'Admin not found.'], 404);
+            return;
+        }
+
+        // Assuming adminList returns an array of results, take the first one
+        $adminData = $admin[0];
+
+
         $this->jsonResponse([
             'message' => 'Login successfully!',
             'admin' => [
                 [
-                    'first_name' => $name['first_name'] ?? '',
-                    'last_name' => $name['last_name'] ?? '',
+                    'id' => $adminData['id'],
+                    'first_name' => $adminData['first_name'] ?? '',
+                    'last_name' => $adminData['last_name'] ?? '',
                     'username' => $username,
-                    'email' => $email,
+                    'email' => $adminData['email'],
                     'token' => $token,
                 ]
             ]
@@ -195,7 +207,7 @@ use DaguConnect\Services\ValidateFirstandLastName;
         if ($store_token) {
             $this->jsonResponse(["message" => "Token Successfully Sent To your email",
                 "email" => $email,
-                "token"=>$otp]);
+                "token"=>$otp], 200);
 
             Email_Sender::sendResetPasswordToken($email,$otp);
         }else{
@@ -211,7 +223,7 @@ use DaguConnect\Services\ValidateFirstandLastName;
         if (!$resetSuccess) {
             $this->jsonResponse(["message" => "Incorrect OTP or Password reset failed."], 400);
         } else {
-            $this->jsonResponse(["message" => "Password successfully reset."]);
+            $this->jsonResponse(["message" => "Password successfully reset."], 200);
         }
     }
 

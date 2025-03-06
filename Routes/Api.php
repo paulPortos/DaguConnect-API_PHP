@@ -227,7 +227,7 @@ class Api extends BaseApi
 
             $profile_pic = $_FILES['profile_pic'];
 
-            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->updateTradesmanProfile($userId, $profile_pic);
         });
 
@@ -242,7 +242,7 @@ class Api extends BaseApi
             $valid_id_front = $_FILES['valid_id_front'];
             $valid_id_back = $_FILES['valid_id_back'];
 
-            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->submitResume($userId,$specialty,$about_me,$prefered_location,$work_fee,$document,$valid_id_front,$valid_id_back);
         });
 
@@ -254,12 +254,12 @@ class Api extends BaseApi
             $work_fee = $this->requestBody['work_fee'];
             $phone_number = $this->requestBody['phone_number'];
 
-            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee,$phone_number);
         });
 
         $this->route('GET','/user/tradesman/getResume/Details',function ($tradesman_Id){
-            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->getResume($tradesman_Id);
         });
 
@@ -430,12 +430,12 @@ class Api extends BaseApi
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
 
-            $ResumeController = new ResumeController(new Resume($this->db),new Client($this->db),new User($this->db),new Report($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->GetAllResumes($page, $limit);
         });
 
         $this->route('GET', '/user/getresume/{resumeId}', function ($userId,$resumeId) {
-            $ResumeController = new ResumeController(new Resume($this->db),new Client($this->db),new User($this->db),new Report($this->db));
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->ViewResume($resumeId);
         });
 

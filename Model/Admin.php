@@ -133,34 +133,17 @@ class Admin extends BaseModel
         }
     }
 
-    public function getName($username) {
-        try {
-            $query = "SELECT first_name, last_name FROM $this->table WHERE username = :username";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':username', $username);
-            $stmt->execute();
+    public function adminList($username)
+    {
+        $query = "SELECT * FROM $this->table WHERE username = :username";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Error getting name: " . $e->getMessage());
-            return [];
-        }
+        // Return the first row if it exists, otherwise return null
+        return !empty($result) ? $result : null;
     }
-
-    public function getEmail($username) {
-        try {
-            $query = "SELECT email FROM $this->table WHERE username = :username";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':username', $username);
-            $stmt->execute();
-
-            return $stmt->fetchColumn();
-        } catch (PDOException $e) {
-            error_log("Error getting email: " . $e->getMessage());
-            return "";
-        }
-    }
-
     public function getPendingBookings(){
         $query = "SELECT COUNT(*) AS totalPending FROM client_booking Where booking_status = 'Pending' ";
         $stmt = $this->db->prepare($query);
@@ -378,7 +361,8 @@ class Admin extends BaseModel
         return $admin ?: null;
     }
 
-    public function validateresume($user_id, $status_of_approval, $is_approve,$is_active) {
+    public function validateresume($user_id, $status_of_approval, $is_approve,$is_active): bool
+    {
         $query = "UPDATE tradesman_resume 
               SET status_of_approval = :status_of_approval, is_approve = :status , is_active = :is_active
               WHERE user_id = :user_id AND status_of_approval = 'Pending'";
@@ -435,7 +419,8 @@ class Admin extends BaseModel
 
     }
 
-    public function getResumeList(){
+    public function getResumeList(): array
+    {
         $query = "SELECT * FROM tradesman_resume WHERE status_of_approval IS NOT NULL";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
@@ -443,7 +428,8 @@ class Admin extends BaseModel
     }
 
 
-    public function getReportList(){
+    public function getReportList(): array
+    {
         $query = "SELECT * FROM reports";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
@@ -490,7 +476,8 @@ class Admin extends BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateReportStatus($reported_id,$report_status){
+    public function updateReportStatus($reported_id,$report_status): bool
+    {
      $query = "UPDATE reports SET report_status = :report_status WHERE reported_id = :reported_id";
      $stmt = $this->db->prepare($query);
      $stmt->bindParam(':report_status', $report_status);
@@ -499,7 +486,8 @@ class Admin extends BaseModel
      return $stmt->rowCount() > 0; // Check if any row was updated
     }
 
-    public function updateSuspendStatus($userId,$suspend){
+    public function updateSuspendStatus($userId,$suspend): bool
+    {
         $query = "UPDATE users SET suspend = :suspend WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':suspend', $suspend);
@@ -509,7 +497,8 @@ class Admin extends BaseModel
 
     }
 
-    public function ratinglist(){
+    public function ratinglist(): array
+    {
         $query = "SELECT * FROM ratings";
         $stmt = $this->db->prepare($query);
         $stmt->execute();

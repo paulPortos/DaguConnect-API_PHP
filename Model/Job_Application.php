@@ -362,9 +362,9 @@ class Job_Application extends BaseModel
     public function updateTradesmanProfileInJobApplication($userId, $profile_picture): void
     {
         try {
-            $query = "UPDATE $this->table SET tradesman_profile_picture = :tradesman_profile_picture WHERE user_id = :user_id";
+            $query = "UPDATE $this->table SET profile_pic = :profile_pic WHERE user_id = :user_id";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':tradesman_profile_picture', $profile_picture);
+            $stmt->bindParam(':profile_pic', $profile_picture);
             $stmt->bindParam(':user_id', $userId);
             $stmt->execute();
         } catch (PDOException $e) {
