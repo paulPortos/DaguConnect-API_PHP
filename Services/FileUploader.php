@@ -13,6 +13,9 @@ trait FileUploader
         $this->baseUrl = 'http://' . $_SERVER['HTTP_HOST']; // Auto-detect domain
     }
 
+    /**
+     * @throws Exception
+     */
     public function uploadFile($file, $directory): string
     {
         // Ensure baseUrl is initialized

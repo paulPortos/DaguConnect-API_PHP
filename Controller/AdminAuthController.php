@@ -136,21 +136,21 @@ use DaguConnect\Services\ValidateFirstandLastName;
                     'token' => $token,
                 ]
             ]
-        ], 200);
+        ]);
     }
 
     public function changePassword($userId, $current_password, $new_password): void {
         $success = $this->adminModel->changeAdminPassword($userId, $current_password, $new_password);
         if ($success) {
-            $this->jsonResponse(['message' => 'Password changed successfully.'], 200);
+            $this->jsonResponse(['message' => 'Password changed successfully.']);
             return;
         }
-        $this->jsonResponse(['message' => 'Incorrect password.'], 200);
+        $this->jsonResponse(['message' => 'Incorrect password.']);
     }
 
     public function logout($token): void {
         if ($this->adminModel->logoutUser($token)) {
-            $this->jsonResponse(['message' => 'Logged out successfully.'], 200);
+            $this->jsonResponse(['message' => 'Logged out successfully.']);
         } else {
             $this->jsonResponse(['message' => 'Logout failed.'], 400);
         }
@@ -161,7 +161,7 @@ use DaguConnect\Services\ValidateFirstandLastName;
 
         $profile = $this->adminModel->updateProfilePicture($userId, $profilePicUrl);
         if ($profile) {
-            $this->jsonResponse(['message' => 'Profile picture updated successfully.'], 200);
+            $this->jsonResponse(['message' => 'Profile picture updated successfully.']);
         } else {
             $this->jsonResponse(['message' => 'Profile picture update failed.'], 400);
         }
@@ -171,7 +171,7 @@ use DaguConnect\Services\ValidateFirstandLastName;
 
         $name = $this->adminModel->updateUsername($userId, $username);
         if ($name) {
-            $this->jsonResponse(['message' => 'Username updated successfully.'], 200);
+            $this->jsonResponse(['message' => 'Username updated successfully.']);
         } else {
             $this->jsonResponse(['message' => 'Name update failed.'], 400);
         }
@@ -195,7 +195,7 @@ use DaguConnect\Services\ValidateFirstandLastName;
         if ($store_token) {
             $this->jsonResponse(["message" => "Token Successfully Sent To your email",
                 "email" => $email,
-                "token"=>$otp], 200);
+                "token"=>$otp]);
 
             Email_Sender::sendResetPasswordToken($email,$otp);
         }else{
@@ -211,7 +211,7 @@ use DaguConnect\Services\ValidateFirstandLastName;
         if (!$resetSuccess) {
             $this->jsonResponse(["message" => "Incorrect OTP or Password reset failed."], 400);
         } else {
-            $this->jsonResponse(["message" => "Password successfully reset."], 200);
+            $this->jsonResponse(["message" => "Password successfully reset."]);
         }
     }
 

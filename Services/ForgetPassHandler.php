@@ -25,9 +25,9 @@ trait ForgetPassHandler
 
     public function ResetPasswordByToken($otp, $new_password, PDO $db) {
         // Fetch the email associated with the token
-        $query = "SELECT email FROM $this->forget_table WHERE token = :$otp";
+        $query = "SELECT email FROM $this->forget_table WHERE token = :otp";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':token', $otp);
+        $stmt->bindParam(':otp', $otp);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
