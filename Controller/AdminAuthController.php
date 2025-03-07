@@ -6,10 +6,13 @@ use AllowDynamicProperties;
 use DaguConnect\Core\BaseController;
 use DaguConnect\Includes\config;
 use DaguConnect\Model\Admin;
+use DaguConnect\PhpMailer\Email_Sender;
 use DaguConnect\Services\Confirm_Password;
 use DaguConnect\Services\FileUploader;
+use DaguConnect\Services\ForgetPassHandler;
 use DaguConnect\Services\IfDataExists;
 use DaguConnect\Services\CheckIfLoggedIn;
+use DaguConnect\Services\TokenHandler;
 use DaguConnect\Services\ValidateEmailAddress;
 use DaguConnect\Services\ValidateFirstandLastName;
 
@@ -18,9 +21,11 @@ use DaguConnect\Services\ValidateFirstandLastName;
     use Confirm_Password;
     use IfDataExists;
     use CheckIfLoggedIn;
+    use TokenHandler;
     use ValidateFirstandLastName;
     use ValidateEmailAddress;
     use FileUploader;
+    use ForgetPassHandler;
     private Admin $adminModel;
 
     public function __construct(Admin $admin_model)
@@ -118,34 +123,46 @@ use DaguConnect\Services\ValidateFirstandLastName;
         }
     
         $token = $this->adminModel->createToken($username);
-        $email = $this->adminModel->getEmail($username);
-        $name = $this->adminModel->getName($username);
+
+        $admin = $this->adminModel->adminList($username);
+
+        // Check if the admin data was found
+        if (empty($admin)) {
+            $this->jsonResponse(['message' => 'Admin not found.'], 404);
+            return;
+        }
+
+        // Assuming adminList returns an array of results, take the first one
+        $adminData = $admin[0];
+
+
         $this->jsonResponse([
             'message' => 'Login successfully!',
             'admin' => [
                 [
-                    'first_name' => $name['first_name'] ?? '',
-                    'last_name' => $name['last_name'] ?? '',
+                    'id' => $adminData['id'],
+                    'first_name' => $adminData['first_name'] ?? '',
+                    'last_name' => $adminData['last_name'] ?? '',
                     'username' => $username,
-                    'email' => $email,
+                    'email' => $adminData['email'],
                     'token' => $token,
                 ]
             ]
-        ], 200);
+        ]);
     }
 
     public function changePassword($userId, $current_password, $new_password): void {
         $success = $this->adminModel->changeAdminPassword($userId, $current_password, $new_password);
         if ($success) {
-            $this->jsonResponse(['message' => 'Password changed successfully.'], 200);
+            $this->jsonResponse(['message' => 'Password changed successfully.']);
             return;
         }
-        $this->jsonResponse(['message' => 'Incorrect password.'], 200);
+        $this->jsonResponse(['message' => 'Incorrect password.']);
     }
 
     public function logout($token): void {
         if ($this->adminModel->logoutUser($token)) {
-            $this->jsonResponse(['message' => 'Logged out successfully.'], 200);
+            $this->jsonResponse(['message' => 'Logged out successfully.']);
         } else {
             $this->jsonResponse(['message' => 'Logout failed.'], 400);
         }
@@ -156,7 +173,7 @@ use DaguConnect\Services\ValidateFirstandLastName;
 
         $profile = $this->adminModel->updateProfilePicture($userId, $profilePicUrl);
         if ($profile) {
-            $this->jsonResponse(['message' => 'Profile picture updated successfully.'], 200);
+            $this->jsonResponse(['message' => 'Profile picture updated successfully.']);
         } else {
             $this->jsonResponse(['message' => 'Profile picture update failed.'], 400);
         }
@@ -166,7 +183,7 @@ use DaguConnect\Services\ValidateFirstandLastName;
 
         $name = $this->adminModel->updateUsername($userId, $username);
         if ($name) {
-            $this->jsonResponse(['message' => 'Username updated successfully.'], 200);
+            $this->jsonResponse(['message' => 'Username updated successfully.']);
         } else {
             $this->jsonResponse(['message' => 'Name update failed.'], 400);
         }
@@ -178,11 +195,6 @@ use DaguConnect\Services\ValidateFirstandLastName;
             return;
         }
 
-        if ($this->validateEmailAddress($email)) {
-            $this->jsonResponse(['message' => 'Invalid email.'], 400);
-            return;
-        }
-
         if (!$this->exists($email, 'email', 'admin')) {
             $this->jsonResponse(['message' => 'Email does not exists.'], 400);
             return;
@@ -190,11 +202,28 @@ use DaguConnect\Services\ValidateFirstandLastName;
 
         $otp = $this->generateOTP();
 
-        $token = $this->adminModel->forgotPassword($email);
-        if ($token) {
-            $this->jsonResponse(['message' => 'Token sent to your email.'], 200);
+        $store_token = $this->createOtpForgetPassword($email, $otp,$this->db->getDB());
+
+        if ($store_token) {
+            $this->jsonResponse(["message" => "Token Successfully Sent To your email",
+                "email" => $email,
+                "token"=>$otp], 200);
+
+            Email_Sender::sendResetPasswordToken($email,$otp);
+        }else{
+            $this->jsonResponse(["message" => "Token generation failed"], 500);
+        }
+
+    }
+
+    public function resetPassword($otp, $new_password): void {
+        // Call the model function to reset the password
+        $resetSuccess = $this->ResetPasswordByTokenAdmin($otp, $new_password, $this->db->getDB());
+
+        if (!$resetSuccess) {
+            $this->jsonResponse(["message" => "Incorrect OTP or Password reset failed."], 400);
         } else {
-            $this->jsonResponse(['message' => 'Internal Server Error.'], 500);
+            $this->jsonResponse(["message" => "Password successfully reset."], 200);
         }
     }
 

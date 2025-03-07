@@ -180,15 +180,29 @@ class DashboardController extends BaseController
         }
     }
 
-    public function viewUserDetail($user_id){
+    public function viewTradesmanDetail($user_id): void
+    {
 
-        $userData = $this->admin_model->viewUserDetail($user_id);
+        $userData = $this->admin_model->viewTradesmanDetail($user_id);
         if($userData){
-            $this->jsonResponse($userData,200);
+            $this->jsonResponse($userData);
         } else {
             $this->jsonResponse(['message' => 'User Not Found'], 400);
         }
     }
+
+    public function viewClientDetail($user_id): void
+    {
+        $userData = $this->admin_model->viewClientDetail($user_id);
+        $userBooking = $this->admin_model->viewTradesmanBookng($user_id);
+        if($userData){
+            $this->jsonResponse(["user_detail" => $userData,
+                                "user_booking" => $userBooking]);
+        }else{
+            $this->jsonResponse(['message' => 'User Not Found'], 400);
+        }
+    }
+
 
 
     public function resumeManagement(): void

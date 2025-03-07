@@ -40,7 +40,7 @@ trait Resume_Seed
         $stmt->execute([
             "vahron24@gmail.com",
             2,
-            "Electrician",
+            "Electrical_work",
             $url,
             '1999-03-21',
             "Experienced electrician specializing in lighting, circuits, and energy-efficient solutions.",
@@ -85,7 +85,7 @@ trait Resume_Seed
         $stmt->execute([
             "test5@gmail.com",
             5,
-            "Electrician",
+            "Electrical_work",
             $url,
             '1999-03-21',
             "I troubleshoot electrical issues and design systems as a dedicated electrician.",
@@ -154,7 +154,7 @@ trait Resume_Seed
         $stmt->execute([
             "test9@gmail.com",
             9,
-            "Electrician",
+            "Electrical_work",
             $url,
             '1999-03-21',
             "Skilled electrician passionate about ensuring safe, reliable power for all clients.",
@@ -198,7 +198,7 @@ trait Resume_Seed
         $stmt->execute([
             "test11@gmail.com",
             11,
-            "Electrician",
+            "Electrical_work",
             $url,
             '1999-03-21',
             "I’m an electrician who installs and repairs wiring for homes and businesses.",

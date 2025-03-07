@@ -106,6 +106,21 @@ class Resume extends BaseModel
         return $stmt->execute();
     }
 
+    public function getTradesmanProfilePicture($userId): ?string
+    {
+        try {
+            $query = "SELECT profile_pic FROM $this->table WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['profile_pic'] ?? null;
+        } catch (PDOException $e) {
+            error_log("Error fetching tradesman profile picture: " . $e->getMessage());
+            return null;
+        }
+    }
+
     public function updateResume($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number): bool
     {
         $query = "UPDATE $this->table 

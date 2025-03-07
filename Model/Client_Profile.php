@@ -58,6 +58,20 @@ class Client_Profile extends BaseModel
             return false;
         }
     }
+    public function getClientProfilePicture($userId): ?string
+    {
+        try {
+            $query = "SELECT profile_picture FROM $this->table WHERE user_id = :user_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['profile_picture'] ?? null;
+        } catch (PDOException $e) {
+            error_log("Error fetching tradesman profile picture: " . $e->getMessage());
+            return null;
+        }
+    }
 
     public function updateUserProfile($user_id, $profile): bool {
         try {

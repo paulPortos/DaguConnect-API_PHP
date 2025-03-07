@@ -20,6 +20,7 @@ class ResumeController extends BaseController
     private User $userModel;
     private Client $clientBookingModel;
 
+
     private Job_Application $jobApplicationModel;
     use FileUploader;
     protected $profileDir;
@@ -32,7 +33,7 @@ class ResumeController extends BaseController
     use IfDataExists;
 
 
-    public function __construct(Resume $resume_Model, Client $client_booking, User $user_model,Report $report_model)
+    public function __construct(Resume $resume_Model, Client $client_booking, User $user_model,Report $report_model,Job_Application $jobApplicationModel)
     {
         $this->profileDir = "/uploads/profile_pictures/";
         $this->documentDir = "/uploads/document/";
@@ -44,6 +45,7 @@ class ResumeController extends BaseController
         $this->clientBookingModel = $client_booking;
         $this->userModel = $user_model;
         $this->reportModel = $report_model;
+        $this->jobApplicationModel = $jobApplicationModel;
     }
 
     //get the resume
@@ -113,12 +115,27 @@ class ResumeController extends BaseController
     public function updateTradesmanProfile($user_Id,$tradesman_profile): void
     {
 
+        // Get the existing profile picture URL from the database
+        $existingProfile = $this->resumeModel->getTradesmanProfilePicture($user_Id);
+
         // Upload the profile picture and get the full URL
         $fullProfilePicUrl = $this->uploadFile($tradesman_profile, $this->profileDir);
 
         $profile_update = $this->resumeModel->UpdateTradesmanProfile($user_Id,$fullProfilePicUrl);
 
             if($profile_update){
+
+                // Delete the old profile picture if it exists, is different from the new one,
+                // and is not the default.png
+                if ($existingProfile &&
+                    $existingProfile !== $fullProfilePicUrl &&
+                    !str_contains($existingProfile, 'Default.png') && // Check if it's not default.png
+                    file_exists($_SERVER['DOCUMENT_ROOT'] . parse_url($existingProfile, PHP_URL_PATH))) {
+                    if (!unlink($_SERVER['DOCUMENT_ROOT'] . parse_url($existingProfile, PHP_URL_PATH))) {
+                        error_log("Failed to delete old profile picture: " . $existingProfile);
+                    }
+                }
+
                 //updates the profile in the users table
                 $this->userModel->updateUserProfile($user_Id, $fullProfilePicUrl);
                 // Update the tradesman_profile in the client_booking table
@@ -127,6 +144,7 @@ class ResumeController extends BaseController
                 $this->reportModel->updateTradesmanProfileInReport($user_Id, $fullProfilePicUrl);
 
                 $this->jobApplicationModel->updateTradesmanProfileInJobApplication($user_Id, $fullProfilePicUrl);
+
                 $this->jsonResponse(['message' => 'Profile Updated successfully.'], 201);
             } else {
                 $this->jsonResponse(['message' => 'Failed to update profile.'], 500);
