@@ -377,13 +377,30 @@ class Admin extends BaseModel
     }
 
 
-    public function viewUserDetail($user_id){
+    public function viewTradesmanDetail($user_id){
         $query = "SELECT  * FROM tradesman_resume WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
 
+    }
+    public function viewClientDetail($user_id): array
+    {
+        $query = "SELECT  * FROM client_profile WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function viewTradesmanBookng($userId): array
+    {
+        $query = "SELECT  * FROM client_booking WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllResumeCount(){
