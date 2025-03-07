@@ -30,7 +30,7 @@ class DashboardController extends BaseController
         $userCountsByDate = $this->admin_model->getUsersCountByDate(); // NEW FUNCTION
 
         if ($totalUserCount <= 0 ) {
-            $this->jsonResponse(["Message" => "No users detected"], 200);
+            $this->jsonResponse(["Message" => "No users detected"]);
         }
 
 
@@ -159,7 +159,8 @@ class DashboardController extends BaseController
     }
 
 
-    public function validateResume($user_id,$status_of_approval){
+    public function validateResume($user_id,$status_of_approval): void
+    {
 
         $is_approve = 0 ;
         $is_active = 0 ;
@@ -170,10 +171,10 @@ class DashboardController extends BaseController
 
 
 
-        $resumeValidataion = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve,$is_active);
+        $resumeValidation = $this->admin_model->validateResume($user_id,$status_of_approval,$is_approve,$is_active);
 
-        if($resumeValidataion){
-            $this->jsonResponse(['message' => 'Resume validation updated successfully.'],200);
+        if($resumeValidation){
+            $this->jsonResponse(['message' => 'Resume validation updated successfully.']);
         }
         else {
             $this->jsonResponse(['message' => 'Resume Is Not Pending'], 400);
@@ -231,15 +232,16 @@ class DashboardController extends BaseController
             "approved_resume" => $approvedResumeCount,
             "declined_resume" => $declinedResumeCount,
             "resume" => $filteredResumes
-        ],200);
+        ]);
     }
 
-    public function reportManagement(){
+    public function reportManagement(): void
+    {
 
         $totalReports = $this->admin_model->getAllReportCount();
         $pendingReports = $this->admin_model->getPendingReport();
         $resolvedReports = $this->admin_model->getSuspendedReport();
-        $dissmissedReports = $this->admin_model->getDissmissReport();
+        $dismissedReports = $this->admin_model->getDissmissReport();
         $reportList = $this->admin_model->getReportList();
         $filteredResumes = array_map(function($reports) {
             return [
@@ -255,21 +257,23 @@ class DashboardController extends BaseController
             "total_reports" => $totalReports,
             "pending_reports" => $pendingReports,
             "suspended_reports" => $resolvedReports,
-            "dismissed_reports" => $dissmissedReports,
+            "dismissed_reports" => $dismissedReports,
             "report_list" => $filteredResumes
         ]);
     }
 
-    public function viewReportDetail($id){
+    public function viewReportDetail($id): void
+    {
         $reportData = $this->admin_model->viewReportDetail($id);
         if($reportData){
-            $this->jsonResponse($reportData,200);
+            $this->jsonResponse($reportData);
         } else {
             $this->jsonResponse(['message' => 'User Not Found'], 400);
         }
     }
     
-    public function suspendedReported ($reported_id,$report_status){
+    public function suspendedReported ($reported_id,$report_status): void
+    {
 
         $suspend = 0;
         if($report_status == 'Suspend'){
@@ -279,7 +283,7 @@ class DashboardController extends BaseController
         $updateReportStatus = $this->admin_model->updateReportStatus($reported_id,$report_status);
 
         if($updateReportStatus || $updateReportedStatus){
-            $this->jsonResponse(['message' => 'Report status updated successfully.'],200);
+            $this->jsonResponse(['message' => 'Report status updated successfully.']);
         }
         else {
             $this->jsonResponse(['message' => 'Report status not updated'], 400);
@@ -288,7 +292,8 @@ class DashboardController extends BaseController
 
     }
 
-    public function ratingManagement(){
+    public function ratingManagement(): void
+    {
         $RatingList = $this->admin_model->ratinglist();
 
         $filteredResumes = array_map(function($ratings) {
@@ -304,10 +309,11 @@ class DashboardController extends BaseController
         ]);
     }
 
-    public function viewRatingDetail($id){
+    public function viewRatingDetail($id): void
+    {
         $ratingData = $this->admin_model->viewRatingDetails($id);
         if($ratingData){
-            $this->jsonResponse($ratingData,200);
+            $this->jsonResponse($ratingData);
         } else {
             $this->jsonResponse(['message' => 'Rating Not Found'], 400);
         }
