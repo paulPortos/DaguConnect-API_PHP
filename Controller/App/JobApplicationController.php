@@ -68,8 +68,6 @@ class JobApplicationController extends BaseController
         }
 
         $exist = $this->job_application_model->checkIfJobApplicationExists($user_id, $job_id);
-        var_dump($exist);
-
         if($exist){
             $reApplyJob = $this->job_application_model->reApplyJob($user_id, $job_id);
             if ($reApplyJob) {
