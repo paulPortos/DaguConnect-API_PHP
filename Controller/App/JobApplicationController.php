@@ -215,7 +215,7 @@ class JobApplicationController extends BaseController
                     $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Client');
                 }
             } else {
-                $this->jsonResponse(['message' => "Internal Server Error s"], 500);
+                $this->jsonResponse(['message' => "Internal Server Error"], 500);
             }
         } else {
             if ($this->job_application_model->changeJobApplicationStatusTradesman($user_id, $job_applicationId, $status)) {
@@ -225,7 +225,7 @@ class JobApplicationController extends BaseController
                 }
                 $this->jsonResponse(['message' => $message], 201);
             } else {
-                $this->jsonResponse(['message' => "Internal Server Error r"], 500);
+                $this->jsonResponse(['message' => "Internal Server Error"], 500);
             }
         }
     }

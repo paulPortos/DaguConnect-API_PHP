@@ -225,7 +225,7 @@ class Job_Application extends BaseModel
     {
         try {
             $stmt = $this->db->prepare("SELECT COUNT(*) FROM $this->table 
-                WHERE user_id = :user_id AND job_id = :job_id AND cancelled_by NOT IN ('Client', 'Tradesman')");
+                WHERE user_id = :user_id AND job_id = :job_id AND status IN ('Pending', 'Active')");
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->bindParam(':job_id', $job_id, PDO::PARAM_INT);
             $stmt->execute();
