@@ -31,13 +31,13 @@ class ClientProfileController extends BaseController
         }
     }
 
-    public function updateProfileAddress(int $user_id, String $address): void {
+    public function updateProfileData(int $user_id, string $address, string $phone_number): void {
         
         if (empty($address)) {
             $this->jsonResponse(['message' => "Address cannot be empty."], 400);
         }
 
-        $profile = $this->model->updateProfileAddress($user_id, $address);
+        $profile = $this->model->updateProfileAddress($user_id, $address, $phone_number);
         if ($profile) {
             $this->jsonResponse(['message' => "Updated successfully!"], 200);
         } else {
@@ -86,19 +86,6 @@ class ClientProfileController extends BaseController
             }
 
             $this->jsonResponse(['message' => "Profile Updated successfully!"], 200);
-        } else {
-            $this->jsonResponse(['message' => "Update failed."], 400);
-        }
-    }
-
-    public function updatePhoneNumber(int $user_id, String $phone_number): void {
-        if (empty($phone_number)) {
-            $this->jsonResponse(['message' => "Phone number cannot be empty."], 400);
-        }
-
-        $profile = $this->model->updatePhoneNumber($user_id, $phone_number);
-        if ($profile) {
-            $this->jsonResponse(['message' => "Updated successfully!"], 200);
         } else {
             $this->jsonResponse(['message' => "Update failed."], 400);
         }
