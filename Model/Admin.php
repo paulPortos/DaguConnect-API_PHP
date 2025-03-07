@@ -394,9 +394,18 @@ class Admin extends BaseModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function viewTradesmanBookng($userId): array
+    public function viewTradesmanBooking($userId): array
     {
         $query = "SELECT  * FROM client_booking WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function viewClientBooking($userId): array
+    {
+        $query = "SELECT * FROM job_applications WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();

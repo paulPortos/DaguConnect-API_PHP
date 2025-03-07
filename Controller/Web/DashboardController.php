@@ -184,8 +184,10 @@ class DashboardController extends BaseController
     {
 
         $userData = $this->admin_model->viewTradesmanDetail($user_id);
+        $userBooking = $this->admin_model->viewClientBooking($user_id);
         if($userData){
-            $this->jsonResponse($userData);
+            $this->jsonResponse(['user_detail'=>$userData,
+                                'user_booking'=>$userBooking]);
         } else {
             $this->jsonResponse(['message' => 'User Not Found'], 400);
         }
@@ -194,7 +196,7 @@ class DashboardController extends BaseController
     public function viewClientDetail($user_id): void
     {
         $userData = $this->admin_model->viewClientDetail($user_id);
-        $userBooking = $this->admin_model->viewTradesmanBookng($user_id);
+        $userBooking = $this->admin_model->viewTradesmanBooking($user_id);
         if($userData){
             $this->jsonResponse(["user_detail" => $userData,
                                 "user_booking" => $userBooking]);
