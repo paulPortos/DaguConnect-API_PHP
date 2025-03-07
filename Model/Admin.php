@@ -396,7 +396,7 @@ class Admin extends BaseModel
 
     public function viewTradesmanBooking($userId): array
     {
-        $query = "SELECT  * FROM client_booking WHERE user_id = :user_id";
+        $query = "SELECT  * FROM client_booking WHERE user_id = :user_id AND booking_status = 'Completed' ";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();
@@ -405,7 +405,7 @@ class Admin extends BaseModel
 
     public function viewClientBooking($userId): array
     {
-        $query = "SELECT * FROM job_applications WHERE user_id = :user_id";
+        $query = "SELECT * FROM job_applications WHERE user_id = :user_id AND status = 'Completed'";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();

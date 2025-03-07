@@ -1533,3 +1533,14 @@ Stack trace:
 #6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php on line 409
+[07-Mar-2025 13:05:21 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''Completed'' at line 1 in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php:400
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php(400): PDO->prepare('SELECT  * FROM ...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php(200): DaguConnect\Model\Admin->viewTradesmanBooking(3)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(171): Controller\Web\DashboardController->viewClientDetail(3)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php on line 400
