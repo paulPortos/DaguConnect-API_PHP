@@ -1522,3 +1522,14 @@ Stack trace:
 [06-Mar-2025 13:51:31 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
 [06-Mar-2025 14:44:14 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
 [06-Mar-2025 15:07:07 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 11:59:18 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.job_application' doesn't exist in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php:409
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php(409): PDO->prepare('SELECT * FROM j...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\Web\DashboardController.php(187): DaguConnect\Model\Admin->viewClientBooking(13)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(167): Controller\Web\DashboardController->viewTradesmanDetail(13)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(1, 13)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php on line 409
