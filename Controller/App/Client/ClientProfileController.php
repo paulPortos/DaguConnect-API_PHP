@@ -31,13 +31,13 @@ class ClientProfileController extends BaseController
         }
     }
 
-    public function updateProfileAddress(int $user_id, String $address): void {
+    public function updateProfileAddress(int $user_id, String $address,String $phone_number): void {
         
         if (empty($address)) {
             $this->jsonResponse(['message' => "Address cannot be empty."], 400);
         }
 
-        $profile = $this->model->updateProfileAddress($user_id, $address);
+        $profile = $this->model->updateProfileAddress($user_id, $address,$phone_number);
         if ($profile) {
             $this->jsonResponse(['message' => "Updated successfully!"], 200);
         } else {

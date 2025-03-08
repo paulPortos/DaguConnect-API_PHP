@@ -503,11 +503,11 @@ class Api extends BaseApi
             $clientProfileController->updateProfilePicture($userId, $profile_pic);
         });
 
-        $this->route('PUT', '/client/update/profile_address', function ($userId){
+        $this->route('PUT', '/client/update/profile_details', function ($userId){
             $this->responseBodyChecker();
-            ['address' => $profile_address] = $this->requestBody;
+            ['address' => $profile_address,'phone_number'=>$phone_number] = $this->requestBody;
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
-            $clientProfileController->updateProfileAddress($userId, $profile_address);
+            $clientProfileController->updateProfileAddress($userId, $profile_address,$phone_number);
         });
 
         $this->route('GET', '/client/profile', function ($user_id) {

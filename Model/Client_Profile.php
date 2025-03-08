@@ -28,12 +28,13 @@ class Client_Profile extends BaseModel
         }
     }
 
-    public function updateProfileAddress($user_id, $address): bool{
+    public function updateProfileAddress($user_id, $address,$phone_number): bool{
         try {
-            $query = "UPDATE $this->table SET address = :address WHERE user_id = :user_id";
+            $query = "UPDATE $this->table SET address = :address, phone_number = :phone_number WHERE user_id = :user_id";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam('user_id' , $user_id);
             $stmt->bindParam('address' , $address);
+            $stmt->bindParam('phone_number' , $phone_number);
             $stmt->execute();
 
             return true;
