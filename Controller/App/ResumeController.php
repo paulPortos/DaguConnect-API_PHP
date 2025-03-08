@@ -152,7 +152,8 @@ class ResumeController extends BaseController
 
     }
 
-    public function updateTradesmanDetails($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number){
+    public function updateTradesmanDetails($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number): void
+    {
 
         $updateResume = $this->resumeModel->updateResume($user_id,$about_me,$prefered_work_location,$work_fee,$phone_number);
 

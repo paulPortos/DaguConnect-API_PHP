@@ -1544,3 +1544,13 @@ Stack trace:
 #6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #7 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Admin.php on line 400
+[07-Mar-2025 13:41:41 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 13:41:41 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 13:41:42 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 13:41:42 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 13:41:43 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 13:41:43 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 13:41:43 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 13:41:44 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[07-Mar-2025 15:28:17 UTC] PHP Warning:  Undefined array key "phone_number" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 259
+[07-Mar-2025 15:29:46 UTC] PHP Warning:  Undefined array key "phone_number" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 259

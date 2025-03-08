@@ -257,7 +257,7 @@ class Api extends BaseApi
             $about_me = $this->requestBody['about_me'];
             $prefered_work_location = $this->requestBody['prefered_work_location'];
             $work_fee = $this->requestBody['work_fee'];
-            $phone_number = $this->requestBody['phone_number'];
+            $phone_number = $this->requestBody['phone_number']?: null;
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee,$phone_number);
