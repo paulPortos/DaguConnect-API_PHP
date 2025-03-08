@@ -177,6 +177,7 @@ class AuthenticationController extends BaseController
             $this->jsonResponse(['message' => 'Email not verified'], 400);
             return;
         }
+        //check if the user is suspended or not
         if($user['suspend'] === true){
             $this->jsonResponse(['message' => 'User suspended'], 400);
             return;
