@@ -166,6 +166,7 @@ class Api extends BaseApi
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->viewTradesmanDetail($tradesman_id);
         });
+        
         $this->route('GET','/admin/view/client/details/{client_id}', function ($user_id,$client_id){
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->viewClientDetail($client_id);
