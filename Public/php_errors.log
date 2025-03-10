@@ -2199,3 +2199,565 @@ Stack trace:
 [09-Mar-2025 06:40:50 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
 [09-Mar-2025 06:40:51 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
 [09-Mar-2025 06:40:51 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[09-Mar-2025 14:58:32 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[09-Mar-2025 14:58:32 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[09-Mar-2025 15:00:27 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[09-Mar-2025 15:00:27 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[09-Mar-2025 15:00:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[09-Mar-2025 15:00:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[09-Mar-2025 15:00:30 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[09-Mar-2025 15:00:31 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[10-Mar-2025 06:07:10 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\Client\ClientProfileController.php(53): Controller\App\Client\ClientProfileController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(503): Controller\App\Client\ClientProfileController->updateProfilePicture(3, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:08:09 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\Client\ClientProfileController.php(53): Controller\App\Client\ClientProfileController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(503): Controller\App\Client\ClientProfileController->updateProfilePicture(3, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:09:32 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\Client\ClientProfileController.php(53): Controller\App\Client\ClientProfileController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(503): Controller\App\Client\ClientProfileController->updateProfilePicture(3, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:14:28 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\Client\ClientProfileController.php(53): Controller\App\Client\ClientProfileController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(503): Controller\App\Client\ClientProfileController->updateProfilePicture(3, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:14:46 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\Client\ClientProfileController.php(53): Controller\App\Client\ClientProfileController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(503): Controller\App\Client\ClientProfileController->updateProfilePicture(3, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:22:37 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(122): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(236): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:25:32 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[10-Mar-2025 06:27:06 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(122): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(236): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:27:23 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(122): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(236): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:28:32 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(122): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(236): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:30:34 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(122): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(236): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:36:35 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(202): Controller\App\ResumeController->uploadFile(Array, '/uploads/IDFRON...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(251): Controller\App\ResumeController->submitResume(28, 'Carpenter', 'hahahavhahahaha...', 'Bayambang, Pang...', '200', Array, Array, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(28)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 06:42:27 UTC] PHP Fatal error:  Uncaught ValueError: finfo_file(): Argument #2 ($filename) cannot be empty in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:43
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php(43): finfo_file(Object(finfo), '')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(122): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(236): Controller\App\ResumeController->updateTradesmanProfile(4, Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 43
+[10-Mar-2025 07:07:36 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:07:36 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:07:36 UTC] Profile Picture Details: Array
+(
+    [name] => profile_picture.jpg
+    [full_path] => profile_picture.jpg
+    [type] => 
+    [tmp_name] => 
+    [error] => 1
+    [size] => 0
+)
+
+[10-Mar-2025 07:07:56 UTC] PHP Fatal error:  Uncaught Exception: No valid file uploaded. in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\Client\ClientProfileController.php(53): Controller\App\Client\ClientProfileController->uploadFile(Array, '/uploads/profil...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(503): Controller\App\Client\ClientProfileController->updateProfilePicture(3, Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 28
+[10-Mar-2025 07:08:38 UTC] PHP Fatal error:  Uncaught Exception: No valid file uploaded. in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\Client\ClientProfileController.php(53): Controller\App\Client\ClientProfileController->uploadFile(Array, '/uploads/profil...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(503): Controller\App\Client\ClientProfileController->updateProfilePicture(3, Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 28
+[10-Mar-2025 07:08:54 UTC] PHP Fatal error:  Uncaught Exception: No valid file uploaded. in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\Client\ClientProfileController.php(53): Controller\App\Client\ClientProfileController->uploadFile(Array, '/uploads/profil...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(504): Controller\App\Client\ClientProfileController->updateProfilePicture(3, Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 28
+[10-Mar-2025 07:20:00 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:20:00 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:20:00 UTC] Raw input: 
+[10-Mar-2025 07:20:21 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:20:21 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:20:21 UTC] Raw input: 
+[10-Mar-2025 07:24:27 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpeg
+            [full_path] => profile_picture.jpeg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:24:27 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:24:27 UTC] Raw input: 
+[10-Mar-2025 07:25:03 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:25:03 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:25:03 UTC] Raw input: 
+[10-Mar-2025 07:25:59 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.png
+            [full_path] => profile_picture.png
+            [type] => image/png
+            [tmp_name] => C:\Users\lNooisYl\AppData\Local\Temp\php2919.tmp
+            [error] => 0
+            [size] => 2691
+        )
+
+)
+
+[10-Mar-2025 07:25:59 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:25:59 UTC] Raw input: 
+[10-Mar-2025 07:25:59 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[10-Mar-2025 07:36:24 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:36:24 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:36:24 UTC] Raw input: 
+[10-Mar-2025 07:37:29 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:37:29 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:37:29 UTC] Raw input: 
+[10-Mar-2025 07:45:41 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:45:41 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:45:41 UTC] Raw input: 
+[10-Mar-2025 07:46:53 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:46:53 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:46:53 UTC] Raw input: 
+[10-Mar-2025 07:53:31 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:53:31 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:53:31 UTC] Raw input: 
+[10-Mar-2025 07:54:44 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\Users\lNooisYl\AppData\Local\Temp\php7B86.tmp
+            [error] => 0
+            [size] => 390726
+        )
+
+)
+
+[10-Mar-2025 07:54:44 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:54:44 UTC] Raw input: 
+[10-Mar-2025 07:54:44 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[10-Mar-2025 07:54:53 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:54:53 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:54:53 UTC] Raw input: 
+[10-Mar-2025 07:55:05 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\Users\lNooisYl\AppData\Local\Temp\phpCB1F.tmp
+            [error] => 0
+            [size] => 946155
+        )
+
+)
+
+[10-Mar-2025 07:55:05 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:55:05 UTC] Raw input: 
+[10-Mar-2025 07:55:05 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[10-Mar-2025 07:56:11 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:56:11 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:56:11 UTC] Raw input: 
+[10-Mar-2025 07:56:44 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:56:44 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:56:44 UTC] Raw input: 
+[10-Mar-2025 07:56:54 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => 
+            [tmp_name] => 
+            [error] => 1
+            [size] => 0
+        )
+
+)
+
+[10-Mar-2025 07:56:54 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 07:56:54 UTC] Raw input: 
+[10-Mar-2025 07:57:28 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[10-Mar-2025 08:05:37 UTC] PHP Fatal error:  Uncaught Exception: No valid file uploaded. in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(122): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(236): Controller\App\ResumeController->updateTradesmanProfile(28, Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(28)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 28
+[10-Mar-2025 08:06:54 UTC] PHP Fatal error:  Uncaught Exception: No valid file uploaded. in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(122): Controller\App\ResumeController->uploadFile(Array, '/uploads/profil...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(236): Controller\App\ResumeController->updateTradesmanProfile(28, Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(28)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 28
+[10-Mar-2025 08:07:24 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[10-Mar-2025 08:09:56 UTC] Received FILES: Array
+(
+    [profile_picture] => Array
+        (
+            [name] => profile_picture.jpg
+            [full_path] => profile_picture.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\Users\lNooisYl\AppData\Local\Temp\php64EB.tmp
+            [error] => 0
+            [size] => 655509
+        )
+
+)
+
+[10-Mar-2025 08:09:56 UTC] Received POST: Array
+(
+)
+
+[10-Mar-2025 08:09:56 UTC] Raw input: 
+[10-Mar-2025 08:09:56 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[10-Mar-2025 08:11:45 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[10-Mar-2025 08:15:58 UTC] PHP Fatal error:  Uncaught Exception: No valid file uploaded. in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php:28
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(202): Controller\App\ResumeController->uploadFile(Array, '/uploads/IDFRON...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(251): Controller\App\ResumeController->submitResume(28, 'Mason', 'jajajaj', 'Bayambang, Pang...', '200', Array, Array, Array)
+#2 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(28)
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#6 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Services\FileUploader.php on line 28
+[10-Mar-2025 08:18:27 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[10-Mar-2025 08:41:02 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[10-Mar-2025 08:41:28 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'

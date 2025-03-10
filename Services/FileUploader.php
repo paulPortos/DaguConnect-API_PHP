@@ -23,22 +23,20 @@ trait FileUploader
             $this->initializeBaseUrl();
         }
 
-        // Define upload directory relative to document root
-        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . $directory;
+        // Validate file data
+        if (empty($file['tmp_name']) || !file_exists($file['tmp_name'])) {
+            throw new Exception("No valid file uploaded.");
+        }
 
-        // Ensure directory exists
+        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . $directory;
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
         }
 
-        // Get file extension
         $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        // Generate unique filename
         $uniqueFileName = uniqid('upload_', true) . '.' . $fileExtension;
         $targetFile = $uploadDir . $uniqueFileName;
 
-        // Validate file type
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mimeType = finfo_file($finfo, $file['tmp_name']);
         finfo_close($finfo);
@@ -54,24 +52,20 @@ trait FileUploader
             throw new Exception("Invalid file type. Only JPG, PNG, GIF, PDF, DOC, DOCX, and TXT files are allowed.");
         }
 
-        // Validate file size (max 10MB)
         if ($file['size'] > 10000000) {
             throw new Exception("File is too large. Max size allowed is 10MB.");
         }
 
-        // If it's an image, resize it
         if (in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif'])) {
             if (!$this->resizeImage($file['tmp_name'], $targetFile, 1080, 1080, $mimeType)) {
                 throw new Exception("Error resizing image.");
             }
         } else {
-            // Move non-image files directly
             if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
                 throw new Exception("Error uploading file.");
             }
         }
 
-        // Return full URL including base domain
         return $this->baseUrl . $directory . $uniqueFileName;
     }
 
