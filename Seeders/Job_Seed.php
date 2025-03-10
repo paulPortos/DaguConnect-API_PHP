@@ -35,7 +35,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1,
-            'John Smith',
+            'Ezekiel Vidal',
             1,
             $url,
             1500.00,
@@ -73,7 +73,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1, // user_id
-            'Alice Johnson',
+            'Ezekiel Vidal',
             1,
             $url,
             1800.00,
@@ -92,7 +92,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1, // user_id
-            'Alice Johnson',
+            'Ezekiel Vidal',
             1,
             $url,
             1800.00,
@@ -111,7 +111,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
-            'Bob Brown',
+            'Karlos Rivo',
             2,
             $url,
             2200.00,
@@ -130,7 +130,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
-            'Kuya Doc',
+            'Karlos Rivo',
             2,
             $url,
             2200.00,
@@ -149,7 +149,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
-            'Lolo Diga',
+            'Karlos Rivo',
             2,
             $url,
             2200.00,
@@ -168,7 +168,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1, // user_id
-            'Ladies Choice Mayonnaise',
+            'Ezekiel Vidal',
             1,
             $url,
             1800.00,
@@ -187,7 +187,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             1, // user_id
-            'Mr Clean',
+            'Ezekiel Vidal',
             1,
             $url,
             1800.00,
@@ -206,7 +206,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
-            'Aqua Boy',
+            'Karlos Rivo',
             2,
             $url,
             1800.00,
@@ -225,7 +225,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
-            'Rapper D',
+            'Karlos Rivo',
             2,
             $url,
             1800.00,
@@ -244,7 +244,7 @@ trait Job_Seed
         $stmt = $this->db->prepare("INSERT INTO jobs (user_id, client_fullname, client_profile_id, client_profile_picture, salary, applicant_limit_count, job_type, job_description, address, latitude, longitude, status, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             3, // user_id
-            'Vladdy Boy',
+            'Karlos Rivo',
             2,
             $url,
             1800.00,

@@ -2761,3 +2761,4 @@ Stack trace:
 [10-Mar-2025 08:18:27 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
 [10-Mar-2025 08:41:02 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
 [10-Mar-2025 08:41:28 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[10-Mar-2025 10:09:52 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
