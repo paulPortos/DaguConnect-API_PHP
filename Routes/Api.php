@@ -263,10 +263,20 @@ class Api extends BaseApi
             $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee,$phone_number);
         });
 
-        $this->route('GET','/user/tradesman/getResume/Details',function ($tradesman_Id){
+        $this->route('GET','/user/tradesman/getResume/Details',function ($tradesmanId){
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
-            $ResumeController->getResume($tradesman_Id);
+            $ResumeController->getResume($tradesmanId);
         });
+
+        $this->route('PUT','/user/tradesman/update/activeStatus', function($tradesmanId){
+            $this->responseBodyChecker();
+
+        $tradesman_status = $this->requestBody['tradesman_status'];
+            $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
+            $ResumeController->tradesmanActiveStatus($tradesman_status,$tradesmanId);
+
+
+    });
 
 
         $this->route('POST', '/user/client/rate/tradesman/{tradesman_id}', function ($userId,$tradesman_id) {

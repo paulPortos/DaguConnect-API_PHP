@@ -206,13 +206,24 @@ class Resume extends BaseModel
         return $result ? $result['status_of_approval'] : null;
     }
 
-    public function getResumeDetails($tradesman_Id){
+    public function getResumeDetails($tradesmanId){
         $query = "SELECT * FROM $this->table WHERE user_id = :tradesman_id";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':tradesman_id', $tradesman_Id);
+        $stmt->bindParam(':tradesman_id', $tradesmanId);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function tradesmanActiveStatus($is_active,$tradesmanId): bool
+    {
+        $query = "UPDATE $this->table SET is_active = :is_active WHERE user_id = :user_id AND is_approve = 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':is_active', $is_active);
+        $stmt->bindParam(':user_id', $tradesmanId);
+        $stmt->execute();
+        // Check if any row was updated
+        return $stmt->rowCount() > 0;
+
+    }
 
 }

@@ -74,7 +74,7 @@ class ReportController extends BaseController
         $clientDetails = $this->user->getClientDetails($reported_by_id);
 
         //gets the clients_fullname
-        $clients_fullname = $clientDetails['fullname'];
+        $clients_fullname = $clientDetails['first_name'] . ' ' . $clientDetails['last_name'];
 
 
 

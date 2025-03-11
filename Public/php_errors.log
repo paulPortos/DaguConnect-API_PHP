@@ -2762,3 +2762,27 @@ Stack trace:
 [10-Mar-2025 08:41:02 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
 [10-Mar-2025 08:41:28 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
 [10-Mar-2025 10:09:52 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[11-Mar-2025 14:39:48 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[11-Mar-2025 15:32:37 UTC] PHP Warning:  Undefined array key "fullname" in C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php on line 77
+[11-Mar-2025 15:32:37 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'reported_by' cannot be null in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php:30
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php(30): PDOStatement->execute()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ReportController.php(81): DaguConnect\Model\Report->ReportTradesman('3', '5', 'testwr', 'testwr', 'test5@gmail.com', 'http://192.168....', 'Charlotte Evans', NULL, 'http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(298): Controller\App\ReportController->reportTradesman(3, 5, 'testwr', 'testwr', Array)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 5)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Report.php on line 30
+[11-Mar-2025 16:02:19 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_approved' in 'where clause' in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php:220
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php(220): PDO->prepare('UPDATE tradesma...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\ResumeController.php(230): DaguConnect\Model\Resume->tradesmanActiveStatus(false, 4)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(276): Controller\App\ResumeController->tradesmanActiveStatus(false, 4)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(4)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(54): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Resume.php on line 220

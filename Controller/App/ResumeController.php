@@ -168,7 +168,10 @@ class ResumeController extends BaseController
         }
     }
 
-    public function submitResume($user_id,$specialty,$about_me,$prefered_location,$work_fee,$document,$Valid_Id_Front,$Valid_Id_Back){
+    /**
+     * @throws \Exception
+     */
+    public function submitResume($user_id, $specialty, $about_me, $prefered_location, $work_fee, $document, $Valid_Id_Front, $Valid_Id_Back){
 
         // Check if the resume is already pending
         $status = $this->resumeModel->getResumeStatus($user_id);
@@ -212,13 +215,23 @@ class ResumeController extends BaseController
     }
 
 
-    public function getResume($tradesman_id){
-        $tradesmanDetail = $this->resumeModel->getResumeDetails($tradesman_id);
+    public function getResume($tradesmanId): void
+    {
+        $tradesmanDetail = $this->resumeModel->getResumeDetails($tradesmanId);
 
         if($tradesmanDetail){
             $this->jsonResponse($tradesmanDetail);
         } else {
             $this->jsonResponse(['message' => 'Failed to retrieve resume.'], 500);
+        }
+    }
+
+    public function tradesmanActiveStatus($tradesmanStatus, $tradesmanId): void{
+        $status = $this->resumeModel->tradesmanActiveStatus($tradesmanStatus,$tradesmanId);
+        if($status){
+            $this->jsonResponse(['message' => 'Status Changed Successfully.']);
+        } else {
+            $this->jsonResponse(['message' => 'Resume Not Yet Verified'], 500);
         }
     }
 }

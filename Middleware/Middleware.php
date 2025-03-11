@@ -51,7 +51,8 @@ trait Middleware
             '/user/notification',
             '/client/jobs/update/{jobId}',
             '/admin/username/update',
-            '/admin/profile_picture/update'
+            '/admin/profile_picture/update',
+            '/user/tradesman/update/activeStatus'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {
