@@ -18,39 +18,6 @@ class ChatController extends BaseController
         $this->model = $chat_model;
     }
 
-    public function messageUser(int $user_id, int $receiver_id, string $message): int {
-        if (empty($user_id) || empty($receiver_id)) {
-            $this->jsonResponse(['message' => "Invalid user ID or receiver ID"]);
-            return 0;
-        }
-
-        if (empty($message) || trim($message) === "") {
-            $this->jsonResponse(['message' => "Cannot send empty message"], 400);
-            return 0;
-        }
-
-        if ($this->hasFoulWords($message)) {
-            $this->jsonResponse(['message' => "Your message cannot contain foul words."], 400);
-            return 0;
-        }
-        $user_id = (int) $user_id;
-        $receiver_id = (int) $receiver_id;
-        $chat_id = $this->model->ensureChatExists($user_id, $receiver_id, $message);
-        var_dump("chat id: $chat_id\n");
-        $this->model->changeLatestMessage($chat_id, $message, $user_id);
-        $chat = $this->model->sendMessage($user_id, $receiver_id, $message, $chat_id);
-        $message_id = $this->model->getLastMessageId();
-
-        if ($chat) {
-            $this->jsonResponse(['message' => "Message sent successfully."], 200);
-            return $message_id;
-        } else {
-            $this->jsonResponse(['message' => "Failed to send message."], 400);
-            return 0;
-        }
-
-    }
-
     public function getChats(int $user_id, int $page = 1, int $limit = 10): void {
         $result = $this->model->getChats($user_id, $page, $limit); // Fetch chats from model
         $chat_return = ['chats' => []];
