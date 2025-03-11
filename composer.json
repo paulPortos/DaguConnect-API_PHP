@@ -5,10 +5,14 @@
         "phpmailer/phpmailer": "^6.9",
       "ext-gd": "*",
       "ext-fileinfo": "*",
-      "ext-posix": "*",
-      "ext-pcntl": "*",
-      "ext-pthreads": "*",
-        "workerman/workerman": "^5.1"
+        "workerman/workerman": "^5.1",
+      "ext-curl": "*",
+        "cboden/ratchet": "^0.4.4",
+        "amphp/websocket-server": "^4.0",
+        "amphp/http-server": "^3.4",
+        "amphp/socket": "^2.3",
+        "swoole/ide-helper": "^6.0",
+        "predis/predis": "^2.3"
     },
   "autoload": {
     "psr-4": {

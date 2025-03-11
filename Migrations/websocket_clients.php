@@ -1,0 +1,5 @@
+CREATE TABLE websocket_clients (
+user_id INT PRIMARY KEY,
+connection_id VARCHAR(255) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

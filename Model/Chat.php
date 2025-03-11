@@ -15,24 +15,6 @@ class Chat extends BaseModel
         parent::__construct($db);
     }
 
-    public function sendMessage($user_id, $receiver_id, $message, $chat_id):bool{
-        try{
-            $query = "INSERT INTO $this->message (user_id, receiver_id, message, chat_id)
-                        VALUES (:user_id, :receiver_id, :message, :chat_id)";
-
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':receiver_id', $receiver_id);
-            $stmt->bindParam(':message', $message);
-            $stmt->bindParam(':chat_id', $chat_id);
-            $this->update_updatedAt($chat_id);
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Chat message insertion error: " . $e->getMessage());
-            return false;
-        }
-    }
-
     public function getChats(int $user_id, int $page, int $limit): array {
         $offset = ($page - 1) * $limit;
 
@@ -81,22 +63,18 @@ class Chat extends BaseModel
         try {
             // Get total number of messages in the chat
             $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->message 
-                                         WHERE (user_id = :user_id AND receiver_id = :chat_id) 
-                                         OR (user_id = :chat_id AND receiver_id = :user_id)");
-            $countStmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                                         WHERE chat_id = :chat_id");
             $countStmt->bindParam(':chat_id', $chat_id, PDO::PARAM_INT);
             $countStmt->execute();
             $totalMessages = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // Cast to int
 
             // Fetch paginated messages
             $query = "SELECT * FROM $this->message 
-                  WHERE (user_id = :user_id AND receiver_id = :chat_id) 
-                  OR (user_id = :chat_id AND receiver_id = :user_id)
+                  WHERE chat_id = :chat_id
                   ORDER BY created_at ASC
                   LIMIT :limit OFFSET :offset";
 
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->bindParam(':chat_id', $chat_id, PDO::PARAM_INT);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -134,16 +112,18 @@ class Chat extends BaseModel
         }
     }
 
-    public function markAsReadChat($chat_id, $user_id): bool {
+    public function markAsReadChat(int $chat_id, int $user_id): bool {
         try {
-            $query = "UPDATE $this->table 
+            $query = "UPDATE $this->table
                   SET last_read_by_user_id = :user_id
-                  WHERE id = :chat_id
-                  AND last_read_by_user_id != :user_id";
+                  WHERE id = :id
+                  AND last_read_by_user_id != :user_id_duplicate";
 
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':chat_id', $chat_id, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $chat_id, PDO::PARAM_INT);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':user_id_duplicate', $user_id, PDO::PARAM_INT); // Bind the second occurrence
+
 
             return $stmt->execute();
         } catch (PDOException $e) {
@@ -154,9 +134,9 @@ class Chat extends BaseModel
 
     public function markAsReadMessage($chat_id, $user_id): bool{
         try {
-            $query = "UPDATE messages 
+            $query = "UPDATE $this->table
                   SET is_read = 1 
-                  WHERE chat_id = :chat_id 
+                  WHERE id = :chat_id 
                   AND ((user1_id = :user_idx) OR (user2_id = :user_idy))";
 
             $stmt = $this->db->prepare($query);
@@ -166,31 +146,6 @@ class Chat extends BaseModel
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error marking message as read: ". $e->getMessage());
-            return false;
-        }
-    }
-
-    public function changeLatestMessage($chat_id, $message, $user_id): bool {
-        try {
-            $query = "UPDATE $this->table 
-                  SET latest_message = :latest_message,
-                      last_sender_id = :last_sender_id,
-                      is_read = CASE 
-                          WHEN user1_id = :last_sender_id THEN 0 
-                          WHEN user2_id = :last_sender_id THEN 0 
-                          ELSE is_read 
-                      END
-                  WHERE id = :chat_id";
-
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':latest_message', $message);
-            $stmt->bindParam(':last_sender_id', $user_id);
-            $stmt->bindParam(':chat_id', $chat_id);
-            $stmt->execute();
-
-            return $stmt->rowCount() > 0;
-        } catch (PDOException $e) {
-            error_log("Error changing latest message: " . $e->getMessage());
             return false;
         }
     }
@@ -242,52 +197,6 @@ class Chat extends BaseModel
             }
         } catch (PDOException $e) {
             error_log("Error getting profile picture: " . $e->getMessage());
-            return null;
-        }
-    }
-
-    public function update_updatedAt($chat_id): bool
-    {
-        try {
-            $query = "UPDATE $this->table SET updated_at = CURRENT_TIMESTAMP WHERE id = :chat_id";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':chat_id', $chat_id, PDO::PARAM_INT);
-            return $stmt->execute();
-        } catch (PDOException $e){
-            error_log("Error updating updatedAt: ". $e->getMessage());
-            return false;
-        }
-    }
-
-    public function ensureChatExists($user_id, $receiver_id, $message): ?int {
-        try {
-            // Check if a chat already exists between the two users
-            $query = "SELECT id FROM $this->table 
-            WHERE (user_id = :user1_id AND receiver_id = :receiver_id1) 
-            OR (user_id = :receiver_id2 AND receiver_id = :user2_id)";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':user1_id', $user_id, PDO::PARAM_INT);
-            $stmt->bindParam(':receiver_id1', $receiver_id, PDO::PARAM_INT);
-            $stmt->bindParam(':user2_id', $user_id, PDO::PARAM_INT);
-            $stmt->bindParam(':receiver_id2', $receiver_id, PDO::PARAM_INT);
-            $stmt->execute();
-
-            $chatId = $stmt->fetchColumn();
-
-            // If no chat exists, create a new one
-            if (!$chatId) {
-                $insertQuery = "INSERT INTO $this->table (user_id, receiver_id, latest_message) 
-                                VALUES (:user_id, :receiver_id, :latest_message)";
-                $insertStmt = $this->db->prepare($insertQuery);
-                $insertStmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-                $insertStmt->bindParam(':receiver_id', $receiver_id, PDO::PARAM_INT);
-                $insertStmt->bindParam(':latest_message', $message);
-                $insertStmt->execute();
-
-                $chatId = $this->db->lastInsertId();
-            }
-            return (int)$chatId;
-        } catch (PDOException $e) {
             return null;
         }
     }
