@@ -26,4 +26,10 @@
 */
 
 
+/*
+go to php.ini remove the semicolon in upload_tmp_dir  and "C:\xampp\tmp" to it also increase the upload_max_filesize to 10M and post_max_size to 12M
+
+*/
+
+
 

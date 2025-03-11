@@ -166,6 +166,7 @@ class Api extends BaseApi
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->viewTradesmanDetail($tradesman_id);
         });
+
         $this->route('GET','/admin/view/client/details/{client_id}', function ($user_id,$client_id){
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->viewClientDetail($client_id);
@@ -256,7 +257,7 @@ class Api extends BaseApi
             $about_me = $this->requestBody['about_me'];
             $prefered_work_location = $this->requestBody['prefered_work_location'];
             $work_fee = $this->requestBody['work_fee'];
-            $phone_number = $this->requestBody['phone_number'];
+            $phone_number = $this->requestBody['phone_number']?: null;
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->updateTradesmanDetails($userId,$about_me,$prefered_work_location,$work_fee,$phone_number);
@@ -502,11 +503,11 @@ class Api extends BaseApi
             $clientProfileController->updateProfilePicture($userId, $profile_pic);
         });
 
-        $this->route('PUT', '/client/update/profile_data', function ($userId){
+        $this->route('PUT', '/client/update/profile_details', function ($userId){
             $this->responseBodyChecker();
-            ['address' => $profile_address, 'phone_number' => $phone_number] = $this->requestBody;
+            ['address' => $profile_address,'phone_number'=>$phone_number] = $this->requestBody;
             $clientProfileController = new ClientProfileController(new Client_Profile($this->db));
-            $clientProfileController->updateProfileData($userId, $profile_address, $phone_number);
+            $clientProfileController->updateProfileAddress($userId, $profile_address,$phone_number);
         });
 
         $this->route('GET', '/client/profile', function ($user_id) {
