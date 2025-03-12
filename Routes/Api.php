@@ -297,7 +297,7 @@ class Api extends BaseApi
             $RatingController->viewratings($tradesman_id);
         });
 
-        $this->route('POST', '/user/client/report/tradesman/{tradesman_Id}', function($client_Id,$tradesman_Id){
+        $this->route('POST', '/user/client/report/tradesman/{tradesmanId}', function($client_Id,$tradesman_Id){
             $this->responseBodyChecker();
 
             $report_reason = $this->requestBody['report_reason'];
@@ -308,7 +308,7 @@ class Api extends BaseApi
             $ReportController->reportTradesman($client_Id,$tradesman_Id,$report_reason,$report_details,$report_attachment);
         });
 
-        $this->route('POST', '/user/tradesman/report/client/{client_Id}', function($tradesman_Id,$client_Id){
+        $this->route('POST', '/user/tradesman/report/client/{clientId}', function($tradesman_Id,$client_Id){
             $this->responseBodyChecker();
 
             $report_reason = $this->requestBody['report_reason'];
