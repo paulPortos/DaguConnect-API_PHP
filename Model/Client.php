@@ -20,8 +20,8 @@ class Client extends BaseModel
     public function BookTradesman($user_id, $resume_id, $tradesman_id, $phone_number, $tradesman_fullname, $tradesman_profile, $work_fee, $client_fullname, $address, $task_type, $task_description, $booking_date,$client_profile): bool
     {
         $query = "INSERT INTO $this->table 
-                (user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname,client_profile, address, task_type, task_description, booking_date, booking_status, created_at)
-                VALUES (:user_id, :resume_id, :tradesman_id, :phone_number, :tradesman_fullname, :tradesman_profile, :work_fee, :client_fullname,:client_profile, :address, :task_type, :task_description, :booking_date, 'Pending', NOW())";
+                (user_id, resume_id, tradesman_id, phone_number, tradesman_fullname, tradesman_profile, work_fee, client_fullname,client_profile, address, task_type, task_description, booking_date, booking_status,booking_date_status, created_at)
+                VALUES (:user_id, :resume_id, :tradesman_id, :phone_number, :tradesman_fullname, :tradesman_profile, :work_fee, :client_fullname,:client_profile, :address, :task_type, :task_description, :booking_date, 'Pending', NOW() ,NOW())";
 
         $stmt = $this->db->prepare($query);
 
@@ -89,7 +89,8 @@ class Client extends BaseModel
         try {
             $query = "UPDATE $this->table 
             SET booking_status = :booking_status,
-                cancel_reason = :cancel_reason
+                cancel_reason = :cancel_reason,
+                booking_date_status  = NOW()
             WHERE user_id = :user_id 
             AND id = :booking_id";
 

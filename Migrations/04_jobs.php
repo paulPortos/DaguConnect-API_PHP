@@ -4,7 +4,7 @@ user_id INT UNSIGNED NOT NULL,
 client_fullname VARCHAR(255) NOT NULL,
 client_profile_id INT UNSIGNED NOT NULL,
 client_profile_picture VARCHAR(255) NOT NULL,
-salary DECIMAL(10,2) NOT NULL,
+salary INT NOT NULL,
 applicant_limit_count TINYINT NOT NULL,
 job_type ENUM(
 'Carpenter',

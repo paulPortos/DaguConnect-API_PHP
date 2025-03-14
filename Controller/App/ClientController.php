@@ -158,11 +158,6 @@ class ClientController extends BaseController
         }else {
             $this->jsonResponse(['message' => 'Failed to update work status.'], 400);
         }
-
-
-
     }
-
-
 }
 
