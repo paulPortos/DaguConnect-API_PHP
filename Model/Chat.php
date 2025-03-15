@@ -57,21 +57,27 @@ class Chat extends BaseModel
         }
     }
 
-
     public function getMessages(int $user_id, int $chat_id, int $page, int $limit): array {
-        $offset = ($page - 1) * $limit;
         try {
-            // Get total number of messages in the chat
-            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->message 
-                                         WHERE chat_id = :chat_id");
+            // Get total number of messages
+            $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->message WHERE chat_id = :chat_id");
             $countStmt->bindParam(':chat_id', $chat_id, PDO::PARAM_INT);
             $countStmt->execute();
             $totalMessages = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // Cast to int
 
-            // Fetch paginated messages
+            // Calculate total pages
+            $totalPages = max(1, ceil($totalMessages / $limit));
+
+            // Ensure the page is valid (start from last page)
+            $page = min($page, $totalPages);
+
+            // Adjust offset to get the **latest messages first**
+            $offset = max(0, ($totalPages - $page) * $limit);
+
+            // Fetch messages in descending order (newest first)
             $query = "SELECT * FROM $this->message 
                   WHERE chat_id = :chat_id
-                  ORDER BY created_at ASC
+                  ORDER BY created_at DESC
                   LIMIT :limit OFFSET :offset";
 
             $stmt = $this->db->prepare($query);
@@ -81,11 +87,8 @@ class Chat extends BaseModel
             $stmt->execute();
             $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // Calculate total pages
-            $totalPages = max(1, ceil($totalMessages / $limit));
-
             return [
-                'messages' => $messages,
+                'messages' => array_reverse($messages), // Reverse to maintain ASC order in UI
                 'current_page' => $page,
                 'total_pages' => $totalPages
             ];
@@ -94,8 +97,6 @@ class Chat extends BaseModel
             return [];
         }
     }
-
-
 
     public function deleteMessage($id, $user_id): bool
     {
@@ -185,15 +186,14 @@ class Chat extends BaseModel
                 // Check if result exists before accessing it
                 return $result !== false ? $result['profile_pic'] : null;
             } else {
-                // Fetch profile picture from users for clients
-                $query = "SELECT profile_pic FROM users WHERE id = :user_id"; // Fixed column name to 'id'
+                $query = "SELECT profile_picture FROM client_profile WHERE user_id = :user_id";
                 $stmt = $this->db->prepare($query);
                 $stmt->bindParam(':user_id', $user_id);
                 $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Check if result exists before accessing it
-                return $result !== false ? $result['profile_pic'] : null;
+                return $result !== false ? $result['profile_picture'] : null;
             }
         } catch (PDOException $e) {
             error_log("Error getting profile picture: " . $e->getMessage());

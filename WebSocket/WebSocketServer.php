@@ -2,9 +2,7 @@
 
 namespace DaguConnect\WebSocket;
 
-use Controller\App\ChatController;
 use DaguConnect\Includes\config;
-use DaguConnect\Model\Chat;
 use Exception;
 use PDO;
 use PDOException;
@@ -15,7 +13,6 @@ class WebSocketServer {
     private array $offlineMessages = [];
     private PDO $db;
     private string $clientsFile = __DIR__ . '/clients.json';
-    private ChatController $chatController;
     private Worker $worker;
     protected string $table = 'chats';
     protected string $message = 'messages';
@@ -23,7 +20,6 @@ class WebSocketServer {
     public function __construct(config $config, Worker $worker) {
         $this->db = $config->db;
         $this->worker = $worker;
-        $this->chatController = new ChatController(new Chat($this->db));
         if (!file_exists($this->clientsFile)) {
             file_put_contents($this->clientsFile, json_encode([], JSON_PRETTY_PRINT));
         }
@@ -67,6 +63,7 @@ class WebSocketServer {
             return;
         }
 
+        // Handle authentication
         if ($data['type'] === 'auth' && isset($data['user_id'])) {
             $user_id = $data['user_id'];
             echo "Authenticating user: $user_id\n";
@@ -85,10 +82,10 @@ class WebSocketServer {
 
             // Persist to database
             $stmt = $this->db->prepare("
-                INSERT INTO websocket_clients (user_id, connection_id) 
-                VALUES (:user_id, :connection_id) 
-                ON DUPLICATE KEY UPDATE connection_id = :connection_id_update
-            ");
+            INSERT INTO websocket_clients (user_id, connection_id) 
+            VALUES (:user_id, :connection_id) 
+            ON DUPLICATE KEY UPDATE connection_id = :connection_id_update
+        ");
             $stmt->execute([
                 ':user_id' => $user_id,
                 ':connection_id' => $connection->id,
@@ -108,7 +105,7 @@ class WebSocketServer {
             return;
         }
 
-        // Handle message sending
+        // Handle regular message
         if ($data['type'] === 'message' && isset($data['user_id']) && isset($data['receiver_id']) && isset($data['message'])) {
             $user_id = $data['user_id'];
             $receiver_id = $data['receiver_id'];
@@ -126,13 +123,14 @@ class WebSocketServer {
 
             $message_id = $this->addToDatabaseMessage($user_id, $receiver_id, $message);
 
+            date_default_timezone_set('UTC');
             $messageData = [
                 'id' => $message_id,
                 'user_id' => $user_id,
                 'receiver_id' => $receiver_id,
                 'message' => $message,
                 'is_read' => 0,
-                'created_at' => date('Y-m-d H:i:s')
+                'created_at' => gmdate('Y-m-d H:i:s')
             ];
 
             $isSent = $this->sendMessage($receiver_id, $messageData);
@@ -141,7 +139,72 @@ class WebSocketServer {
                 ? ['status' => 'sent', 'message' => 'Message sent successfully in real-time']
                 : ['status' => 'queued', 'message' => 'Message stored, recipient offline'];
             $connection->send(json_encode($response));
+            return;
         }
+
+        if ($data['type'] === 'notification' && isset($data['client']) && $data['client'] === true &&
+            isset($data['resume_id']) && isset($data['notification_title']) && isset($data['notificationType']) && isset($data['message'])) {
+            $resume_id = $data['resume_id'];
+            $tradesman_id = $this->getTradesmanIdFromResume($resume_id);
+
+            if (!$tradesman_id) {
+                $connection->send(json_encode(['error' => 'Tradesman not found for resume ID']));
+                return;
+            }
+
+            $notificationData = [
+                'resume_id' => $resume_id,
+                'notification_title' => $data['notification_title'],
+                'notification_type' => $data['notificationType'],
+                'message' => $data['message'],
+                'created_at' => gmdate('Y-m-d H:i:s')
+            ];
+
+            if ($this->saveNotificationToDatabase($tradesman_id, $notificationData)) {
+                echo "Notification saved to database\n";
+            } else {
+                echo "Failed to save notification to database\n";
+                return;
+            }
+
+            $notified = $this->sendNotification($tradesman_id, $notificationData);
+            $response = $notified
+                ? ['status' => 'sent', 'message' => 'Notification sent to tradesman']
+                : ['status' => 'queued', 'message' => 'Notification queued, tradesman offline'];
+            $connection->send(json_encode($response));
+            return;
+        }
+
+        // Handle notification to client
+        if ($data['type'] === 'notification' && isset($data['tradesman']) && $data['tradesman'] === true &&
+            isset($data['client_id']) && isset($data['notification_title']) && isset($data['notificationType']) && isset($data['message'])) {
+            $client_id = $data['client_id'];
+            $notificationData = [
+                'client_id' => $client_id,
+                'notification_title' => $data['notification_title'],
+                'notification_type' => $data['notificationType'],
+                'message' => $data['message'],
+                'created_at' => gmdate('Y-m-d H:i:s')
+            ];
+
+            if ($this->saveNotificationToDatabase($client_id, $notificationData)) {
+                echo "Notification saved to database\n";
+            } else {
+                echo "Failed to save notification to database\n";
+                return;
+            }
+
+            $notified = $this->sendNotification($client_id, $notificationData);
+            $response = $notified
+                ? ['status' => 'sent', 'message' => 'Notification sent to client']
+                : ['status' => 'queued', 'message' => 'Notification queued, client offline'];
+            $connection->send(json_encode($response));
+            return;
+        }
+
+        // If no matching type is found
+        echo "Unknown message type: {$data['type']}\n";
+        $connection->send(json_encode(['error' => 'Unknown message type']));
     }
 
     public function onClose(TcpConnection $connection): void {
@@ -197,9 +260,54 @@ class WebSocketServer {
         try {
             $websocket_connection->send($messageJson);
             echo "Message sent to user $receiver_id via WebSocket\n";
+            echo "Message: $messageJson\n \n \n";
             return true;
         } catch (Exception $e) {
             echo "Failed to send message: " . $e->getMessage() . "\n";
+            return false;
+        }
+    }
+
+    public function sendNotification(string $receiver_id, array $data): bool {
+        $clientsData = $this->loadClientsFromJson();
+        $notificationJson = json_encode(['type' => 'notification', 'data' => $data]);
+        $onlineUsers = $this->getUserIds();
+
+        if (!in_array($receiver_id, $onlineUsers)) {
+            echo "User $receiver_id is offline; queuing notification.\n";
+            $this->offlineMessages[$receiver_id][] = $notificationJson;
+            return false;
+        }
+
+        if (!isset($clientsData[$receiver_id]['connection_id'])) {
+            echo "No connection ID found in JSON for user $receiver_id\n";
+            return false;
+        }
+        $json_connection_id = (int) $clientsData[$receiver_id]['connection_id'];
+        echo "Fetched connection_id for user $receiver_id from JSON: $json_connection_id\n";
+
+        $stmt = $this->db->prepare("SELECT connection_id FROM websocket_clients WHERE user_id = :user_id LIMIT 1");
+        $stmt->execute([':user_id' => $receiver_id]);
+        $db_connection_id = (int) $stmt->fetchColumn();
+
+        if (!$db_connection_id || $json_connection_id !== $db_connection_id) {
+            echo "Connection ID mismatch or not found in database\n";
+            return false;
+        }
+
+        if (!isset($this->worker->connections[$db_connection_id])) {
+            echo "WebSocket connection for ID $db_connection_id not found.\n";
+            return false;
+        }
+
+        $websocket_connection = $this->worker->connections[$db_connection_id];
+        try {
+            $websocket_connection->send($notificationJson);
+            echo "Notification sent to user $receiver_id via WebSocket\n";
+            echo "Notification: $notificationJson\n \n \n";
+            return true;
+        } catch (Exception $e) {
+            echo "Failed to send notification: " . $e->getMessage() . "\n";
             return false;
         }
     }
@@ -312,6 +420,48 @@ class WebSocketServer {
             return $result ? (int) $result['id'] : null;
         } catch (PDOException $e) {
             error_log("Error fetching last message ID: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    public function getTradesmanIdFromResume($resume_id): ?int {
+        try {
+            $query = "SELECT user_id FROM tradesman_resume WHERE id = :resume_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':resume_id', $resume_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error fetching tradesman ID: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    public function saveNotificationToDatabase(int $receiver_id, array $data): bool {
+        try {
+            $query = "INSERT INTO notification (user_id, notification_title, notification_type, message) 
+                      VALUES (:user_id, :notification_title, :notification_type, :message)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $receiver_id, PDO::PARAM_INT);
+            $stmt->bindParam(':notification_title', $data['notification_title']);
+            $stmt->bindParam(':notification_type', $data['notification_type']);
+            $stmt->bindParam(':message', $data['message']);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error saving notification: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function getUserIdFromClientProfile($clientProfile_id){
+        try {
+            $query = "SELECT user_id FROM client_profile WHERE id = :clientProfile_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':clientProfile_id', $clientProfile_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error fetching user ID from client profile: " . $e->getMessage());
             return null;
         }
     }

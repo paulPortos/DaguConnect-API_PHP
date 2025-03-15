@@ -9,6 +9,19 @@ use PDOException;
 class Job extends BaseModel
 {
     protected string $table = 'jobs';
+    private array $specialtyToJobType = [
+        'Carpentry' => 'Carpenter',
+        'Painting' => 'Painter',
+        'Welding' => 'Welder',
+        'Electrical_work' => 'Electrician',
+        'Plumbing' => 'Plumber',
+        'Masonry' => 'Mason',
+        'Roofing' => 'Roofer',
+        'Ac_repair' => 'Ac_technician',
+        'Mechanics' => 'Mechanic',
+        'Cleaning' => 'Cleaner'
+    ];
+
     public function __construct($db){
         parent::__construct($db);
     }
@@ -30,13 +43,17 @@ class Job extends BaseModel
                 return [];
             }
 
-            $speciality = $user['specialty'];
             $address = $user['prefered_work_location'];
+
+            //This will be used to get the job type
+            $specialtyRaw = $user['specialty'];
+            $speciality = $this->specialtyToJobType[$specialtyRaw] ?? $specialtyRaw;
 
             // Get total available jobs count (no filtering)
             $countStmt = $this->db->prepare(
                 "SELECT COUNT(*) as total FROM $this->table WHERE LOWER(status) = 'Available'"
             );
+
             $countStmt->execute();
             $totalJobs = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
 

@@ -16,7 +16,7 @@ class config extends \PDO
     public function __construct()
     {
         new Env();
-
+        date_default_timezone_set('UTC');
         $db_host = $_ENV['DB_HOST'];
         $db_name = $_ENV['DB_NAME'];
         $db_username = $_ENV['DB_USERNAME'];

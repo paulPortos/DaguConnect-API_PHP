@@ -99,27 +99,4 @@ class ChatController extends BaseController
             $this->jsonResponse(['message' => 'No messages found'], 200);
         }
     }
-
-    public function hasFoulWords($message): bool {
-        $foulWords = [
-            'gago',
-            'fuck',
-            'fuck you',
-            'asshole',
-            'nigga',
-            'nigger',
-            'dick',
-            'pakyu',
-            'tang ina mo',
-            'tangina mo'
-        ];
-
-        $messageLower = strtolower($message);
-        foreach ($foulWords as $word) {
-            if (str_contains($messageLower, $word)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

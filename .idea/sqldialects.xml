@@ -8,5 +8,6 @@
     <file url="file://$PROJECT_DIR$/Model/User.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/Services/IfDataExists.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/Services/TokenHandler.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/WebSocket/WebSocketServer.php" dialect="GenericSQL" />
   </component>
 </project>

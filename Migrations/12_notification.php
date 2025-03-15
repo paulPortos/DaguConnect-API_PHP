@@ -2,15 +2,12 @@ CREATE TABLE notification(
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 user_id INT UNSIGNED NOT NULL,
 notification_title VARCHAR(255) NOT NULL,
-notification_type ENUM ('Message', 'Job', 'Report', 'Tradesman_Validation') NOT NULL,
+notification_type ENUM ('Job', 'Booking', 'Review') NOT NULL,
 message VARCHAR(255) NOT NULL,
 job_id INT UNSIGNED NULL,
-chat_id INT UNSIGNED NULL,
-report_id INT UNSIGNED NULL,
+booking_id INT UNSIGNED NULL,
 is_read BOOLEAN NOT NULL DEFAULT 0,
 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
-FOREIGN KEY (chat_id) REFERENCES chats(id) ON DELETE CASCADE,
-FOREIGN KEY (report_id) REFERENCES reports(id) ON DELETE CASCADE
+FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
 )ENGINE = InnoDB;
