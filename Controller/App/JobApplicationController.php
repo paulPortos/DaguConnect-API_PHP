@@ -210,6 +210,7 @@ class JobApplicationController extends BaseController
 
         if ($this->job_application_model->isClient($user_id)) {
             if ($this->job_application_model->changeJobApplicationStatusClient($user_id, $job_applicationId, $status)) {
+                $this->job_application_model->checkJobApplicationLimit($job_applicationId);
                 $this->jsonResponse(['message' => $message], 201);
                 if ($status === 'Cancelled') {
                     $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Client');

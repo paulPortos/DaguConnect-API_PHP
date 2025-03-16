@@ -85,7 +85,7 @@ class WebSocketServer {
             INSERT INTO websocket_clients (user_id, connection_id) 
             VALUES (:user_id, :connection_id) 
             ON DUPLICATE KEY UPDATE connection_id = :connection_id_update
-        ");
+            ");
             $stmt->execute([
                 ':user_id' => $user_id,
                 ':connection_id' => $connection->id,

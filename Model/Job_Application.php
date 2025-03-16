@@ -403,4 +403,66 @@ class Job_Application extends BaseModel
             return false;
         }
     }
+
+    public function getJobId($job_application_id): int
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT job_id FROM $this->table WHERE id = :id LIMIT 1");
+            $stmt->bindParam(':id', $job_application_id);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting job ID: " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    public function getActiveJobApplicantsCount($job_id): int
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM $this->table WHERE job_id = :job_id AND status = 'Active'");
+            $stmt->bindParam(':job_id', $job_id);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting active job applicants count: " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    public function getJobApplicationLimit($job_id): int
+        {
+            try {
+                $stmt = $this->db->prepare("SELECT applicant_limit_count FROM jobs WHERE id = :job_id LIMIT 1");
+                $stmt->bindParam(':job_id', $job_id);
+                $stmt->execute();
+                return (int)$stmt->fetchColumn();
+            } catch (PDOException $e) {
+                error_log("Error getting job limit: " . $e->getMessage());
+                return 0;
+            }
+        }
+
+        public function checkJobApplicationLimit($job_application_id): bool{
+            $jobId = $this->getJobId($job_application_id);
+            $activeApplicationsCount = $this->getActiveJobApplicantsCount($jobId);
+            $applicantLimit = $this->getJobApplicationLimit($jobId);
+            if ($activeApplicationsCount >= $applicantLimit) {
+                return $this->setJobToActive($jobId);
+            } else {
+                return false;
+            }
+        }
+
+        public function setJobToActive($job_id): bool
+        {
+            try {
+                $stmt = $this->db->prepare("UPDATE jobs SET status = 'Active' WHERE id = :job_id");
+                $stmt->bindParam(':job_id', $job_id);
+                return $stmt->execute();
+            } catch (PDOException $e) {
+                error_log("Error setting job to deadline: " . $e->getMessage());
+                return false;
+            }
+        }
 }

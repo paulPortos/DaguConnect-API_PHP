@@ -484,12 +484,12 @@ class Api extends BaseApi
             $messageController->getMessages($user_id, $chat_id, $page, $limit);
         });
 
-        $this->route('DELETE', '/client/jobs/delete/{jobId}', function ($jobId, $userId){
+        $this->route('DELETE', '/client/jobs/delete/{jobId}', function ($userId, $jobId){
             $jobController = new JobController(new Job($this->db));
             $jobController->deleteJob($jobId, $userId);
         });
 
-        $this->route('DELETE', '/user/message/delete{messageId}', function ($message_id, $userId){
+        $this->route('DELETE', '/user/message/delete{messageId}', function ($userId, $message_id){
             $messageController = new ChatController(new Chat($this->db));
             $messageController->deleteMessage($message_id, $userId);
         });
