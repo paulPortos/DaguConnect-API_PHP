@@ -15,6 +15,7 @@ task_type ENUM('Carpentry','Painter','Welding','Electrical_work','Plumbing','Mas
 task_description TEXT NULL,
 booking_date DATE NULL,
 booking_status ENUM('Pending','Active','Declined','Completed','Cancelled') NOT NULL,
+booking_date_status DATE NULL,
 cancel_reason VARCHAR(255) NULL,
 created_at DATETIME NOT NULL,
 INDEX (`user_id`),

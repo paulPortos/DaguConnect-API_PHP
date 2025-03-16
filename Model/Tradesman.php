@@ -54,7 +54,7 @@ class Tradesman extends BaseModel
     {
         try {
             $query = "UPDATE $this->table SET
-                  booking_status = :booking_status, cancel_reason = :cancel_reason
+                  booking_status = :booking_status, cancel_reason = :cancel_reason, booking_date_status = NOW()
                   WHERE id = :booking_id AND tradesman_id = :tradesman_id";
 
             $stmt = $this->db->prepare($query);
