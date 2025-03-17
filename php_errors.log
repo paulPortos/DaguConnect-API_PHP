@@ -160,3 +160,13 @@ Stack trace:
 [14-Mar-2025 12:58:25 UTC] PHP Fatal error:  Failed opening required '-' (include_path='.;C:\php\pear') in Unknown on line 0
 [14-Mar-2025 12:58:35 UTC] PHP Warning:  Unknown: Failed to open stream: No such file or directory in Unknown on line 0
 [14-Mar-2025 12:58:35 UTC] PHP Fatal error:  Failed opening required '-' (include_path='.;C:\php\pear') in Unknown on line 0
+[17-Mar-2025 15:05:43 UTC] Starting check_expired_bookings.php at 2025-03-17 15:05:43
+[17-Mar-2025 15:05:43 UTC] Running checkAllExpiredBookings at 2025-03-17 15:05:43
+[17-Mar-2025 15:05:43 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 15:05:43 UTC] Finished checking expired bookings at 2025-03-17 15:05:43
+[17-Mar-2025 15:06:29 UTC] Starting check_expired_bookings.php at 2025-03-17 15:06:29
+[17-Mar-2025 15:06:29 UTC] Running checkAllExpiredBookings at 2025-03-17 15:06:29
+[17-Mar-2025 15:06:29 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 15:06:29 UTC] Finished checking expired bookings at 2025-03-17 15:06:29
+[17-Mar-2025 15:07:29 UTC] Running checkAllExpiredBookings at 2025-03-17 15:07:29
+[17-Mar-2025 15:07:29 UTC] Finished checking expired bookings at 2025-03-17 15:07:29

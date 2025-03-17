@@ -30,9 +30,9 @@ use DaguConnect\Model\Tradesman;
 use DaguConnect\Model\User;
 use Exception;
 
-
 class Api extends BaseApi
 {
+
     /**
      * @throws Exception
      */
@@ -47,7 +47,6 @@ class Api extends BaseApi
             http_response_code(200);
             exit(0);
         }
-        parent::__construct(); // Calling constructor
 
         $this->registeredRoutes();
 
@@ -56,10 +55,8 @@ class Api extends BaseApi
 
     public function registeredRoutes(): void
     {
-
         // Register a route for the AuthenticationController
         $this->route('POST', '/admin/register', function () {
-
             $this->responseBodyChecker();
 
             ['first_name' => $first_name, 'last_name' => $last_name, 'username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $confirm_password] = $this->requestBody;
@@ -140,8 +137,6 @@ class Api extends BaseApi
             $adminController->changeUsername($userId, $username);
         });
 
-
-
         $this->route('PUT', '/admin/validate/Resume/{tradesman_id}', function ($user_id, $tradesman_id) {
             $this->responseBodyChecker();
 
@@ -159,8 +154,6 @@ class Api extends BaseApi
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->suspendedReported($reported_id,$report_status);
         });
-
-
 
         $this->route('GET', '/admin/view/tradesman/details/{tradesman_id}', function ($user_id,$tradesman_id) {
             $adminController = new DashboardController(new Admin($this->db));
@@ -186,7 +179,6 @@ class Api extends BaseApi
             $adminController = new DashboardController(new Admin($this->db));
             $adminController->viewRatingDetail($id);
         });
-
 
         $this->route('POST', '/user/register', function () {
             $this->responseBodyChecker();
@@ -216,7 +208,6 @@ class Api extends BaseApi
         });
 
         $this->route('DELETE', '/user/logout', function () {
-
             $authController = new AuthenticationController(new User($this->db), new Resume($this->db), new Client_Profile($this->db));
             $authController->logout();
         });
@@ -229,7 +220,6 @@ class Api extends BaseApi
         });
 
         $this->route('POST','/user/tradesman/update/profile', function ($userId){
-
             $profile_pic = $_FILES['profile_pic'];
 
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
@@ -271,13 +261,10 @@ class Api extends BaseApi
         $this->route('PUT','/user/tradesman/update/activeStatus', function($tradesmanId){
             $this->responseBodyChecker();
 
-        $tradesman_status = $this->requestBody['tradesman_status'];
+            $tradesman_status = $this->requestBody['tradesman_status'];
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->tradesmanActiveStatus($tradesman_status,$tradesmanId);
-
-
-    });
-
+        });
 
         $this->route('POST', '/user/client/rate/tradesman/{tradesman_id}', function ($userId,$tradesman_id) {
             $this->responseBodyChecker();
@@ -287,6 +274,7 @@ class Api extends BaseApi
             $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
             $RatingController->rateTradesman($userId,$tradesman_id,$rating,$message);
         });
+
         $this->route('GET', '/user/client/view/tradesman/rating/{tradesman_id}', function ($user_id,$tradesman_Id) {
             $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
             $RatingController->viewratingsById($tradesman_Id);
@@ -325,7 +313,7 @@ class Api extends BaseApi
             $phone_number = $this->requestBody['phone_number'] ?? null;
             $address = $this->requestBody['address'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
-                $task_description = $this->requestBody['task_description'] ?? null;
+            $task_description = $this->requestBody['task_description'] ?? null;
             $booking_date = $this->requestBody['booking_date'] ?? null;
 
             $ClientController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
@@ -338,6 +326,7 @@ class Api extends BaseApi
             $ClientBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
             $ClientBookingController->GetBookingClient($userId,$page,$limit);
         });
+
         $this ->route('GET','/user/client/viewbooking/{resumeId}' , function ($userID,$resumeId) {
             $ViewBookingController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
             $ViewBookingController->viewClientBooking($resumeId);
@@ -351,13 +340,6 @@ class Api extends BaseApi
 
             $TradesmanBookingStatus = new TradesmanController(new Tradesman($this->db));
             $TradesmanBookingStatus ->UpdateBookingFromClient($userId,$booking_id,$book_status,$cancel_reason);
-        });
-
-        // New endpoint for cron job to check expired bookings
-        $this->route('POST', '/cron/check-expired-bookings', function () {
-            $tradesmanModel = new Tradesman($this->db);
-            $tradesmanModel->checkAllExpiredBookings();
-            echo json_encode(['message' => 'Expired bookings checked and updated successfully']);
         });
 
         $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
@@ -401,7 +383,6 @@ class Api extends BaseApi
         });
 
         $this->route('GET', '/user/job/view/{id}', function ($userId,$id) {
-
             $jobController = new JobController(new Job($this->db));
             $jobController->viewJob($id);
         });
@@ -448,6 +429,7 @@ class Api extends BaseApi
             $jobApplicationController = new JobApplicationController(new Job_Application($this->db));
             $jobApplicationController->apply_job($userId, $jobId, $qualificationSummary);
         });
+
         $this->route('GET', '/user/getresumes', function () {
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
@@ -587,7 +569,7 @@ class Api extends BaseApi
         });
     }
 
-    //Check if the response body for POST is empty
+    // Check if the response body for POST is empty
     private function responseBodyChecker(): void {
         if (!$this->requestBody || !is_array($this->requestBody)) {
             echo json_encode(['message' => 'Invalid or missing JSON payload']);
