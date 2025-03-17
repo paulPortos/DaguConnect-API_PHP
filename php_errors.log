@@ -170,3 +170,7 @@ Stack trace:
 [17-Mar-2025 15:06:29 UTC] Finished checking expired bookings at 2025-03-17 15:06:29
 [17-Mar-2025 15:07:29 UTC] Running checkAllExpiredBookings at 2025-03-17 15:07:29
 [17-Mar-2025 15:07:29 UTC] Finished checking expired bookings at 2025-03-17 15:07:29
+[17-Mar-2025 15:13:22 UTC] Starting check_expired_bookings.php at 2025-03-17 15:13:22
+[17-Mar-2025 15:13:22 UTC] Running checkAllExpiredBookings at 2025-03-17 15:13:22
+[17-Mar-2025 15:13:22 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 15:13:22 UTC] Finished checking expired bookings at 2025-03-17 15:13:22

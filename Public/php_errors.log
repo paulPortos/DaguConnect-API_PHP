@@ -3322,3 +3322,93 @@ Stack trace:
 #1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #2 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:38 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:38 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:38 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:38 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:39 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:39 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:40 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:40 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:40 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:42 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:43 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:43 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:09:16 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:09:18 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:09:26 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
