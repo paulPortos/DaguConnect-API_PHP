@@ -50,6 +50,9 @@ class TradesmanController extends BaseController
             $this->jsonResponse(['message' => 'Invalid status provided.'], 400);
             return;
         }
+        // Check all bookings for expiration before proceeding
+        $this->tradesman->checkAllExpiredBookings();
+
         $booking_update = $booking_status == 'Accepted' ? 'Active' : 'Declined';
 
         //check if the booking exist or the booking belongs to the tradesman

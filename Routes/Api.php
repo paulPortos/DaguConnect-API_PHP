@@ -353,6 +353,13 @@ class Api extends BaseApi
             $TradesmanBookingStatus ->UpdateBookingFromClient($userId,$booking_id,$book_status,$cancel_reason);
         });
 
+        // New endpoint for cron job to check expired bookings
+        $this->route('POST', '/cron/check-expired-bookings', function () {
+            $tradesmanModel = new Tradesman($this->db);
+            $tradesmanModel->checkAllExpiredBookings();
+            echo json_encode(['message' => 'Expired bookings checked and updated successfully']);
+        });
+
         $this->route('GET', '/user/tradesman/getbooking', function ($userId) {
             $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
             $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
