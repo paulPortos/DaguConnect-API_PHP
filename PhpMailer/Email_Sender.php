@@ -98,7 +98,7 @@ class Email_Sender extends BaseController
         $mail = new PHPMailer(true);
 
         try {
-            // Server settings (same as your existing config)
+            // Server settings
             $mail->isSMTP();
             $mail->Host = $_ENV['MAIL_HOST'];
             $mail->SMTPAuth = true;
@@ -108,10 +108,11 @@ class Email_Sender extends BaseController
             $mail->Port = $_ENV['MAIL_PORT'];
 
             $reportConcernPath = __DIR__ . '/../Views/Report_Concern.html';
+            $reportTemplate = file_get_contents($reportConcernPath);
 
-            $reportTemplate =file_get_contents($reportConcernPath);
+            error_log("Template content: " . $reportTemplate); // Debug log
+            error_log("Replacing with userEmail: $userEmail, message: $message"); // Debug log
 
-            // Replace the placeholder with the token
             // Replace all placeholders
             $emailBody = str_replace(
                 ['{{userEmail}}', '{{message}}', '{{appName}}', '{{year}}'],
@@ -119,17 +120,14 @@ class Email_Sender extends BaseController
                 $reportTemplate
             );
 
-            // Gmail SMTP will force the "From" address to be the authenticated account (daguconnect.team@gmail.com)
+            // Gmail SMTP will force the "From" address
             $mail->setFrom($_ENV['MAIL_USERNAME'], $_ENV['APP_NAME']);
-            // Set the user's email as the Reply-To address so you can reply to them directly
-            $mail->addReplyTo($userEmail);
-            // Send the email to your address
+            $mail->addReplyTo($userEmail, 'User');
             $mail->addAddress($_ENV['MAIL_USERNAME']);
 
             // Content
             $mail->isHTML(true);
             $mail->Subject = "Report Concern";
-            // Simple HTML body including the user's message and their email
             $mail->Body = $emailBody;
             $mail->AltBody = "From: {$userEmail}\nMessage:\n{$message}";
 

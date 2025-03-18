@@ -3413,3 +3413,486 @@ Stack trace:
 #2 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
 [18-Mar-2025 11:40:31 UTC] PHP Parse error:  syntax error, unexpected token "class", expecting "function" or "const" in C:\xampp\htdocs\DaguConnect-API_PHP\PhpMailer\Email_Sender.php on line 95
+[18-Mar-2025 14:22:06 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {$_ENV['APP_NAME']}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:22:06 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: Report Concern
+[18-Mar-2025 14:23:56 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:23:56 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: Report Concern
+[18-Mar-2025 14:24:46 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:24:46 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[18-Mar-2025 14:29:09 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+
+[18-Mar-2025 14:29:09 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[18-Mar-2025 14:30:36 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 100%; /* Full width */
+            height: 100vh; /* Full height of the viewport */
+            margin: 0;
+            background-color: #ffffff;
+            border-radius: 0; /* Remove border radius for full screen */
+            overflow: hidden;
+            box-shadow: none; /* Remove shadow for full screen effect */
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            flex: 0 0 auto; /* Header takes only its content height */
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+            flex: 1 1 auto; /* Content takes remaining space */
+            overflow-y: auto; /* Allow scrolling if content overflows */
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:30:36 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[18-Mar-2025 14:30:59 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 30px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+
+[18-Mar-2025 14:30:59 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[18-Mar-2025 14:34:01 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            flex: 0 0 auto;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+            flex: 1 1 auto;
+            overflow-y: auto;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='header'>
+    <h1>Report Concern</h1>
+    <p>Received via {{appName}}</p>
+</div>
+<div class='container'>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:34:01 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw

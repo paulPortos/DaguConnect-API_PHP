@@ -22,7 +22,7 @@ class ContactController extends BaseController
         }
 
         // Send the email using the Email_Sender class
-        Email_Sender::sendContactMessage($userEmail, $subject, $message);
+        Email_Sender::sendContactMessage($userEmail, $message);
 
        $this->jsonResponse(['message' => 'Contact message sent successfully']);
     }
