@@ -110,9 +110,6 @@ class Email_Sender extends BaseController
             $reportConcernPath = __DIR__ . '/../Views/Report_Concern.html';
             $reportTemplate = file_get_contents($reportConcernPath);
 
-            error_log("Template content: " . $reportTemplate); // Debug log
-            error_log("Replacing with userEmail: $userEmail, message: $message"); // Debug log
-
             // Replace all placeholders
             $emailBody = str_replace(
                 ['{{userEmail}}', '{{message}}', '{{appName}}', '{{year}}'],
