@@ -5,12 +5,13 @@ namespace DaguConnect\Routes;
 use Controller\AdminAuthController;
 use Controller\App\ChatController;
 use Controller\App\Client\ClientProfileController;
+use Controller\App\ClientController;
+use Controller\App\ContactController;
 use Controller\App\JobApplicationController;
 use Controller\App\JobController;
 use Controller\App\RatingsController;
 use Controller\App\ReportController;
 use Controller\APP\ResumeController;
-use Controller\App\ClientController;
 use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
 use Controller\NotificationController;
@@ -18,6 +19,7 @@ use Controller\Web\DashboardController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\Chat;
+use DaguConnect\Model\Client;
 use DaguConnect\Model\Client_Profile;
 use DaguConnect\Model\Job;
 use DaguConnect\Model\Job_Application;
@@ -25,7 +27,6 @@ use DaguConnect\Model\Notification;
 use DaguConnect\Model\Rating;
 use DaguConnect\Model\Report;
 use DaguConnect\Model\Resume;
-use DaguConnect\Model\Client;
 use DaguConnect\Model\Tradesman;
 use DaguConnect\Model\User;
 use Exception;
@@ -577,6 +578,15 @@ class Api extends BaseApi
             $this->responseBodyChecker();
             $adminAuthController = new AdminAuthController(new Admin($this->db));
             $adminAuthController->resetPassword($otp, $new_password);
+        });
+
+        $this->route('POST', '/user/contact', function () {
+            $this->responseBodyChecker();
+            $userEmail = $this->requestBody['user_email'];
+            $message = $this->requestBody['message'];
+
+            $contactController = new ContactController();
+            $contactController->sendContactMessage($userEmail,$message);
         });
     }
 

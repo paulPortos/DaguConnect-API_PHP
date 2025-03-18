@@ -3412,3 +3412,4 @@ Stack trace:
 #1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
 #2 {main}
   thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[18-Mar-2025 11:40:31 UTC] PHP Parse error:  syntax error, unexpected token "class", expecting "function" or "const" in C:\xampp\htdocs\DaguConnect-API_PHP\PhpMailer\Email_Sender.php on line 95

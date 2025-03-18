@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {$_ENV['APP_NAME']}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
