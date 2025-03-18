@@ -200,14 +200,19 @@ class Job extends BaseModel
 
     public function viewUserJob($user_id, int $page, int $limit): array {
         $offset = ($page - 1) * $limit;
-
         try {
             $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE user_id = :user_id");
             $countStmt->bindParam(':user_id', $user_id);
             $countStmt->execute();
             $totalJobs = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int to avoid errors
 
-            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE user_id = :user_id LIMIT :limit OFFSET :offset");
+            $stmt = $this->db->prepare("
+            SELECT * FROM $this->table 
+            WHERE user_id = :user_id 
+            ORDER BY FIELD(status, 'Available', 'Active', 'Completed', 'Deadline_End')
+            LIMIT :limit OFFSET :offset
+            ");
+
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);

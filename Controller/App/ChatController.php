@@ -80,7 +80,12 @@ class ChatController extends BaseController
         }
     }
 
-    public function getMessages(int $user_id, int $chat_id, $page, $limit): void{
+    public function getMessages(int $user_id, int $chat_id, int $receiver_id, $page, $limit): void{
+
+        if ($chat_id == 0){
+            $chat_id = $this->model->ifChatIdExistsBetweenUsers($user_id, $receiver_id);
+        }
+
         $messagesData = $this->model->getMessages($user_id, $chat_id, $page, $limit);
 
         $this->model->markAsReadChat($chat_id, $user_id);

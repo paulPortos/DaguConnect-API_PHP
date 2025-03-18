@@ -39,4 +39,15 @@ class Notification extends BaseModel
             return [];
         }
     }
+
+    public function clearNotification($user_id): bool {
+        try {
+            $stmt = $this->db->prepare("DELETE FROM $this->table WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }

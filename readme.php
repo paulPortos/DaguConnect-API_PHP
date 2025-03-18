@@ -32,4 +32,8 @@ go to php.ini remove the semicolon in upload_tmp_dir  and "C:\xampp\tmp" to it a
 */
 
 
+/*
+Start websocket type "php WebSocket/start.php" in the terminal
+*/
+
 

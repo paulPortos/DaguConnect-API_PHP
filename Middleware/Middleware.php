@@ -19,7 +19,6 @@ trait Middleware
             '/user/job/view/{id}',
             '/user/tradesman/job-applications',
             '/user/tradesman/job-applications/{jobId}',
-            '/user/client/job/apply',
             '/user/tradesman/bookings/status/{booking_id}',
             '/user/client/work/status/{booking_id}',
             '/user/client/getbooking',
@@ -52,7 +51,8 @@ trait Middleware
             '/client/jobs/update/{jobId}',
             '/admin/username/update',
             '/admin/profile_picture/update',
-            '/user/tradesman/update/activeStatus'
+            '/user/tradesman/update/activeStatus',
+            '/user/notification/clear'
         ];
 
         foreach ($protectedRoutes as $protectedRoute) {

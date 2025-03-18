@@ -372,12 +372,13 @@ class WebSocketServer {
 
             // If no chat exists, create a new one
             if (!$chatId) {
-                $insertQuery = "INSERT INTO $this->table (user1_id, user2_id, latest_message) 
-                                VALUES (:user1_id, :user2_id, :latest_message)";
+                $insertQuery = "INSERT INTO $this->table (user1_id, user2_id, latest_message, last_sender_id) 
+                VALUES (:user1_id, :user2_id, :latest_message, :last_sender_id)";
                 $insertStmt = $this->db->prepare($insertQuery);
                 $insertStmt->bindParam(':user1_id', $user_id, PDO::PARAM_INT);
                 $insertStmt->bindParam(':user2_id', $receiver_id, PDO::PARAM_INT);
                 $insertStmt->bindParam(':latest_message', $message);
+                $insertStmt->bindParam(':last_sender_id', $user_id, PDO::PARAM_INT);
                 $insertStmt->execute();
 
                 $chatId = $this->db->lastInsertId();

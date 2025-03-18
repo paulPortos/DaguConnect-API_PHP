@@ -42,16 +42,27 @@ class AuthenticationController extends BaseController
 
     public function __construct(User $user_Model, Resume $resume_Model, Client_Profile $clientProfile_Model)
     {
-
         $this->db = new config();
         $this->userModel = $user_Model;
         $this->resumeModel = $resume_Model;
         $this->clientProfileModel = $clientProfile_Model;
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param string $first_name The first name of the user.
+     * @param string $last_name The last name of the user.
+     * @param string $username The username of the user.
+     * @param string $birthdate The birthdate of the user.
+     * @param string $email The email address of the user.
+     * @param bool $is_client Indicates if the user is a client.
+     * @param string $password The password of the user.
+     * @param string $confirm_password The confirmation password.
+     * @return void
+     */
     public function register($first_name, $last_name, $username, $birthdate, $email, $is_client ,$password, $confirm_password): void
     {
-
         //creates the full name of the tradesman
         $fullname = $first_name." ".$last_name;
         //Check if password and confirm password match
@@ -139,6 +150,12 @@ class AuthenticationController extends BaseController
         }
     }
 
+    /**
+     * Verifies the email address of a user.
+     *
+     * @param string $email The email address to be verified.
+     * @return void
+     */
     public function verifyEmail($email): void
     {
         if (isset($email)) {
@@ -204,32 +221,13 @@ class AuthenticationController extends BaseController
                 $this->jsonResponse(['message' => 'Token generation failed'], 500);
             }
         }
-
-
-
-
-
-        /*if($this->userModel->loginUser($email,$password)){
-            $user = $this->getUserByEmail($email,$this->db->getDB());
-            if($user){
-                $token = $this->generateToken($user['id'], $this -> db->getDB());
-                if($token){
-                    if($user['email_verified_at'] !== null){
-                        $this->jsonResponse(['message' => 'Login successful', 'token' => $token], 200);
-                    }else{
-                        $this->jsonResponse(['message' => 'Email not verified'], 400);
-                    }
-                }else{
-                    $this->jsonResponse(['message' => 'Token generation failed'], 500);
-                }
-            }else{
-                $this->jsonResponse(['message' => 'User not found'], 404);
-            }
-        }else{
-            $this->jsonResponse(['message' => 'Email or password invalid' ], 400);
-        }*/
     }
 
+    /**
+     * Logs out the user by invalidating the authorization token.
+     *
+     * @return void
+     */
     public function logout(): void {
         // Retrieve the token from the Authorization header
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? null;
@@ -256,7 +254,14 @@ class AuthenticationController extends BaseController
         }
     }
 
-
+    /**
+     * Changes the password for a user.
+     *
+     * @param int $userId The ID of the user.
+     * @param string $Current_Password The current password of the user.
+     * @param string $New_Password The new password to be set.
+     * @return void
+     */
     public function changepass($userId,$Current_Password,$New_Password): void
     {
         $New_Password = $this->userModel->changePass($userId,$Current_Password,$New_Password);
@@ -268,6 +273,12 @@ class AuthenticationController extends BaseController
         }
     }
 
+    /**
+     * Handles the forgot password process by generating and sending an OTP to the user's email.
+     *
+     * @param string $email The email address of the user who forgot their password.
+     * @return void
+     */
     public function forgotpassword($email){
 
         $email_checker = $this->exists($email, 'email','users');
@@ -286,10 +297,17 @@ class AuthenticationController extends BaseController
         }else{
             $this->jsonResponse(["message" => "Token generation failed"], 500);
         }
-
     }
 
-    public function resetpassword($otp, $new_password) {
+    /**
+     * Resets the password for a user using an OTP.
+     *
+     * @param string $otp The OTP provided by the user.
+     * @param string $new_password The new password to be set.
+     * @return void
+     */
+    public function resetpassword($otp, $new_password): void
+    {
         // Call the model function to reset the password
         $resetSuccess = $this->ResetPasswordByToken($otp, $new_password, $this->db->getDB());
 

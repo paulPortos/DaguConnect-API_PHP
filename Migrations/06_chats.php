@@ -12,8 +12,6 @@ PRIMARY KEY (id),
 UNIQUE KEY unique_chat_pair (user1_id, user2_id),
 FOREIGN KEY (user1_id) REFERENCES users(id) ON DELETE CASCADE,
 FOREIGN KEY (user2_id) REFERENCES users(id) ON DELETE CASCADE,
-FOREIGN KEY (last_sender_id) REFERENCES users(id) ON DELETE CASCADE,
-INDEX idx_last_sender_id (last_sender_id),
 INDEX idx_user1_id (user1_id),
 INDEX idx_user2_id (user2_id)
 ) ENGINE = InnoDB;

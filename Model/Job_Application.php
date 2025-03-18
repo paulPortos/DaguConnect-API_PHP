@@ -5,6 +5,7 @@ namespace DaguConnect\Model;
 use DaguConnect\Core\BaseModel;
 use PDO;
 use PDOException;
+use PHPMailer\PHPMailer\Exception;
 
 class Job_Application extends BaseModel
 {
@@ -191,7 +192,6 @@ class Job_Application extends BaseModel
     public function getMyJobsApplicants(int $client_id, int $page, int $limit): array
     {
         $offset = ($page - 1) * $limit;
-
         try {
             // Get total count of job applicants for the client
             $countStmt = $this->db->prepare("SELECT COUNT(*) as total FROM $this->table WHERE client_id = :client_id");
@@ -200,7 +200,13 @@ class Job_Application extends BaseModel
             $totalApplicants = (int) $countStmt->fetch(PDO::FETCH_ASSOC)['total']; // ✅ Cast to int
 
             // Get paginated job applicants
-            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE client_id = :client_id LIMIT :limit OFFSET :offset");
+            $stmt = $this->db->prepare("
+            SELECT * FROM $this->table 
+            WHERE client_id = :client_id 
+            ORDER BY job_id
+            LIMIT :limit OFFSET :offset
+            ");
+
             $stmt->bindParam(':client_id', $client_id, PDO::PARAM_INT);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -464,5 +470,38 @@ class Job_Application extends BaseModel
                 error_log("Error setting job to deadline: " . $e->getMessage());
                 return false;
             }
+        }
+
+        public function checkIfJobIsActive($job_application_id): bool
+        {
+            try {
+                $jobId = $this->getJobId($job_application_id);
+                $stmt = $this->db->prepare("SELECT status FROM jobs WHERE id = :job_id LIMIT 1");
+                $stmt->bindParam(':job_id', $jobId);
+                $stmt->execute();
+                return $stmt->fetchColumn() === 'Active';
+            } catch (PDOException $e) {
+                error_log("Error checking if job is active: " . $e->getMessage());
+                return false;
+            }
+        }
+
+        public function checkIfAllApplicantsAreCompleted($job_application_id): bool
+        {
+            $jobId = $this->getJobId($job_application_id);
+            $activeApplicationsCount = $this->getActiveJobApplicantsCount($jobId);
+            $applicantLimit = $this->getJobApplicationLimit($jobId);
+
+            if ($activeApplicationsCount === $applicantLimit) {
+                try {
+                    $stmt = $this->db->prepare("UPDATE jobs SET status = 'Completed' WHERE id = :job_id AND status = 'Active'");
+                    $stmt->bindParam(':job_id', $jobId);
+                    return $stmt->execute();
+                } catch (PDOException $e){
+                    error_log("Error updating job status to completed: " . $e->getMessage());
+                    return false;
+                }
+            }
+            return false;
         }
 }

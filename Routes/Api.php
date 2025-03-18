@@ -477,11 +477,11 @@ class Api extends BaseApi
             $jobController->viewUserJobs($userId, $page, $limit);
         });
 
-        $this->route('GET', '/user/message/{chatId}', function ($user_id, $chat_id) {
+        $this->route('GET', '/user/message/{chatId}/{receiverId}', function ($user_id, $chat_id, $receiver_id) {
             $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
             $limit = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 10;
             $messageController = new ChatController(new Chat($this->db));
-            $messageController->getMessages($user_id, $chat_id, $page, $limit);
+            $messageController->getMessages($user_id, $chat_id, $receiver_id, $page, $limit);
         });
 
         $this->route('DELETE', '/client/jobs/delete/{jobId}', function ($userId, $jobId){
@@ -577,6 +577,11 @@ class Api extends BaseApi
             $this->responseBodyChecker();
             $adminAuthController = new AdminAuthController(new Admin($this->db));
             $adminAuthController->resetPassword($otp, $new_password);
+        });
+
+        $this->route('DELETE', '/user/notification/clear', function ($userId) {
+            $notificationController = new NotificationController(new Notification($this->db));
+            $notificationController->clearNotification($userId);
         });
     }
 

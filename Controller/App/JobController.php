@@ -34,7 +34,7 @@ class JobController extends BaseController
         $this->db = new config();
         $this->job_model = $job_model;
     }
-    use IfDataExists;
+
 
     public function addJob($user_id, $salary, $applicant_limit_count, $job_type, $job_description, $address, $status, $deadline): void
     {

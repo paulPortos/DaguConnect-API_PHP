@@ -196,12 +196,22 @@ class JobApplicationController extends BaseController
             return;
         }
         if($status === 'Cancelled') {
+            if ($this->job_application_model->checkIfJobIsActive($job_applicationId)){
+                $this->jsonResponse(['message' => 'Job is already active.'], 400);
+                return;
+            }
             $message = 'Job application cancelled successfully.';
         } else if ($status === 'Declined') {
             $message = 'Job application declined successfully.';
         } else if ($status === 'Active') {
             $message = 'Job application accepted successfully.';
         } else if ($status === 'Completed') {
+            if (!$this->job_application_model->checkIfJobIsActive($job_applicationId)){
+                $this->jsonResponse(['message' => 'Job is not yet active.'], 400);
+                return;
+            }
+            if ($this->job_application_model->checkIfAllApplicantsAreCompleted($job_applicationId)){
+            }
             $message = 'Job application completed successfully.';
         } else {
             $this->jsonResponse(['message' => 'Invalid status.'], 400);

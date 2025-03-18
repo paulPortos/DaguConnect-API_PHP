@@ -201,4 +201,33 @@ class Chat extends BaseModel
         }
     }
 
+    public function ifChatIdExistsBetweenUsers($user_id, $receiver_id): int {
+        try{
+            $query = "SELECT id FROM $this->table WHERE (user1_id = :user_id AND user2_id = :receiver_id) OR (user1_id = :receiver_id2 AND user2_id = :user_id2)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':receiver_id', $receiver_id);
+            $stmt->bindParam(':user_id2', $user_id);
+            $stmt->bindParam(':receiver_id2', $receiver_id);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ? (int) $result['id'] : 0;
+        } catch (PDOException $e) {
+            error_log("Error checking chat id: ". $e->getMessage());
+            return 0;
+        }
+    }
+
+    public function createChatIdIfDoesntExists(){
+        try{
+            $query = "INSERT INTO $this->table (user1_id, user2_id) VALUES (:user1_id, :user2_id)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user1_id', $user1_id);
+            $stmt->bindParam(':user2_id', $user2_id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error creating chat id: ". $e->getMessage());
+            return false;
+        }
+    }
 }
