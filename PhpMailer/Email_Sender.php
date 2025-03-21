@@ -2,11 +2,12 @@
 
 namespace DaguConnect\PhpMailer;
 
+use DaguConnect\Core\BaseController;
 use PHPMailer\PHPMailer\PHPMailer;
 
 require_once __DIR__ . '/../Services/Env.php';
 
-class Email_Sender
+class Email_Sender extends BaseController
 {
     public static function sendVerificationEmail($email):void
     {
@@ -88,6 +89,48 @@ class Email_Sender
             $mail->send();
         } catch (\Exception $e) {
             error_log("Reset password email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        }
+    }
+
+    // New method for users to contact your email
+    public static function sendContactMessage($userEmail, $message,$report_problem): void
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host = $_ENV['MAIL_HOST'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $_ENV['MAIL_USERNAME'];
+            $mail->Password = $_ENV['MAIL_PASSWORD'];
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = $_ENV['MAIL_PORT'];
+
+            $reportConcernPath = __DIR__ . '/../Views/Report_Concern.html';
+            $reportTemplate = file_get_contents($reportConcernPath);
+
+            // Replace all placeholders
+            $emailBody = str_replace(
+                ['{{userEmail}}', '{{message}}', '{{appName}}', '{{year}}','{{Concern_type}}'],
+                [$userEmail, nl2br(htmlspecialchars($message)), $_ENV['APP_NAME'], date('Y'), $report_problem],
+                $reportTemplate
+            );
+
+            // Gmail SMTP will force the "From" address
+            $mail->setFrom($_ENV['MAIL_USERNAME'], $_ENV['APP_NAME']);
+            $mail->addReplyTo($userEmail, 'User');
+            $mail->addAddress($_ENV['MAIL_USERNAME']);
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = "Report Concern";
+            $mail->Body = $emailBody;
+            $mail->AltBody = "From: {$userEmail}\nMessage:\n{$message}";
+
+            $mail->send();
+        } catch (\Exception $e) {
+            error_log("Contact email could not be sent. Mailer Error: {$mail->ErrorInfo}");
         }
     }
 

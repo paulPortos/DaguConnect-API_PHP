@@ -5,12 +5,13 @@ namespace DaguConnect\Routes;
 use Controller\AdminAuthController;
 use Controller\App\ChatController;
 use Controller\App\Client\ClientProfileController;
+use Controller\App\ClientController;
+use Controller\App\ContactController;
 use Controller\App\JobApplicationController;
 use Controller\App\JobController;
 use Controller\App\RatingsController;
 use Controller\App\ReportController;
 use Controller\APP\ResumeController;
-use Controller\App\ClientController;
 use Controller\App\TradesmanController;
 use Controller\AuthenticationController;
 use Controller\NotificationController;
@@ -18,6 +19,7 @@ use Controller\Web\DashboardController;
 use DaguConnect\Core\BaseApi;
 use DaguConnect\Model\Admin;
 use DaguConnect\Model\Chat;
+use DaguConnect\Model\Client;
 use DaguConnect\Model\Client_Profile;
 use DaguConnect\Model\Job;
 use DaguConnect\Model\Job_Application;
@@ -25,7 +27,6 @@ use DaguConnect\Model\Notification;
 use DaguConnect\Model\Rating;
 use DaguConnect\Model\Report;
 use DaguConnect\Model\Resume;
-use DaguConnect\Model\Client;
 use DaguConnect\Model\Tradesman;
 use DaguConnect\Model\User;
 use Exception;
@@ -271,12 +272,12 @@ class Api extends BaseApi
         $this->route('PUT','/user/tradesman/update/activeStatus', function($tradesmanId){
             $this->responseBodyChecker();
 
-        $tradesman_status = $this->requestBody['tradesman_status'];
+            $tradesman_status = $this->requestBody['tradesman_status'];
             $ResumeController = new ResumeController(new Resume($this->db), new Client($this->db),new User($this->db),new Report($this->db),new Job_Application($this->db));
             $ResumeController->tradesmanActiveStatus($tradesman_status,$tradesmanId);
 
 
-    });
+        });
 
 
         $this->route('POST', '/user/client/rate/tradesman/{tradesman_id}', function ($userId,$tradesman_id) {
@@ -325,7 +326,7 @@ class Api extends BaseApi
             $phone_number = $this->requestBody['phone_number'] ?? null;
             $address = $this->requestBody['address'] ?? null;
             $task_type = $this->requestBody['task_type'] ?? null;
-                $task_description = $this->requestBody['task_description'] ?? null;
+            $task_description = $this->requestBody['task_description'] ?? null;
             $booking_date = $this->requestBody['booking_date'] ?? null;
 
             $ClientController = new ClientController(new Client($this->db),new Resume($this->db),new User($this->db));
@@ -577,6 +578,16 @@ class Api extends BaseApi
             $this->responseBodyChecker();
             $adminAuthController = new AdminAuthController(new Admin($this->db));
             $adminAuthController->resetPassword($otp, $new_password);
+        });
+
+        $this->route('POST', '/user/contact', function () {
+            $this->responseBodyChecker();
+            $userEmail = $this->requestBody['user_email'];
+            $message = $this->requestBody['report_message'];
+            $report_problem = $this->requestBody['report_problem'];
+
+            $contactController = new ContactController();
+            $contactController->sendContactMessage($userEmail,$message,$report_problem);
         });
 
         $this->route('DELETE', '/user/notification/clear', function ($userId) {

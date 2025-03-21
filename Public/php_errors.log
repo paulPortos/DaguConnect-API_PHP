@@ -3216,3 +3216,684 @@ Stack trace:
 [15-Mar-2025 11:00:33 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
 [15-Mar-2025 11:01:51 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
 [15-Mar-2025 11:01:52 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:06:00 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:06:18 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:06:33 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:12 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:14 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:15 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:21 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:21 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:30 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:31 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:34 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:37 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:39 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:51 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:52 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:07:53 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:11:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:11:29 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:11:32 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:11:33 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:11:34 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:11:58 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:11:58 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:12:01 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:12:02 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 11:12:03 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[17-Mar-2025 14:04:05 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:06:54 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:07:08 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:09:08 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:09:08 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:09:09 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:09:09 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:09:09 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:09:10 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:09:11 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:10:35 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:10:35 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:10:35 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:10:36 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:11:19 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:11:19 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:11:19 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:11:19 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:12:12 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:12:13 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:12:13 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:15:20 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 190
+[17-Mar-2025 14:15:20 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 190
+[17-Mar-2025 14:15:20 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 190
+[17-Mar-2025 14:16:12 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:16:12 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:16:12 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:16:33 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:16:33 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:16:34 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:16:42 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:16:42 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:16:43 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:17:11 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:17:12 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:17:12 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:17:32 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Modeltracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:17:33 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Modeltracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:17:33 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Modeltracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:20:41 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:20:42 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:20:42 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/tracker/last_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:20:54 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Modellast_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:20:54 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Modellast_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:20:54 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Modellast_expired_check.txt/): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:22:57 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\ModelC:\xampp\htdocs\DaguConnect-API_PHP\Public\last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:22:57 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\ModelC:\xampp\htdocs\DaguConnect-API_PHP\Public\last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:22:57 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\ModelC:\xampp\htdocs\DaguConnect-API_PHP\Public\last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:26:52 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/Model/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:26:52 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/Model/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:26:52 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model/Model/last_expired_check.txt): Failed to open stream: No such file or directory in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:31:12 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:32:16 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:37:10 UTC] PHP Warning:  file_get_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model): Failed to open stream: Permission denied in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 181
+[17-Mar-2025 14:37:10 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model): Failed to open stream: Permission denied in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:37:10 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 14:37:10 UTC] PHP Warning:  file_get_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model): Failed to open stream: Permission denied in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 181
+[17-Mar-2025 14:37:10 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model): Failed to open stream: Permission denied in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:37:10 UTC] PHP Warning:  file_get_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model): Failed to open stream: Permission denied in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 181
+[17-Mar-2025 14:37:10 UTC] PHP Warning:  file_put_contents(C:\xampp\htdocs\DaguConnect-API_PHP\Model): Failed to open stream: Permission denied in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Tradesman.php on line 189
+[17-Mar-2025 14:38:22 UTC] Updated booking ID 1 to Cancelled due to expiration
+[17-Mar-2025 15:04:45 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:04:45 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:04:45 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:38 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:38 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:38 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:38 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:39 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:39 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:40 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:40 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:40 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:42 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:43 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:08:43 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:09:16 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:09:18 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[17-Mar-2025 15:09:26 UTC] PHP Fatal error:  Uncaught Error: Typed property DaguConnect\Core\BaseApi::$db must not be accessed before initialization in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php:58
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(53): DaguConnect\Core\BaseApi->handleRequest()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#2 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php on line 58
+[18-Mar-2025 11:40:31 UTC] PHP Parse error:  syntax error, unexpected token "class", expecting "function" or "const" in C:\xampp\htdocs\DaguConnect-API_PHP\PhpMailer\Email_Sender.php on line 95
+[18-Mar-2025 14:22:06 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {$_ENV['APP_NAME']}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:22:06 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: Report Concern
+[18-Mar-2025 14:23:56 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:23:56 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: Report Concern
+[18-Mar-2025 14:24:46 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:24:46 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[18-Mar-2025 14:29:09 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+
+[18-Mar-2025 14:29:09 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[18-Mar-2025 14:30:36 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 100%; /* Full width */
+            height: 100vh; /* Full height of the viewport */
+            margin: 0;
+            background-color: #ffffff;
+            border-radius: 0; /* Remove border radius for full screen */
+            overflow: hidden;
+            box-shadow: none; /* Remove shadow for full screen effect */
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            flex: 0 0 auto; /* Header takes only its content height */
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+            flex: 1 1 auto; /* Content takes remaining space */
+            overflow-y: auto; /* Allow scrolling if content overflows */
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:30:36 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[18-Mar-2025 14:30:59 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 30px;
+            background-color: #f0f8ff;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='header'>
+        <h1>Report Concern</h1>
+        <p>Received via {{appName}}</p>
+    </div>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+
+[18-Mar-2025 14:30:59 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[18-Mar-2025 14:34:01 UTC] Template content: <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            flex: 0 0 auto;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+            flex: 1 1 auto;
+            overflow-y: auto;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='header'>
+    <h1>Report Concern</h1>
+    <p>Received via {{appName}}</p>
+</div>
+<div class='container'>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
+[18-Mar-2025 14:34:01 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
+[19-Mar-2025 14:30:31 UTC] PHP Warning:  Undefined array key "report_message" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 586

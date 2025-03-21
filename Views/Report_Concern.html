@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Contact Concern - {{appName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            min-height: 100vh; /* Ensure body takes at least the full viewport height */
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            flex: 0 0 auto; /* Header takes only the space it needs */
+        }
+        .container {
+            width: 100%;
+            flex: 1 1 auto; /* Container grows to fill remaining space */
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 80px); /* Adjust for header height (approx 80px) */
+        }
+        .content {
+            padding: 20px;
+            background-color: #f0f8ff;
+            flex: 1 1 auto; /* Content grows to fill remaining space in container */
+            width: 100%; /* Ensure content stretches to full width of container */
+            overflow-y: auto; /* Scroll if content overflows */
+            min-height: 0; /* Prevents flexbox from breaking in some browsers */
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .label {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class='header'>
+    <h1>Report Concern</h1>
+    <p>Received via {{appName}}</p>
+</div>
+<div class='container'>
+    <div class='content'>
+        <h2>Concern Details</h2>
+        <p class='label'>From:</p>
+        <p>{{userEmail}}</p>
+        <p class='label'>Concern Type:</p>
+        <p>{{Concern_type}}</p>
+        <p class='label'>Message:</p>
+        <p>{{message}}</p>
+    </div>
+</div>
+</body>
+</html>
