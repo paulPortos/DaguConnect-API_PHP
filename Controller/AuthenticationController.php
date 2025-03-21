@@ -26,8 +26,6 @@ class AuthenticationController extends BaseController
     private User $userModel;
     private Resume $resumeModel;
 
-
-
     private Client_Profile $clientProfileModel;
 
     use Confirm_Password;

@@ -217,17 +217,4 @@ class Chat extends BaseModel
             return 0;
         }
     }
-
-    public function createChatIdIfDoesntExists(){
-        try{
-            $query = "INSERT INTO $this->table (user1_id, user2_id) VALUES (:user1_id, :user2_id)";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':user1_id', $user1_id);
-            $stmt->bindParam(':user2_id', $user2_id);
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Error creating chat id: ". $e->getMessage());
-            return false;
-        }
-    }
 }

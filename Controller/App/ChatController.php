@@ -104,4 +104,8 @@ class ChatController extends BaseController
             $this->jsonResponse(['message' => 'No messages found'], 200);
         }
     }
+
+    public function searchChat($name) {
+        $userId = $this->model->getUserIdByName($name);
+    }
 }

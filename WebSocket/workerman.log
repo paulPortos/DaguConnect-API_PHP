@@ -49,3 +49,14 @@ Stack trace:
 #3 C:\xampp\htdocs\DaguConnect-API_PHP\WebSocket\start.php(39): Workerman\Worker::runAll()
 #4 {main}
 2025-03-14 03:34:37 pid:1 Worker process terminated
+2025-03-20 10:16:12 pid:1 PDOException: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away in C:\xampp\htdocs\DaguConnect-API_PHP\WebSocket\WebSocketServer.php:84
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\WebSocket\WebSocketServer.php(84): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\WebSocket\start.php(25): DaguConnect\WebSocket\WebSocketServer->onMessage(Object(Workerman\Connection\TcpConnection), '{"type": "auth"...')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Connection\TcpConnection.php(748): {closure}(Object(Workerman\Connection\TcpConnection), '{"type": "auth"...')
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Events\Select.php(408): Workerman\Connection\TcpConnection->baseRead(Resource id #348)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(1601): Workerman\Events\Select->run()
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(1526): Workerman\Worker::forkWorkersForWindows()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(593): Workerman\Worker::forkWorkers()
+#7 C:\xampp\htdocs\DaguConnect-API_PHP\WebSocket\start.php(39): Workerman\Worker::runAll()
+#8 {main}
