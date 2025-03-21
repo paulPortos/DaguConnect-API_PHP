@@ -583,10 +583,11 @@ class Api extends BaseApi
         $this->route('POST', '/user/contact', function () {
             $this->responseBodyChecker();
             $userEmail = $this->requestBody['user_email'];
-            $message = $this->requestBody['message'];
+            $message = $this->requestBody['report_message'];
+            $report_problem = $this->requestBody['report_problem'];
 
             $contactController = new ContactController();
-            $contactController->sendContactMessage($userEmail,$message);
+            $contactController->sendContactMessage($userEmail,$message,$report_problem);
         });
     }
 

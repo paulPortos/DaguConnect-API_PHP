@@ -174,3 +174,11 @@ Stack trace:
 [17-Mar-2025 15:13:22 UTC] Running checkAllExpiredBookings at 2025-03-17 15:13:22
 [17-Mar-2025 15:13:22 UTC] Updated booking ID 1 to Cancelled due to expiration
 [17-Mar-2025 15:13:22 UTC] Finished checking expired bookings at 2025-03-17 15:13:22
+[19-Mar-2025 11:25:18 UTC] PHP Warning:  stream_socket_server(): Unable to connect to tcp://192.168.1.141:8080 (The requested address is not valid in its context) in C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php on line 2396
+[19-Mar-2025 14:17:18 UTC] Error removing WebSocket connection: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.websocket_clients' doesn't exist
+[19-Mar-2025 14:55:59 UTC] Error removing WebSocket connection: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.websocket_clients' doesn't exist
+[20-Mar-2025 08:35:41 UTC] Error removing WebSocket connection: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.websocket_clients' doesn't exist
+[20-Mar-2025 08:51:03 UTC] Error removing WebSocket connection: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.websocket_clients' doesn't exist
+[20-Mar-2025 08:55:31 UTC] Error removing WebSocket connection: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.websocket_clients' doesn't exist
+[20-Mar-2025 08:55:55 UTC] Error removing WebSocket connection: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.websocket_clients' doesn't exist
+[20-Mar-2025 08:57:46 UTC] Error removing WebSocket connection: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'daguconnect-db.websocket_clients' doesn't exist

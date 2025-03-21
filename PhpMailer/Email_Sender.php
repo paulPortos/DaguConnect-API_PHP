@@ -93,7 +93,7 @@ class Email_Sender extends BaseController
     }
 
     // New method for users to contact your email
-    public static function sendContactMessage($userEmail, $message): void
+    public static function sendContactMessage($userEmail, $message,$report_problem): void
     {
         $mail = new PHPMailer(true);
 
@@ -112,8 +112,8 @@ class Email_Sender extends BaseController
 
             // Replace all placeholders
             $emailBody = str_replace(
-                ['{{userEmail}}', '{{message}}', '{{appName}}', '{{year}}'],
-                [$userEmail, nl2br(htmlspecialchars($message)), $_ENV['APP_NAME'], date('Y')],
+                ['{{userEmail}}', '{{message}}', '{{appName}}', '{{year}}','{{Concern_type}}'],
+                [$userEmail, nl2br(htmlspecialchars($message)), $_ENV['APP_NAME'], date('Y'), $report_problem],
                 $reportTemplate
             );
 

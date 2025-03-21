@@ -7,9 +7,9 @@ use DaguConnect\PhpMailer\Email_Sender;
 
 class ContactController extends BaseController
 {
-    public function sendContactMessage($userEmail,$message): void
+    public function sendContactMessage($userEmail,$message,$report_problem): void
     {
-        $subject ='Report Concern';
+
 
         // Validation
         if (empty($userEmail) || !filter_var($userEmail, FILTER_VALIDATE_EMAIL)) {
@@ -22,7 +22,7 @@ class ContactController extends BaseController
         }
 
         // Send the email using the Email_Sender class
-        Email_Sender::sendContactMessage($userEmail, $message);
+        Email_Sender::sendContactMessage($userEmail, $message,$report_problem);
 
        $this->jsonResponse(['message' => 'Contact message sent successfully']);
     }

@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             color: #333;
-            min-height: 100vh;
+            min-height: 100vh; /* Ensure body takes at least the full viewport height */
             display: flex;
             flex-direction: column;
         }
@@ -19,20 +19,22 @@
             color: #ffffff;
             text-align: center;
             padding: 20px;
-            flex: 0 0 auto;
+            flex: 0 0 auto; /* Header takes only the space it needs */
         }
         .container {
             width: 100%;
-            height: 100vh;
+            flex: 1 1 auto; /* Container grows to fill remaining space */
             display: flex;
             flex-direction: column;
-            flex: 1 1 auto;
+            min-height: calc(100vh - 80px); /* Adjust for header height (approx 80px) */
         }
         .content {
             padding: 20px;
             background-color: #f0f8ff;
-            flex: 1 1 auto;
-            overflow-y: auto;
+            flex: 1 1 auto; /* Content grows to fill remaining space in container */
+            width: 100%; /* Ensure content stretches to full width of container */
+            overflow-y: auto; /* Scroll if content overflows */
+            min-height: 0; /* Prevents flexbox from breaking in some browsers */
         }
         .content h2 {
             color: #007bff;
@@ -60,6 +62,8 @@
         <h2>Concern Details</h2>
         <p class='label'>From:</p>
         <p>{{userEmail}}</p>
+        <p class='label'>Concern Type:</p>
+        <p>{{Concern_type}}</p>
         <p class='label'>Message:</p>
         <p>{{message}}</p>
     </div>
