@@ -3897,3 +3897,35 @@ Stack trace:
 </html>
 [18-Mar-2025 14:34:01 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
 [19-Mar-2025 14:30:31 UTC] PHP Warning:  Undefined array key "report_message" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 586
+[22-Mar-2025 12:55:17 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php:163
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php(163): PDOStatement->bindParam(':userId', 3, 1)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(47): DaguConnect\Model\Client->CheckCompletedBookings(3, 2)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(289): Controller\App\RatingsController->rateTradesman(3, 4, 5, 'tester', 2)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 4, 2)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(55): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php on line 163
+[22-Mar-2025 12:55:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php:163
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php(163): PDOStatement->bindParam(':userId', 3, 1)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(47): DaguConnect\Model\Client->CheckCompletedBookings(3, 2)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(289): Controller\App\RatingsController->rateTradesman(3, 4, 5, 'tester', 2)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 4, 2)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(55): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php on line 163
+[22-Mar-2025 13:06:12 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:12 UTC] Updated booking ID 1 to Cancelled due to expiration
+[22-Mar-2025 13:06:13 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:36 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:50 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:51 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:53 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:55 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'

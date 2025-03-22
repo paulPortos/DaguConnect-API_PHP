@@ -24,7 +24,7 @@ class RatingsController extends BaseController
         $this->resume = $resume;
     }
 
-    public function rateTradesman($client_id,$tradesman_id,$rating,$message,){
+    public function rateTradesman($client_id,$tradesman_id,$rating,$message,$booking_id){
 
         //gets client details
         $Client_detail = $this->client_Profile->getClientDetails($client_id);
@@ -42,9 +42,9 @@ class RatingsController extends BaseController
         $tradesmanDetails = $this->resume->getTradesmanDetails($tradesman_id);
 
         //gets the tradesman_fullaname
-        $tradesman_fullname = $tradesmanDetails['tradesman_full_name'];
+        $tradesman_FullName = $tradesmanDetails['tradesman_full_name'];
 
-        $completedStatus = $this->client->CheckCompletedBookings($client_id,$tradesman_id);
+        $completedStatus = $this->client->CheckCompletedBookings($client_id,$booking_id);
 
         if(!$completedStatus){
             $this->jsonResponse([
@@ -54,7 +54,7 @@ class RatingsController extends BaseController
         }
 
 
-        $ExistingRating = $this->rating->ExistingRating($client_id,$tradesman_id);
+        $ExistingRating = $this->rating->ExistingRating($client_id,$booking_id);
         if($ExistingRating){
             $this->jsonResponse(['message'=>'Already Rated This booking'],400);
             return;
@@ -62,9 +62,9 @@ class RatingsController extends BaseController
 
 
 
-        $ratingtradesman = $this->rating->RateTradesman($client_id,$tradesman_id,$rating,$message,$client_name,$client_profile,$tradesman_fullname);
+        $ratingTradesman = $this->rating->RateTradesman($client_id,$booking_id,$tradesman_id,$rating,$message,$client_name,$client_profile,$tradesman_FullName);
 
-        if(!$ratingtradesman){
+        if(!$ratingTradesman){
             $this->jsonResponse([
                 'message' => "Rating Tradesman cannot be found",
                 ],400

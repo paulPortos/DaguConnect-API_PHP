@@ -2,5 +2,9 @@
     "2": {
         "user_id": "2",
         "connection_id": 45
+    },
+    "4": {
+        "user_id": "4",
+        "connection_id": 9
     }
 }
