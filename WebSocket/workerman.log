@@ -57,3 +57,19 @@ Stack trace:
 #3 C:\xampp\htdocs\DaguConnect-API_PHP\WebSocket\start.php(39): Workerman\Worker::runAll()
 #4 {main}
 2025-03-22 12:38:25 pid:1 Worker process terminated
+2025-03-23 04:28:52 pid:1 RuntimeException: The requested address is not valid in its context in C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php:2398
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(1599): Workerman\Worker->listen()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(1526): Workerman\Worker::forkWorkersForWindows()
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(593): Workerman\Worker::forkWorkers()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\WebSocket\start.php(39): Workerman\Worker::runAll()
+#4 {main}
+2025-03-23 04:28:52 pid:1 Worker process terminated
+2025-03-23 04:28:54 pid:1 RuntimeException: The requested address is not valid in its context in C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php:2398
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(1599): Workerman\Worker->listen()
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(1526): Workerman\Worker::forkWorkersForWindows()
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php(593): Workerman\Worker::forkWorkers()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\WebSocket\start.php(39): Workerman\Worker::runAll()
+#4 {main}
+2025-03-23 04:28:54 pid:1 Worker process terminated
