@@ -167,4 +167,17 @@ class JobController extends BaseController
             $this->jsonResponse(['message' => "Job does not belong to this user."], 500);
         }
     }
+
+    public function getJobPostedByClient($clientId): void
+    {
+        $result = $this->job_model->getJobsPostedByClient($clientId);
+        if (empty($result)) {
+            $this->jsonResponse(['message' => "No jobs available"], 200);
+            return;
+        }
+
+        $this->jsonResponse([
+            'jobs' => $result
+        ], 200);
+    }
 }

@@ -594,6 +594,12 @@ class Api extends BaseApi
             $notificationController = new NotificationController(new Notification($this->db));
             $notificationController->clearNotification($userId);
         });
+
+
+        $this->route('GET', '/job/getClientPostedJob/{clientId}', function ($clientId) {
+            $jobController = new JobController(new Job($this->db));
+            $jobController->getJobPostedByClient($clientId);
+        });
     }
 
     //Check if the response body for POST is empty

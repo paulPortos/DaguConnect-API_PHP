@@ -290,5 +290,15 @@ class Job extends BaseModel
         }
     }
 
-
+    public function getJobsPostedByClient($clientId): array {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE user_id = :client_id");
+            $stmt->bindParam(':client_id', $clientId);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error getting jobs posted by client: " . $e->getMessage());
+            return[];
+        }
+    }
 }
