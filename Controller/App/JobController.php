@@ -154,12 +154,12 @@ class JobController extends BaseController
     }
 
     public function deleteJob($id, $user_id): void{
-        $delete_job = $this->job_model->deleteJob($id, $user_id);
-
         if (!$this->exists($id, "id", "jobs")) {
             $this->jsonResponse(['message' => "Job does not exist."], 404);
             return;
         }
+
+        $delete_job = $this->job_model->deleteJob($id, $user_id);
 
         if ($delete_job) {
             $this->jsonResponse(['message' => "Job deleted successfully."], 200);

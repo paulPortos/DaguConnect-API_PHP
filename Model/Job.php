@@ -235,23 +235,27 @@ class Job extends BaseModel
         }
     }
 
-    public function deleteJob($id, $user_id): bool{
+    public function deleteJob($id, $user_id): bool {
         try {
+            // First, delete related job applications
+            $stmt = $this->db->prepare("DELETE FROM job_applications WHERE job_id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            // Then, delete the job itself
             $stmt = $this->db->prepare("DELETE FROM $this->table WHERE id = :id AND user_id = :user_id");
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+
+            return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
-            error_log("Error deleting job: ". $e->getMessage());
+            error_log("Error deleting job: " . $e->getMessage());
             var_dump($e->getMessage());
             return false;
         }
     }
+
 
     public function getProfileIdByUserId($user_id): int
     {

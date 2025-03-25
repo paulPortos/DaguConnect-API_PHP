@@ -460,6 +460,19 @@ class Job_Application extends BaseModel
             }
         }
 
+    public function getCompletedJobApplicantsCount($job_id): int
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM $this->table WHERE job_id = :job_id AND status = 'Completed'");
+            $stmt->bindParam(':job_id', $job_id);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error getting completed job applicants count: " . $e->getMessage());
+            return 0;
+        }
+    }
+
         public function setJobToActive($job_id): bool
         {
             try {
@@ -489,10 +502,10 @@ class Job_Application extends BaseModel
         public function checkIfAllApplicantsAreCompleted($job_application_id): bool
         {
             $jobId = $this->getJobId($job_application_id);
-            $activeApplicationsCount = $this->getActiveJobApplicantsCount($jobId);
+            $completedApplicationCount = $this->getCompletedJobApplicantsCount($jobId);
             $applicantLimit = $this->getJobApplicationLimit($jobId);
 
-            if ($activeApplicationsCount === $applicantLimit) {
+            if ($completedApplicationCount === $applicantLimit) {
                 try {
                     $stmt = $this->db->prepare("UPDATE jobs SET status = 'Completed' WHERE id = :job_id AND status = 'Active'");
                     $stmt->bindParam(':job_id', $jobId);

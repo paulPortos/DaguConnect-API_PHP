@@ -63,7 +63,7 @@ class JobApplicationController extends BaseController
         }
 
         if (!$this->job_application_model->isApproved($user_id)) {
-            $this->jsonResponse(['message' => 'Your resume must be approved to apply for jobs.'], 400);
+            $this->jsonResponse(['message' => 'Your resume must be approved before you can apply for jobs.'], 400);
             return;
         }
 
@@ -191,7 +191,7 @@ class JobApplicationController extends BaseController
     }
 
     public function changeJobApplicationStatus(int $user_id, int $job_applicationId, string $status, string $cancel_reason = ""):void {
-        if (!$this->exists($job_applicationId, "id", "jobs")) {
+        if (!$this->exists($job_applicationId, "id", "job_applications")) {
             $this->jsonResponse(['message' => 'Invalid job application ID'], 400);
             return;
         }
@@ -210,8 +210,7 @@ class JobApplicationController extends BaseController
                 $this->jsonResponse(['message' => 'Job is not yet active.'], 400);
                 return;
             }
-            if ($this->job_application_model->checkIfAllApplicantsAreCompleted($job_applicationId)){
-            }
+
             $message = 'Job application completed successfully.';
         } else {
             $this->jsonResponse(['message' => 'Invalid status.'], 400);
@@ -221,6 +220,7 @@ class JobApplicationController extends BaseController
         if ($this->job_application_model->isClient($user_id)) {
             if ($this->job_application_model->changeJobApplicationStatusClient($user_id, $job_applicationId, $status)) {
                 $this->job_application_model->checkJobApplicationLimit($job_applicationId);
+                $this->job_application_model->checkIfAllApplicantsAreCompleted($job_applicationId);
                 $this->jsonResponse(['message' => $message], 201);
                 if ($status === 'Cancelled') {
                     $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Client');
