@@ -280,13 +280,13 @@ class Api extends BaseApi
         });
 
 
-        $this->route('POST', '/user/client/rate/tradesman/{tradesman_id}', function ($userId,$tradesman_id) {
+        $this->route('POST', '/user/client/rate/tradesman/{tradesman_id}/{booking_id}', function ($userId,$tradesman_id,$booking_id) {
             $this->responseBodyChecker();
             $message = $this->requestBody['message'];
             $rating = $this->requestBody['rating'];
 
             $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));
-            $RatingController->rateTradesman($userId,$tradesman_id,$rating,$message);
+            $RatingController->rateTradesman($userId,$tradesman_id,$rating,$message,$booking_id);
         });
         $this->route('GET', '/user/client/view/tradesman/rating/{tradesman_id}', function ($user_id,$tradesman_Id) {
             $RatingController = new RatingsController(new Rating($this->db),new Client_Profile($this->db),new Client($this->db),new Resume($this->db));

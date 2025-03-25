@@ -3897,3 +3897,108 @@ Stack trace:
 </html>
 [18-Mar-2025 14:34:01 UTC] Replacing with userEmail: karlosrivo@gmail.com, message: sadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadwsadw
 [19-Mar-2025 14:30:31 UTC] PHP Warning:  Undefined array key "report_message" in C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php on line 586
+[22-Mar-2025 12:55:17 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php:163
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php(163): PDOStatement->bindParam(':userId', 3, 1)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(47): DaguConnect\Model\Client->CheckCompletedBookings(3, 2)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(289): Controller\App\RatingsController->rateTradesman(3, 4, 5, 'tester', 2)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 4, 2)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(55): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php on line 163
+[22-Mar-2025 12:55:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php:163
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php(163): PDOStatement->bindParam(':userId', 3, 1)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Controller\App\RatingsController.php(47): DaguConnect\Model\Client->CheckCompletedBookings(3, 2)
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(289): Controller\App\RatingsController->rateTradesman(3, 4, 5, 'tester', 2)
+#3 [internal function]: DaguConnect\Routes\Api->DaguConnect\Routes\{closure}(3, 4, 2)
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\Core\BaseApi.php(65): call_user_func_array(Object(Closure), Array)
+#5 C:\xampp\htdocs\DaguConnect-API_PHP\Routes\Api.php(55): DaguConnect\Core\BaseApi->handleRequest()
+#6 C:\xampp\htdocs\DaguConnect-API_PHP\Public\Index.php(13): DaguConnect\Routes\Api->__construct()
+#7 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Model\Client.php on line 163
+[22-Mar-2025 13:06:12 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:12 UTC] Updated booking ID 1 to Cancelled due to expiration
+[22-Mar-2025 13:06:13 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:36 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:50 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:51 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:53 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[22-Mar-2025 13:06:55 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:33:03 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:33:35 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[23-Mar-2025 04:33:35 UTC] Error updating tradesman profile in job application: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'profile_pic' in 'field list'
+[23-Mar-2025 04:35:37 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:36:03 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:36:22 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:40:03 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:41:53 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:42:50 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:43:29 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:43:59 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:47:45 UTC] Error updating profile picture: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:58:14 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:58:14 UTC] Updated booking ID 1 to Cancelled due to expiration
+[23-Mar-2025 04:58:16 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:58:29 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:58:48 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 04:58:49 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 05:00:52 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:26 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:32 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:32 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:33 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:33 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:34 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:34 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:36:35 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:05 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:05 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:06 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:06 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:12 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:21 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:21 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:25 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:25 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:26 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:27 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:27 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:37:28 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:41:32 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:42:08 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:42:08 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:42:24 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:42:24 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:42:51 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:06 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:06 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:10 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:11 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:30 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:36 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:36 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:40 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:42 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:43 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:43:43 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:44:29 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:44:31 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:44:31 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:44:41 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:44:41 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:44:42 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:44:52 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:44:52 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:45:34 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:45:34 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:46:31 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:46:31 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+[23-Mar-2025 06:48:56 UTC] Error tracing table: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'

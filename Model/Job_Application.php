@@ -30,7 +30,7 @@ class Job_Application extends BaseModel
      * @return bool Returns true if the job application was successfully inserted, false otherwise.
      */
     //Apply for a job
-    public function applyJob(int $user_id, int $resume_id, int $job_id, int $client_id, string $client_full_name, string $tradesman_full_name, string $client_profile_picture, string $tradesman_profile_picture, string $job_address, string $job_type, string $job_deadline, string $qualifications_summary, string $status):bool {
+    public function applyJob(int $user_id, int $resume_id, int $job_id, int $client_id, string $client_full_name, string $tradesman_full_name,  string $tradesman_profile_picture, string $client_profile_picture,string $job_address, string $job_type, string $job_deadline, string $qualifications_summary, string $status):bool {
         try {
             $query = "INSERT INTO $this->table 
         (user_id, resume_id, job_id, client_id, client_fullname, tradesman_fullname, tradesman_profile_picture, client_profile_picture, job_address, job_type, job_deadline, qualification_summary, status,job_date_status ,created_at) 

@@ -1,6 +1,7 @@
 CREATE TABLE ratings(
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 client_id INT UNSIGNED NOT NULL,
+booking_id INT UNSIGNED NOT NULL,
 tradesman_id INT UNSIGNED NOT NULL,
 tradesman_fullname VARCHAR(255) NOT NULL,
 client_profile VARCHAR(255) NULL,

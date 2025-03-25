@@ -152,16 +152,16 @@ class Client extends BaseModel
         }
     }
 
-    public function CheckCompletedBookings($user_id, $tradesman_id): bool
+    public function CheckCompletedBookings($user_id, $booking_id): bool
     {
         $query = "SELECT COUNT(*) FROM $this->table 
               WHERE user_id = :user_id 
-              AND tradesman_id = :tradesman_id
+              AND id = :booking_id
               AND booking_status IN ('Completed')";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->bindParam(':tradesman_id', $tradesman_id, PDO::PARAM_INT);
+        $stmt->bindParam(':booking_id', $booking_id, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchColumn() > 0;
