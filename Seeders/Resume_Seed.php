@@ -260,7 +260,6 @@ trait Resume_Seed
     }
     public function seedResume11($url,$documents,$valid_id_front,$valid_id_back): void
     {
-
         $stmt = $this->db->prepare("INSERT INTO tradesman_resume(email, user_id, specialty, profile_pic,birthdate, about_me, prefered_work_location, work_fee,documents,valid_id_front,valid_id_back ,tradesman_full_name,status_of_approval ,updated_at, created_at, is_active,is_approve) VALUES (?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?,?)");
         $stmt->execute([
             "test14@gmail.com",

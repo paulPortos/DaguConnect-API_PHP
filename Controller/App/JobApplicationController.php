@@ -195,8 +195,9 @@ class JobApplicationController extends BaseController
             $this->jsonResponse(['message' => 'Invalid job application ID'], 400);
             return;
         }
+
         if($status === 'Cancelled') {
-            if ($this->job_application_model->checkIfJobIsActive($job_applicationId)){
+            if ($this->job_application_model->checkIfJobIsActive($job_applicationId)) {
                 $this->jsonResponse(['message' => 'Job is already active.'], 400);
                 return;
             }
@@ -222,16 +223,18 @@ class JobApplicationController extends BaseController
                 $this->job_application_model->checkJobApplicationLimit($job_applicationId);
                 $this->job_application_model->checkIfAllApplicantsAreCompleted($job_applicationId);
                 $this->jsonResponse(['message' => $message], 201);
-                if ($status === 'Cancelled') {
+
+                if ($status === 'Cancelled' || $status === 'Declined') {
                     $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Client');
                 }
+
             } else {
                 $this->jsonResponse(['message' => "Internal Server Error"], 500);
             }
         } else {
             if ($this->job_application_model->changeJobApplicationStatusTradesman($user_id, $job_applicationId, $status)) {
 
-                if ($status === 'Cancelled') {
+                if ($status === 'Cancelled' || $status === 'Declined') {
                     $this->job_application_model->addCancellationReason($job_applicationId, $cancel_reason, 'Tradesman');
                 }
                 $this->jsonResponse(['message' => $message], 201);
