@@ -235,6 +235,44 @@ class Job extends BaseModel
         }
     }
 
+    public function checkAllExpiredJobs(): void
+    {
+        try {
+            // Select all jobs that are Available or Active
+            $query = "SELECT id, deadline, status 
+                      FROM $this->table 
+                      WHERE status IN ('Available', 'Active')";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $current_date = strtotime(date('Y-m-d')); // Current date without time
+
+            foreach ($jobs as $job) {
+                $deadline = strtotime($job['deadline']);
+                $job_id = $job['id'];
+
+                // If the deadline is in the past, update status to 'Deadline_End'
+                if ($deadline < $current_date) {
+                    $update_query = "UPDATE $this->table 
+                                     SET status = :status 
+                                     WHERE id = :job_id";
+
+                    $update_stmt = $this->db->prepare($update_query);
+                    $new_status = 'Deadline_End';
+
+                    $update_stmt->bindParam(':status', $new_status);
+                    $update_stmt->bindParam(':job_id', $job_id);
+
+                    $update_stmt->execute();
+                    error_log("Updated job ID $job_id to 'Deadline_End' due to expiration");
+                }
+            }
+        } catch (PDOException $e) {
+            error_log('Error on checking all expired jobs: ' . $e->getMessage());
+        }
+    }
+
     public function deleteJob($id, $user_id): bool {
         try {
             // First, delete related job applications

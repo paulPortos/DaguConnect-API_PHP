@@ -150,7 +150,7 @@ class Tradesman extends BaseModel
                                  WHERE id = :booking_id";
 
                     $update_stmt = $this->db->prepare($update_query);
-                    $new_status = 'Expired';
+                    $new_status = 'Cancelled';
                     $new_reason = 'Expired Booking';
 
                     $update_stmt->bindParam(':booking_status', $new_status);

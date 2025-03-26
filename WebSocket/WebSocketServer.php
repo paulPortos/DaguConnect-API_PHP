@@ -121,6 +121,8 @@ class WebSocketServer {
                 return;
             }
 
+            // Get or create chat_id and save the message
+            $chat_id = $this->ensureChatExists($user_id, $receiver_id, $message);
             $message_id = $this->addToDatabaseMessage($user_id, $receiver_id, $message);
 
             date_default_timezone_set('UTC');
@@ -128,6 +130,7 @@ class WebSocketServer {
                 'id' => $message_id,
                 'user_id' => $user_id,
                 'receiver_id' => $receiver_id,
+                'chat_id' => $chat_id, // Add chat_id here
                 'message' => $message,
                 'is_read' => 0,
                 'created_at' => gmdate('Y-m-d H:i:s')
