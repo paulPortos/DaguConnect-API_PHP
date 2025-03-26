@@ -108,7 +108,7 @@ trait Resume_Seed
         $stmt->execute([
             "test6@gmail.com",
             6,
-            "Masonry",
+            "Mason",
             $url,
             '1999-03-21',
             "I’m a mason who expertly crafts durable walls, foundations, and chimneys using brick and stone.",
@@ -243,7 +243,7 @@ trait Resume_Seed
         $stmt->execute([
             "test13@gmail.com",
             13,
-            "Carpentry",
+            "Carpenter",
             $url,
             '1999-03-21',
             "I’m a carpenter who builds sturdy frameworks and custom furniture pieces.",
@@ -264,7 +264,7 @@ trait Resume_Seed
         $stmt->execute([
             "test14@gmail.com",
             14,
-            "Roofing",
+            "Roofer",
             $url,
             '1999-03-21',
             "I’m a roofer who installs durable roofs to shield your home.",
