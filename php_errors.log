@@ -185,3 +185,12 @@ Stack trace:
 [22-Mar-2025 12:38:25 UTC] PHP Warning:  stream_socket_server(): Unable to connect to tcp://192.168.1.103:8080 (The requested address is not valid in its context) in C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php on line 2396
 [23-Mar-2025 04:28:52 UTC] PHP Warning:  stream_socket_server(): Unable to connect to tcp://192.168.247.223:8080 (The requested address is not valid in its context) in C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php on line 2396
 [23-Mar-2025 04:28:54 UTC] PHP Warning:  stream_socket_server(): Unable to connect to tcp://192.168.247.223:8080 (The requested address is not valid in its context) in C:\xampp\htdocs\DaguConnect-API_PHP\vendor\workerman\workerman\src\Worker.php on line 2396
+[26-Mar-2025 14:08:55 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'EzeBoy' for key 'idx_username' in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\User_Seed.php:42
+Stack trace:
+#0 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\User_Seed.php(42): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\User_Seed.php(22): DaguConnect\Seeders\Seed->seedUser1('http://192.168....')
+#2 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(50): DaguConnect\Seeders\Seed->seed_user()
+#3 C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\Seed.php(24): DaguConnect\Seeders\Seed->seed_data()
+#4 C:\xampp\htdocs\DaguConnect-API_PHP\migrate.php(16): DaguConnect\Seeders\Seed->__construct(Object(PDO))
+#5 {main}
+  thrown in C:\xampp\htdocs\DaguConnect-API_PHP\Seeders\User_Seed.php on line 42
